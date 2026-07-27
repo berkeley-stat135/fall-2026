@@ -1,5 +1,6 @@
-department: Department
-department-abbrev: Dept
-number: 999
-name: Generic Class
-semester: Spring 2025
+department: Statistics
+department-abbrev: Stat
+number: 135
+name: Concepts of Statistics
+semester: Fall 2026
+site-url: https://stat135.berkeley.edu/fall-2026
