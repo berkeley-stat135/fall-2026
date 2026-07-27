@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  site-url: {{< var site-url >}}
+  site-url: https://stat135.berkeley.edu/spring-2026
   sidebar:
     style: docked
     title: "{{< var department-abbrev >}} {{< var number >}}"
@@ -10,7 +10,7 @@ website:
     logo-alt: "UC Berkeley Statistics logo"
     tools:
       - icon: github
-        href: {{< var site-url >}}
+        href: "{{< var site-url >}}"
         aria-label: GitHub
     contents:
       - href: index.qmd
