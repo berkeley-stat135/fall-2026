@@ -24,7 +24,6 @@ website:
       - section: "Units"
         contents:
           - units/unit1.qmd
-          - units/unit2.ipynb
           - units/unit3.qmd
       - href: data.qmd
         text: Datasets

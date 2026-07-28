@@ -2,7 +2,9 @@
 title: "Syllabus"
 ---
 
-[UNDER CONSTRUCTION]
+:::{.callout-caution}
+THIS SITE IS UNDER CONSTRUCTION. None of the material is finalized yet.
+:::
 
 Jump to:
 
@@ -13,8 +15,13 @@ Jump to:
 
 ## About {{< var department >}} {{< var number >}}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lectus dui, euismod vel tellus sit amet, maximus fringilla risus. Cras nec maximus leo. Fusce sit amet tortor pellentesque, hendrerit odio vitae, dictum lorem. Nunc sed nunc nisl. Cras augue tortor, ultrices ut luctus non, dictum nec magna. Cras vel ex purus. In blandit est non finibus dignissim. Donec vehicula, nisi quis rutrum faucibus, est turpis ultrices nibh, quis rutrum diam nibh tempus nulla. Vestibulum malesuada consectetur ex in vestibulum. 
-
+STAT 135 is one of the three foundational courses of the Statistics
+Major, the other two being Stat 134 (Concepts of Probability) and Stat
+133 (Concepts of Computing). While Stat 134, which is a **serious**
+prerequisite for Stat 135, is a course in probability, Stat 135 is a
+course in statistical inference. It is a comprehensive survey course in
+statistical theory and methodology. Topics include parameter estimation,
+hypothesis testing, statistical tests, and linear regression.
 
 ### Goals
 
@@ -25,4 +32,23 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lectus dui, e
 
 ### Prerequisites
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lectus dui, euismod vel tellus sit amet, maximus fringilla risus. Cras nec maximus leo. Fusce sit amet tortor pellentesque, hendrerit odio vitae, dictum lorem. Nunc sed nunc nisl. Cras augue tortor, ultrices ut luctus non, dictum nec magna. Cras vel ex purus. In blandit est non finibus dignissim. Donec vehicula, nisi quis rutrum faucibus, est turpis ultrices nibh, quis rutrum diam nibh tempus nulla. Vestibulum malesuada consectetur ex in vestibulum. 
+-   **STAT 134 or an equivalent course in probability theory. Do NOT take 134 and 135 concurrently!!**
+
+-   Multivariable calculus, especially Lagrange multipliers.
+
+-   Familiarity with basic R concepts equivalent to the first \~6 weeks
+    of Stat 133. Note that assignments involving computing must be completed
+    in R.
+
+-   Familiarity with linear algebra (matrix operations, inverses, and eigenvalues)
+
+### Useful Textbooks
+
+Official textbooks for the course:
+- *Foundations of Statistics for Data Scientists* by Alan Agresti and Maria Kateri: This is the main text that we will follow. It does a good job of laying out the main subjects and gives a modern treatment of the area, but is light in detail. 
+- *Mathematical Statistics and Data Analysis* (3rd
+    Edition), by John Rice: This is the classical book for this course, and has very good, detailed exposition of the subjects it covers as well as *many* exercises. However, it has a very classical perspective, and we will be covering topics this semester not in this book. There are many places online where you can find a pdf of the book. 
+
+Other useful texts:
+- [*R for Data Science*](https://r4ds.hadley.nz/), by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund
+

@@ -13,15 +13,10 @@ listing:
 ::: {#buttons}
 :::
 
-[UNDER CONSTRUCTION]
-
-
-::: {.callout-note title="Welcome to Week 1 of Dept 999"}
+:::{.callout-caution}
+THIS SITE IS UNDER CONSTRUCTION. None of the material is finalized yet.
 :::
 
-::: {.callout-note title="Welcome to Week 2"}
-Things are picking up now.
-:::
 
 ## Schedule
 
