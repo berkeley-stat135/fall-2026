@@ -2,7 +2,9 @@
 title: "Staff"
 ---
 
-[UNDER CONSTRUCTION]
+:::{.callout-caution}
+Site and course are under construction. Do not contact any of the staff listed here (except for the Instructor) before the first day of class! 
+:::
 
 Office hours are subject to change.
 
@@ -11,34 +13,34 @@ Office hours are subject to change.
 ::: {.grid}
 
 ::: {.g-col-4}
-**Instructor:** <a href="https://statistics.berkeley.edu" target='_blank'>Elizabeth Purdom</a><br>
+**Instructor:** <a href="https://purdom.stat.berkeley.edu" target='_blank'>Elizabeth Purdom</a><br>
 `epurdom@stat.berkeley.edu`<br>
 Office hours: <br>
 - TBA<br>
 :::
 
 ::: {.g-col-4}
-**GSI**: <a href="http://statistics.berkeley.edu" target="_blank">Person Y</a><br>
-`y@berkeley.edu`<br>
+**GSI**: <a href="http://statistics.berkeley.edu" target="_blank">Florica Constantine</a><br>
+`florica@berkeley.edu`<br>
+Office hours:<br>
+- TBA<br>
+:::
+::: {.g-col-4}
+**GSI**: <a href="http://statistics.berkeley.edu" target="_blank">Chuao Dong</a><br>
+`chuaodong@berkeley.edu`<br>
 Office hours:<br>
 - TBA<br>
 :::
 
 ::: {.g-col-4}
-**Tutor:** Person Z<br>
-`z@berkeley.edu`<br>
+**GSI:** Chloe Shen<br>
+`cjshen@berkeley.edu`<br>
 Office hours: <br>
 - TBA<br>
-- Sunday 2pm - 6pm, <a href="https://berkeley.zoom.us/j/99887452083?pwd=T1pXWC9HZFpTRHQzc1MrOElUakFUdz09">Zoom</a>
+- TBA, <a href="https://berkeley.zoom.us/j/99887452083?pwd=T1pXWC9HZFpTRHQzc1MrOElUakFUdz09">Zoom</a>
 :::
 
-::: {.g-col-4}
-**Tutor**: Person W<br>
-`w@berkeley.edu`<br>
-Office hours: <br>
-- Wednesday 10am-2pm, Evans 432<br>
-- Thursday 3-5pm, Evans 434
-:::
+
 
 :::
 
