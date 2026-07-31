@@ -2,53 +2,139 @@
 title: "Syllabus"
 ---
 
-:::{.callout-caution}
-THIS SITE IS UNDER CONSTRUCTION. None of the material is finalized yet.
-:::
+## Logistics
 
-Jump to:
+**Class schedule (in person)**
 
-- [About {{< var department >}} {{< var number >}}](#about)
-  - [Goals](#goals)
-  - [Prerequisites](#prerequisites)
+ | Number | Time | Location 
+ :------------ | :------------- | :------------- | 
+Lecture | | MWF 11:00A-11:59A | Hearst Field Annex A1
+Section | 101| Tu 9-11am | Etcheverry 3105
+ | 102 | Tu 10-12pm | Hearst Field Annex B1
+ | 103 | Tu 12-2pm | Social Sciences Building 185
+ | 104 | Tu 2-4pm | Hearst Gym 242
+ | 105| Tu 2-4pm | Hearst Mining 310
+ | 106 | Tu 4-6pm | Moffitt Library 106
+
+**[Staff](staff.qmd)**
+
+ | Name 
+:------------ | :------------- 
+Instructor | [Elizabeth Purdom](staff.qmd#ep) 
+GSI |  [Florica Constantine](staff.qmd#fc)   
+|  [Chuao Dong](staff.qmd#cd)   
+|  [Chloe Shen](staff.qmd#cs)   
+
+(to see email, office hours and other information, click on the person's name)
+
+### Lectures
+
+Lectures will cover core theory and concepts, with supporting data analysis examples. To get the full benefit of lecture, it is best to read the supporting material ahead of time. When slides or R code are shown in class, they will be posted online *after* class. However, lectures will not always have associated slides -- I usually will write on the board/ipad. I will not be posting recordings of the lectures, but if you have to miss class due to an emergency or unavoidable circumstance, the class notes and text should suffice. Please do come and see me so we can review what you have missed. 
+
+Lecture attendance will be measured using occasional quizzes. There will be roughly 8-10 of these handed out in lecture throughout the semester. You need to complete **five** of them to get the full attendance credit.
+
+### Sections
+
+The sections meet once a week, on Tuesdays, for two hours. The individual section times will be listed in the course calendar. Section time will be spent working on practice problems. Since some problems will involve computing you should plan to always bring your laptop. You may attend a lab for which you are not enrolled (physical space permitting). Labs will not be recorded so attendance is strongly recommended.
+
+<!-- ### Office Hours -->
+
+<!-- Prof. Purdom and one of the GSIs will hold individual office hours each week. In addition, there will be **group office hours** in one of the 3rd floor classrooms in Evans, the room and hours TBA. You can go to these to get questions answered about homework or any concepts discussed in class, or help with your coding assignments.  -->
+
+<!-- ## Stat Scholars Program -->
+
+<!-- The new [Stat Scholars Program](https://statistics.berkeley.edu/academics/undergrad/program/stat-scholars) will be available to Stat 135 students to provide community, academic support, and more such as answers to your questions about the stat major, new directions in statistics, research being done in the stat department etc. Applications will be sent out soon, begin checking your mail next week.  -->
+
+## Assessments
+
+### Homework Assignments 
+
+Homework assignments will be due roughly every week or so during the semester, starting in the second week.  Homework will be posted to [Gradescope]() usually by Friday, and will generally be due the following Friday at 11:59 pm. Homework will be a combination of analytical and computational exercises done “by hand” and data analysis using R. If you turn in your homework late, you will get half credit for homework that is up to 24 hours late (if you have not requested an extension), and no credit after that.
+
+### Quizzes
+
+There will be four 50-minute quizzes to test your understanding of homework and lecture. You will take the quizzes in the [CBTF](https://rtl.berkeley.edu/services-programs/computer-based-testing-facility-cbtf) (Computer-Based Testing Facility) in 200 Sutardja Dai Hall. The dates of the quizzes are: Feb 12/13, Feb 26/27, Apr 9/10, and Apr 30/May 1. You will have to schedule your quiz during the given dates at the CBTF. We do not schedule your quiz for you. Note that DSP students will also take it in the CBTF and will get their extended time. 
+We will drop your lowest quiz score, and you may retake **at most one** quiz, also in the CBTF, during the week following the original quiz dates. Dates for each retake will be announced later, and you will have to fill out a form to be registered for the retake. 
 
 
-## About {{< var department >}} {{< var number >}}
+### Exams
 
-STAT 135 is one of the three foundational courses of the Statistics
-Major, the other two being Stat 134 (Concepts of Probability) and Stat
-133 (Concepts of Computing). While Stat 134, which is a **serious**
-prerequisite for Stat 135, is a course in probability, Stat 135 is a
-course in statistical inference. It is a comprehensive survey course in
-statistical theory and methodology. Topics include parameter estimation,
-hypothesis testing, statistical tests, and linear regression.
+There will be one midterm exam and the final exam. 
 
-### Goals
+- The midterm exam will be a **two hour** exam which will be held in the **evening from 7-9 pm** on **Wednesday, March 11** in **VLSB 2050**. 
+- The final exam time and day are **Tuesday, May 12, 11:30 am - 2:30 pm (group 6)**.  If you do not take the final exam, you will **not pass** the class.
 
 
-- Goal 1
-- Goal 2
-- Goal 3
+### Extra Credit Opportunities
 
-### Prerequisites
+Extra credit is assigned at the end of the semester after the grade bins have been determined. Ways to get extra credit (it will be added to your overall course percentage):
 
--   **STAT 134 or an equivalent course in probability theory. Do NOT take 134 and 135 concurrently!!**
+- Diagnostic test: 0.25% for submission with some clear attempt at solving the questions.
+- EdStem: The top 5 student *answerers* will get up to 0.5% extra credit.
 
--   Multivariable calculus, especially Lagrange multipliers.
 
--   Familiarity with basic R concepts equivalent to the first \~6 weeks
-    of Stat 133. Note that assignments involving computing must be completed
-    in R.
+### Attendance Quizzes
 
--   Familiarity with linear algebra (matrix operations, inverses, and eigenvalues)
+As stated above, there will be 8-10 attendance quizzes handed out in lecture throughout the semester. These will be graded on completion, and you will need to complete **five** of them to get all the attendance points.
 
-### Useful Textbooks
 
-Official textbooks for the course:
-- *Foundations of Statistics for Data Scientists* by Alan Agresti and Maria Kateri: This is the main text that we will follow. It does a good job of laying out the main subjects and gives a modern treatment of the area, but is light in detail. 
-- *Mathematical Statistics and Data Analysis* (3rd
-    Edition), by John Rice: This is the classical book for this course, and has very good, detailed exposition of the subjects it covers as well as *many* exercises. However, it has a very classical perspective, and we will be covering topics this semester not in this book. There are many places online where you can find a pdf of the book. 
+### Overall Score
 
-Other useful texts:
-- [*R for Data Science*](https://r4ds.hadley.nz/), by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund
+Your letter grade for the course will be based a weighted average of your assessments, as follows:
 
+- Homework (each assignment weighted equally, drop two lowest): 15% 
+- Quizzes: 15% (equally weighted, drop lowest)
+- Midterm: 25% (can be clobbered by the final)
+- Final exam: 40% or 65% (if higher than the midterm)
+- Attendance quizzes: 5%
+
+**Rough grade bins**: Students earning a course average of at least 88% are guaranteed to receive an A- or better, students earning a course average of at least 75% are guaranteed a B- or better,  and students earning at least 60% on their course average are guaranteed at least a C-. These bins might move down, depending on how the class does. 
+
+
+## Important sites to bookmark
+
+### R Datahub
+
+All coding in this class will be done in `R`. You may download the desktop version of [RStudio](https://posit.co/download/rstudio-desktop/) if you wish, but it might be easier to use the [datahub](https://r.datahub.berkeley.edu/). It is up to you. Just make sure you have the latest version of `R` and RStudio, if you would like to download it to your laptop.
+
+### Bcourses
+
+Important coursewide announcements will be sent out on bcourses.
+
+### Ed Discussion
+
+I have created a [Ed discussion page](https://edstem.org/us/courses/94278/discussion) for this course, which you can access through the link in bCourses (so you will be logged in).  This is an online forum to ask questions to fellow students and answer other students’ questions. The GSIs and I will have access to the forum and may endorse or occasionally answer questions but this is *primarily* a forum for students to help each other – if you need an instructor or GSI’s assistance please attend office hours. Extra credit of up to 0.5% on the final course score will be awarded to the five students who have responded to the most questions on Ed by the end of the semester (with reasonable attempts at answering the questions).
+
+### CBTF
+
+This semester, you will be taking your quizzes in the Computer-Based Testing Facility in Sutardja Dai Hall. In order to take the test, you will have to log into the course site using your **Calnet** ID. I will post a practice quiz so that you can get the hang of how to do the scheduling etc. Meanwhile, take a look at the page  ["CBTF Getting Started for Students"](https://rtl.berkeley.edu/services-programs/computer-based-testing-facility-cbtf/cbtf-student-information/cbtf-getting-started). 
+
+### Gradescope
+
+Homework assignments, take-home exams, and regrade requests (see Policies section below) will be submitted through Gradescope, which you can also access through the link in bCourses (you should **not** add yourself to Gradescope, as the roster has already been uploaded). You can view your grades here, as I will not be creating assignments on bCourses.
+
+
+### Flextensions
+
+You can request extensions of up to **two days** for up to **two** homework assignments, using this [page](https://flextensions.berkeley.edu/courses/35/), once assignments have been posted on Gradescope. You must make the request before the due date. If you have DSP accommodations, please send us a **private** message on Ed.
+
+
+## Academic Honesty Policy
+
+The student community at UC Berkeley has adopted the following Honor Code: **_“As a member of the UC Berkeley community, I act with honesty, integrity, and respect for others.”_**.
+
+My expectation is that you will adhere to this code. Beyond the importance of respecting your fellow students, acting with integrity in completing course assignments helps ensure that they achieve their purpose, which is to help you learn and develop valuable statistical understanding and skills. 
+Homework must be done independently. If you get stuck or want to explore alternative approaches, feel free to discuss issues with students or course staff at the homework parties or on Ed.
+You may ask an AI tool for help understanding a concept, or figuring out a coding error (but note that the answers are not always correct), but putting assignment questions into an AI tool and then copying and pasting/paraphrasing the answers will be considered plagiarism. It is also completely negates the purpose of the homework, which is to cement and internalize concepts from the course. It will not serve you for the exam either, when you have to tackle the problems on your own. I leave it to you to decide how much you would like to use genAI tools, but please use them with caution. 
+
+## Email/Ed policy
+
+If you have a question for us, the fastest way to get a response is to post the question on Ed. If it deals with private matters, please make it a **private** post. If you are not comfortable writing a private post,  come and see me. You can drop into office hours or make an appointment, either is fine. 
+
+## Inclusivity and Accommodation
+
+If you need accommodations for any physical, psychological, or learning disability, please speak to me after class or during office hours. Please note that you *must* make arrangements in a timely manner through DSP so that I can make the appropriate accommodations.
+
+## Possibility of revisions to course policies
+
+All course policies, including assessment, are subject to change during the course of the semester in response to unforeseen events including, but not limited to, campus shutdowns due to various reasons, power outages, forest fires, and medical emergencies among members of the course staff.

@@ -13,34 +13,36 @@ Office hours are subject to change.
 ::: {.grid}
 
 ::: {.g-col-4}
-**Instructor:** <a href="https://purdom.stat.berkeley.edu" target='_blank'>Elizabeth Purdom</a><br>
+**Instructor:** <a href="https://purdom.stat.berkeley.edu" target='_blank'>[Elizabeth Purdom](#ep)</a><br>
 `epurdom@stat.berkeley.edu`<br>
 Office hours: <br>
 - TBA<br>
+pronouns: she/her
 :::
 
 ::: {.g-col-4}
-**GSI**: <a href="http://statistics.berkeley.edu" target="_blank">Florica Constantine</a><br>
+**GSI**: <a href="https://statistics.berkeley.edu/people/florica-constantine" target="_blank">[Florica Constantine](#fc)</a><br>
 `florica@berkeley.edu`<br>
 Office hours:<br>
 - TBA<br>
 :::
 ::: {.g-col-4}
-**GSI**: <a href="http://statistics.berkeley.edu" target="_blank">Chuao Dong</a><br>
+**GSI**: <a href="http://statistics.berkeley.edu" target="_blank">[Chuao Dong](#cd)</a><br>
 `chuaodong@berkeley.edu`<br>
 Office hours:<br>
 - TBA<br>
 :::
 
 ::: {.g-col-4}
-**GSI:** Chloe Shen<br>
+**GSI:** <a href="https://statistics.berkeley.edu/people/chloe-shen" target="_blank">[Chloe Shen](#cs)<br>
 `cjshen@berkeley.edu`<br>
 Office hours: <br>
 - TBA<br>
-- TBA, <a href="https://berkeley.zoom.us/j/99887452083?pwd=T1pXWC9HZFpTRHQzc1MrOElUakFUdz09">Zoom</a>
 :::
 
-
-
+<!-- Readers: -->
+<!-- Yingxin Deng sammydyx@berkeley.edu -->
+<!-- Ivan Chan 511ori@berkeley.edu -->
+<!-- Anouksha Bansal anouksha@berkeley.edu -->
 :::
 
