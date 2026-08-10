@@ -20,11 +20,61 @@
     ]
   },
   {
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "Data",
+    "section": "",
+    "text": "[UNDER CONSTRUCTION]\nWe’ll use data from several real world situations in class.",
+    "crumbs": [
+      "Datasets"
+    ]
+  },
+  {
+    "objectID": "data.html#data-1",
+    "href": "data.html#data-1",
+    "title": "Data",
+    "section": "Data 1",
+    "text": "Data 1",
+    "crumbs": [
+      "Datasets"
+    ]
+  },
+  {
+    "objectID": "data.html#data-2",
+    "href": "data.html#data-2",
+    "title": "Data",
+    "section": "Data 2",
+    "text": "Data 2",
+    "crumbs": [
+      "Datasets"
+    ]
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs License (CC BY-NC-ND 4.0).",
+    "crumbs": [
+      "License"
+    ]
+  },
+  {
+    "objectID": "staff.html",
+    "href": "staff.html",
+    "title": "Staff",
+    "section": "",
+    "text": "Caution\n\n\n\nSite and course are under construction. Do not contact any of the staff listed here (except for the Instructor) before the first day of class!\n\n\nOffice hours are subject to change.\n\n\n\nInstructor: Elizabeth Purdom epurdom@stat.berkeley.edu Office hours:  - TBA pronouns: she/her\n\n\nGSI: Florica Constantine florica@berkeley.edu Office hours: - TBA\n\n\nGSI: Chuao Dong chuaodong@berkeley.edu Office hours: - TBA\n\n\nGSI: Chloe Shen cjshen@berkeley.edu Office hours:  - TBA",
+    "crumbs": [
+      "Staff"
+    ]
+  },
+  {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "Class schedule (in person)\n\n\n\nNumber\nTime\nLocation\n\n\n\n\nLecture\n\nMWF 11:00A-11:59A\n\n\nSection\n101\nTu 9-11am\n\n\n102\nTu 10-12pm\nHearst Field Annex B1\n\n\n103\nTu 12-2pm\nSocial Sciences Building 185\n\n\n104\nTu 2-4pm\nHearst Gym 242\n\n\n105\nTu 2-4pm\nHearst Mining 310\n\n\n106\nTu 4-6pm\nMoffitt Library 106\n\n\n\nStaff\n\n\n\nName\n\n\n\n\n\nInstructor\nElizabeth Purdom\n\n\nGSI\nFlorica Constantine\n\n\nChuao Dong\n\n\n\nChloe Shen\n\n\n\n\n(to see email, office hours and other information, click on the person’s name)\n\n\nLectures will cover core theory and concepts, with supporting data analysis examples. To get the full benefit of lecture, it is best to read the supporting material ahead of time. When slides or R code are shown in class, they will be posted online after class. However, lectures will not always have associated slides – I usually will write on the board/ipad. I will not be posting recordings of the lectures, but if you have to miss class due to an emergency or unavoidable circumstance, the class notes and text should suffice. Please do come and see me so we can review what you have missed.\nLecture attendance will be measured using occasional quizzes. There will be roughly 8-10 of these handed out in lecture throughout the semester. You need to complete five of them to get the full attendance credit.\n\n\n\nThe sections meet once a week, on Tuesdays, for two hours. The individual section times will be listed in the course calendar. Section time will be spent working on practice problems. Since some problems will involve computing you should plan to always bring your laptop. You may attend a lab for which you are not enrolled (physical space permitting). Labs will not be recorded so attendance is strongly recommended.",
+    "text": "Caution\n\n\n\nSite and course are under construction. Nothing in this Syllabus has been finalized.",
     "crumbs": [
       "Syllabus"
     ]
@@ -33,8 +83,8 @@
     "objectID": "syllabus.html#logistics",
     "href": "syllabus.html#logistics",
     "title": "Syllabus",
-    "section": "",
-    "text": "Class schedule (in person)\n\n\n\nNumber\nTime\nLocation\n\n\n\n\nLecture\n\nMWF 11:00A-11:59A\n\n\nSection\n101\nTu 9-11am\n\n\n102\nTu 10-12pm\nHearst Field Annex B1\n\n\n103\nTu 12-2pm\nSocial Sciences Building 185\n\n\n104\nTu 2-4pm\nHearst Gym 242\n\n\n105\nTu 2-4pm\nHearst Mining 310\n\n\n106\nTu 4-6pm\nMoffitt Library 106\n\n\n\nStaff\n\n\n\nName\n\n\n\n\n\nInstructor\nElizabeth Purdom\n\n\nGSI\nFlorica Constantine\n\n\nChuao Dong\n\n\n\nChloe Shen\n\n\n\n\n(to see email, office hours and other information, click on the person’s name)\n\n\nLectures will cover core theory and concepts, with supporting data analysis examples. To get the full benefit of lecture, it is best to read the supporting material ahead of time. When slides or R code are shown in class, they will be posted online after class. However, lectures will not always have associated slides – I usually will write on the board/ipad. I will not be posting recordings of the lectures, but if you have to miss class due to an emergency or unavoidable circumstance, the class notes and text should suffice. Please do come and see me so we can review what you have missed.\nLecture attendance will be measured using occasional quizzes. There will be roughly 8-10 of these handed out in lecture throughout the semester. You need to complete five of them to get the full attendance credit.\n\n\n\nThe sections meet once a week, on Tuesdays, for two hours. The individual section times will be listed in the course calendar. Section time will be spent working on practice problems. Since some problems will involve computing you should plan to always bring your laptop. You may attend a lab for which you are not enrolled (physical space permitting). Labs will not be recorded so attendance is strongly recommended.",
+    "section": "Logistics",
+    "text": "Logistics\nClass schedule (in person)\n\n\n\nNumber\nTime\nLocation\n\n\n\n\nLecture\n\nMWF 11:00A-11:59A\n\n\nSection\n101\nTu 9-11am\n\n\n102\nTu 10-12pm\nHearst Field Annex B1\n\n\n103\nTu 12-2pm\nSocial Sciences Building 185\n\n\n104\nTu 2-4pm\nHearst Gym 242\n\n\n105\nTu 2-4pm\nHearst Mining 310\n\n\n106\nTu 4-6pm\nMoffitt Library 106\n\n\n\nStaff\n\n\n\nName\n\n\n\n\n\nInstructor\nElizabeth Purdom\n\n\nGSI\nFlorica Constantine\n\n\nChuao Dong\n\n\n\nChloe Shen\n\n\n\n\n(to see email, office hours and other information, click on the person’s name)\n\nLectures\nLectures will cover core theory and concepts, with supporting data analysis examples. To get the full benefit of lecture, it is best to read the supporting material ahead of time. When slides or R code are shown in class, they will be posted online after class. However, lectures will not always have associated slides – I usually will write on the board/ipad. I will not be posting recordings of the lectures, but if you have to miss class due to an emergency or unavoidable circumstance, the class notes and text should suffice. Please do come and see me so we can review what you have missed.\nLecture attendance will be measured using occasional in-class pop quizzes. There will be roughly 8-10 of these handed out in lecture throughout the semester. You need to complete five of them to get the full attendance credit. They serve primarily as attendence checks, but I also use them to get a feel for where the class is, so please answer them as best you can.\n\n\nSections\nThe sections meet once a week, on Tuesdays, for two hours. The individual section times will be listed in the course calendar. Section time will be spent working on practice problems. Since some problems will involve computing you should plan to always bring your laptop. You may attend a lab for which you are not enrolled (physical space permitting). Labs will not be recorded so attendance is strongly recommended.",
     "crumbs": [
       "Syllabus"
     ]
@@ -44,7 +94,7 @@
     "href": "syllabus.html#assessments",
     "title": "Syllabus",
     "section": "Assessments",
-    "text": "Assessments\n\nHomework Assignments\nHomework assignments will be due roughly every week or so during the semester, starting in the second week. Homework will be posted to Gradescope usually by Friday, and will generally be due the following Friday at 11:59 pm. Homework will be a combination of analytical and computational exercises done “by hand” and data analysis using R. If you turn in your homework late, you will get half credit for homework that is up to 24 hours late (if you have not requested an extension), and no credit after that.\n\n\nQuizzes\nThere will be four 50-minute quizzes to test your understanding of homework and lecture. You will take the quizzes in the CBTF (Computer-Based Testing Facility) in 200 Sutardja Dai Hall. The dates of the quizzes are: Feb 12/13, Feb 26/27, Apr 9/10, and Apr 30/May 1. You will have to schedule your quiz during the given dates at the CBTF. We do not schedule your quiz for you. Note that DSP students will also take it in the CBTF and will get their extended time. We will drop your lowest quiz score, and you may retake at most one quiz, also in the CBTF, during the week following the original quiz dates. Dates for each retake will be announced later, and you will have to fill out a form to be registered for the retake.\n\n\nExams\nThere will be one midterm exam and the final exam.\n\nThe midterm exam will be a two hour exam which will be held in the evening from 7-9 pm on Wednesday, March 11 in VLSB 2050.\nThe final exam time and day are Tuesday, May 12, 11:30 am - 2:30 pm (group 6). If you do not take the final exam, you will not pass the class.\n\n\n\nExtra Credit Opportunities\nExtra credit is assigned at the end of the semester after the grade bins have been determined. Ways to get extra credit (it will be added to your overall course percentage):\n\nDiagnostic test: 0.25% for submission with some clear attempt at solving the questions.\nEdStem: The top 5 student answerers will get up to 0.5% extra credit.\n\n\n\nAttendance Quizzes\nAs stated above, there will be 8-10 attendance quizzes handed out in lecture throughout the semester. These will be graded on completion, and you will need to complete five of them to get all the attendance points.\n\n\nOverall Score\nYour letter grade for the course will be based a weighted average of your assessments, as follows:\n\nHomework (each assignment weighted equally, drop two lowest): 15%\nQuizzes: 15% (equally weighted, drop lowest)\nMidterm: 25% (can be clobbered by the final)\nFinal exam: 40% or 65% (if higher than the midterm)\nAttendance quizzes: 5%\n\nRough grade bins: Students earning a course average of at least 88% are guaranteed to receive an A- or better, students earning a course average of at least 75% are guaranteed a B- or better, and students earning at least 60% on their course average are guaranteed at least a C-. These bins might move down, depending on how the class does.",
+    "text": "Assessments\n\nHomework Assignments\nHomework assignments will be due roughly every week or so during the semester, starting in the second week. Homework will be posted to Gradescope usually by Friday, and will generally be due the following Friday at 11:59 pm. Homework will be a combination of analytical exercises done “by hand” and data analysis using R.\n\n\n\n\nQuizzes\nThere will be four 50-minute quizzes to test your understanding of homework and lecture. You will take the quizzes in the CBTF (Computer-Based Testing Facility) in 200 Sutardja Dai Hall. The dates of the quizzes are: Feb 12/13, Feb 26/27, Apr 9/10, and Apr 30/May 1. You will have to schedule your quiz during the given dates at the CBTF. We do not schedule your quiz for you. Note that DSP students will also take it in the CBTF and will get their extended time. We will drop your lowest quiz score, and you may retake at most one quiz, also in the CBTF, during the week following the original quiz dates. Dates for each retake will be announced later, and you will have to fill out a form to be registered for the retake.\n\n\nExams\nThere will be one midterm exam and the final exam.\n\nThe midterm exam will be a two hour exam which will be held in the evening from 7-9 pm on Wednesday, October 12 in VLSB 2050.\nThe final exam time and day are Monday, December 14, 11:30 am - 2:30 pm. If you do not take the final exam, you will not pass the class.\n\n\n\nExtra Credit Opportunities\nExtra credit is assigned at the end of the semester after the grade bins have been determined. Ways to get extra credit (it will be added to your overall course percentage):\n\nDiagnostic test: 0.25% for submission with some clear attempt at solving the questions.\nEdStem: The top 5 student responders will get up to 0.5% extra credit.\n\n\n\nAttendance Quizzes\nAs stated above, there will be 8-10 attendance quizzes handed out in lecture throughout the semester. These will be graded on completion, and you will need to complete five of them to get all the attendance points.\n\n\nOverall Score\nYour letter grade for the course will be based a weighted average of your assessments, as follows:\n\nHomework (each assignment weighted equally, drop two lowest): 10%\nQuizzes: 20% (equally weighted, drop lowest)\nMidterm: 25% (can be clobbered by the final)\nFinal exam: 40% or 65% (if higher than the midterm)\nAttendance quizzes: 5%\n\nGuaranteed grade bins: Students earning an overall score of at least 90% are guaranteed to receive an A- or better, students earning an overall score of at least 80% are guaranteed a B- or better, and students earning an overall score of at least 70% are guaranteed at least a C-. These are guidelines to help you be able to concretely monitor how you are doing. However, I do curve grades, meaning I may move these cutoffs down, based on how the rest of the class does, but they will not go up. We will also report summary statistics, like median/mean/upper and lower quartiles, so you can see how you are doing relative to the rest of the class.",
     "crumbs": [
       "Syllabus"
     ]
@@ -54,7 +104,7 @@
     "href": "syllabus.html#important-sites-to-bookmark",
     "title": "Syllabus",
     "section": "Important sites to bookmark",
-    "text": "Important sites to bookmark\n\nR Datahub\nAll coding in this class will be done in R. You may download the desktop version of RStudio if you wish, but it might be easier to use the datahub. It is up to you. Just make sure you have the latest version of R and RStudio, if you would like to download it to your laptop.\n\n\nBcourses\nImportant coursewide announcements will be sent out on bcourses.\n\n\nEd Discussion\nI have created a Ed discussion page for this course, which you can access through the link in bCourses (so you will be logged in). This is an online forum to ask questions to fellow students and answer other students’ questions. The GSIs and I will have access to the forum and may endorse or occasionally answer questions but this is primarily a forum for students to help each other – if you need an instructor or GSI’s assistance please attend office hours. Extra credit of up to 0.5% on the final course score will be awarded to the five students who have responded to the most questions on Ed by the end of the semester (with reasonable attempts at answering the questions).\n\n\nCBTF\nThis semester, you will be taking your quizzes in the Computer-Based Testing Facility in Sutardja Dai Hall. In order to take the test, you will have to log into the course site using your Calnet ID. I will post a practice quiz so that you can get the hang of how to do the scheduling etc. Meanwhile, take a look at the page “CBTF Getting Started for Students”.\n\n\nGradescope\nHomework assignments, take-home exams, and regrade requests (see Policies section below) will be submitted through Gradescope, which you can also access through the link in bCourses (you should not add yourself to Gradescope, as the roster has already been uploaded). You can view your grades here, as I will not be creating assignments on bCourses.\n\n\nFlextensions\nYou can request extensions of up to two days for up to two homework assignments, using this page, once assignments have been posted on Gradescope. You must make the request before the due date. If you have DSP accommodations, please send us a private message on Ed.",
+    "text": "Important sites to bookmark\n\nR Studio / R Datahub\nAll coding in this class will be done in R. You may download the desktop version of RStudio if you wish, but you can also use the datahub. It is up to you. Just make sure you have the latest version of R and RStudio, if you would like to download it to your laptop.\n\n\nBcourses\nImportant coursewide announcements will be sent out on bcourses.\n\n\nEd Discussion\nI have created a Ed discussion page for this course, which you can access through the link in bCourses (so you will be logged in). This is an online forum to ask questions to fellow students and answer other students’ questions. The GSIs and I will have access to the forum and may endorse or occasionally answer questions but this is primarily a forum for students to help each other – if you need an instructor or GSI’s assistance please attend office hours. Extra credit of up to 0.5% on the final course score will be awarded to the five students who have responded to the most questions on Ed by the end of the semester (with reasonable attempts at answering the questions).\n\n\nCBTF\nThis semester, you will be taking your quizzes in the Computer-Based Testing Facility in Sutardja Dai Hall. In order to take the test, you will have to log into the course site using your Calnet ID. I will post a practice quiz so that you can get the hang of how to do the scheduling etc. Meanwhile, take a look at the page “CBTF Getting Started for Students”.\n\n\nGradescope\nHomework assignments, take-home exams, and regrade requests (see Policies section below) will be submitted through Gradescope, which you can also access through the link in bCourses (you should not add yourself to Gradescope, as the roster has already been uploaded). You can view your grades here, as I will not be creating assignments on bCourses.\n\n\nFlextensions\nYou can request extensions of up to five days across all of your homework assignments, using this page, once assignments have been posted on Gradescope. You must make the request before the due date. If you have DSP accommodations, please send us a private message on Ed.",
     "crumbs": [
       "Syllabus"
     ]
@@ -64,7 +114,7 @@
     "href": "syllabus.html#academic-honesty-policy",
     "title": "Syllabus",
     "section": "Academic Honesty Policy",
-    "text": "Academic Honesty Policy\nThe student community at UC Berkeley has adopted the following Honor Code: “As a member of the UC Berkeley community, I act with honesty, integrity, and respect for others.”.\nMy expectation is that you will adhere to this code. Beyond the importance of respecting your fellow students, acting with integrity in completing course assignments helps ensure that they achieve their purpose, which is to help you learn and develop valuable statistical understanding and skills. Homework must be done independently. If you get stuck or want to explore alternative approaches, feel free to discuss issues with students or course staff at the homework parties or on Ed. You may ask an AI tool for help understanding a concept, or figuring out a coding error (but note that the answers are not always correct), but putting assignment questions into an AI tool and then copying and pasting/paraphrasing the answers will be considered plagiarism. It is also completely negates the purpose of the homework, which is to cement and internalize concepts from the course. It will not serve you for the exam either, when you have to tackle the problems on your own. I leave it to you to decide how much you would like to use genAI tools, but please use them with caution.",
+    "text": "Academic Honesty Policy\nThe student community at UC Berkeley has adopted the following Honor Code: “As a member of the UC Berkeley community, I act with honesty, integrity, and respect for others.”.\nMy expectation is that you will adhere to this code. Beyond the importance of respecting your fellow students, acting with integrity in completing course assignments helps ensure that they achieve their purpose, which is to help you learn and develop valuable statistical understanding and skills. Homework must be done independently. If you get stuck or want to explore alternative approaches, feel free to discuss issues with students or course staff at the homework parties or on Ed.\nYou may ask an AI tool for help understanding a concept, or figuring out a coding error (but note that the answers are not always correct), but putting assignment questions into an AI tool and then copying and pasting/paraphrasing the answers will be considered plagiarism. It is also completely negates the purpose of the homework, which is to cement and internalize concepts from the course. It will not serve you for the exam either, when you have to tackle the problems on your own. I leave it to you to decide how much you would like to use genAI tools, but please use them with caution.",
     "crumbs": [
       "Syllabus"
     ]
@@ -97,86 +147,6 @@
     "text": "Possibility of revisions to course policies\nAll course policies, including assessment, are subject to change during the course of the semester in response to unforeseen events including, but not limited to, campus shutdowns due to various reasons, power outages, forest fires, and medical emergencies among members of the course staff.",
     "crumbs": [
       "Syllabus"
-    ]
-  },
-  {
-    "objectID": "staff.html",
-    "href": "staff.html",
-    "title": "Staff",
-    "section": "",
-    "text": "Caution\n\n\n\nSite and course are under construction. Do not contact any of the staff listed here (except for the Instructor) before the first day of class!\n\n\nOffice hours are subject to change.\n\n\n\nInstructor: Elizabeth Purdom epurdom@stat.berkeley.edu Office hours:  - TBA pronouns: she/her\n\n\nGSI: Florica Constantine florica@berkeley.edu Office hours: - TBA\n\n\nGSI: Chuao Dong chuaodong@berkeley.edu Office hours: - TBA\n\n\nGSI: Chloe Shen cjshen@berkeley.edu Office hours:  - TBA",
-    "crumbs": [
-      "Staff"
-    ]
-  },
-  {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
-    "section": "",
-    "text": "This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs License (CC BY-NC-ND 4.0).",
-    "crumbs": [
-      "License"
-    ]
-  },
-  {
-    "objectID": "data.html",
-    "href": "data.html",
-    "title": "Data",
-    "section": "",
-    "text": "[UNDER CONSTRUCTION]\nWe’ll use data from several real world situations in class.",
-    "crumbs": [
-      "Datasets"
-    ]
-  },
-  {
-    "objectID": "data.html#data-1",
-    "href": "data.html#data-1",
-    "title": "Data",
-    "section": "Data 1",
-    "text": "Data 1",
-    "crumbs": [
-      "Datasets"
-    ]
-  },
-  {
-    "objectID": "data.html#data-2",
-    "href": "data.html#data-2",
-    "title": "Data",
-    "section": "Data 2",
-    "text": "Data 2",
-    "crumbs": [
-      "Datasets"
-    ]
-  },
-  {
-    "objectID": "calendar.html",
-    "href": "calendar.html",
-    "title": "Calendar",
-    "section": "",
-    "text": "This is an example of providing access to multiple calendars. This might be useful if you want to have different calendars for assignments, exams, instructor office hours, GSI office hours, etc.\nView the Course Calendar",
-    "crumbs": [
-      "Calendar"
-    ]
-  },
-  {
-    "objectID": "calendar.html#course-calendar",
-    "href": "calendar.html#course-calendar",
-    "title": "Calendar",
-    "section": "",
-    "text": "This is an example of providing access to multiple calendars. This might be useful if you want to have different calendars for assignments, exams, instructor office hours, GSI office hours, etc.\nView the Course Calendar",
-    "crumbs": [
-      "Calendar"
-    ]
-  },
-  {
-    "objectID": "calendar.html#instructions",
-    "href": "calendar.html#instructions",
-    "title": "Calendar",
-    "section": "Instructions",
-    "text": "Instructions\nWe suggest that you delete these instructions before publishing your website.\n\nCreate the Calendars:\n\nGo to Google Calendar.\nOn the left sidebar, click the + sign next to “Other calendars” and select “Create new calendar”.\nCreate your calendars and name them appropriately.\n\nObtain the Embed Code for Each Calendar:\n\nFor each calendar, go to its settings by clicking on the three dots next to the calendar name and selecting “Settings and sharing”.\nIn the calendar settings, scroll down to “Integrate calendar” and copy the embed code provided under “Embed code”.\n\nCombine the Embed Codes:\n\nInstead of copying the entire embed code, you need the calendar’s ID, which is part of the embed URL. It will look something like calendarID@group.calendar.google.com.\nFor example, in the embed URL https://calendar.google.com/calendar/embed?src=calendarID@group.calendar.google.com, calendarID@group.calendar.google.com is the part you need.\n\nCreate a Single Link:\n\nUse the base URL for embedding multiple calendars: https://calendar.google.com/calendar/embed?\nAppend each calendar ID to the base URL using the format &src=calendarID@group.calendar.google.com for each calendar you want to include.\nOptionally, you can customize the appearance by adding parameters (e.g., &color=%23F6BF26 for the color, &ctz=America%2FLos_Angeles for the time zone).\n\nFor example, if you have two calendars with IDs calendar1ID@group.calendar.google.com and calendar2ID@group.calendar.google.com, your combined link would look like this:\nhttps://calendar.google.com/calendar/embed?src=calendar1ID@group.calendar.google.com&src=calendar2ID@group.calendar.google.com\nSubstitute this URL into the link at the top of this page.",
-    "crumbs": [
-      "Calendar"
     ]
   }
 ]
