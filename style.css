@@ -1,0 +1,59 @@
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+.ANSWER {
+  color: red;
+  margin-left:2em;
+}
+.PARAGRAPH{
+  font-weight: bold;
+    
+}
+.HIDDEN {
+  color: blue;
+  font-style: italic;
+
+}
+
+.QUESTION, .READING, .GOALS {
+  border-left: 5px solid;
+  border-radius: .25rem;
+  margin: 1.25rem 0;
+  padding: 0 1em .75em 1em;
+}
+.QUESTION > .block-title, .READING > .block-title, .GOALS > .block-title {
+  margin: 0 -1em .5em -1em;
+  padding: .4em 1em;
+  border-top-right-radius: .25rem;
+  font-weight: 600;
+}
+.QUESTION {
+  border-left-color: #dc3545;
+}
+.QUESTION > .block-title {
+  background-color: rgb(252, 237, 237);
+}
+.READING {
+  border-left-color: #2780e3;
+}
+.READING > .block-title {
+  background-color: rgb(233.4, 242.3, 252.2);
+}
+.GOALS {
+  border-left-color: #3fb618;
+}
+.GOALS > .block-title {
+  background-color: rgb(235.8, 247.7, 231.9);
+}

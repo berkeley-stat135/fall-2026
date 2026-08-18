@@ -1,124 +1,5 @@
 [
   {
-    "objectID": "units/macros.html",
-    "href": "units/macros.html",
-    "title": "",
-    "section": "",
-    "text": "\\[\n\\newcommand{\\trans}{^\\mathsf{T}}\n\\newcommand{\\eps}{\\epsilon}\n\\]"
-  },
-  {
-    "objectID": "units/unit2.html",
-    "href": "units/unit2.html",
-    "title": "Unit 2: Next",
-    "section": "",
-    "text": "[UNDER CONSTRUCTION]\nThis is an example of using an ipynb file as source rather than qmd. It follows instructions from https://github.com/DS-100/course-notes/README.md.\nLink to the data."
-  },
-  {
-    "objectID": "units/unit2.html#latex",
-    "href": "units/unit2.html#latex",
-    "title": "Unit 2: Next",
-    "section": "LaTeX",
-    "text": "LaTeX\nHere is some \\(\\LaTeX\\). \\[\n\\theta = 7\n\\]"
-  },
-  {
-    "objectID": "units/unit2.html#evaluated-python-code",
-    "href": "units/unit2.html#evaluated-python-code",
-    "title": "Unit 2: Next",
-    "section": "Evaluated Python code",
-    "text": "Evaluated Python code\nNote that to get code output shown, the underlying notebook must have executed the code.\n\n\nCode\na=7\nprint(a)\n\n\n7"
-  },
-  {
-    "objectID": "units/unit2.html#callout",
-    "href": "units/unit2.html#callout",
-    "title": "Unit 2: Next",
-    "section": "Callout",
-    "text": "Callout\n\n\n\n\n\n\nTipTip with Title\n\n\n\nThis is an example of a callout with a title."
-  },
-  {
-    "objectID": "units/00-OverviewIntro.html",
-    "href": "units/00-OverviewIntro.html",
-    "title": "Introduction",
-    "section": "",
-    "text": "The field of statistic can be very broadly summarized as taking data that we have in hand to make statements that we think have broader generality than just this data.\nConsider this data from the Pew Research Center, based on a survey of US Parents in May of 2025 of 3,054 eligible parents who responded (out of 6,287 who were asked)1\n\n\n\n\n\nThis is the results of data collected on a small sample of all US parents, but its interest is lies in being able to use it to infer or make statements about the general population of all US parents.\nIn statistics this is called inference and is the heart of the subject of statistics. This course is an rigorous, mathematical introduction into the process of inference and inferential thinking about data more broadly.\nThe main parts of inference can be roughly broken down into the following steps:\n\nHow do we use our data to best estimate something about a larger population\nor\nto predict something about future observations we will see from that population?\n\nI estimate 51% of 2-4 yrs old and 54% of 5-12 yrs old in the US watch YouTube daily\n\nHow good of an estimate/prediction is it and can we give measures of accuracy or confidence in our estimate/prediction?\n\nWith 95% confidence, I estimate 47.9-54.1% of 2-4 yrs old and 50.8-57.0% of 5-12 yrs old in the US watch YouTube daily\n\nHow can we make comparisons or test hypotheses from our data?\n\nAre the rates of daily YouTube consumption different between 2-4yr olds and 5-12yr olds in the general population?\nPutting all of these together into an analysis of a dataset is the process of inference.\nWe are able to accomplish these tasks by thinking of our data as random and using probability to model aspects of our data. These probabilistic models are how we justify generalizing beyond our specific data.\nYou will in the syllabus see that the course topics will progress through these fundamental steps.\n\nHaven’t I already done this in my intro stat course?\n\nIf you have taken previous intro statistics courses, like STAT 20 or DATA 8, you have probably been introduced to these topics. That’s great! The difference in this course is that we are going to lean heavily into your probability from STAT 134 or 140 to make these ideas mathematically rigorous. The goal is both that you mathematically understand the specific tools we will introduce, and that you have the foundation to expand into more complex scenarios (for example, 150-level Statistics classes!)."
-  },
-  {
-    "objectID": "units/00-OverviewIntro.html#footnotes",
-    "href": "units/00-OverviewIntro.html#footnotes",
-    "title": "Introduction",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nhttps://www.pewresearch.org/internet/2025/10/08/parents-kids-screens-methodology/↩︎"
-  },
-  {
-    "objectID": "staff.html",
-    "href": "staff.html",
-    "title": "Staff",
-    "section": "",
-    "text": "Caution\n\n\n\nSite and course are under construction. Do not contact any of the staff listed here (except for the Instructor) before the first day of class!\n\n\nOffice hours are subject to change.\n\n\n\nInstructor: Elizabeth Purdom epurdom@stat.berkeley.edu Office hours:  - TBA pronouns: she/her\n\n\nGSI: Florica Constantine florica@berkeley.edu Office hours: - TBA\n\n\nGSI: Chuao Dong chuaodong@berkeley.edu Office hours: - TBA\n\n\nGSI: Chloe Shen cjshen@berkeley.edu Office hours:  - TBA",
-    "crumbs": [
-      "Staff"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Statistics 135: Concepts of Statistics",
-    "section": "",
-    "text": "Ed\n\n  DataHub\n\n  Gradescope\n\n  bCourses\n\n\nNo matching items",
-    "crumbs": [
-      "Home / Schedule"
-    ]
-  },
-  {
-    "objectID": "index.html#schedule",
-    "href": "index.html#schedule",
-    "title": "Statistics 135: Concepts of Statistics",
-    "section": "Schedule",
-    "text": "Schedule\nHere we use Quarto’s EJS templating.\n\n\n\n   Week 1\n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           \n           \n           \n           Aug 26:\n           \n           \n              Unit 0 Introduction\n           \n           \n                \n                \n                  \n                    Syllabus\n                  \n                  \n                  \n                    Diagnostic Test\n                  \n                  \n                \n           \n                \n           \n        \n   \n   \n   \nNo matching items",
-    "crumbs": [
-      "Home / Schedule"
-    ]
-  },
-  {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
-    "section": "",
-    "text": "This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs License (CC BY-NC-ND 4.0).",
-    "crumbs": [
-      "License"
-    ]
-  },
-  {
-    "objectID": "data.html",
-    "href": "data.html",
-    "title": "Data",
-    "section": "",
-    "text": "[UNDER CONSTRUCTION]\nWe’ll use data from several real world situations in class.",
-    "crumbs": [
-      "Datasets"
-    ]
-  },
-  {
-    "objectID": "data.html#data-1",
-    "href": "data.html#data-1",
-    "title": "Data",
-    "section": "Data 1",
-    "text": "Data 1",
-    "crumbs": [
-      "Datasets"
-    ]
-  },
-  {
-    "objectID": "data.html#data-2",
-    "href": "data.html#data-2",
-    "title": "Data",
-    "section": "Data 2",
-    "text": "Data 2",
-    "crumbs": [
-      "Datasets"
-    ]
-  },
-  {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
     "title": "Syllabus",
@@ -173,7 +54,7 @@
     "href": "syllabus.html#important-sites-to-bookmark",
     "title": "Syllabus",
     "section": "Important sites to bookmark",
-    "text": "Important sites to bookmark\n\nR Studio / R Datahub\nAll coding in this class will be done in R. You may download the desktop version of RStudio if you wish, but you can also use the datahub. It is up to you. Just make sure you have the latest version of R and RStudio, if you would like to download it to your laptop.\n\n\nBcourses\nImportant coursewide announcements will be sent out on bcourses.\n\n\nEd Discussion\nI have created a Ed discussion page for this course, which you can access through the link in bCourses (so you will be logged in). This is an online forum to ask questions to fellow students and answer other students’ questions. The GSIs and I will have access to the forum and may endorse or occasionally answer questions but this is primarily a forum for students to help each other – if you need an instructor or GSI’s assistance please attend office hours. Extra credit of up to 0.5% on the final course score will be awarded to the five students who have responded to the most questions on Ed by the end of the semester (with reasonable attempts at answering the questions).\n\n\nCBTF\nThis semester, you will be taking your quizzes in the Computer-Based Testing Facility in Sutardja Dai Hall. In order to take the test, you will have to log into the course site using your Calnet ID. I will post a practice quiz so that you can get the hang of how to do the scheduling etc. Meanwhile, take a look at the page “CBTF Getting Started for Students”.\n\n\nGradescope\nHomework assignments, take-home exams, and regrade requests (see Policies section below) will be submitted through Gradescope, which you can also access through the link in bCourses (you should not add yourself to Gradescope, as the roster has already been uploaded). You can view your grades here, as I will not be creating assignments on bCourses.\n\n\nFlextensions\nYou can request extensions of up to five days across all of your homework assignments, using this page, once assignments have been posted on Gradescope. You must make the request before the due date. If you have DSP accommodations, please send us a private message on Ed.",
+    "text": "Important sites to bookmark\n\nR Studio / R Datahub\nAll coding in this class will be done in R. You may download the desktop version of RStudio if you wish, but you can also use the datahub. It is up to you. Just make sure you have the latest version of R and RStudio, if you would like to download it to your laptop.\n\n\nBcourses\nImportant coursewide announcements will be sent out on bcourses.\n\n\nEd Discussion\nI have created a Ed discussion page for this course, which you can access through the link in bCourses (so you will be logged in). This is an online forum to ask questions to fellow students and answer other students’ questions. The GSIs and I will have access to the forum and may endorse or occasionally answer questions but this is primarily a forum for students to help each other – if you need an instructor or GSI’s assistance please attend office hours. Extra credit of up to 0.5% on the final course score will be awarded to the five students who have responded to the most questions on Ed by the end of the semester (with reasonable attempts at answering the questions).\n\n\nCBTF\nThis semester, you will be taking your quizzes in the Computer-Based Testing Facility in Sutardja Dai Hall. In order to take the test, you will have to log into the course site using your Calnet ID. I will post a practice quiz so that you can get the hang of how to do the scheduling etc. Meanwhile, take a look at the page “CBTF Getting Started for Students”.\n\n\nGradescope\nHomework assignments, take-home exams, and regrade requests (see Policies section below) will be submitted through Gradescope, which you can also access through the link in bCourses (you should not add yourself to Gradescope, as the roster has already been uploaded). You can view your grades here, as I will not be creating assignments on bCourses.\n\n\nFlextensions\nYou can request extensions for 2 days for up to 3 assignments across all of your homework assignments, using this page, once assignments have been posted on Gradescope. You must make the request before the due date. If you have DSP accommodations or need more extensive extensions due to extrordinary circumstances, please send us a private message on Ed.",
     "crumbs": [
       "Syllabus"
     ]
@@ -219,52 +100,8 @@
     ]
   },
   {
-    "objectID": "units/unit3.html",
-    "href": "units/unit3.html",
-    "title": "Unit 3: More",
-    "section": "",
-    "text": "[UNDER CONSTRUCTION]\nThis is an example of using qmd as the source document with pdf as one target. I’ve taken out the qmd stuff that doesn’t seem to render to pdf.",
-    "crumbs": [
-      "Units",
-      "Unit 3: More"
-    ]
-  },
-  {
-    "objectID": "units/unit3.html#evaluated-python-code-chunk-with-a-plot",
-    "href": "units/unit3.html#evaluated-python-code-chunk-with-a-plot",
-    "title": "Unit 3: More",
-    "section": "Evaluated Python code chunk, with a plot",
-    "text": "Evaluated Python code chunk, with a plot\n\n\nCode\nimport numpy as np\nx = np.random.normal(size=100)\nimport matplotlib.pyplot as plt\nplt.hist(x)\nplt.show()\nnp.mean(x)\n\n\n\n\n\n\n\n\n\nnp.float64(0.06577386825390928)",
-    "crumbs": [
-      "Units",
-      "Unit 3: More"
-    ]
-  },
-  {
-    "objectID": "units/unit3.html#latex",
-    "href": "units/unit3.html#latex",
-    "title": "Unit 3: More",
-    "section": "LaTeX",
-    "text": "LaTeX\n\\[\n\\theta = \\int_0^\\infty f(x,\\theta)d\\theta\n\\]",
-    "crumbs": [
-      "Units",
-      "Unit 3: More"
-    ]
-  },
-  {
-    "objectID": "units/unit3.html#latex-macro",
-    "href": "units/unit3.html#latex-macro",
-    "title": "Unit 3: More",
-    "section": "LaTeX macro",
-    "text": "LaTeX macro\n\n\n\n\n\n\nWarning\n\n\n\nHaving include-before-body in the yaml header of this file, as seemingly needed to enable macros, causes extra space at top of page.\n\n\n\\[\nA = X \\trans Y\n\\]",
-    "crumbs": [
-      "Units",
-      "Unit 3: More"
-    ]
-  },
-  {
-    "objectID": "units/unit1.html",
-    "href": "units/unit1.html",
+    "objectID": "Modules/unit1.html",
+    "href": "Modules/unit1.html",
     "title": "Unit 1: Intro",
     "section": "",
     "text": "[UNDER CONSTRUCTION]\nThis is an example of using qmd as the source document.",
@@ -274,19 +111,19 @@
     ]
   },
   {
-    "objectID": "units/unit1.html#evaluated-python-code-chunk-with-a-plot",
-    "href": "units/unit1.html#evaluated-python-code-chunk-with-a-plot",
+    "objectID": "Modules/unit1.html#evaluated-python-code-chunk-with-a-plot",
+    "href": "Modules/unit1.html#evaluated-python-code-chunk-with-a-plot",
     "title": "Unit 1: Intro",
     "section": "Evaluated Python code chunk, with a plot",
-    "text": "Evaluated Python code chunk, with a plot\n\n\nCode\nimport numpy as np\nx = np.random.normal(size=100)\nimport matplotlib.pyplot as plt\nplt.hist(x)\nplt.show()\nnp.mean(x)\n\n\n\n\n\n\n\n\n\nnp.float64(0.13613770068124895)",
+    "text": "Evaluated Python code chunk, with a plot\n\n\n\n\n\n\n\n\n\nnp.float64(0.06509100014226639)",
     "crumbs": [
       "Units",
       "Unit 1: Intro"
     ]
   },
   {
-    "objectID": "units/unit1.html#latex",
-    "href": "units/unit1.html#latex",
+    "objectID": "Modules/unit1.html#latex",
+    "href": "Modules/unit1.html#latex",
     "title": "Unit 1: Intro",
     "section": "LaTeX",
     "text": "LaTeX\n\\[\n\\theta = \\int_0^\\infty f(x,\\theta)d\\theta\n\\]",
@@ -296,8 +133,8 @@
     ]
   },
   {
-    "objectID": "units/unit1.html#styled-div-via-direct-html",
-    "href": "units/unit1.html#styled-div-via-direct-html",
+    "objectID": "Modules/unit1.html#styled-div-via-direct-html",
+    "href": "Modules/unit1.html#styled-div-via-direct-html",
     "title": "Unit 1: Intro",
     "section": "Styled div via direct html",
     "text": "Styled div via direct html\n\nThis content can be styled via the border class.",
@@ -307,8 +144,8 @@
     ]
   },
   {
-    "objectID": "units/unit1.html#a-callout",
-    "href": "units/unit1.html#a-callout",
+    "objectID": "Modules/unit1.html#a-callout",
+    "href": "Modules/unit1.html#a-callout",
     "title": "Unit 1: Intro",
     "section": "A callout",
     "text": "A callout\n\n\n\n\n\n\nTipTip with Title\n\n\n\nThis is an example of a callout with a title.",
@@ -318,19 +155,19 @@
     ]
   },
   {
-    "objectID": "units/unit1.html#tabset",
-    "href": "units/unit1.html#tabset",
+    "objectID": "Modules/unit1.html#tabset",
+    "href": "Modules/unit1.html#tabset",
     "title": "Unit 1: Intro",
     "section": "Tabset",
-    "text": "Tabset\n\nRPython\n\n\nThis code is not executed.\nfizz_buzz &lt;- function(fbnums = 1:50) {\n  output &lt;- dplyr::case_when(\n    fbnums %% 15 == 0 ~ \"FizzBuzz\",\n    fbnums %% 3 == 0 ~ \"Fizz\",\n    fbnums %% 5 == 0 ~ \"Buzz\",\n    TRUE ~ as.character(fbnums)\n  )\n  print(output)\n}\n\nfizz_buzz(3)\n\n\nThis code is executed.\n\n\nCode\ndef fizz_buzz(num):\n  if num % 15 == 0:\n    print(\"FizzBuzz\")\n  elif num % 5 == 0:\n    print(\"Buzz\")\n  elif num % 3 == 0:\n    print(\"Fizz\")\n  else:\n    print(num)\n    \nfizz_buzz(3)\n\n\nFizz",
+    "text": "Tabset\n\nRPython\n\n\nThis code is not executed.\nfizz_buzz &lt;- function(fbnums = 1:50) {\n  output &lt;- dplyr::case_when(\n    fbnums %% 15 == 0 ~ \"FizzBuzz\",\n    fbnums %% 3 == 0 ~ \"Fizz\",\n    fbnums %% 5 == 0 ~ \"Buzz\",\n    TRUE ~ as.character(fbnums)\n  )\n  print(output)\n}\n\nfizz_buzz(3)\n\n\nThis code is executed.\n\n\nFizz",
     "crumbs": [
       "Units",
       "Unit 1: Intro"
     ]
   },
   {
-    "objectID": "units/unit1.html#a-basic-markdown-table",
-    "href": "units/unit1.html#a-basic-markdown-table",
+    "objectID": "Modules/unit1.html#a-basic-markdown-table",
+    "href": "Modules/unit1.html#a-basic-markdown-table",
     "title": "Unit 1: Intro",
     "section": "A basic Markdown table",
     "text": "A basic Markdown table\n\n\n\nDefault\nLeft\nRight\nCenter\n\n\n\n\n12\n12\n12\n12\n\n\n123\n123\n123\n123\n\n\n1\n1\n1\n1",
@@ -338,5 +175,168 @@
       "Units",
       "Unit 1: Intro"
     ]
+  },
+  {
+    "objectID": "Modules/unit3.html",
+    "href": "Modules/unit3.html",
+    "title": "Unit 3: More",
+    "section": "",
+    "text": "[UNDER CONSTRUCTION]\nThis is an example of using qmd as the source document with pdf as one target. I’ve taken out the qmd stuff that doesn’t seem to render to pdf.",
+    "crumbs": [
+      "Units",
+      "Unit 3: More"
+    ]
+  },
+  {
+    "objectID": "Modules/unit3.html#evaluated-python-code-chunk-with-a-plot",
+    "href": "Modules/unit3.html#evaluated-python-code-chunk-with-a-plot",
+    "title": "Unit 3: More",
+    "section": "Evaluated Python code chunk, with a plot",
+    "text": "Evaluated Python code chunk, with a plot\n\n\n\n\n\n\n\n\n\nnp.float64(0.21015521877433152)",
+    "crumbs": [
+      "Units",
+      "Unit 3: More"
+    ]
+  },
+  {
+    "objectID": "Modules/unit3.html#latex",
+    "href": "Modules/unit3.html#latex",
+    "title": "Unit 3: More",
+    "section": "LaTeX",
+    "text": "LaTeX\n\\[\n\\theta = \\int_0^\\infty f(x,\\theta)d\\theta\n\\]",
+    "crumbs": [
+      "Units",
+      "Unit 3: More"
+    ]
+  },
+  {
+    "objectID": "Modules/unit3.html#latex-macro",
+    "href": "Modules/unit3.html#latex-macro",
+    "title": "Unit 3: More",
+    "section": "LaTeX macro",
+    "text": "LaTeX macro\n\n\n\n\n\n\nWarning\n\n\n\nHaving include-before-body in the yaml header of this file, as seemingly needed to enable macros, causes extra space at top of page.\n\n\n\\[\nA = X \\trans Y\n\\]",
+    "crumbs": [
+      "Units",
+      "Unit 3: More"
+    ]
+  },
+  {
+    "objectID": "staff.html",
+    "href": "staff.html",
+    "title": "Staff",
+    "section": "",
+    "text": "Caution\n\n\n\nSite and course are under construction. Do not contact any of the staff listed here (except for the Instructor) before the first day of class!\n\n\nOffice hours are subject to change.\n\n\n\nInstructor: Elizabeth Purdom epurdom@stat.berkeley.edu Office hours:  - TBA pronouns: she/her\n\n\nGSI: Florica Constantine florica@berkeley.edu Office hours: - TBA\n\n\nGSI: Chuao Dong chuaodong@berkeley.edu Office hours: - TBA\n\n\nGSI: Chloe Shen cjshen@berkeley.edu Office hours:  - TBA",
+    "crumbs": [
+      "Staff"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistics 135: Concepts of Statistics",
+    "section": "",
+    "text": "Ed\n\n  DataHub\n\n  Gradescope\n\n  bCourses\n\n  Flextensions\n\n\nNo matching items",
+    "crumbs": [
+      "Home / Schedule"
+    ]
+  },
+  {
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
+    "title": "Statistics 135: Concepts of Statistics",
+    "section": "Schedule",
+    "text": "Schedule\nHere we use Quarto’s EJS templating.\n\n\n\n   Week 1\n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           \n           \n           \n           Aug 26:\n           \n           \n              Module 0 Introduction\n           \n           \n                \n                \n                  \n                    Syllabus\n                  \n                  \n                  \n                    Diagnostic Test\n                  \n                  \n                \n           \n                \n           \n        \n   \n   \n   \nNo matching items",
+    "crumbs": [
+      "Home / Schedule"
+    ]
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs License (CC BY-NC-ND 4.0).",
+    "crumbs": [
+      "License"
+    ]
+  },
+  {
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "Data",
+    "section": "",
+    "text": "[UNDER CONSTRUCTION]\nWe’ll use data from several real world situations in class.",
+    "crumbs": [
+      "Datasets"
+    ]
+  },
+  {
+    "objectID": "data.html#data-1",
+    "href": "data.html#data-1",
+    "title": "Data",
+    "section": "Data 1",
+    "text": "Data 1",
+    "crumbs": [
+      "Datasets"
+    ]
+  },
+  {
+    "objectID": "data.html#data-2",
+    "href": "data.html#data-2",
+    "title": "Data",
+    "section": "Data 2",
+    "text": "Data 2",
+    "crumbs": [
+      "Datasets"
+    ]
+  },
+  {
+    "objectID": "Modules/00-OverviewIntro.html",
+    "href": "Modules/00-OverviewIntro.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "The field of statistic can be very broadly summarized as taking data that we have in hand to make statements that we think have broader generality than just this data.\nConsider this data from the Pew Research Center, based on a survey of US Parents in May of 2025 of 3,054 eligible parents who responded (out of 6,287 who were asked)1\n\n\n\n\n\nThis is the results of data collected on a small sample of all US parents, but its interest is lies in being able to use it to infer or make statements about the general population of all US parents.\nIn statistics this is called inference and is the heart of the subject of statistics. This course is an rigorous, mathematical introduction into the process of inference and inferential thinking about data more broadly.\nThe main parts of inference can be roughly broken down into the following steps:\n\nHow do we use our data to best estimate something about a larger population\nor\nto predict something about future observations we will see from that population?\n\nI estimate 51% of 2-4 yrs old and 54% of 5-12 yrs old in the US watch YouTube daily\n\nHow good of an estimate/prediction is it and can we give measures of accuracy or confidence in our estimate/prediction?\n\nWith 95% confidence, I estimate 47.9-54.1% of 2-4 yrs old and 50.8-57.0% of 5-12 yrs old in the US watch YouTube daily\n\nHow can we make comparisons or test hypotheses from our data?\n\nAre the rates of daily YouTube consumption different between 2-4yr olds and 5-12yr olds in the general population?\nPutting all of these together into an analysis of a dataset is the process of inference.\nWe are able to accomplish these tasks by thinking of our data as random and using probability to model aspects of our data. These probabilistic models are how we justify generalizing beyond our specific data.\nYou will in the syllabus see that the course topics will progress through these fundamental steps.\n\nHaven’t I already done this in my intro stat course?\n\nIf you have taken previous intro statistics courses, like STAT 20 or DATA 8, you have probably been introduced to these topics. That’s great! The difference in this course is that we are going to lean heavily into your probability from STAT 134 or 140 to make these ideas mathematically rigorous. The goal is both that you mathematically understand the specific tools we will introduce, and that you have the foundation to expand into more complex scenarios (for example, 150-level Statistics classes!)."
+  },
+  {
+    "objectID": "Modules/00-OverviewIntro.html#footnotes",
+    "href": "Modules/00-OverviewIntro.html#footnotes",
+    "title": "Introduction",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://www.pewresearch.org/internet/2025/10/08/parents-kids-screens-methodology/↩︎"
+  },
+  {
+    "objectID": "Modules/unit2.html",
+    "href": "Modules/unit2.html",
+    "title": "Unit 2: Next",
+    "section": "",
+    "text": "[UNDER CONSTRUCTION]\nThis is an example of using an ipynb file as source rather than qmd. It follows instructions from https://github.com/DS-100/course-notes/README.md.\nLink to the data."
+  },
+  {
+    "objectID": "Modules/unit2.html#latex",
+    "href": "Modules/unit2.html#latex",
+    "title": "Unit 2: Next",
+    "section": "LaTeX",
+    "text": "LaTeX\nHere is some \\(\\LaTeX\\). \\[\n\\theta = 7\n\\]"
+  },
+  {
+    "objectID": "Modules/unit2.html#evaluated-python-code",
+    "href": "Modules/unit2.html#evaluated-python-code",
+    "title": "Unit 2: Next",
+    "section": "Evaluated Python code",
+    "text": "Evaluated Python code\nNote that to get code output shown, the underlying notebook must have executed the code.\n\n\n7"
+  },
+  {
+    "objectID": "Modules/unit2.html#callout",
+    "href": "Modules/unit2.html#callout",
+    "title": "Unit 2: Next",
+    "section": "Callout",
+    "text": "Callout\n\n\n\n\n\n\nTipTip with Title\n\n\n\nThis is an example of a callout with a title."
+  },
+  {
+    "objectID": "Modules/macros.html",
+    "href": "Modules/macros.html",
+    "title": "",
+    "section": "",
+    "text": "\\[\n\\newcommand{\\trans}{^\\mathsf{T}}\n\\newcommand{\\eps}{\\epsilon}\n\\]"
   }
 ]
