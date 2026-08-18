@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistics 135: Concepts of Statistics</title>
+<title>Calendar</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -72,94 +70,8 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-schedule .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-week','listing-days',{ data: ['index'] },{ data: ['categories'] }],
-      
-      searchColumns: ["listing-week","listing-days"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-schedule'] = new List('listing-schedule', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-buttons .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-button','listing-link','listing-color',{ data: ['index'] },{ data: ['categories'] }],
-      
-      searchColumns: ["listing-button","listing-link","listing-color"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-buttons'] = new List('listing-buttons', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="”https://siteimproveanalytics.com/js/siteanalyze_6294756.js”"></script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="assets/styles.css">
 <link rel="stylesheet" href="style.css">
@@ -174,7 +86,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home / Schedule</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./calendar.html">Calendar</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -208,7 +120,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home / Schedule</span></a>
   </div>
 </li>
@@ -226,7 +138,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calendar.html" class="sidebar-item-text sidebar-link">
+  <a href="./calendar.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Calendar</span></a>
   </div>
 </li>
@@ -264,22 +176,15 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#schedule" id="toc-schedule" class="nav-link active" data-scroll-target="#schedule">Schedule</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistics 135: Concepts of Statistics</h1>
-<p class="subtitle lead">UC Berkeley, Fall 2026</p>
+<h1 class="title">Calendar</h1>
 </div>
 
 
@@ -296,126 +201,10 @@ window.Quarto = {
 </header>
 
 
-<div id="listing-buttons" class="quarto-listing quarto-listing-container-custom">
-<div id="listing-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
-
-  <a href="https://edstem.org/us/courses/100848" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #6A0DAD; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; border: 1px solid #6A0DAD;">Ed</a>
-
-  <a href="https://berkeley.edu" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #006400; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; border: 1px solid #006400;">DataHub</a>
-
-  <a href="https://www.gradescope.com/courses/1342601" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #8B0000; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; border: 1px solid #8B0000;">Gradescope</a>
-
-  <a href="https://bcourses.berkeley.edu/courses/1556876" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #00008B; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; border: 1px solid #00008B;">bCourses</a>
-
-  <a href="https://flextensions.berkeley.edu/courses/75/" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: gold; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; border: 1px solid gold;">Flextensions</a>
-
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>THIS SITE IS UNDER CONSTRUCTION. None of the material is finalized yet.</p>
-</div>
-</div>
-<section id="schedule" class="level2">
-<h2 class="anchored" data-anchor-id="schedule">Schedule</h2>
-<p>Here we use Quarto’s EJS templating.</p>
-<div id="listing-schedule" class="quarto-listing quarto-listing-container-custom">
-<style>
-.label {
-    border-radius: 9px;
-    padding: 5px;
-    color: white;
-}
-
-.label-Lecture { background-color: #4767FF}
-.label-Participation { background-color:  #7A2CAB}
-.label-Lab { background-color: #facd05}
-.label-Homework { background-color: crimson}
-.label-Exam { background-color: green}
-
-#th-schedule {
-    width: 15%;
-    text-align: center;
-}
-
-#td-schedule:first-of-type {
-    width: 55%;
-}
-
-#td-schedule:last-of-type {
-    width: 30%;
-}
-
-table {
-    border: 2px solid;
-}
-
-.border {
-  color:#069;
-  font-weight: bold;
-}
-
-a.unpublished {
-  color:#808080
-}
-
-</style>
-
-   <h4 class="anchored">Week 1</h4>
-
-   <table class="table" data-quarto-disable-processing="true">
-   <!-- 'table' class causes use of quarto styling for tables, seemingly from bootstrap.min.css -->
-   <!-- data-quarto-disable-processing="true" prevents Quarto processing of tables (https://quarto.org/docs/authoring/tables.html#disabling-quarto-table-processing) -->
-   
-   <tbody>
-   
-
-        
-
-           <tr>
-           
-           
-           
-           
-           <th id="th-schedule" scope="row" rowspan="1">Aug 26:</th>
-           
-           
-              <td id="td-schedule"><strong class="label label-Module">Module 0</strong> <a href="./Modules/00-OverviewIntro.html" target="_blank">Introduction</a></td>
-           
-           
-                <td id="td-schedule">
-                
-                  
-                    <a href="./syllabus.html">Syllabus</a>
-                  
-                  
-                  
-                    <a href="Materials/s135-sp26-diagnostic.pdf">Diagnostic Test</a>
-                  
-                  
-                </td>
-           
-                
-           </tr>
-        
-   
-   </tbody>
-   </table>
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
+<p>Here is the calendar of events for Stat 135, Fall 2026.</p>
+<iframe src="https://calendar.google.com/calendar/embed?src=c_769526c0bd4c60931f5f004ff7a71cd8249a51d01432d80c09c4d9e128032d44%40group.calendar.google.com&amp;ctz=America%2FLos_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
 
-
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
