@@ -82,9 +82,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-week','listing-days',{ data: ['index'] },{ data: ['categories'] }],
+      valueNames: ['listing-week','listing-days','listing-projectProfile',{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-week","listing-days"],
+      searchColumns: ["listing-week","listing-days","listing-projectProfile"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -245,14 +245,14 @@ window.Quarto = {
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Datasets</span></a>
+  <a href="./Modules/01-ThinkProb.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Thinking probabilistically about data</span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./license.html" class="sidebar-item-text sidebar-link">
@@ -269,7 +269,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#schedule" id="toc-schedule" class="nav-link active" data-scroll-target="#schedule">Schedule</a></li>
+  <li><a href="#welcome-to-stat-135" id="toc-welcome-to-stat-135" class="nav-link active" data-scroll-target="#welcome-to-stat-135">Welcome to Stat 135!</a></li>
+  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
   </ul>
 </nav>
     </div>
@@ -312,6 +313,8 @@ window.Quarto = {
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div>
+<section id="welcome-to-stat-135" class="level2">
+<h2 class="anchored" data-anchor-id="welcome-to-stat-135">Welcome to Stat 135!</h2>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -325,9 +328,9 @@ Caution
 <p>THIS SITE IS UNDER CONSTRUCTION. None of the material is finalized yet.</p>
 </div>
 </div>
+</section>
 <section id="schedule" class="level2">
 <h2 class="anchored" data-anchor-id="schedule">Schedule</h2>
-<p>Here we use Quarto’s EJS templating.</p>
 <div id="listing-schedule" class="quarto-listing quarto-listing-container-custom">
 <style>
 .label {

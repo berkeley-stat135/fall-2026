@@ -2,34 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://stat135.berkeley.edu/spring-2026/calendar.html</loc>
-    <lastmod>2026-08-18T17:00:33.374Z</lastmod>
+    <lastmod>2026-08-19T00:10:01.629Z</lastmod>
   </url>
   <url>
     <loc>https://stat135.berkeley.edu/spring-2026/Modules/macros.html</loc>
-    <lastmod>2026-08-18T17:00:33.370Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/staff.html</loc>
-    <lastmod>2026-08-18T17:00:33.376Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/index.html</loc>
-    <lastmod>2026-08-18T17:00:33.374Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/license.html</loc>
-    <lastmod>2026-08-18T17:00:33.374Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/data.html</loc>
-    <lastmod>2026-08-18T17:00:33.374Z</lastmod>
+    <lastmod>2026-08-19T00:10:01.624Z</lastmod>
   </url>
   <url>
     <loc>https://stat135.berkeley.edu/spring-2026/Modules/00-OverviewIntro.html</loc>
-    <lastmod>2026-08-18T17:00:33.369Z</lastmod>
+    <lastmod>2026-08-19T00:10:01.623Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/data.html</loc>
+    <lastmod>2026-08-19T00:10:01.629Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/license.html</loc>
+    <lastmod>2026-08-19T00:10:01.629Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/index.html</loc>
+    <lastmod>2026-08-19T00:10:01.629Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/staff.html</loc>
+    <lastmod>2026-08-19T00:10:01.630Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/Modules/01-ThinkProb.html</loc>
+    <lastmod>2026-08-19T00:10:01.624Z</lastmod>
   </url>
   <url>
     <loc>https://stat135.berkeley.edu/spring-2026/syllabus.html</loc>
-    <lastmod>2026-08-18T17:00:33.376Z</lastmod>
+    <lastmod>2026-08-19T00:10:01.630Z</lastmod>
   </url>
 </urlset>
