@@ -10,103 +10,93 @@
     ]
   },
   {
-    "objectID": "Modules/macros.html",
-    "href": "Modules/macros.html",
-    "title": "",
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
     "section": "",
-    "text": "\\[\n\\newcommand{\\trans}{^\\mathsf{T}}\n\\newcommand{\\eps}{\\epsilon}\n\\]"
-  },
-  {
-    "objectID": "Modules/00-OverviewIntro.html",
-    "href": "Modules/00-OverviewIntro.html",
-    "title": "Introduction",
-    "section": "",
-    "text": "The field of statistic can be very broadly summarized as taking data that we have in hand to make statements that we think have broader generality than just this data.\nConsider this data from the Pew Research Center, based on a survey of US Parents in May of 2025 of 3,054 eligible parents who responded (out of 6,287 who were asked)1\n\n\n\n\n\nThis is the results of data collected on a small sample of all US parents, but its interest is lies in being able to use it to infer or make statements about the general population of all US parents.\nIn statistics this is called inference and is the heart of the subject of statistics. This course is an rigorous, mathematical introduction into the process of inference and inferential thinking about data more broadly.\nThe main parts of inference can be roughly broken down into the following steps:\n\nHow do we use our data to best estimate something about a larger population\nor\nto predict something about future observations we will see from that population?\n\nI estimate 51% of 2-4 yrs old and 54% of 5-12 yrs old in the US watch YouTube daily\n\nHow good of an estimate/prediction is it and can we give measures of accuracy or confidence in our estimate/prediction?\n\nWith 95% confidence, I estimate 47.9-54.1% of 2-4 yrs old and 50.8-57.0% of 5-12 yrs old in the US watch YouTube daily\n\nHow can we make comparisons or test hypotheses from our data?\n\nAre the rates of daily YouTube consumption different between 2-4yr olds and 5-12yr olds in the general population?\nPutting all of these together into an analysis of a dataset is the process of inference.\nWe are able to accomplish these tasks by thinking of our data as random and using probability to model aspects of our data. These probabilistic models are how we justify generalizing beyond our specific data.\nYou will in the syllabus see that the course topics will progress through these fundamental steps.\n\nHaven’t I already done this in my intro stat course?\n\nIf you have taken previous intro statistics courses, like STAT 20 or DATA 8, you have probably been introduced to these topics. That’s great! The difference in this course is that we are going to lean heavily into your probability from STAT 134 or 140 to make these ideas mathematically rigorous. The goal is both that you mathematically understand the specific tools we will introduce, and that you have the foundation to expand into more complex scenarios (for example, 150-level Statistics classes!).",
+    "text": "Caution\n\n\n\nSite and course are under construction. Nothing in this Syllabus has been finalized.",
     "crumbs": [
-      "Modules",
-      "Introduction"
+      "Syllabus"
     ]
   },
   {
-    "objectID": "Modules/00-OverviewIntro.html#footnotes",
-    "href": "Modules/00-OverviewIntro.html#footnotes",
-    "title": "Introduction",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nhttps://www.pewresearch.org/internet/2025/10/08/parents-kids-screens-methodology/↩︎",
+    "objectID": "syllabus.html#logistics",
+    "href": "syllabus.html#logistics",
+    "title": "Syllabus",
+    "section": "Logistics",
+    "text": "Logistics\n\nClass schedule (in person)\n\n\n\n\nNumber\nTime\nLocation\n\n\n\n\nLecture\n\nMWF 11:00A-11:59A\nHearst Field Annex A1\n\n\n Section\n101\nTu 9-11am\nEtcheverry 3105\n\n\n102\nTu 10-12pm\nHearst Field Annex B1\n\n\n103\nTu 12-2pm\nSocial Sciences Building 185\n\n\n104\nTu 2-4pm\nHearst Gym 242\n\n\n105\nTu 2-4pm\nHearst Mining 310\n\n\n106\nTu 4-6pm\nMoffitt Library 106\n\n\n\n\n\nStaff\n\n\n\nPosition\nName\n\n\n\n\nInstructor\nElizabeth Purdom\n\n\n GSI\nFlorica Constantine\n\n\nChuao Dong\n\n\nChloe Shen\n\n\n\n(to see email, office hours and other information, click on the person’s name)\n\n\nLectures\nLectures will cover core theory and concepts, with supporting data analysis examples. To get the full benefit of lecture, it is best to read the supporting material ahead of time. When slides or R code are shown in class, they will be posted online after class. However, lectures will not always have associated slides – I usually will write on the board/ipad. I will not be posting recordings of the lectures, but if you have to miss class due to an emergency or unavoidable circumstance, the class notes and text should suffice. Please do come and see me so we can review what you have missed.\nLectures and sections cannot be recorded, whether video or audio-only. This includes use of smart glasses, phones, etc. (Note, that UC policy prohibits distributing any recordings of classes without the instructor’s explicit permission.)\nLecture attendance will be measured using occasional in-class pop quizzes. There will be roughly 8-10 of these handed out in lecture throughout the semester. You need to complete five of them to get the full attendance credit. They serve primarily as attendance checks, but I also use them to get a feel for where the class is, so you must answer them as best you can to receive credit.\n\n\nSections\nThe sections meet once a week, on Tuesdays, for two hours. The individual section times will be listed in the course calendar. Section time will be spent working on practice problems. Since some problems will involve computing you should plan to always bring your laptop. You may attend a lab for which you are not enrolled (physical space permitting). Labs will not be recorded so attendance is strongly recommended.",
     "crumbs": [
-      "Modules",
-      "Introduction"
+      "Syllabus"
     ]
   },
   {
-    "objectID": "data.html",
-    "href": "data.html",
-    "title": "Data",
-    "section": "",
-    "text": "[UNDER CONSTRUCTION]\nWe’ll use data from several real world situations in class."
-  },
-  {
-    "objectID": "data.html#data-1",
-    "href": "data.html#data-1",
-    "title": "Data",
-    "section": "Data 1",
-    "text": "Data 1"
-  },
-  {
-    "objectID": "data.html#data-2",
-    "href": "data.html#data-2",
-    "title": "Data",
-    "section": "Data 2",
-    "text": "Data 2"
-  },
-  {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
-    "section": "",
-    "text": "This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs License (CC BY-NC-ND 4.0).",
+    "objectID": "syllabus.html#emailcommunication-policy",
+    "href": "syllabus.html#emailcommunication-policy",
+    "title": "Syllabus",
+    "section": "Email/Communication policy",
+    "text": "Email/Communication policy\nIf you have a question for us, the fastest way to get a response is to post the question on Ed. If it deals with private matters, please make it a private post. If you are not comfortable writing a private post, come see one of the staff in person, either to office hours or make an appointment.",
     "crumbs": [
-      "License"
+      "Syllabus"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Statistics 135: Concepts of Statistics",
-    "section": "",
-    "text": "Ed\n\n  DataHub\n\n  Gradescope\n\n  bCourses\n\n  Flextensions\n\n\nNo matching items",
+    "objectID": "syllabus.html#assessments",
+    "href": "syllabus.html#assessments",
+    "title": "Syllabus",
+    "section": "Assessments",
+    "text": "Assessments\n\nHomework Assignments\nHomework assignments will be due roughly every week or so during the semester, starting in the second week. Homework will be posted to Gradescope usually by Friday, and will generally be due the following Friday at 11:59 pm. Homework will be a combination of analytical exercises done “by hand” and data analysis using R.\nHomework will be graded for completeness/effort, not for accuracy.\n\n\nQuizzes\nThere will be four 50-minute quizzes to test your understanding of homework and lecture. We will drop your lowest quiz score.\nYou will take the quizzes in the CBTF (Computer-Based Testing Facility) in Moffit Library. The dates of the quizzes are:\n\n\n\nQuiz\nDates\n\n\n\n\nQuiz 1\nSep 14 - Sep 17\n\n\nQuiz 2\nSep 28 - Oct 1\n\n\nQuiz 3\nOct 26 - Oct 29\n\n\nQuiz 4\nNov 16 - Nov 19\n\n\n\nYou will have to schedule your quiz during the given dates at the CBTF. We do not schedule your quiz for you. Note that DSP students will also take it in the CBTF and will get their extended time and other accommodations. See more details here\nStudents are responsible for reading and following all CBTF policies and procedures, including instantiating a PrairieTest account, submitting any DSP accommodations in advance, and reserving and attending quiz sessions on time. During CBTF exams, students may use only the materials and resources expressly authorized by the course; unauthorized devices, materials, or resources are prohibited.\n\n\nExams\nThere will be one midterm exam and the final exam.\n\nThe midterm exam will be a two hour exam which will be held in the evening from 7-9 pm on Wednesday, October 12 (Location TBD).\nThe final exam time and day are Monday, December 14, 11:30 am - 2:30 pm. If you do not take the final exam, you will not pass the class.\n\n\n\nAttendance Quizzes\nAs stated above, there will be 8-10 attendance quizzes handed out in lecture throughout the semester. These will be graded on completion, and you will need to complete five of them to get all the attendance points.\n\n\nExtra Credit Opportunities\nExtra credit is assigned at the end of the semester after the grade bins have been determined. Ways to get extra credit (it will be added to your overall course percentage):\n\nDiagnostic test: 0.25% for submission with some clear attempt at solving the questions.\nEdStem: The top 5 student responders will get up to 0.5% extra credit.\n\n\n\nLate Assignments\nHomework You can automatically receive extensions for 3 days for up to 2 homework assignments by submitting a request at this page once assignments have been posted on Gradescope. You must make the request before the due date.\nQuizzes You will self-schedule a time to take your quizzes in a three day window. There is guaranteed space for all students somewhere in that window, but no specific time is guaranteed so you should reserve your time well in advance, particularly if you know you will have conflicts on certain days. (Students from other classes will also be taking their exams during these time periods in the same space). You can, however, cancel your time and reserve another time up until the start of your scheduled time if something comes up closer to the time.\nThis policy is intended to handle most standard needs, and students are expected to use their extensions wisely and plan ahead for scheduling their quizzes. If you have DSP accommodations or need more extensive extensions due to extraordinary circumstances, please send us a private message on Ed.\n\n\nOverall Score\nYour letter grade for the course will be based a weighted average of your assessments, as follows:\n\nHomework (each assignment weighted equally): 10%\nQuizzes: 20% (equally weighted, drop lowest)\nMidterm: 30% (can be replaced by the final if higher)\nFinal exam: 35%\nAttendance quizzes: 5%\n\nGuaranteed grade bins: Students earning an overall score of at least 90% are guaranteed to receive an A- or better, students earning an overall score of at least 80% are guaranteed a B- or better, and students earning an overall score of at least 70% are guaranteed at least a C-. These are guidelines to help you be able to concretely monitor how you are doing. However, I do curve grades, meaning I may move these cutoffs down, based on how the rest of the class does, but they will not go up. We will also report summary statistics, like median/mean/upper and lower quartiles, so you can see how you are doing relative to the rest of the class.",
     "crumbs": [
-      "Home / Schedule"
+      "Syllabus"
     ]
   },
   {
-    "objectID": "index.html#welcome-to-stat-135",
-    "href": "index.html#welcome-to-stat-135",
-    "title": "Statistics 135: Concepts of Statistics",
-    "section": "Welcome to Stat 135!",
-    "text": "Welcome to Stat 135!\n\n\n\n\n\n\nCaution\n\n\n\nTHIS SITE IS UNDER CONSTRUCTION. None of the material is finalized yet.",
+    "objectID": "syllabus.html#curriculum",
+    "href": "syllabus.html#curriculum",
+    "title": "Syllabus",
+    "section": "Curriculum",
+    "text": "Curriculum\n\nWhat we will cover\nBelow is a rough guide to what we will cover this semester, but this may change as the semester progresses.\n\n\n\nWeeks\nTopic\n\n\n\n\n 1-2\nIntroduction to modeling data\n\n\nCase Study: Simple Regression\n\n\n 3-4\nEstimation: MLE and Beyond\n\n\nSampling Distribution\n\n\n 5-6\nFinite properties of Estimators\n\n\nConfidence Intervals\n\n\nCase Study: Two group comparisons\n\n\n 7-9\nBeyond Finite sampling distributions:\n\n\nAsymptotic Distributions\n\n\nBootstrap\n\n\n10\nCase Study: Multiple Regression\n\n\n 11-12\nPrediction and Classification\n\n\nCase Study: Logistic Regression\n\n\n13-14\nHypothesis Testing\n\n\n\n\n\nTextbooks\nOfficial textbooks for the course:\n\nFoundations of Statistics for Data Scientists by Alan Agresti and Maria Kateri: This is the main text that we will follow. It does a good job of laying out the main subjects and gives a modern treatment of the area, but is light in detail.\nMathematical Statistics and Data Analysis (3rd Edition), by John Rice: This is the classical book for this course, and has very good, detailed exposition of the subjects it covers as well as many exercises. However, it has a very classical perspective, and we will be covering topics this semester not in this book or with a different emphasis as to the relative importance. There are many places online where you can find a pdf of the book, and I will assign reading out of this textbook to supplement the main text.\n\nOther useful texts:\n\nR for Data Science, by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund",
     "crumbs": [
-      "Home / Schedule"
+      "Syllabus"
     ]
   },
   {
-    "objectID": "index.html#schedule",
-    "href": "index.html#schedule",
-    "title": "Statistics 135: Concepts of Statistics",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\n   Week 1\n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           \n           \n           \n           Aug 26:\n           \n           \n              Module 0 Introduction\n           \n           \n                \n                \n                  \n                    Syllabus\n                  \n                  \n                  \n                    Diagnostic Test\n                  \n                  \n                \n           \n                \n           \n        \n   \n   \n   \nNo matching items",
+    "objectID": "syllabus.html#important-sites-to-bookmark",
+    "href": "syllabus.html#important-sites-to-bookmark",
+    "title": "Syllabus",
+    "section": "Important sites to bookmark",
+    "text": "Important sites to bookmark\n\nR Studio / R Datahub\nAll coding in this class will be done in R. You may download the desktop version of RStudio if you wish, but you can also use the datahub. It is up to you. Just make sure you have the latest version of R and RStudio, if you would like to download it to your laptop.\n\n\nBcourses\nImportant coursewide announcements will be sent out on bcourses.\n\n\nEd Discussion\nI have created a Ed discussion page for this course, which you can access through the link in bCourses (so you will be logged in). This is an online forum to ask questions to fellow students and answer other students’ questions. The GSIs and I will have access to the forum and may endorse or occasionally answer questions but this is primarily a forum for students to help each other – if you need an instructor or GSI’s assistance please attend office hours. Extra credit of up to 0.5% on the final course score will be awarded to the five students who have responded to the most questions on Ed by the end of the semester (with reasonable attempts at answering the questions).\n\n\nCBTF\nThis semester, you will be taking your quizzes in the Computer-Based Testing Facility in Moffit Library. In order to take the test, you will have to log into the course site using your Calnet ID. I will post a practice quiz so that you can get the hang of how to do the scheduling etc. Meanwhile, take a look at the page “CBTF Getting Started for Students”.\n\n\nGradescope\nHomework assignments, take-home exams, and regrade requests will be submitted through Gradescope, which you can also access through the link in bCourses (you should not add yourself to Gradescope, as the roster has already been uploaded). You should view your grades here, not bCourses.\n\n\nFlextensions\nThis is the online platform for requesting extensions for homeworks and other assignments. Everyone has automatic extensions for homeworks, as described above. Beyond those, extensions will only be granted in extraordinary circumstances.",
     "crumbs": [
-      "Home / Schedule"
+      "Syllabus"
     ]
   },
   {
-    "objectID": "staff.html",
-    "href": "staff.html",
-    "title": "Staff",
-    "section": "",
-    "text": "Caution\n\n\n\nSite and course are under construction. Do not contact any of the staff listed here (except for the Instructor) before the first day of class!\n\n\nOffice hours are subject to change.\n\n\n\nInstructor: Elizabeth Purdom epurdom@stat.berkeley.edu Office hours:  - TBA pronouns: she/her\n\n\nGSI: Florica Constantine florica@berkeley.edu Office hours: - TBA\n\n\nGSI: Chuao Dong chuaodong@berkeley.edu Office hours: - TBA\n\n\nGSI: Chloe Shen cjshen@berkeley.edu Office hours:  - TBA",
+    "objectID": "syllabus.html#academic-honesty-policy",
+    "href": "syllabus.html#academic-honesty-policy",
+    "title": "Syllabus",
+    "section": "Academic Honesty Policy",
+    "text": "Academic Honesty Policy\nThe student community at UC Berkeley has adopted the following Honor Code: “As a member of the UC Berkeley community, I act with honesty, integrity, and respect for others.”.\nMy expectation is that you will adhere to this code. Beyond the importance of respecting your fellow students, acting with integrity in completing course assignments helps ensure that they achieve their purpose, which is to help you learn and develop valuable statistical understanding and skills. Homework must be done independently. If you get stuck or want to explore alternative approaches, feel free to discuss issues with students or course staff at the homework parties or on Ed.\nYou may ask an AI tool for help understanding a concept, or figuring out a coding error (but note that the answers are not always correct), but putting assignment questions into an AI tool and then copying and pasting/paraphrasing the answers will be considered plagiarism. It is also completely negates the purpose of the homework, which is to cement and internalize concepts from the course. It will not serve you for the exam either, when you have to tackle the problems on your own. I leave it to you to decide how much you would like to use genAI tools, but please use them with caution.\nCBTF proctors monitor all sessions and will document and report any suspected academic misconduct to the course staff. Suspected violations will be handled in accordance with the Berkeley Honor Code and the UC Berkeley Code of Student Conduct, and may result in penalties up to and including a failing grade on the exam or in the course and referral to the Center for Student Conduct.",
     "crumbs": [
-      "Staff"
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "syllabus.html#inclusivity-and-accommodation",
+    "href": "syllabus.html#inclusivity-and-accommodation",
+    "title": "Syllabus",
+    "section": "Inclusivity and Accommodation",
+    "text": "Inclusivity and Accommodation\nIf you need accommodations for any physical, psychological, or learning disability, please speak to me after class or during office hours. Please note that you must make arrangements in a timely manner through DSP so that I can make the appropriate accommodations.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "syllabus.html#possibility-of-revisions-to-course-policies",
+    "href": "syllabus.html#possibility-of-revisions-to-course-policies",
+    "title": "Syllabus",
+    "section": "Possibility of revisions to course policies",
+    "text": "Possibility of revisions to course policies\nAll course policies, including assessment, are subject to change during the course of the semester in response to unforeseen events including, but not limited to, campus shutdowns due to various reasons, power outages, forest fires, and medical emergencies among members of the course staff.",
+    "crumbs": [
+      "Syllabus"
     ]
   },
   {
@@ -154,93 +144,131 @@
     ]
   },
   {
-    "objectID": "syllabus.html",
-    "href": "syllabus.html",
-    "title": "Syllabus",
+    "objectID": "staff.html",
+    "href": "staff.html",
+    "title": "Staff",
     "section": "",
-    "text": "Caution\n\n\n\nSite and course are under construction. Nothing in this Syllabus has been finalized.",
+    "text": "Caution\n\n\n\nSite and course are under construction. Do not contact any of the staff listed here (except for the Instructor) before the first day of class!\n\n\nOffice hours are subject to change.\n\n\n\nInstructor: Elizabeth Purdom epurdom@stat.berkeley.edu Office hours:  - TBA pronouns: she/her\n\n\nGSI: Florica Constantine florica@berkeley.edu Office hours: - TBA\n\n\nGSI: Chuao Dong chuaodong@berkeley.edu Office hours: - TBA\n\n\nGSI: Chloe Shen cjshen@berkeley.edu Office hours:  - TBA",
     "crumbs": [
-      "Syllabus"
+      "Staff"
     ]
   },
   {
-    "objectID": "syllabus.html#logistics",
-    "href": "syllabus.html#logistics",
-    "title": "Syllabus",
-    "section": "Logistics",
-    "text": "Logistics\n\nClass schedule (in person)\n\n\n\n\nNumber\nTime\nLocation\n\n\n\n\nLecture\n\nMWF 11:00A-11:59A\nHearst Field Annex A1\n\n\n Section\n101\nTu 9-11am\nEtcheverry 3105\n\n\n102\nTu 10-12pm\nHearst Field Annex B1\n\n\n103\nTu 12-2pm\nSocial Sciences Building 185\n\n\n104\nTu 2-4pm\nHearst Gym 242\n\n\n105\nTu 2-4pm\nHearst Mining 310\n\n\n106\nTu 4-6pm\nMoffitt Library 106\n\n\n\n\n\nStaff\n\n\n\nPosition\nName\n\n\n\n\nInstructor\nElizabeth Purdom\n\n\n GSI\nFlorica Constantine\n\n\nChuao Dong\n\n\nChloe Shen\n\n\n\n(to see email, office hours and other information, click on the person’s name)\n\n\nLectures\nLectures will cover core theory and concepts, with supporting data analysis examples. To get the full benefit of lecture, it is best to read the supporting material ahead of time. When slides or R code are shown in class, they will be posted online after class. However, lectures will not always have associated slides – I usually will write on the board/ipad. I will not be posting recordings of the lectures, but if you have to miss class due to an emergency or unavoidable circumstance, the class notes and text should suffice. Please do come and see me so we can review what you have missed.\nLectures and sections cannot be recorded, whether video or audio-only. This includes use of smart glasses, phones, etc. (Note, that UC policy prohibits distributing any recordings of classes without the instructor’s explicit permission.)\nLecture attendance will be measured using occasional in-class pop quizzes. There will be roughly 8-10 of these handed out in lecture throughout the semester. You need to complete five of them to get the full attendance credit. They serve primarily as attendance checks, but I also use them to get a feel for where the class is, so you must answer them as best you can to receive credit.\n\n\nSections\nThe sections meet once a week, on Tuesdays, for two hours. The individual section times will be listed in the course calendar. Section time will be spent working on practice problems. Since some problems will involve computing you should plan to always bring your laptop. You may attend a lab for which you are not enrolled (physical space permitting). Labs will not be recorded so attendance is strongly recommended.",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistics 135: Concepts of Statistics",
+    "section": "",
+    "text": "Ed\n\n  DataHub\n\n  Gradescope\n\n  bCourses\n\n  Flextensions\n\n\nNo matching items",
     "crumbs": [
-      "Syllabus"
+      "Home / Schedule"
     ]
   },
   {
-    "objectID": "syllabus.html#assessments",
-    "href": "syllabus.html#assessments",
-    "title": "Syllabus",
-    "section": "Assessments",
-    "text": "Assessments\n\nHomework Assignments\nHomework assignments will be due roughly every week or so during the semester, starting in the second week. Homework will be posted to Gradescope usually by Friday, and will generally be due the following Friday at 11:59 pm. Homework will be a combination of analytical exercises done “by hand” and data analysis using R.\n\n\n\n\nQuizzes\nThere will be four 50-minute quizzes to test your understanding of homework and lecture. We will drop your lowest quiz score.\nYou will take the quizzes in the CBTF (Computer-Based Testing Facility) in Moffit Library. The dates of the quizzes are:\n\n\n\nQuiz\nDates\n\n\n\n\nQuiz 1\nSep 14 - Sep 17\n\n\nQuiz 2\nSep 28 - Oct 1\n\n\nQuiz 3\nOct 26 - Oct 29\n\n\nQuiz 4\nNov 16 - Nov 19\n\n\n\nYou will have to schedule your quiz during the given dates at the CBTF. We do not schedule your quiz for you. Note that DSP students will also take it in the CBTF and will get their extended time and other accommodations.\n\n\nExams\nThere will be one midterm exam and the final exam.\n\nThe midterm exam will be a two hour exam which will be held in the evening from 7-9 pm on Wednesday, October 12 (Location TBD).\nThe final exam time and day are Monday, December 14, 11:30 am - 2:30 pm. If you do not take the final exam, you will not pass the class.\n\n\n\nAttendance Quizzes\nAs stated above, there will be 8-10 attendance quizzes handed out in lecture throughout the semester. These will be graded on completion, and you will need to complete five of them to get all the attendance points.\n\n\nExtra Credit Opportunities\nExtra credit is assigned at the end of the semester after the grade bins have been determined. Ways to get extra credit (it will be added to your overall course percentage):\n\nDiagnostic test: 0.25% for submission with some clear attempt at solving the questions.\nEdStem: The top 5 student responders will get up to 0.5% extra credit.\n\n\n\nLate Assignments\nHomework You can automatically receive extensions for 3 days for up to 2 homework assignments by submitting a request at this page once assignments have been posted on Gradescope. You must make the request before the due date.\nQuizzes You will self-schedule a time to take your quizzes in a three day window. There is guaranteed space for all students somewhere in that window, but no specific time is guaranteed so you should reserve your time well in advance, particularly if you know you will have conflicts on certain days. (Students from other classes will also be taking their exams during these time periods in the same space). You can, however, cancel your time and reserve another time up until the start of your scheduled time if something comes up closer to the time.\nThis policy is intended to handle most standard needs, and students are expected to use their extensions wisely and plan ahead for scheduling their quizzes. If you have DSP accommodations or need more extensive extensions due to extraordinary circumstances, please send us a private message on Ed.\n\n\nOverall Score\nYour letter grade for the course will be based a weighted average of your assessments, as follows:\n\nHomework (each assignment weighted equally, drop two lowest): 10%\nQuizzes: 20% (equally weighted, drop lowest)\nMidterm: 30% (can be replaced by the final if higher)\nFinal exam: 35%\nAttendance quizzes: 5%\n\nGuaranteed grade bins: Students earning an overall score of at least 90% are guaranteed to receive an A- or better, students earning an overall score of at least 80% are guaranteed a B- or better, and students earning an overall score of at least 70% are guaranteed at least a C-. These are guidelines to help you be able to concretely monitor how you are doing. However, I do curve grades, meaning I may move these cutoffs down, based on how the rest of the class does, but they will not go up. We will also report summary statistics, like median/mean/upper and lower quartiles, so you can see how you are doing relative to the rest of the class.",
+    "objectID": "index.html#welcome-to-stat-135",
+    "href": "index.html#welcome-to-stat-135",
+    "title": "Statistics 135: Concepts of Statistics",
+    "section": "Welcome to Stat 135!",
+    "text": "Welcome to Stat 135!\n\n\n\n\n\n\nCaution\n\n\n\nTHIS SITE IS UNDER CONSTRUCTION. None of the material is finalized yet.",
     "crumbs": [
-      "Syllabus"
+      "Home / Schedule"
     ]
   },
   {
-    "objectID": "syllabus.html#curriculum",
-    "href": "syllabus.html#curriculum",
-    "title": "Syllabus",
-    "section": "Curriculum",
-    "text": "Curriculum\n\nWhat we will cover\nBelow is a rough guide to what we will cover this semester, but this may change as the semester progresses.\n\n\n\nWeeks\nTopic\n\n\n\n\n 1-2\nIntroduction to modeling data\n\n\nCase Study: Simple Regression\n\n\n 3-4\nEstimation: MLE and Beyond\n\n\nSampling Distribution\n\n\n 5-6\nFinite properties of Estimators\n\n\nConfidence Intervals\n\n\nCase Study: Two group comparisons\n\n\n 7-9\nBeyond Finite sampling distributions:\n\n\nAsymptotic Distributions\n\n\nBootstrap\n\n\n10\nCase Study: Multiple Regression\n\n\n 11-12\nPrediction and Classification\n\n\nCase Study: Logistic Regression\n\n\n13-14\nHypothesis Testing\n\n\n\n\n\nTextbooks\nOfficial textbooks for the course:\n\nFoundations of Statistics for Data Scientists by Alan Agresti and Maria Kateri: This is the main text that we will follow. It does a good job of laying out the main subjects and gives a modern treatment of the area, but is light in detail.\nMathematical Statistics and Data Analysis (3rd Edition), by John Rice: This is the classical book for this course, and has very good, detailed exposition of the subjects it covers as well as many exercises. However, it has a very classical perspective, and we will be covering topics this semester not in this book or with a different emphasis as to the relative importance. There are many places online where you can find a pdf of the book, and I will assign reading out of this textbook to supplement the main text.\n\nOther useful texts:\n\nR for Data Science, by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund",
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
+    "title": "Statistics 135: Concepts of Statistics",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\n   Week 1\n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           \n           \n           \n           Aug 26:\n           \n           \n              Module 0 Introduction\n           \n           \n                \n                \n                  \n                    Syllabus\n                  \n                  \n                  \n                    Diagnostic Test\n                  \n                  \n                \n           \n                \n           \n        \n   \n   \n   \nNo matching items",
     "crumbs": [
-      "Syllabus"
+      "Home / Schedule"
     ]
   },
   {
-    "objectID": "syllabus.html#important-sites-to-bookmark",
-    "href": "syllabus.html#important-sites-to-bookmark",
-    "title": "Syllabus",
-    "section": "Important sites to bookmark",
-    "text": "Important sites to bookmark\n\nR Studio / R Datahub\nAll coding in this class will be done in R. You may download the desktop version of RStudio if you wish, but you can also use the datahub. It is up to you. Just make sure you have the latest version of R and RStudio, if you would like to download it to your laptop.\n\n\nBcourses\nImportant coursewide announcements will be sent out on bcourses.\n\n\nEd Discussion\nI have created a Ed discussion page for this course, which you can access through the link in bCourses (so you will be logged in). This is an online forum to ask questions to fellow students and answer other students’ questions. The GSIs and I will have access to the forum and may endorse or occasionally answer questions but this is primarily a forum for students to help each other – if you need an instructor or GSI’s assistance please attend office hours. Extra credit of up to 0.5% on the final course score will be awarded to the five students who have responded to the most questions on Ed by the end of the semester (with reasonable attempts at answering the questions).\n\n\nCBTF\nThis semester, you will be taking your quizzes in the Computer-Based Testing Facility in Moffit Library. In order to take the test, you will have to log into the course site using your Calnet ID. I will post a practice quiz so that you can get the hang of how to do the scheduling etc. Meanwhile, take a look at the page “CBTF Getting Started for Students”.\n\n\nGradescope\nHomework assignments, take-home exams, and regrade requests will be submitted through Gradescope, which you can also access through the link in bCourses (you should not add yourself to Gradescope, as the roster has already been uploaded). You should view your grades here, not bCourses.\n\n\nFlextensions\nThis is the online platform for requesting extensions for homeworks and other assignments. Everyone has automatic extensions for homeworks, as described above. Beyond those, extensions will only be granted in extraordinary circumstances.",
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs License (CC BY-NC-ND 4.0).",
     "crumbs": [
-      "Syllabus"
+      "License"
     ]
   },
   {
-    "objectID": "syllabus.html#academic-honesty-policy",
-    "href": "syllabus.html#academic-honesty-policy",
-    "title": "Syllabus",
-    "section": "Academic Honesty Policy",
-    "text": "Academic Honesty Policy\nThe student community at UC Berkeley has adopted the following Honor Code: “As a member of the UC Berkeley community, I act with honesty, integrity, and respect for others.”.\nMy expectation is that you will adhere to this code. Beyond the importance of respecting your fellow students, acting with integrity in completing course assignments helps ensure that they achieve their purpose, which is to help you learn and develop valuable statistical understanding and skills. Homework must be done independently. If you get stuck or want to explore alternative approaches, feel free to discuss issues with students or course staff at the homework parties or on Ed.\nYou may ask an AI tool for help understanding a concept, or figuring out a coding error (but note that the answers are not always correct), but putting assignment questions into an AI tool and then copying and pasting/paraphrasing the answers will be considered plagiarism. It is also completely negates the purpose of the homework, which is to cement and internalize concepts from the course. It will not serve you for the exam either, when you have to tackle the problems on your own. I leave it to you to decide how much you would like to use genAI tools, but please use them with caution.",
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "Data",
+    "section": "",
+    "text": "[UNDER CONSTRUCTION]\nWe’ll use data from several real world situations in class."
+  },
+  {
+    "objectID": "data.html#data-1",
+    "href": "data.html#data-1",
+    "title": "Data",
+    "section": "Data 1",
+    "text": "Data 1"
+  },
+  {
+    "objectID": "data.html#data-2",
+    "href": "data.html#data-2",
+    "title": "Data",
+    "section": "Data 2",
+    "text": "Data 2"
+  },
+  {
+    "objectID": "Modules/00-OverviewIntro.html",
+    "href": "Modules/00-OverviewIntro.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "The field of statistic can be very broadly summarized as taking data that we have in hand to make statements that we think have broader generality than just this data.\nConsider this data from the Pew Research Center, based on a survey of US Parents in May of 2025 of 3,054 eligible parents who responded (out of 6,287 who were asked)1\n\n\n\n\n\nThis is the results of data collected on a small sample of all US parents, but its interest is lies in being able to use it to infer or make statements about the general population of all US parents.\nIn statistics this is called inference and is the heart of the subject of statistics. This course is an rigorous, mathematical introduction into the process of inference and inferential thinking about data more broadly.\nThe main parts of inference can be roughly broken down into the following steps:\n\nHow do we use our data to best estimate something about a larger population\nor\nto predict something about future observations we will see from that population?\n\nI estimate 51% of 2-4 yrs old and 54% of 5-12 yrs old in the US watch YouTube daily\n\nHow good of an estimate/prediction is it and can we give measures of accuracy or confidence in our estimate/prediction?\n\nWith 95% confidence, I estimate 47.9-54.1% of 2-4 yrs old and 50.8-57.0% of 5-12 yrs old in the US watch YouTube daily\n\nHow can we make comparisons or test hypotheses from our data?\n\nAre the rates of daily YouTube consumption different between 2-4yr olds and 5-12yr olds in the general population?\nPutting all of these together into an analysis of a dataset is the process of inference.\nWe are able to accomplish these tasks by thinking of our data as random and using probability to model aspects of our data. These probabilistic models are how we justify generalizing beyond our specific data.\nYou will in the syllabus see that the course topics will progress through these fundamental steps.\n\nHaven’t I already done this in my intro stat course?\n\nIf you have taken previous intro statistics courses, like STAT 20 or DATA 8, you have probably been introduced to these topics. That’s great! The difference in this course is that we are going to lean heavily into your probability from STAT 134 or 140 to make these ideas mathematically rigorous. The goal is both that you mathematically understand the specific tools we will introduce, and that you have the foundation to expand into more complex scenarios (for example, 150-level Statistics classes!).",
     "crumbs": [
-      "Syllabus"
+      "Modules",
+      "Introduction"
     ]
   },
   {
-    "objectID": "syllabus.html#emailed-policy",
-    "href": "syllabus.html#emailed-policy",
-    "title": "Syllabus",
-    "section": "Email/Ed policy",
-    "text": "Email/Ed policy\nIf you have a question for us, the fastest way to get a response is to post the question on Ed. If it deals with private matters, please make it a private post. If you are not comfortable writing a private post, come and see me. You can drop into office hours or make an appointment, either is fine.",
+    "objectID": "Modules/00-OverviewIntro.html#footnotes",
+    "href": "Modules/00-OverviewIntro.html#footnotes",
+    "title": "Introduction",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://www.pewresearch.org/internet/2025/10/08/parents-kids-screens-methodology/↩︎",
     "crumbs": [
-      "Syllabus"
+      "Modules",
+      "Introduction"
     ]
   },
   {
-    "objectID": "syllabus.html#inclusivity-and-accommodation",
-    "href": "syllabus.html#inclusivity-and-accommodation",
-    "title": "Syllabus",
-    "section": "Inclusivity and Accommodation",
-    "text": "Inclusivity and Accommodation\nIf you need accommodations for any physical, psychological, or learning disability, please speak to me after class or during office hours. Please note that you must make arrangements in a timely manner through DSP so that I can make the appropriate accommodations.",
-    "crumbs": [
-      "Syllabus"
-    ]
+    "objectID": "Modules/macros.html",
+    "href": "Modules/macros.html",
+    "title": "",
+    "section": "",
+    "text": "\\[\n\\newcommand{\\trans}{^\\mathsf{T}}\n\\newcommand{\\eps}{\\epsilon}\n\\]"
   },
   {
-    "objectID": "syllabus.html#possibility-of-revisions-to-course-policies",
-    "href": "syllabus.html#possibility-of-revisions-to-course-policies",
-    "title": "Syllabus",
-    "section": "Possibility of revisions to course policies",
-    "text": "Possibility of revisions to course policies\nAll course policies, including assessment, are subject to change during the course of the semester in response to unforeseen events including, but not limited to, campus shutdowns due to various reasons, power outages, forest fires, and medical emergencies among members of the course staff.",
-    "crumbs": [
-      "Syllabus"
-    ]
+    "objectID": "CBTesting.html",
+    "href": "CBTesting.html",
+    "title": "More details on CBTF",
+    "section": "",
+    "text": "Computer-Based Testing Facility (CBTF)\nThis semester you’ll be taking quizes in the Computer-Based Testing Facility (CBTF), a secure, proctored facility where you take computer-administered exams on managed CBTF computers. Please read the How the CBTF Works page and the Getting Started & Reservations page before your first exam."
+  },
+  {
+    "objectID": "CBTesting.html#pre-exam-tasks",
+    "href": "CBTesting.html#pre-exam-tasks",
+    "title": "More details on CBTF",
+    "section": "Pre-Exam tasks",
+    "text": "Pre-Exam tasks\n\nTo set up your account, sign in to us.prairietest.com with your CalNet ID to instantiate your PrairieTest account.\n\n\nWe will enter students into the Prairie Test testing center at the beginning of the semester. Students will then need to login and accept their invitation.\n\n\nSubmit any DSP accommodations as soon as possible to your course instructor so they can be entered into your PrairieTest account.\n\n\nSTAT 135 course staff have to manually provide CBTF the information at least a week before the quiz opens. So please be prompt in getting your DSP letter for STAT 135 sent to us.\nNote: if you haven’t instantiated your account (step 1), CBTF staff cannot enter your accommodations.\n\n\nMake reservations for your exams once self-reservations open. Instructions for making, changing, or deleting reservations are here.\n\n\nCourse staff will let you know when each exam opens for reservations. You can change a reservation up to 90 minutes before the session starts.\nIf you cancel after that 90 minute window or miss your reservation entirely, you will have to email the center or go in person to the center before you can reserve a new time.\nThe quiz opens for students to be able to register roughly a week before the quiz. Book a time as soon as you can. Don’t wait until the middle of the testing period or there might not be seats available.\n\n\nWhen taking exams in the CBTF, use the “PrairieTest” shortcut on the desktop."
+  },
+  {
+    "objectID": "CBTesting.html#what-to-expect-in-the-testing-center",
+    "href": "CBTesting.html#what-to-expect-in-the-testing-center",
+    "title": "More details on CBTF",
+    "section": "What to expect in the testing center",
+    "text": "What to expect in the testing center\n\nArrive 10 minutes before your scheduled session to check in on time. Exams start right at the listed session time.\nYou may not use any unauthorized devices or materials during your exam (smartphones, personal cheat sheets, smartwatches, smart glasses, etc.)\nProctors monitor the CBTF and report any instances of academic dishonesty to course staff directly.\n\nIf you find that accommodations do not meet your needs, please contact your instructor and DSP specialist so that alternate arrangements can be made for you.\n\nProctors cannot answer any content-related questions during your exam. You will be instructed to report an issue on PrairieLearn which will be sent to your course staff for review.\nIf your course is not holding its own orientation quiz / pre-test, the CBTF will offer a 20 minute, no-stakes, orientation quiz during Week 2 of the semester (August 31 - September 4th). It is highly recommended that you sign up for a slot during this time so you can get an understanding of the CBTF process before your first real exam."
+  },
+  {
+    "objectID": "CBTesting.html#additional-resources",
+    "href": "CBTesting.html#additional-resources",
+    "title": "More details on CBTF",
+    "section": "Additional Resources:",
+    "text": "Additional Resources:\n\nFull policies: CBTF Policies and Procedures\nStudent FAQ\nQuestions: cbt-help@berkeley.edu"
   }
 ]
