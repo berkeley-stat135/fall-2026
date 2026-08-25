@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>estimationbasics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9c07d96cd4bda5dae6f88da775026b2b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="”https://siteimproveanalytics.com/js/siteanalyze_6294756.js”"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#estimation" id="toc-estimation" class="nav-link active" data-scroll-target="#estimation">Estimation</a>
+  <ul class="collapse">
+  <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">An Example</a></li>
+  <li><a href="#the-basics-notation" id="toc-the-basics-notation" class="nav-link" data-scroll-target="#the-basics-notation">The Basics: Notation</a></li>
+  <li><a href="#what-is-estimation" id="toc-what-is-estimation" class="nav-link" data-scroll-target="#what-is-estimation">What is estimation?</a></li>
+  <li><a href="#sampling-perspective" id="toc-sampling-perspective" class="nav-link" data-scroll-target="#sampling-perspective">Sampling Perspective</a>
+  <ul class="collapse">
+  <li><a href="#random-samples" id="toc-random-samples" class="nav-link" data-scroll-target="#random-samples">Random Samples</a></li>
+  </ul></li>
+  <li><a href="#general-modeling-perspective" id="toc-general-modeling-perspective" class="nav-link" data-scroll-target="#general-modeling-perspective">General Modeling Perspective</a></li>
+  <li><a href="#some-common-estimators" id="toc-some-common-estimators" class="nav-link" data-scroll-target="#some-common-estimators">Some common estimators</a>
+  <ul class="collapse">
+  <li><a href="#estimate-of-the-mean-of-the-population" id="toc-estimate-of-the-mean-of-the-population" class="nav-link" data-scroll-target="#estimate-of-the-mean-of-the-population">Estimate of the Mean of the Population</a></li>
+  <li><a href="#estimate-the-variance-of-the-population" id="toc-estimate-the-variance-of-the-population" class="nav-link" data-scroll-target="#estimate-the-variance-of-the-population">Estimate the Variance of the Population</a></li>
+  <li><a href="#estimate-the-probability-of-success" id="toc-estimate-the-probability-of-success" class="nav-link" data-scroll-target="#estimate-the-probability-of-success">Estimate the Probability of Success</a></li>
+  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
+  <li><a href="#what-to-estimate" id="toc-what-to-estimate" class="nav-link" data-scroll-target="#what-to-estimate">What to estimate</a></li>
+  </ul></li>
+  <li><a href="#general-modeling" id="toc-general-modeling" class="nav-link" data-scroll-target="#general-modeling">General modeling</a>
+  <ul class="collapse">
+  <li><a href="#parametric-models" id="toc-parametric-models" class="nav-link" data-scroll-target="#parametric-models">Parametric Models</a></li>
+  <li><a href="#alternatives-to-parametric-models" id="toc-alternatives-to-parametric-models" class="nav-link" data-scroll-target="#alternatives-to-parametric-models">Alternatives to Parametric Models</a></li>
+  <li><a href="#why-bother-with-parametric-models" id="toc-why-bother-with-parametric-models" class="nav-link" data-scroll-target="#why-bother-with-parametric-models">Why bother with parametric models?</a></li>
+  <li><a href="#known-probability-structure-random-samples" id="toc-known-probability-structure-random-samples" class="nav-link" data-scroll-target="#known-probability-structure-random-samples">Known Probability Structure – Random Samples</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="estimation" class="level1">
+<h1>Estimation</h1>
+<div class="READING">
+<div class="block-title">
+<p><strong>Corresponding reading</strong></p>
+</div>
+<ul>
+<li>Chapter 1.4, 4.1 of <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span></li>
+</ul>
+</div>
+<div class="GOALS">
+<div class="block-title">
+<p><strong>Questions/Goals for this Module</strong></p>
+</div>
+<ul>
+<li>What is an estimator?</li>
+<li>What are we estimating?</li>
+<li>What do we mean when we “model” our data? - What is a parametric model?</li>
+<li>How does the context of the data change how we think about modeling data?</li>
+</ul>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These lecture notes weave in material from Shobhana Stoyanov’s lecture notes from <a href="https://stat135.berkeley.edu/spring-2026/">Spring 2026</a>, Lectures 2 &amp; 3. You are welcome to look at her material directly as well.</p>
+</div>
+</div>
+<section id="an-example" class="level2">
+<h2 class="anchored" data-anchor-id="an-example">An Example</h2>
+<p>Let’s return to our simple example from the first day of class: a survey of US Parents in May of 2025 of 3,054 eligible parents who responded (out of 6,287 who were asked)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../StaticFigures/Pew2025_Youtube2Yr.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+<p>We want to use this data on 3,054 parents estimate something about a larger population. We <em>observe</em> on this data 51% of 2-4 yrs old and 54% of 5-12 yrs old watch YouTube daily.</p>
+<p>We want to estimate what these numbers would be in the entire US if we were to question <em>all</em> parents. To actually find that number exactly would require a census of all US parents, so using this data as a stand-in for the entire US can only be an estimate.</p>
+</section>
+<section id="the-basics-notation" class="level2">
+<h2 class="anchored" data-anchor-id="the-basics-notation">The Basics: Notation</h2>
+<p>Let’s introduce some notation to talk about our data. We will assume we have <span class="math inline">\(n\)</span> observations or units. For each observation, we observe (usually numerical) information. We will let our observed data be<br>
+<span class="math display">\[X_1,\ldots, X_n\]</span> We will often talk about an observation <span class="math inline">\(i\)</span> and it’s data <span class="math inline">\(X_i\)</span>, where <span class="math inline">\(i\)</span> can be any integer between <span class="math inline">\(1,\ldots,n\)</span>.</p>
+<p><span class="math inline">\(X\)</span> is not the only notational option; in different settings we might use <span class="math inline">\(Y\)</span> or <span class="math inline">\(Z\)</span>. But it is traditional to use letters at the end of the alphabet and capital letters to indicate that it is a random variable.</p>
+<p>Specific Cases:</p>
+<ul>
+<li><p>What if I observe two data points for each observation, like income and GPA? Well, <span class="math inline">\(X_i\)</span> can be a vector, e.g.&nbsp;<span class="math inline">\(X_i\in R^2\)</span></p></li>
+<li><p>What if my data is not numerical, but what category the observation falls into (e.g.&nbsp;color of hair, or what state someone is from)? There are various options for converting these categories into numbers, for example I can give each of my possible <span class="math inline">\(K\)</span> categories numerical values like <span class="math inline">\(1,\ldots,K\)</span>, and then <span class="math inline">\(X_i \in \{1,\ldots,K\}\)</span>.</p></li>
+</ul>
+</section>
+<section id="what-is-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-estimation">What is estimation?</h2>
+<p><strong>Estimation</strong> involves using a <strong>sample</strong> to compute an <strong>estimate</strong> of a <strong>population parameter</strong>.</p>
+<ul>
+<li><strong>Estimator</strong>: The <strong>function</strong> (or algorithm) that maps sample data to a number.</li>
+<li><strong>Estimate</strong>: The <em>actual</em> observed value after applying the estimator on the sample (observed) data.</li>
+<li><strong>Population Parameter</strong>: A feature of the population that we are estimating, such as the mean, the median, or the</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../StaticFigures/inference-sampling.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Figure courtesy of Shobhana Stoyanov</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Estimator vs Estimate
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is a subtle distinction. It is related to the distinction in probability of a <em>random variable</em> and it’s <em>realization</em>. In probability we often use <span class="math inline">\(X\)</span> (capital letter) for a random variable, and it’s particular realization as <span class="math inline">\(x\)</span> (lowercase). Similarly, an estimator is generally written as a function <span class="math inline">\(f\)</span> of <span class="math inline">\(X\)</span> to indicate it’s generic, the estimator is when you plug in <span class="math inline">\(x\)</span> you actually observe into the function <span class="math inline">\(f\)</span>.</p>
+</div>
+</div>
+<p>What do we mean by the population parameter? There are two ways to think about this.</p>
+</section>
+<section id="sampling-perspective" class="level2">
+<h2 class="anchored" data-anchor-id="sampling-perspective">Sampling Perspective</h2>
+<p>In this perspective, our population is the larger set of units from which our observed units were drawn. This is the example of our parent survey above.</p>
+<p>Then a population parameter is some summary value of the population that we don’t know, like the proportion of all US parents (or much more complicated characteristics!)<br>
+This makes a lot of sense in settings where the selection of particular units to measure is a significant aspect of our data collection (even if the selection process is non-random or unknown). It allows us to think quite concretely about our sample, and in what ways it might have biases from the full population or even from the sample we <em>wanted</em> to collected but didn’t because of, for example, some units not responding or being unavailable. There can often be a gap between the population you want to generalize to, and the one that your data makes possible.</p>
+<p>This is a common visualization of these components:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../StaticFigures/sampling-schematic.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Figure courtesy of Shobhana Stoyanov</figcaption>
+</figure>
+</div>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Think about these components for the Pew Survey. What might these different boxes correspond to?</p>
+</div>
+<section id="random-samples" class="level3">
+<h3 class="anchored" data-anchor-id="random-samples">Random Samples</h3>
+<p>How specifically are these samples collected from the population. We’ve seen they can be collected in many ways, but the gold standard is to <em>randomly select</em> units from the population, where the investigator selects a unit based on a known, but random mechanism.</p>
+<div id="def-rs" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1</strong></span> <strong>Probability sampling</strong> is a method of selecting a sample through a defined random process in which every (eligible) population unit has a <em>known</em>, positive chance of inclusion. A <strong>random sample</strong> is the resulting sample from performing probability sampling.</p>
+</div>
+<p>The most simple and widely known mechanism is a <em>simple random sample</em></p>
+<div id="def-srs" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2</strong></span> A <strong>simple random sample (SRS)</strong> is a random sample where every eligible unit in the population had <em>equal</em> chance of being selected.</p>
+<p>Another way of stating this is in a SRS of size <span class="math inline">\(n\)</span>, every subset of the population of size <span class="math inline">\(n\)</span> has equal probability of being selected.</p>
+</div>
+<p>The sampling mechanism for construction a SRS is also known as <em>sampling without replacement</em>, because they way you can create a SRS is to repeatedly draw from the population with equal probability for each unit, but <em>without replacing</em> the samples you previously drew.</p>
+</section>
+</section>
+<section id="general-modeling-perspective" class="level2">
+<h2 class="anchored" data-anchor-id="general-modeling-perspective">General Modeling Perspective</h2>
+<p>However, the sampling perspective doesn’t make a lot of sense for experimental data in the physical sciences, for example, like our spring data from the first module.</p>
+<p>We can generalize to <strong>assume</strong> the data comes from a probability distribution, i.e.&nbsp;they are random in some way. We can write this as <span class="math display">\[(X_1,\ldots,X_n)\sim \mathcal{F}\]</span> where <span class="math inline">\(\mathcal{F}\)</span> is a <em>unknown</em> distribution on <span class="math inline">\(n\)</span> variables.</p>
+<p>Then a more general definition is that our population parameter is some feature of the unknown data generation process <span class="math inline">\(\mathcal{F}\)</span>, like the expectation of that distribution. This is a more general, mathematically rigorous definition that we can make work for any data. But notice how much it divorces you from thinking about how your data was collected!</p>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Consider our spring example from the first class. There is no obvious sampling mechanism described. But what kinds of problems in the data collection might you have that could lead to problems in making conclusions about the process that generated the data?</p>
+</div>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Go through the scenarios of data collection from module 1:</p>
+<ol type="1">
+<li>What might be the population you are interested in? There may be more than one answer: how does that affect whether this data will be good for answering that question?</li>
+<li>What kind of parameter(s) would you be estimating?</li>
+</ol>
+</div>
+</section>
+<section id="some-common-estimators" class="level2">
+<h2 class="anchored" data-anchor-id="some-common-estimators">Some common estimators</h2>
+<p>There are common simple estimators that come up all the time. They form part of what fundamental <em>descriptive</em> statistics of data, in that they estimate the center and spread of data and are useful even separate from trying to estimate a population parameter. They will reappear throughout the course – we will see that there are multiple ways that they can be justified as “reasonable” estimators.</p>
+<section id="estimate-of-the-mean-of-the-population" class="level3">
+<h3 class="anchored" data-anchor-id="estimate-of-the-mean-of-the-population">Estimate of the Mean of the Population</h3>
+<p>Suppose we have continuous data <span class="math inline">\(X_1, \ldots, X_n\)</span> from a population distribution <span class="math inline">\(\mathcal{F}\)</span>. We <em>assume</em> that a draw of an observation <span class="math inline">\(X\)</span> from <span class="math inline">\(\mathcal{F}\)</span> will always have the same expected value, <span class="math inline">\(\mu\)</span>, <span class="math display">\[E(X)=\mu\]</span> We can call <span class="math inline">\(\mu\)</span> the population mean, and then we want to estimate it from our data, <span class="math inline">\(X_1\ldots,X_n\)</span>.</p>
+<p>A common and intuitive estimate is to simply take the mean of our data, <span class="math display">\[\hat{\mu}=\hat{\mu}(X_1,\ldots,X_n)=\frac{1}{n}\sum_{i=1}^n X_i=\bar{X}\]</span></p>
+</section>
+<section id="estimate-the-variance-of-the-population" class="level3">
+<h3 class="anchored" data-anchor-id="estimate-the-variance-of-the-population">Estimate the Variance of the Population</h3>
+<p>Suppose we have continuous data <span class="math inline">\(X_1, \ldots, X_n\)</span> from a population distribution <span class="math inline">\(\mathcal{F}\)</span>. We <em>assume</em> that a draw of an observation <span class="math inline">\(X\)</span> from <span class="math inline">\(\mathcal{F}\)</span> has the same expected value, <span class="math inline">\(\mu\)</span> <em>and</em> the same variance <span class="math display">\[E(X)=\mu, var(X)=\sigma^2\]</span> Then the standard estimator for this is <span class="math display">\[S^2=\frac{1}{n-1}\sum_{i=1}^n (X-\bar{X})^2\]</span> Notice how this mirrors our definition of variance, <span class="math display">\[var(X)=E[(X-\mu)^2]\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You will sometimes see another estimator of variance that comes up this semester, <span class="math display">\[\frac{1}{n}\sum_{i=1}^n (X-\bar{X})^2\]</span> This mirrors our defintion of variance even more closely (replacing the expected value with the mean, rather than a <span class="math inline">\(1/(n-1)\)</span>). However, this is never the preferred estimate, as we will see, because it is <em>biased</em>, but it does come up, for example as a MLE estimator.</p>
+</div>
+</div>
+</section>
+<section id="estimate-the-probability-of-success" class="level3">
+<h3 class="anchored" data-anchor-id="estimate-the-probability-of-success">Estimate the Probability of Success</h3>
+<p>Suppose instead we have binary response data <span class="math inline">\(X_1, \ldots, X_n\)</span>, meaning each <span class="math inline">\(X_i\)</span> takes on one of two values. These can be any value (“spam”/“not-spam” or “agree”/“disagree”), but we will encode the two values as either 0 or 1. We will often talk about 1 as “success”, but this is totally arbitrary.</p>
+<p>We again <em>assume</em> that a draw of an observation <span class="math inline">\(X\)</span> from <span class="math inline">\(\mathcal{F}\)</span> will always have the same probability of success <span class="math inline">\(p\)</span>, <span class="math display">\[P(X=1)=\pi\in (0,1)\]</span> Notice that <span class="math display">\[E(X)=P(X=1)=\pi,\]</span> so in fact, we are just estimating the population mean again.</p>
+<p>Then the standard estimate of <span class="math inline">\(\pi\)</span> is given by the proportion of 1s in the data, <span class="math display">\[\hat{\pi} =\hat{\pi}(X_1,\ldots,X_n)=\frac{\# \{X_i=1\}}{n}\]</span> Notice that since each <span class="math inline">\(X_i\)</span> is either 0 or 1, the mean <span class="math inline">\(\bar{X}\)</span> is just the proportion of 1’s in the data, <span class="math display">\[
+\hat{\pi} = \frac{1}{n}\sum_{i=1}^n X_i = \bar{X}.
+\]</span></p>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>What will the estimate of variance imply if our data is binary?</p>
+</div>
+</section>
+<section id="notation" class="level3">
+<h3 class="anchored" data-anchor-id="notation">Notation</h3>
+<p>It is important to notice the standard notation introduced here. The unknown population parameters are generally Greek letters, while the estimate of that population is designated by putting a “hat” over the population parameter. For example,</p>
+<ul>
+<li>Population mean: <span class="math inline">\(\mu\)</span></li>
+<li>Estimate of population mean: <span class="math inline">\(\hat{\mu}=\hat{\mu}(X_1,\ldots,X_n)=\bar{X}\)</span></li>
+</ul>
+<p>But these are two quite different quantities! <span class="math inline">\(\mu\)</span> is an unknown constant, while <span class="math inline">\(\hat{\mu}=f(X_1,\ldots,X_n)\)</span> is a function of our <span class="math inline">\(n\)</span> data points and thus a random variable!</p>
+<p>You will see there are deviations to this rule, particularly in really common settings, like using <span class="math inline">\(s^2\)</span> for the estimate of variance. And sometimes we just say <span class="math inline">\(\bar{X}\)</span> and not <span class="math inline">\(\hat{\mu}\)</span>.</p>
+</section>
+<section id="what-to-estimate" class="level3">
+<h3 class="anchored" data-anchor-id="what-to-estimate">What to estimate</h3>
+<p>Notice that in my general modeling perspective, to even describe what I want to estimate, I am already making assumptions about <span class="math inline">\(\mathcal{F}\)</span>.</p>
+<p>For example, I said I would use the sample average to estimate the population mean. But if my data generation process is a random number collected over time, like the temperature, and the expected value of that number changes over time, then it may make no sense to talk about the mean of my population. We can talk reasonably about the average temperature in June; it’s less clear that the average temperature over a six month period is a relevant number.</p>
+<p>So what it makes sense to estimate depends on what data I have.</p>
+</section>
+</section>
+<section id="general-modeling" class="level2">
+<h2 class="anchored" data-anchor-id="general-modeling">General modeling</h2>
+<p>We said previously that when we don’t have the kind of precise information we have from a random sample, we will define our notion of population to be the unknown probability distribution <span class="math inline">\(\mathcal{F}\)</span> that created my data.</p>
+<p>If we leave it at that, we’ve basically gone no farther than saying the <span class="math inline">\(X_i\)</span> are random. <span class="math inline">\(\mathcal{F}\)</span> could be any distribution, there could be any kind of relationship between the <span class="math inline">\(X_i\)</span>, etc. It gives us no idea of what a future data point might look like or in what way the data might resemble each other. Ultimately, we cannot draw any general conclusions without <strong>additional assumptions</strong> on the data that, at a minimum, allow us to assume this data has some relationship to each and share some features in common that we are interested in exploring. Ultimately assumptions narrow down what is unknown about a distribution, leaving us with less to have to try to determine directly from the data. We often call this <strong>modeling</strong> my data generation process.</p>
+<p>Here are examples of some basic assumptions we might add; this can give you a sense of how little we’ve will have otherwise assumed so far:</p>
+<ul>
+<li><strong>Density</strong> We can assume <span class="math inline">\(\mathcal{F}\)</span> has a density <span class="math inline">\(f(x_1,\ldots,x_n)\)</span> – and yes, this is an assumption. Not all distributions have a density!</li>
+<li><strong>Independence</strong> We can assume the <span class="math inline">\(X_1,\ldots,X_n\)</span> are independent from each other. This is probably the most common assumption in the entire field of statistics. It is so common, that people frequently state it automatically without even thinking whether it makes sense. But there are many important problems where this isn’t true, for example when data is collected over time, like stock market. And in our website example, it’s not clear why independence would make sense since the comments very well might be influencing each other.</li>
+<li><strong>Assumptions about shared moments (or other features)</strong> We could assume that the <span class="math inline">\(X_i\)</span> share the same moments.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> For example, <span class="math display">\[E(X_1)=\ldots=E(X_n)\text{, or }var(X_1)=\ldots=var(X_n)\]</span> Notice if we are going to do this, then we might want to make our life easier and introduce notation to describe these shared values, e.g.&nbsp;<span class="math display">\[E(X_i)=\mu\text{, or }var(X_i)=\sigma^2.\]</span> This is a common point of interest – can we estimate the data’s shared mean or shared variances?</li>
+</ul>
+<ul>
+<li><strong>Assumptions about the components of <span class="math inline">\(X_i\)</span>.</strong> If <span class="math inline">\(X_i\)</span> is a vector, like our income and GPA, we could assume that there is a relationship between them, e.g.&nbsp;<span class="math display">\[E(X_i^{income})=\beta_0+\beta_1 E(X_i^{GPA}),\]</span> then the average of one is related to the average of the other.</li>
+</ul>
+<p>Noticed this isn’t the same thing as saying <span class="math inline">\(E(X_1)=E(X_2)\ldots=E(X_n)\)</span> – the observations could each have different means, but their components are related and that relationship is the same across observations.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Notation:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that in these last two examples I have introduced new values:</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> for the shared moments</li>
+<li><span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> for the shared relationship</li>
+</ul>
+<p>These are examples of possible <strong>parameters</strong> of the distribution <span class="math inline">\(\mathcal{F}\)</span> we might want to estimate. This is often part of modeling your data – introducting or defining the parameters of interest.</p>
+</div>
+</div>
+<section id="parametric-models" class="level3">
+<h3 class="anchored" data-anchor-id="parametric-models">Parametric Models</h3>
+<p>The above are assumptions about aspects of the distribution <span class="math inline">\(\mathcal{F}\)</span>. We can go even further and assume a <em>distributional form</em> for the data. I could for example assume that the unknown random process is one of the many distributions you learned about in probability, e.g.</p>
+<ul>
+<li>Normal: <span class="math inline">\(\mathcal{N}(\mu,\sigma^2), \sigma^2&gt;0\)</span></li>
+<li>Gamma: <span class="math inline">\(Gamma(\alpha,\beta), \alpha&gt;0, \beta&gt;0\)</span></li>
+<li>Poisson: <span class="math inline">\(Poisson(\lambda), \lambda&gt;0\)</span></li>
+<li>Bernoulli: <span class="math inline">\(Be(p), p\in(0,1)\)</span></li>
+<li>Binomial: <span class="math inline">\(Bin(n,p), p\in(0,1)\)</span></li>
+</ul>
+<p>Notice these are are distributions that have parameters that define them. Hence, we call them <strong>parametric models</strong> for the data. Each one of these can more properly be called a <strong>parametric family</strong>, meaning that they are a class or set of distributions that share the same form.</p>
+<p>Importantly, I haven’t assumed I know the parameters – if I already knew the parameters, I wouldn’t need to collect data. Instead, what we mean is that we assume <span class="math inline">\(\mathcal{F}\)</span> is in the parametric family but with the specific values of the parameters unknown. So while we have narrowed down what is unknown to a small set of parameters to estimate, there’s still something left to figure out from our data!</p>
+<div class="PARAGRAPH">
+<p>Example</p>
+</div>
+<p>We can return to our example of visitors to a website. We have records of the number of visits to the website in 10min intervals – this is our data <span class="math inline">\(X_1,\ldots,X_n\)</span> (which will be counts). A parametric model for this data might say that each <span class="math inline">\(X_i\)</span> is distributed <span class="math inline">\(Poisson(\lambda)\)</span> <span class="math display">\[X_i\sim Poisson(\lambda)\]</span> Notice that we’ve said how each <span class="math inline">\(X_i\)</span> is distributed, but we haven’t thought about how they are related to each other, specifically whether they are independent from each other or share a dependency structure. <em>Deciding on a dependency structure is a key component of any modeling of data.</em></p>
+<p>The simplest option would be to say they are all independent of each other. When we also assume they are all from the exact same distribution, we will say that the data are “independent and identically distributed” often called <span class="math inline">\(i.i.d\)</span>. This can be written many ways e.g.&nbsp;<span class="math display">\[X_i\stackrel{i.i.d.}{\sim} Poisson(\lambda)\]</span> or <span class="math display">\[X_1,\ldots,X_n\:\text{are}\: i.i.d.\: Poisson(\lambda)\]</span> Independence is an easy modeling choice, and we will frequently make these kind of modeling assumptions in what follows. But these are <em>assumptions</em> and it’s not obvious that they are true!</p>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Think through the website visitors example and the Poisson model we’ve described above. Do you see any problems with these assumptions?</p>
+</div>
+<p>The best way to assess your assumptions is to think deeply about where the data is coming from.</p>
+</section>
+<section id="alternatives-to-parametric-models" class="level3">
+<h3 class="anchored" data-anchor-id="alternatives-to-parametric-models">Alternatives to Parametric Models</h3>
+<p>Can we avoid parametric models? We often don’t need to know the full distribution of the data, but enough to do specific tasks, like give statements about how much confidence we have in an estimate. There are methods that allow us to do this, but they still have assumptions.</p>
+<p>We will learn about these more later. But it’s helpful to think about two classes of data which we’ve introduced earlier</p>
+<ul>
+<li><strong>Known randomness</strong> This is data where the investigator inserted controlled randomness (like our random surveys or interventions). We will see that knowing this information allows us to perform statistical analyses that do not require any parametric models – only knowledge of the randomness we inserted.</li>
+<li><strong>Unknown randomness</strong> We will see methods (requiring computers) that can accomplish statistical analysis tasks that don’t depend on parametric models. Basically, you can estimate specific aspects of the data generation process by resampling from your data in different ways. This doesn’t mean it’s assumption free (for example you still generally need independence, amongst other things). We will also see that in situations where the assumptions are satisfied, these resampling methods often come to similar conclusions as common parametric modeling choices.</li>
+</ul>
+<p>Ultimately, for any statistical analysis it will be important to understand when your results are sensitive to your assumptions – and to which part of your assumptions. This can be described as <strong>robustness.</strong> For example, in many settings, the statistical analysis is more sensitive to the assumption of independence than of the specific parametric model!</p>
+</section>
+<section id="why-bother-with-parametric-models" class="level3">
+<h3 class="anchored" data-anchor-id="why-bother-with-parametric-models">Why bother with parametric models?</h3>
+<p>If alternative to parametric models exist, why are we going to bother with parametric models? That is a question that can prompt large debate!</p>
+<p>Generally, writing down a model (whether fully assuming a parametric distribution or not) can allow an investigator to be precise mathematically about what they are doing. Parametric models can be good starting point for thinking about data problems, particularly complex problems. We will see that there are ``out-of-the-box” strategies for inference in the context of parametric models, and thus they can be helpful for thinking how to tackled a new problem, or adjust existing techniques for a new wrinkle. Parametric models also immediately provide a strategy for simulating data, which can be helpful to get a handle on how methods work.</p>
+<p>We will see that non-parametric strategies also have assumptions and situations in which they perform better, and once you satisfy them, it is not uncommon to discover the non-parametric methods are close to a standard parametric model. Putting that together with the ease of having out-of-the-box solutions that don’t require extensive compute time for common scenarios, you will find parametric models are still widely used (and reported in scientific publications, for example).</p>
+<p>Finally, we would note that dependency in your data can sometimes basically <em>require</em> parametric models to handle the dependency correctly and get valid results. As we said, independence is a strong assumption.</p>
+<p>Thus parametric models still have a large place in statistical thinking and methodology development, even if in practical data analysis, practitioners are now much more likely to use non-parametric methods in many situations.</p>
+</section>
+<section id="known-probability-structure-random-samples" class="level3">
+<h3 class="anchored" data-anchor-id="known-probability-structure-random-samples">Known Probability Structure – Random Samples</h3>
+<p>Notice that if we have a random sample, we actually know a lot about the probability structure of our data, so we don’t have to make these assumptions (or not as many of them).</p>
+<p>For example, we will <em>know</em> the dependency structure between our <span class="math inline">\(X_i\)</span>. In particular, if we have a simple random sample (i.e.&nbsp;sampled <em>without replacement</em> from our population), then we can calculate the covariance of two elements of our sample, <span class="math inline">\(X_i\)</span>, <span class="math inline">\(X_j\)</span>. And in fact they are <em>not</em> independent! This is because we sampled from a finite population and since you don’t sample with replacement, knowing <span class="math inline">\(X_i=x\)</span> tells you something about what <span class="math inline">\(X_j\)</span> can be (for example, if the population you drew your samples from had all unique values, then <span class="math inline">\(X_j\)</span> can’t be <span class="math inline">\(x\)</span> if you know <span class="math inline">\(X_i\)</span> was).</p>
+
+
+
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-agresti2021" class="csl-entry" role="listitem">
+Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://www.pewresearch.org/internet/2025/10/08/parents-kids-screens-methodology/" class="uri">https://www.pewresearch.org/internet/2025/10/08/parents-kids-screens-methodology/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>indeed saying the <span class="math inline">\(X_i\)</span> have moments is an assumption, because not all distributions do.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/spring-2026");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
