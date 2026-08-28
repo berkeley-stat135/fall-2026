@@ -64,7 +64,7 @@
     "href": "syllabus.html#academic-honesty-policy",
     "title": "Syllabus",
     "section": "Academic Honesty Policy",
-    "text": "Academic Honesty Policy\nThe student community at UC Berkeley has adopted the following Honor Code: “As a member of the UC Berkeley community, I act with honesty, integrity, and respect for others.”.\nMy expectation is that you will adhere to this code. Beyond the importance of respecting your fellow students, acting with integrity in completing course assignments helps ensure that they achieve their purpose, which is to help you learn and develop valuable statistical understanding and skills. Homework must be done independently. If you get stuck or want to explore alternative approaches, feel free to discuss issues with students or course staff at the homework parties or on Ed.\nYou may ask an AI tool for help understanding a concept, or figuring out a coding error (but note that the answers are not always correct), but putting assignment questions into an AI tool and then copying and pasting/paraphrasing the answers will be considered plagiarism. It is also completely negates the purpose of the homework, which is to cement and internalize concepts from the course. It will not serve you for the exam either, when you have to tackle the problems on your own. I leave it to you to decide how much you would like to use genAI tools, but please use them with caution.\nCBTF proctors monitor all sessions and will document and report any suspected academic misconduct to the course staff. Suspected violations will be handled in accordance with the Berkeley Honor Code and the UC Berkeley Code of Student Conduct, and may result in penalties up to and including a failing grade on the exam or in the course and referral to the Center for Student Conduct.",
+    "text": "Academic Honesty Policy\nThe student community at UC Berkeley has adopted the following Honor Code: “As a member of the UC Berkeley community, I act with honesty, integrity, and respect for others.”.\nMy expectation is that you will adhere to this code. Beyond the importance of respecting your fellow students, acting with integrity in completing course assignments helps ensure that they achieve their purpose, which is to help you learn and develop valuable statistical understanding and skills. Homework must be done independently. If you get stuck or want to explore alternative approaches, feel free to discuss issues with students or course staff at the homework parties or on Ed.\nYou may ask an AI tool for help understanding a concept, or figuring out a coding error (but note that the answers are not always correct), but putting assignment questions into an AI tool and then copying and pasting/paraphrasing the answers will be considered plagiarism. It is also completely negates the purpose of the homework, which is to cement and internalize concepts from the course. It will not serve you for the exam either, when you have to tackle the problems on your own. I leave it to you to decide how much you would like to use genAI tools, but please use them with caution. I encourage you to read this discussion on the syllabus of STAT 20 about effective and ineffective usages of AI and the pitfalls of relying on AI to solve your HW problems.\nCBTF proctors monitor all sessions and will document and report any suspected academic misconduct to the course staff. Suspected violations will be handled in accordance with the Berkeley Honor Code and the UC Berkeley Code of Student Conduct, and may result in penalties up to and including a failing grade on the exam or in the course and referral to the Center for Student Conduct.",
     "crumbs": [
       "Syllabus"
     ]
@@ -95,99 +95,6 @@
     "title": "",
     "section": "",
     "text": "\\[\n\\newcommand{\\trans}{^\\mathsf{T}}\n\\newcommand{\\eps}{\\epsilon}\n\\]"
-  },
-  {
-    "objectID": "Modules/00-OverviewIntro.html",
-    "href": "Modules/00-OverviewIntro.html",
-    "title": "Introduction",
-    "section": "",
-    "text": "The field of statistic can be very broadly summarized as taking data that we have in hand to make statements that we think have broader generality than just this data.\nConsider this data from the Pew Research Center, based on a survey of US Parents in May of 2025 of 3,054 eligible parents who responded (out of 6,287 who were asked)1\n\n\n\n\n\nThis is the results of data collected on a small sample of all US parents, but its interest is lies in being able to use it to infer or make statements about the general population of all US parents.\nIn statistics this is called inference and is the heart of the subject of statistics. This course is an rigorous, mathematical introduction into the process of inference and inferential thinking about data more broadly.\nThe main parts of inference can be roughly broken down into the following steps:\n\nHow do we use our data to best estimate something about a larger population\nor\nto predict something about future observations we will see from that population?\n\nI estimate 51% of 2-4 yrs old and 54% of 5-12 yrs old in the US watch YouTube daily\n\nHow good of an estimate/prediction is it and can we give measures of accuracy or confidence in our estimate/prediction?\n\nWith 95% confidence, I estimate 47.9-54.1% of 2-4 yrs old and 50.8-57.0% of 5-12 yrs old in the US watch YouTube daily\n\nHow can we make comparisons or test hypotheses from our data?\n\nAre the rates of daily YouTube consumption different between 2-4yr olds and 5-12yr olds in the general population?\nPutting all of these together into an analysis of a dataset is the process of inference.\nWe are able to accomplish these tasks by thinking of our data as random and using probability to model aspects of our data. These probabilistic models are how we justify generalizing beyond our specific data.\nYou will in the syllabus see that the course topics will progress through these fundamental steps.\n\nHaven’t I already done this in my intro stat course?\n\nIf you have taken previous intro statistics courses, like STAT 20 or DATA 8, you have probably been introduced to these topics. That’s great! Most people who take STAT 135 have taken one of these courses. The difference in this course is that we are going to lean heavily into your probability from STAT 134 or 140 to make these ideas mathematically rigorous and go further. The goal is both that you mathematically understand the specific tools we will introduce, and that you have the foundation to expand into more complex scenarios (for example, 150-level Statistics classes!).\nThere are also things in Stat 20 that we don’t spend a lot of time on, such as visualization tools like boxplots and histograms, or basic summary statistics of data. We assume you’ve seen these basic things at some point.",
-    "crumbs": [
-      "Modules",
-      "Introduction"
-    ]
-  },
-  {
-    "objectID": "Modules/00-OverviewIntro.html#footnotes",
-    "href": "Modules/00-OverviewIntro.html#footnotes",
-    "title": "Introduction",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nhttps://www.pewresearch.org/internet/2025/10/08/parents-kids-screens-methodology/↩︎",
-    "crumbs": [
-      "Modules",
-      "Introduction"
-    ]
-  },
-  {
-    "objectID": "data.html",
-    "href": "data.html",
-    "title": "Data",
-    "section": "",
-    "text": "[UNDER CONSTRUCTION]\nWe’ll use data from several real world situations in class."
-  },
-  {
-    "objectID": "data.html#data-1",
-    "href": "data.html#data-1",
-    "title": "Data",
-    "section": "Data 1",
-    "text": "Data 1"
-  },
-  {
-    "objectID": "data.html#data-2",
-    "href": "data.html#data-2",
-    "title": "Data",
-    "section": "Data 2",
-    "text": "Data 2"
-  },
-  {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
-    "section": "",
-    "text": "This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs License (CC BY-NC-ND 4.0).",
-    "crumbs": [
-      "License"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Statistics 135: Concepts of Statistics",
-    "section": "",
-    "text": "Ed\n\n  DataHub\n\n  Gradescope\n\n  bCourses\n\n  Flextensions\n\n\nNo matching items",
-    "crumbs": [
-      "Home / Schedule"
-    ]
-  },
-  {
-    "objectID": "index.html#welcome-to-stat-135",
-    "href": "index.html#welcome-to-stat-135",
-    "title": "Statistics 135: Concepts of Statistics",
-    "section": "Welcome to Stat 135!",
-    "text": "Welcome to Stat 135!\n\nAnnouncements\nConcurrent enrollment students interested in this class should attend the first class for information. No concurrent enrollment students will be added to the class until all Berkeley students on the waitlist have been given the opportunity to add, and no actions will be taken until after the first day of class. There is usually a good bit of movement in the first couple of weeks of the course.\nConcurrent enrollement students should fill out this google form after the first class (it will not be taking responses until then).\nTo ask to be added to bcourses, email Florica Constantine at florica@berkeley.edu (registered students and waitlist students are added automatically)",
-    "crumbs": [
-      "Home / Schedule"
-    ]
-  },
-  {
-    "objectID": "index.html#schedule",
-    "href": "index.html#schedule",
-    "title": "Statistics 135: Concepts of Statistics",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\n   Week 1\n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           \n           \n           \n           Aug 26:\n           \n           \n              Module 0 Introduction\n           \n           \n                \n                \n                  \n                    Syllabus\n                  \n                  \n                  \n                    Diagnostic Test\n                  \n                  \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           \n           \n           \n           Aug 28:\n           \n           \n              Module 1 Thinking probabilistically about data\n           \n           \n                \n           \n                \n           \n        \n\n           \n           \n           \n           \n           \n           \n              Module 2 Estimation\n           \n           \n                \n                \n                  \n                    Intro R Lab\n                  \n                  \n                \n           \n                \n           \n        \n   \n   \n   \nNo matching items",
-    "crumbs": [
-      "Home / Schedule"
-    ]
-  },
-  {
-    "objectID": "staff.html",
-    "href": "staff.html",
-    "title": "Staff",
-    "section": "",
-    "text": "Office hours are subject to change.\n\n\n\nInstructor: Elizabeth Purdom epurdom@stat.berkeley.edu Office hours:  - TBA pronouns: she/her\n\n\nGSI: Florica Constantine florica@berkeley.edu Office hours: - TBA\n\n\nGSI: Chuao Dong chuaodong@berkeley.edu Office hours: - TBA\n\n\nGSI: Chloe Shen cjshen@berkeley.edu Office hours:  - TBA",
-    "crumbs": [
-      "Staff"
-    ]
   },
   {
     "objectID": "Modules/01-ThinkProb.html",
@@ -231,6 +138,176 @@
     "crumbs": [
       "Modules",
       "Thinking probabilistically about data"
+    ]
+  },
+  {
+    "objectID": "staff.html",
+    "href": "staff.html",
+    "title": "Staff",
+    "section": "",
+    "text": "Office hours are subject to change.\n\n\n\nInstructor: Elizabeth Purdom epurdom@stat.berkeley.edu Office hours:  - TBA pronouns: she/her\n\n\nGSI: Florica Constantine florica@berkeley.edu Office hours: - TBA\n\n\nGSI: Chuao Dong chuaodong@berkeley.edu Office hours: - TBA\n\n\nGSI: Chloe Shen cjshen@berkeley.edu Office hours:  - TBA",
+    "crumbs": [
+      "Staff"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistics 135: Concepts of Statistics",
+    "section": "",
+    "text": "Ed\n\n  DataHub\n\n  Gradescope\n\n  bCourses\n\n  Flextensions\n\n\nNo matching items",
+    "crumbs": [
+      "Home / Schedule"
+    ]
+  },
+  {
+    "objectID": "index.html#welcome-to-stat-135",
+    "href": "index.html#welcome-to-stat-135",
+    "title": "Statistics 135: Concepts of Statistics",
+    "section": "Welcome to Stat 135!",
+    "text": "Welcome to Stat 135!\n\nAnnouncements\nConcurrent enrollment students interested in this class should attend the first class for information. No concurrent enrollment students will be added to the class until all Berkeley students on the waitlist have been given the opportunity to add, and no actions will be taken until after the first day of class. There is usually a good bit of movement in the first couple of weeks of the course.\nConcurrent enrollement students should fill out this google form after the first class (it will not be taking responses until then).\nTo ask to be added to bcourses, email Florica Constantine at florica@berkeley.edu (registered students and waitlist students are added automatically)",
+    "crumbs": [
+      "Home / Schedule"
+    ]
+  },
+  {
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
+    "title": "Statistics 135: Concepts of Statistics",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\n   Week 1\n\n   \n   \n   \n   \n   \n   \n\n        \n\n           \n           \n           \n           \n           \n           Aug 26:\n           \n           \n              Module 0 Introduction\n           \n           \n                \n                \n                  \n                    Syllabus\n                  \n                  \n                  \n                    Diagnostic Test\n                  \n                  \n                \n           \n                \n           \n        \n   \n\n        \n\n           \n           \n           \n           \n           \n           Aug 28:\n           \n           \n              Module 1 Thinking probabilistically about data\n           \n           \n                \n           \n                \n           \n        \n\n           \n           \n           \n           \n           \n           \n              Module 2 Estimation\n           \n           \n                \n                \n                  \n                    Intro R Lab\n                  \n                  \n                \n           \n                \n           \n        \n   \n   \n   \nNo matching items",
+    "crumbs": [
+      "Home / Schedule"
+    ]
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs License (CC BY-NC-ND 4.0).",
+    "crumbs": [
+      "License"
+    ]
+  },
+  {
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "Data",
+    "section": "",
+    "text": "[UNDER CONSTRUCTION]\nWe’ll use data from several real world situations in class."
+  },
+  {
+    "objectID": "data.html#data-1",
+    "href": "data.html#data-1",
+    "title": "Data",
+    "section": "Data 1",
+    "text": "Data 1"
+  },
+  {
+    "objectID": "data.html#data-2",
+    "href": "data.html#data-2",
+    "title": "Data",
+    "section": "Data 2",
+    "text": "Data 2"
+  },
+  {
+    "objectID": "Modules/00-OverviewIntro.html",
+    "href": "Modules/00-OverviewIntro.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "The field of statistic can be very broadly summarized as taking data that we have in hand to make statements that we think have broader generality than just this data.\nConsider this data from the Pew Research Center, based on a survey of US Parents in May of 2025 of 3,054 eligible parents who responded (out of 6,287 who were asked)1\n\n\n\n\n\nThis is the results of data collected on a small sample of all US parents, but its interest is lies in being able to use it to infer or make statements about the general population of all US parents.\nIn statistics this is called inference and is the heart of the subject of statistics. This course is an rigorous, mathematical introduction into the process of inference and inferential thinking about data more broadly.\nThe main parts of inference can be roughly broken down into the following steps:\n\nHow do we use our data to best estimate something about a larger population\nor\nto predict something about future observations we will see from that population?\n\nI estimate 51% of 2-4 yrs old and 54% of 5-12 yrs old in the US watch YouTube daily\n\nHow good of an estimate/prediction is it and can we give measures of accuracy or confidence in our estimate/prediction?\n\nWith 95% confidence, I estimate 47.9-54.1% of 2-4 yrs old and 50.8-57.0% of 5-12 yrs old in the US watch YouTube daily\n\nHow can we make comparisons or test hypotheses from our data?\n\nAre the rates of daily YouTube consumption different between 2-4yr olds and 5-12yr olds in the general population?\nPutting all of these together into an analysis of a dataset is the process of inference.\nWe are able to accomplish these tasks by thinking of our data as random and using probability to model aspects of our data. These probabilistic models are how we justify generalizing beyond our specific data.\nYou will in the syllabus see that the course topics will progress through these fundamental steps.\n\nHaven’t I already done this in my intro stat course?\n\nIf you have taken previous intro statistics courses, like STAT 20 or DATA 8, you have probably been introduced to these topics. That’s great! Most people who take STAT 135 have taken one of these courses. The difference in this course is that we are going to lean heavily into your probability from STAT 134 or 140 to make these ideas mathematically rigorous and go further. The goal is both that you mathematically understand the specific tools we will introduce, and that you have the foundation to expand into more complex scenarios (for example, 150-level Statistics classes!).\nThere are also things in Stat 20 that we don’t spend a lot of time on, such as visualization tools like boxplots and histograms, or basic summary statistics of data. We assume you’ve seen these basic things at some point.",
+    "crumbs": [
+      "Modules",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "Modules/00-OverviewIntro.html#footnotes",
+    "href": "Modules/00-OverviewIntro.html#footnotes",
+    "title": "Introduction",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://www.pewresearch.org/internet/2025/10/08/parents-kids-screens-methodology/↩︎",
+    "crumbs": [
+      "Modules",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "Modules/03-CaseStudyRegression.html",
+    "href": "Modules/03-CaseStudyRegression.html",
+    "title": "Case Study: Simple Regression",
+    "section": "",
+    "text": "Corresponding reading\n\nChapter 6.1.1-6.1.7, 6.5.1 in Agresti and Kateri (2021)\nWe’ve talked about some simple population parameters like the mean or the variance of the population, and we introduced some standard estimators for those quantities.\nWe are going to introduce another common estimation setting, which is the slightly more complicated data analysis setting of regression. As you will see, there are a variety of different levels of abstraction with which we can consider this model, with the most common example, linear regression making the most assumptions.\nWe will get to estimation for this setting in the next module.",
+    "crumbs": [
+      "Modules",
+      "Case Study: Simple Regression"
+    ]
+  },
+  {
+    "objectID": "Modules/03-CaseStudyRegression.html#example",
+    "href": "Modules/03-CaseStudyRegression.html#example",
+    "title": "Case Study: Simple Regression",
+    "section": "Example",
+    "text": "Example\nHere we take data collected from the federal government for the 2024-25 academic year on universities in the US whose students receive federal grants (so basically all universities) available here\nWe show a scatterplot of two of the variables, the average SAT score and the full-time student retention rate:\n\n\n\n\n\n\n\n\n\nWe see that schools with higher average SAT scores also have higher rates of full-time students returning.",
+    "crumbs": [
+      "Modules",
+      "Case Study: Simple Regression"
+    ]
+  },
+  {
+    "objectID": "Modules/03-CaseStudyRegression.html#the-basics-of-regression-modeling",
+    "href": "Modules/03-CaseStudyRegression.html#the-basics-of-regression-modeling",
+    "title": "Case Study: Simple Regression",
+    "section": "The Basics of Regression Modeling",
+    "text": "The Basics of Regression Modeling\nLet’s go through the logic of how we might build up a model for this data.\nThe data here has a similar structure to the examples we discussed in the first module. Each observed data point \\(X_i\\) is in fact a vector, \\(X_i=(X_i^1, X_i^2)\\in R^2\\).\nGenerally one of the components of \\(X\\) is prioritized and given the label \\(Y\\), so we can write our data vector as \\((X_i,Y_i)\\). \\(Y_i\\) is “prioritized” in the sense that we want to understand how \\(Y_i\\) changes as a function of \\(X_i\\). In our data example, we implicitly (by how we plotted the data), set our \\(Y\\) variable to be the retention rate, and the \\(X\\) variable to be the average SAT scores.\n\n\nExercise/Question\n\nOur first fundamental step in this modeling process is to assume that the data are random variables. In what ways might we consider this data random? What conceptual problems are there?\n\nThere are different terminologies for what we call \\(Y\\) and \\(X\\):\n\n\n\n\\(Y\\)\n\\(X\\)\n\n\n\n\ndependent variable\nindependent variable\n\n\nresponse\npredictor\n\n\n\nexplanatory variable\n\n\n\n\n\nExercise/Question\n\nGo back to our original examples in module 1, and consider which of the two variables we would assign as \\(Y\\) versus \\(X\\) (there’s not necessarily a single correct answer here).",
+    "crumbs": [
+      "Modules",
+      "Case Study: Simple Regression"
+    ]
+  },
+  {
+    "objectID": "Modules/03-CaseStudyRegression.html#modeling-ey",
+    "href": "Modules/03-CaseStudyRegression.html#modeling-ey",
+    "title": "Case Study: Simple Regression",
+    "section": "Modeling \\(E(Y)\\)",
+    "text": "Modeling \\(E(Y)\\)\nHow \\(Y_i\\) changes as a function of \\(X_i\\) could be expressed as \\[Y_i=f(X_i)\\] However, this is actually problematic, since clearly when we look at data there is not an exact functional form \\(f\\) that does this exactly for each point (or at least not a nice one!).\n\n\n\n\n\nTrying to fit deterministic function to fit each data point doesn’t work!\n\n\n\n\nWhat’s the problem? Well, just like we didn’t previously expect our observed data to be exactly equal to the population mean, we don’t expect our \\(Y_i\\) to be exactly equal to \\(f(X_i)\\) for any reasonable \\(f\\). So one way we can fix this problem is formulate our model in terms of the average value of \\(Y_i\\) \\[E(Y_i)=f(X_i)\\] However, notice that we have now made the expected value of \\(Y\\) equal to a random variable! That’s not an option. Instead:\n\nWe can consider the \\(X\\) variable as a fixed value, i.e. not random. This makes a lot of sense for data where the investigator set the variable, like the spring example or the dosage variable. \\[E(Y_i)=f(x_i).\\] You will often see regression models described in this way.\nAlternatively, we recognize that \\(X\\) is random, but we want to describe the relationship of \\(Y\\) if when the corresponding value is \\(X\\). Conditional distributions allow for this, \\[E(Y_i |X_i)=f(X_i)\\] This is effectively equivalent to the first option, but it is a notation that more explicitly indicates that \\(X\\) might be random, but we’re not worrying about it.\n\n\n\n\n\n\n\n\n\n\nThis is the basic (simple) regression model – simple just refers to the fact that we only have one predictor variable \\(X\\), thought everything we’ve said so far can work for multiple \\(X\\).\nNotice that we are assuming that \\(f\\) is the same for all observations – once I know an observation’s \\(X\\) value, this is a model for the average of the \\(Y\\) value. So we will frequently drop the \\(i\\) to describe the relationship as one that is general for any \\((X,Y)\\) from the population distribution, \\[E(Y |X)=f(X)\\]\n\nDistribution of \\(Y|X\\)\nRecall from probability, when we condition, then we get a new random variable, \\(Y|X\\). So far we have only given a specification of the mean of \\(Y\\) as a function of \\(X\\), but \\(Y|X\\) has an entire distribution for every realization of \\(X\\)!\n\n\n\n\n\n\n\n\n\nWe’ll look at modeling this distribution below in the context of linear regression.",
+    "crumbs": [
+      "Modules",
+      "Case Study: Simple Regression"
+    ]
+  },
+  {
+    "objectID": "Modules/03-CaseStudyRegression.html#categorical-data",
+    "href": "Modules/03-CaseStudyRegression.html#categorical-data",
+    "title": "Case Study: Simple Regression",
+    "section": "Categorical Data",
+    "text": "Categorical Data\n\nCategorical \\(X\\)\nWhat if, for example, if instead of SAT scores, we used the variable of whether the school is public (\\(X=0\\)) or private (\\(X=1\\)),\nThen \\(X\\) is a binary variable, \\[X\\in \\{0,1\\}\\]\nThen our function \\(f\\) takes as input only two possible values and so there are only two different expected values to consider.\n\n\n\n\n\n\n\n\n\nSo any possible function that does this can be re-written as: \\[E(Y |X)=\\begin{cases}\n\\alpha_1 & X=1\\\\\n\\alpha_0 & X=0\n\\end{cases}\n\\] where \\(\\alpha_1\\) and \\(\\alpha_0\\) are some constant. Notice that we can write this model simply with just two parameters.\nWe could rewrite this more succinctly as \\[E(Y |X)= \\alpha_0 I(X=0)+ \\alpha_1 I(X=1)\\] where \\(I(\\cdot)\\) is the indicator function that is 1 if the quantity inside the parentheses is true and 0 otherwise.\n\n\nCategorical \\(Y\\)\nWhat if instead our \\(Y\\) is categorical? Consider data collected on emails, where \\(Y\\) is whether the email is spam or not. We can ask what relationship there is between an email being spam and other characteristics of the email, like the presence of capital letters or the number of dollar signs.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nNotice that scatter plots with categorical variables are not satisifying since the points all plot over each other. Boxplots are much better for demonstrating the data.\n\n\nAgain, \\(Y\\) is a binary variable \\[Y\\in \\{0,1\\}\\] Then \\[E(Y_i |X)=P(Y_i=1 | X)\\] So our modeling of \\(E(Y|X=x)=f(x)\\) now becomes a model for the probability of outcome \\(1\\) given a certain value of the predictor \\(X\\).\nWe can visualize what we are estimating here by taking the proportion of 1’s for small windows of values of our \\(X\\):\n\n\n\n\n\n\n\n\n\nWe see the proportion of 1’s is increasing with the length of capital letters. We want to estimate a function \\(f(x)\\) function that explains this trend.",
+    "crumbs": [
+      "Modules",
+      "Case Study: Simple Regression"
+    ]
+  },
+  {
+    "objectID": "Modules/03-CaseStudyRegression.html#restricting-f",
+    "href": "Modules/03-CaseStudyRegression.html#restricting-f",
+    "title": "Case Study: Simple Regression",
+    "section": "Restricting \\(f\\)",
+    "text": "Restricting \\(f\\)\n\nLinear Regression\nIf we let \\(f\\) be anything, then it’s going to be very hard to estimate. So we can try to restrict \\(f\\) to make it easier to estimate by writing it in terms of a small number of parameters, like we saw with categorical \\(X\\).\nThe simplest such model is a linear model: \\[E(Y |X)= \\beta_0 + \\beta_1 X\\] Now we have a two-parameter model for \\(E(Y|X)\\). Usually these will be the parameters of the population we want to estimate as well!\n\nCategorical \\(X\\)\nNotice what happens if \\(X\\) is binary, either 0,1: \\[E(Y |X)= \\beta_0 + \\beta_1 X=\\begin{cases}\\beta_0+\\beta_1 &X=1\\\\\n\\beta_0 &X=0\n\\end{cases} \\] This is the same as my above model, with \\(\\alpha_0=\\beta_0\\) and \\(\\alpha_1=\\beta_0+\\beta_1\\). So we see that we have two ways to write the same model (by same, I mean both ways of writing the model results in the set of values of \\(E(Y_i |X)\\)).\nBut the coefficients are different and have a different meaning. \\(\\alpha_0=\\beta_0\\) is always the mean of \\(Y\\) when \\(X=0\\), but \\(\\alpha_1\\) is the mean of \\(Y\\) when \\(X=1\\), while \\(\\beta_1\\) is the change in the mean of \\(Y\\) from going from \\(X=0\\) to \\(X=1\\).\nThis is frequently the case for models with categorical predictors, and neither is “right”. They give different parameters for describing the \\(Y\\) response, but they are equivalent models and you can always go back and forth between the two sets of parameters to describe the relationship of \\(X\\) to \\(Y\\).\n\n\n\n\n\n\nNote\n\n\n\nWhat if I didn’t encode \\(X\\) as \\(\\{0,1\\}\\) but something else like \\(\\{-1,1\\}\\)? (This is a common encoding in machine learning…) It’s still the same idea, we would just write our \\((\\beta_0,\\beta_1)\\) model with indicator functions, like we did with \\((\\alpha_0,\\alpha_1)\\), \\[E(Y|X)= \\beta_0 + \\beta_1 I(X=1)\\] Standard computing packages, however, will just re-encode the data to \\(\\{0,1\\}\\)\n\n\n\n\n\nNon-linear model\nA linear form for \\(f(X)\\) is an assumption – and it won’t always be a good one. Consider if instead our \\(Y\\) variable was the school’s out of state tuition,\n\n\n\n\n\n\n\n\n\nClearly, the linear model is starting to fail because the retention rate is plateauing for large values – not an uncommon phenomena for value \\(Y\\) that are limited to between certain values.\nNon-linear models are beyond the scope of what we will cover in this class, but there are many straightforward (and less straightforward) extensions of what we will learn that can result in non-linear models. Interested students can look at Chapter 4 of my online book that goes along with STAT 131A for a non-technical look at some options.",
+    "crumbs": [
+      "Modules",
+      "Case Study: Simple Regression"
+    ]
+  },
+  {
+    "objectID": "Modules/03-CaseStudyRegression.html#adding-a-parametric-model-assumption",
+    "href": "Modules/03-CaseStudyRegression.html#adding-a-parametric-model-assumption",
+    "title": "Case Study: Simple Regression",
+    "section": "Adding a parametric model assumption",
+    "text": "Adding a parametric model assumption\nAs we said above, we haven’t made any assumptions about the distribution of \\(Y\\) so far. We’ll consider this now. For simplicity, we’ll stick to the linear regression model, but the same idea can be extended to other models.\nTwo common additional assumptions are\n\nIndependence between the data points.\nAssume \\(Y|X\\) follows a parametric model, usually normal if \\(Y\\) is real-valued.\n\nThe first is straightforward to understand and we have discussed the assumption frequently. The second deserves more explanation.\nRecall your conditional distribution theory: \\(Y|X\\) is a random variable with a distribution that depends on the realization of \\(X\\). Now we are proposing that distribution be normal, which means it is defined by two parameters, a mean and variance. We’ve already said what the mean of that normal distribution should be, \\(f(X)=\\beta_0+\\beta_1 X\\). So it remains to say what the variance is.\n\nThe simplest (and most common) option is to say all observations have the same variance, let’s call it \\(\\sigma^2\\), \\[Y|X \\sim N(\\beta_0+\\beta_1 X , \\sigma^2)\\]\n\n\n\n\n\n\n\n\n\n\nLike independence, this is an extremely common assumption that is quickly assumed, but is quite strong and we will see has a very important impact on our later conclusions.\n\nWe could let the variance vary with \\(X\\), \\[Y|X \\sim N(\\beta_0+\\beta_1 X , \\sigma^2(X))\\] We can see with our example here, that might make sense – the points look more variable for lower values of \\(X\\) than higher values of \\(X\\):\n\n\n\n\n\n\n\n\n\n\nWhile totally possible, in general you do not see this frequently because it adds another task of figuring out what \\(\\sigma^2(X)\\) should be and people just accept the assumption.\nThe exception is in the special case when \\(X\\) is categorical. In this case, letting the variance “vary with \\(X\\)” simply means a different variance for each category of \\(X\\). So in the two-group setting this would be \\[Y |X \\sim \\begin{cases}\nN(\\alpha_1,\\sigma_1^2), & X=1\\\\\nN(\\alpha_0,\\sigma_0^2), & X=0\n\\end{cases}\n\\]\nThis is probably one of the most common statistical models in all of statistics, and is called a two group analysis, meaning we have two groups\n\nAlternative description in terms of error\nRecall that if a random variable \\(Z \\sim N(0,\\sigma^2)\\) then if we define \\(Y=Z+\\mu\\), then $YN(,^2).\nWe can use this in reverse to realize that our model of independent \\(Y_i\\) each distributed as \\[Y_i|X_i \\sim N(\\beta_0+\\beta_1 X_i , \\sigma^2)\\] can be equivalently written, conditional on \\(X_i=x_i\\) as \\[Y_i = \\beta_0+\\beta_1 x_i +\\epsilon_i\\] where \\[\\epsilon_i\\stackrel{i.i.d}{\\sim}N(0,\\sigma^2).\\] This means that we can consider \\(Y_i\\) to be a linear function of \\(x_i\\), plus a random error \\(\\epsilon_i\\). \\(\\epsilon_i\\) is often equated to measurement error, particularly in physical experiments like our spring example.\n\n\n\n\n\n\nNote\n\n\n\nNote that unlike the \\(Y_i\\), the \\(\\epsilon_i\\) are generally assumed to be \\(i.i.d.\\), since they each have the same mean and variance. This is because of our shared variance assumption we discussed above.\n\n\n\n\nCategorical \\(Y\\): Logistic Regression\nThe above can be extended to other distributions of \\(Y\\). In particular, if \\(Y\\) is binary, we could say that \\(Y|X\\) is Bernoulli, with probability \\(P(Y=1|X)\\) given by a function \\(f(X)\\).\nOf course, we need the range of \\(f(X)\\) to be between \\((0,1)\\)! So a linear function of \\(X\\) will not be a good choice since the range of a line is outside of \\((0,1)\\). We will introduce a common alternative of how to do this as the course progresses, which leads to what is often called logistic regression.",
+    "crumbs": [
+      "Modules",
+      "Case Study: Simple Regression"
     ]
   },
   {
