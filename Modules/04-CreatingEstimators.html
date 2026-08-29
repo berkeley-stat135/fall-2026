@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>creatingestimators</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9c07d96cd4bda5dae6f88da775026b2b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="”https://siteimproveanalytics.com/js/siteanalyze_6294756.js”"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/04-CreatingEstimators.html">Creating Estimators with MLE</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/stat_bear.png" alt="UC Berkeley Statistics logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../assets/stat_bear.png" alt="UC Berkeley Statistics logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Stat 135</a> 
+        <div class="sidebar-tools-main">
+    <a href="{{< var site-url >}}" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home / Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../staff.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Staff</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calendar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calendar</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modules</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/00-OverviewIntro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/01-ThinkProb.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Thinking probabilistically about data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/02-EstimationBasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/03-CaseStudyRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Case Study: Simple Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/04-CreatingEstimators.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Creating Estimators with MLE</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../license.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">License</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#creating-estimators-with-mle" id="toc-creating-estimators-with-mle" class="nav-link active" data-scroll-target="#creating-estimators-with-mle">Creating Estimators with MLE</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#basic-setup" id="toc-basic-setup" class="nav-link" data-scroll-target="#basic-setup">Basic Setup</a>
+  <ul class="collapse">
+  <li><a href="#independent-samples" id="toc-independent-samples" class="nav-link" data-scroll-target="#independent-samples">Independent samples</a></li>
+  </ul></li>
+  <li><a href="#simple-examples-one-parameter-families." id="toc-simple-examples-one-parameter-families." class="nav-link" data-scroll-target="#simple-examples-one-parameter-families.">Simple Examples – One Parameter families.</a>
+  <ul class="collapse">
+  <li><a href="#binary-data-the-bernoulli-distribution" id="toc-binary-data-the-bernoulli-distribution" class="nav-link" data-scroll-target="#binary-data-the-bernoulli-distribution">Binary Data – the Bernoulli distribution</a></li>
+  <li><a href="#count-data-the-poisson-distribution" id="toc-count-data-the-poisson-distribution" class="nav-link" data-scroll-target="#count-data-the-poisson-distribution">Count Data – the Poisson distribution</a></li>
+  </ul></li>
+  <li><a href="#mle-with-multiple-parameters" id="toc-mle-with-multiple-parameters" class="nav-link" data-scroll-target="#mle-with-multiple-parameters">MLE with multiple parameters</a>
+  <ul class="collapse">
+  <li><a href="#normal" id="toc-normal" class="nav-link" data-scroll-target="#normal">Normal</a></li>
+  <li><a href="#simple-regression" id="toc-simple-regression" class="nav-link" data-scroll-target="#simple-regression">Simple Regression</a></li>
+  </ul></li>
+  <li><a href="#non-analytical-solutions" id="toc-non-analytical-solutions" class="nav-link" data-scroll-target="#non-analytical-solutions">Non Analytical Solutions</a>
+  <ul class="collapse">
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  </ul></li>
+  <li><a href="#estimating-a-function-of-parameter-with-mle" id="toc-estimating-a-function-of-parameter-with-mle" class="nav-link" data-scroll-target="#estimating-a-function-of-parameter-with-mle">Estimating a function of Parameter with MLE</a>
+  <ul class="collapse">
+  <li><a href="#proof" id="toc-proof" class="nav-link" data-scroll-target="#proof">Proof</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/04-CreatingEstimators.html">Creating Estimators with MLE</a></li></ol></nav></header>
+
+
+
+
+<section id="creating-estimators-with-mle" class="level1">
+<h1>Creating Estimators with MLE</h1>
+<div class="READING">
+<div class="block-title">
+<p><strong>Corresponding reading</strong></p>
+</div>
+<ul>
+<li>Chapter 4.2, 7.1.1-7.1.2, 7.2.1-7.2.3 in <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span></li>
+<li>Chapter 8.5 in <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span></li>
+</ul>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These lecture notes weave in material from Shobhana Stoyanov’s lecture notes from <a href="https://stat135.berkeley.edu/spring-2026/">Spring 2026</a>, <a href="https://stat135.berkeley.edu/spring-2026/lectures/lecture-10.html">Lecture 10</a>. You are welcome to look at her material directly as well.</p>
+</div>
+</div>
+<div class="GOALS">
+<div class="block-title">
+<p><strong>Questions/Goals for this Module</strong></p>
+</div>
+<p>Learn about a principled way to get an estimator when we are facing a new problem</p>
+<ul>
+<li>What is the likelihood of the observed data?</li>
+<li>What is a Maximum Likelihood Estimator (MLE)?</li>
+<li>How do you calculate the MLE for a parameter?</li>
+<li>How it is used for linear regression?</li>
+<li>Introduction to logistic regression for binary response</li>
+</ul>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>How do we estimate something? We can make up estimators, like the mean of the sample, which can seem reasonable. But what is a principled way to get an estimator when we are facing a new (and harder) problem?</p>
+<p><em>Maximum Likelihood Estimation</em> is a rather general and very useful method for estimating parameters. The estimators found by this method (called MLEs) have useful statistical properties, which we will get to, which is why this method is widely used.</p>
+<p>In maximum likelihood estimation, as the name suggests, we pick parameters that are <em>most likely</em> to have resulted in our observed sample. That is, we have a data sample and a probability model (some particular family of probability distributions) in mind that we believe generated this data sample. We need to decide what probability model we would use based on other considerations, perhaps field knowledge or visualizations of the data.</p>
+<p>Then we have to estimate the parameter values for our probability model that <em>maximize the likelihood</em> that the model produced the observed sample. The following example is reproduced from <span class="citation" data-cites="kerns2017mle">Kerns (<a href="#ref-kerns2017mle" role="doc-biblioref">2017</a>)</span>, using a different random sample.</p>
+<p><strong>Example</strong> In this example, we can see the basic idea behind maximum likelihood estimation. Say we have an observed data sample from some process.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-CreatingEstimators_files/figure-html/unnamed-chunk-2-1.png" style="width:60.0%;height:10.0%" class="figure-img"></p>
+<figcaption>Plot of 1-dim data on a line, courtesy of Shobhana Stoyanov</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We have strong reason to believe that the generating probability model is a Normal distribution, but we do not know the parameters. Let’s look at a picture with four possible distributions from a Normal family. When we superimpose the points, we see that the most likely distribution it could have come from is the purple one, so now the points are shaded purple instead of gray.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-CreatingEstimators_files/figure-html/unnamed-chunk-3-1.png" style="width:70.0%;height:70.0%" class="figure-img"></p>
+<figcaption>Different possible normal distributions over data, courtesy of Shobhana Stoyanov</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The idea is that we would do this <em>quantitatively</em> over all possible Normal distributions to find the particular parameters that maximize the probability of seeing these data points.</p>
+</section>
+<section id="basic-setup" class="level2">
+<h2 class="anchored" data-anchor-id="basic-setup">Basic Setup</h2>
+<p>Suppose we choose to model our data <span class="math inline">\(X_1, \ldots, X_n\)</span> as coming come from some probability distribution with unknown parameter <span class="math inline">\(\theta\)</span>. Let <span class="math inline">\(f(\cdot \vert \theta)\)</span>, be the PMF (for discrete <span class="math inline">\(X\)</span>) or PDF (for continuous <span class="math inline">\(X\)</span>) of the distribution. We have the <em>observed values</em> of this sample: <span class="math inline">\(X_1 = x_1, \ldots, X_n = x_n\)</span>. The <strong>joint density</strong> (or probability for discrete <span class="math inline">\(X\)</span>) of these specific observed values values is <span class="math display">\[f(x_1, x_2, \ldots, x_n \vert \theta)\]</span> i.e.&nbsp;a function of the <span class="math inline">\(x\)</span>, for any particular <span class="math inline">\(\theta\)</span>. If our <span class="math inline">\(X_i\)</span> are discrete, for example, then <span class="math inline">\(f(x_1, x_2, \ldots, x_n \vert \theta)\)</span> is the probability of observing these values; but it’s still a function that takes in any possible values.</p>
+<p>Instead, we want to turn this function around, think that for our observed values <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>, it’s a function of <span class="math inline">\(\theta\)</span>, and we want to figure out what value of <span class="math inline">\(\theta\)</span> makes it large.</p>
+<p>When we consider this as a function of <span class="math inline">\(\theta\)</span>, that we call the <strong>likelihood</strong> of <span class="math inline">\(\theta\)</span>: <span class="math display">\[
+\ell(\theta) = f(x_1, x_2, \ldots, x_n \vert \theta)
+\]</span> It’s the same function, but we are now considering <span class="math inline">\(\theta\)</span> as the variable that varies.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is worth emphasizing that even though <span class="math inline">\(\ell(\theta) = \ell(\theta\vert x_1, x_2, \ldots, x_n)\)</span> is equal to <span class="math inline">\(f(x_1, x_2, \ldots, x_n \vert \theta)\)</span> in value, we think about <span class="math inline">\(\ell(\cdot)\)</span> as a function of the variable <span class="math inline">\(\theta\)</span> for <em>fixed</em> <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>, and the second <span class="math inline">\(f(\cdot)\)</span>, as a PDF (or PMF), which is a function of the <span class="math inline">\(x_i\)</span> for some fixed parameter <span class="math inline">\(\theta\)</span>.</p>
+<p>And they have different properties. For example, for a continuous distribution, a density <span class="math inline">\(f\)</span> must integrate to 1 as a function of <span class="math inline">\(x\)</span>. But as a function of <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\ell(\theta)\)</span> will not generally integrate to 1. Similarly, the domain of the functions are different. For example, if <span class="math inline">\(f(x)\)</span> is a PMF of a random variable like Bernouilli, it takes as input only discrete values <span class="math inline">\(x\in \{0,1\}\)</span>, while <span class="math inline">\(\ell(\theta)\)</span> is defined for <span class="math inline">\(0\leq \theta\leq 1\)</span>, i.e.&nbsp;continuous valued <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+<p>Then, a maximum likelihood estimator of <span class="math inline">\(\theta\)</span> is any value of <span class="math inline">\(\theta\)</span> that maximizes the likelihood. For discrete <span class="math inline">\(X_i\)</span>, it maximizes the probability of seeing the observed data.</p>
+<p><strong>Definition of the MLE</strong>: We say that <span class="math inline">\(\hat{\theta} = \hat\theta(X_1, \ldots, X_n)\)</span> is a <strong>maximum likelihood estimator</strong> if <span class="math inline">\(\ell(\hat\theta) = \ell(\hat\theta \vert X_1, \dots, X_n)\ge \ell(\theta \vert X_1, \dots, X_n)\)</span> for all <span class="math inline">\(\theta\)</span>. That is, <span class="math inline">\(\ell(\hat\theta \vert X_1, \dots, X_n)\)</span> achieves its maximum value at <span class="math inline">\(\hat{\theta}\)</span>.</p>
+<p>Notice that the MLE of <span class="math inline">\(\hat{\theta}\)</span> is not required to be unique; their could potentially be multiple values of <span class="math inline">\(\theta\)</span> that result in the maximimum value of <span class="math inline">\(\ell(\theta)\)</span>.</p>
+<p><strong>Log-likelihood</strong> As we will see, we will often work with the <span class="math inline">\(\log\)</span> of the likelihood, <span class="math inline">\(L(\theta)=\log \ell(\theta)\)</span>. Maximizing the log of the likelihood is equivalent to maximizing the likelihood (why?).</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Notation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The notation of what letter to use for likelihood versus log-likelihood is not fixed. You will see <span class="math inline">\(\ell(\cdot)\)</span>, <span class="math inline">\(L(\cdot)\)</span>, <span class="math inline">\(\mathcal{L}(\cdot)\)</span>, <span class="math inline">\(lik(\cdot)\)</span>, … all used for one of the likelihood or the log-likelihood depending on the author’s pleasure. Indeed, the Rice book and the Agresti &amp; Kateri use opposite notation! I am following Agresti &amp; Kateri since it is our main textbook.</p>
+<p>Similarly, <span class="math inline">\(X_1,\ldots, X_n\)</span> are the random variables while <span class="math inline">\(x_1,\ldots,x_n\)</span> are the realizations. So for any particular <span class="math inline">\(x_1,\ldots,x_n\)</span> we can maximize the likelihood <span class="math display">\[\ell(\theta) = f(x_1, x_2, \ldots, x_n \vert \theta)\]</span> and get the <em>estimate</em> of <span class="math inline">\(\theta\)</span> for that observed data. But if we think about this as a general algorithm for finding the maximum likelihood estimator, we can write <span class="math display">\[\ell(\theta) = f(X_1, X_2, \ldots, X_n \vert \theta)\]</span> and the resulting <span class="math inline">\(\hat\theta=\hat\theta(X_1, X_2, \ldots, X_n)\)</span> is an estimator for <span class="math inline">\(\theta\)</span>. While the density or pmf function is always written as <span class="math inline">\(f(x_1,\ldots,x_n|\theta)\)</span>, i.e.&nbsp;in terms of lower case <span class="math inline">\(x\)</span>, the likelihood can be seen both ways depending on how it’s being used. This isn’t an important distinction to worry about too much while you’re doing calculations.</p>
+</div>
+</div>
+<section id="independent-samples" class="level3">
+<h3 class="anchored" data-anchor-id="independent-samples">Independent samples</h3>
+<p>Notice we’ve made no assumption in our model about independence of our data. We don’t have to! So long-as we can write down the <em>joint</em> density or PMF of our data, everything holds. However, the problem simplifies when we choose to model the <span class="math inline">\(X_i\)</span> as being independent of each other. If each <span class="math inline">\(X_i \sim f_i(x|\theta)\)</span>, then the joint likelihood <span class="math inline">\(f(x_1, x_2, \ldots, x_n \vert \theta)\)</span> simplifies to</p>
+<p><span class="math display">\[
+f(x_1, x_2, \ldots, x_n \vert \theta) = \prod_{i=1}^n f_i(x_i \vert \theta)
+\]</span> This means we have our likelihood and log-likelihood functions as: <span class="math display">\[\begin{align}
+\ell(\theta)=&amp;\prod_{i=1}^n f_i(x_i \vert \theta)\\
+L(\theta)=\log\ell(\theta)=&amp;\sum_{i=1}^n \log f_i(x_i \vert \theta)
+\end{align}\]</span></p>
+<p>Notice how taking the log makes the equation we are trying to maximize a <em>sum</em> versus a <em>product</em>. This is much easier to work with (as well as being more numerically stable to evaluate).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>In Summary
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Finding a MLE consists of the following steps:</p>
+<ol type="1">
+<li>Choosing a parametric model for the data</li>
+<li>Writing down the (log) likelihood for the data</li>
+<li>Finding the value of <span class="math inline">\(\theta\)</span> that maximizes the likelihood (using either calculus or a computer)</li>
+</ol>
+</div>
+</div>
+</section>
+</section>
+<section id="simple-examples-one-parameter-families." class="level2">
+<h2 class="anchored" data-anchor-id="simple-examples-one-parameter-families.">Simple Examples – One Parameter families.</h2>
+<p>Let’s see how we might solve for the maximizing <span class="math inline">\(\theta\)</span> in some simple cases, where <span class="math inline">\(\theta\in R\)</span>, meaning there is only a single parameter.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We used <span class="math inline">\(\theta\)</span> for our parameter in the general setting, but when we work with specific parametric models, we will use the “standard” notation for the parameter(s). It’s important to be flexible!</p>
+</div>
+</div>
+<section id="binary-data-the-bernoulli-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="binary-data-the-bernoulli-distribution">Binary Data – the Bernoulli distribution</h3>
+<ol type="1">
+<li><strong>Our Model</strong> Return to our example of binary response data <span class="math inline">\(X_1, \ldots, X_n\)</span>, meaning each <span class="math inline">\(X_i\)</span> takes on two values, either 0 or 1. We decide to model them as independent and we are going to assume they all have same probability <span class="math inline">\(\pi\in(0,1)\)</span> of being <span class="math inline">\(1\)</span>. Putting this together we can write this as a probability model,<br>
+<span class="math display">\[X_1, \ldots, X_n \text{ i.i.d},  X_i \sim Bernoulli(\pi)\]</span>.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is “the” standard starting model for binary data – and binary data are really common, since we are often interested in the chance two possible outcomes. But there are strong assumptions here. First is independence, as we’ve mentioned. The second is that all <span class="math inline">\(X_i\)</span> have the same probability <span class="math inline">\(\pi\)</span> of being <span class="math inline">\(1\)</span>. We frequently find in real data settings that this is a poor assumption – even if the two groups do have a <em>generally</em> shared probability of an outcome, individual people often have variability in their response. Other distributions, like the <em>negative binomial</em> model this (and introduce another parameter to do so!). Importantly, using a negative binomial model instead of a Bernouli model can have a large impact when we get to later sections about how confident we are in our estimate because we’ve introduced more uncertainty in estimating their shared probability by not assuming every individual has exactly the same probability.</p>
+</div>
+</div>
+<ol start="2" type="1">
+<li><strong>Writing down the (log) likelihood</strong> Recall that the PMF of a Bernoulli is given by <span class="math display">\[
+f(x)=P(X=x) =
+\begin{cases}
+\pi^x\,(1-\pi)^{1-x}  \quad &amp; x= 0,1\\
+0 \quad &amp; \mathrm{ otherwise}
+\end{cases}
+\]</span></li>
+</ol>
+<p>Note that <span class="math inline">\(x\)</span> just takes two values <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, and our parameter is <span class="math inline">\(\pi\)</span>, with <span class="math inline">\(0\le\pi\le 1\)</span>. The joint probability that <span class="math inline">\(X_1 = x_1, \ldots, X_n = x_n\)</span> is given by <span class="math inline">\(P(X_1 = x_1, \ldots, X_n = x_n)\)</span>. We use the independence of the <span class="math inline">\(X_i\)</span> to write: <span class="math display">\[\begin{aligned}
+P(X_1 = x_1, \ldots, X_n = x_n) &amp;= P(X_1 = x_1)\times P(X_2 = x_2) \times \ldots\times P(X_n = x_n) \\
+                &amp;=\pi^{x_1}\,(1-\pi)^{1-x_1}\times\pi^{x_2}\,(1-\pi)^{1-x_2}\times \ldots\pi^{x_n}\,(1-\pi)^{1-x_n}.
+\end{aligned}\]</span> Collecting all the <span class="math inline">\(\pi\)</span> terms and <span class="math inline">\(1-\pi\)</span> terms we get: <span class="math display">\[\begin{aligned}
+\ell(\pi) &amp;= f(x_1, x_2, \ldots, x_n \vert \pi) \\
+               &amp;= P(X_1 = x_1, \ldots, X_n = x_n\vert \pi) \\
+               &amp;= \pi^{x_1+x_2+\ldots +x_n}(1-\pi)^{1-x_1 +1-x_2 + \ldots + 1-x_n}\\
+               &amp;= \pi^{\sum_{i=1}^n x_i} (1-\pi)^{n-\sum_{i=1}^n x_i},\\
+\end{aligned}
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>Maximizing the likelihood</strong> If we maximize this quantity (with respect to <span class="math inline">\(\pi\)</span>), then we are maximizing the probability of seeing this particular observed data sample. As we suggested above, the likelihood is kind of complicated to maximize, so we will take the (natural) log of the likelihood and maximize that instead. Since <span class="math inline">\(\log(x)\)</span> is a monotonic function of <span class="math inline">\(x\)</span>, maximizing the logarithm of the likelihood will be equivalent to maximizing the likelihood itself.</li>
+</ol>
+<p>Define <span class="math inline">\(L(\pi) = \log(\ell(\pi))\)</span>. Now we have: <span class="math display">\[
+L(\pi) = \log(\ell(\pi)) = \left(\sum_{i=1}^n x_i \right) \log(\pi) + (n-\sum_{i=1}^n x_i)\log(1-\pi).
+\]</span></p>
+<p>Since we want to maximize <span class="math inline">\(L(\pi)\)</span> with respect to <span class="math inline">\(\pi\)</span>, we differentiate it w.r.t <span class="math inline">\(\pi\)</span>: <span class="math display">\[
+\dfrac{dL(\pi)}{d\pi} = \frac{x}{\pi} - \frac{(n-x)}{1- \pi}.
+\]</span> Setting this equal to 0 and solving for <span class="math inline">\(\pi\)</span> gives us that the maximizing <span class="math inline">\(\pi\)</span> is given by <span class="math inline">\(\dfrac{x}{n} = \dfrac{\sum_{i=1}^n x_i}{n} = \bar{x}\)</span> (assuming that <span class="math inline">\(\pi\)</span> is not <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>). You can check that this is indeed a maximum by doing the first or second derivative test.</p>
+<p>The maximum likelihood <em>estimate</em> for <span class="math inline">\(\pi\)</span> is given by <span class="math inline">\(\frac{1}{n}\sum_{i=1}^n x_i\)</span>. The corresponding <em>estimator</em> <span class="math inline">\(\hat{\pi}\)</span> is given by: <span class="math display">\[
+\hat{\pi} = \frac{1}{n}\sum_{i=1}^n X_i = \bar{X}.
+\]</span> <span class="math inline">\(\hat{\pi}\)</span> is called the <strong>maximum likelihood <em>estimator</em></strong> of <span class="math inline">\(p\)</span>. Notice it is the standard common estimate that we introduced before.</p>
+<p><strong>Example</strong> Suppose that we have <span class="math inline">\(n=5\)</span> and our observed values are <span class="math inline">\(0, 0, 1, 0, 1\)</span>. Then <span class="math inline">\(\ell(\pi) =  \pi^2 (1- \pi)^3\)</span>, and the maximum likelihood estimate for <span class="math inline">\(\pi\)</span> is given by <span class="math inline">\(\hat\pi = \dfrac{2}{5}\)</span>.</p>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Did it matter which category I assign to <span class="math inline">\(1\)</span> versus <span class="math inline">\(0\)</span> when setting up my model? How would it change if I flipped them around?</p>
+</div>
+<p>Let’s consider some more examples.</p>
+</section>
+<section id="count-data-the-poisson-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="count-data-the-poisson-distribution">Count Data – the Poisson distribution</h3>
+<ol type="1">
+<li><p><strong>Our Model</strong> Suppose we have count response data <span class="math inline">\(X_1, \ldots, X_n\)</span>, like our website traffic example. A common model for count data is the Poisson with. We will also assume our data are independent with the same parameter <span class="math inline">\(\lambda\)</span>, though remember for the website data our concerns about this assumption. (There are models that give flexibility in <span class="math inline">\(\lambda\)</span> being different, and with the same effect on our confidence in our estimator as with the Bernoulli)</p></li>
+<li><p><strong>Writing the (log) likelihood</strong> Recall that the PMF of a <span class="math inline">\(Poisson(\lambda)\)</span> distribution is <span class="math display">\[f(x) = P(X=x) = \dfrac{\lambda^x e^{-\lambda}}{x!},\]</span> where <span class="math inline">\(x = 0, 1, 2, \ldots\)</span>.</p></li>
+</ol>
+<p>If <span class="math inline">\(X_1 = x_1, \ldots, X_n=x_n\)</span> independent, then the joint PMF is the product of the marginals. This gives the likelihood as <span class="math display">\[
+\ell(\lambda) = \dfrac{\lambda^{x_1} e^{-\lambda}}{x_1!}\cdot \dfrac{\lambda^{x_2} e^{-\lambda}}{x_2!}\dots \dfrac{\lambda^{x_n} e^{-\lambda}}{x_n!} = \dfrac{\lambda^{\sum_{i=1}^n x_i} e^{-n\lambda}}{x_1!x_2!\ldots x_n!}
+\]</span> Taking logs, we get that <span class="math display">\[
+L(\lambda) = \left(\sum_{i=1}^n x_i\right)\log(\lambda) -n\lambda -log(x_1!x_2!\ldots x_n!).
+\]</span> 3. <strong>Maximizing the likelihood</strong> We can ignore/drop the last term as is since it does not contain <span class="math inline">\(\lambda\)</span> and when we differentiate with respect to <span class="math inline">\(\lambda\)</span>, its derivative will be <span class="math inline">\(0\)</span>. This implies that: <span class="math display">\[
+\dfrac{dL(\lambda)}{d\lambda} = \dfrac{\sum_{i=1}^n}{\lambda} -n \Rightarrow \hat\lambda = \dfrac{\sum_{i=1}^nx_i}{n} = \bar{x}.
+\]</span></p>
+<p>Again, the maximum likelihood <em>estimate</em> is <span class="math inline">\(\hat\lambda = \bar{x}\)</span>, i.e.&nbsp;for this particular data, and generalizing this to any data gives us the corresponding statistic is <span class="math inline">\(\hat\lambda = \bar{X}\)</span>.</p>
+<p><strong>Example</strong> Suppose <span class="math inline">\(n=3\)</span> and our observed values are <span class="math inline">\(5, 2, 3\)</span>. Then the MLE is given by the average of these numbers, which is 3.33.</p>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Compute the maximum likelihood estimators for parameters of the:</p>
+<ol type="1">
+<li>Exponential(<span class="math inline">\(\lambda\)</span>), and</li>
+<li>Uniform(<span class="math inline">\(0, b\)</span>) distributions.</li>
+</ol>
+</div>
+<details>
+<summary>
+Check your work for Exponential
+</summary>
+<p>Assume we choose to model our data <span class="math inline">\(X_1, \dots, X_n\)</span> as coming from independent Exponential distributions, with a shared parameter <span class="math inline">\(\lambda\)</span>, <span class="math display">\[X_i \stackrel{i.i.d.}{\sim} Exponential(\lambda)\]</span>:</p>
+<p><span class="math display">\[\begin{align*}
+L(\lambda) &amp;= \log\ell(\lambda)\\
+      &amp;= \log\left(\lambda^n e^{-\lambda n \overline{X}}\right)\\
+      &amp;= n \log \lambda - \lambda n \overline{X} \\
+      \Rightarrow \dfrac{dl}{d\lambda} &amp;= \dfrac{n}{\lambda} - n \overline{X}\\
+      \Rightarrow \hat\lambda  &amp;= \dfrac{1}{\overline{X}}
+\end{align*}\]</span></p>
+</details>
+</section>
+</section>
+<section id="mle-with-multiple-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="mle-with-multiple-parameters">MLE with multiple parameters</h2>
+<section id="normal" class="level3">
+<h3 class="anchored" data-anchor-id="normal">Normal</h3>
+<p>What about the most common distribution in all of statistics – the normal distribution? Well, it’s actually a bit more complicated because the normal has two parameters, the mean and variance. What do I do?</p>
+<p>Well, the steps for getting an MLE remain the same, only now my <span class="math inline">\(\theta\)</span> parameter is a vector in <span class="math inline">\(R^2\)</span>: <span class="math display">\[\theta=(\beta_0,\sigma^2)^T\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice I am considering my parameter to be the <em>variance</em> (<span class="math inline">\(\sigma^2\)</span>) and not standard deviation <span class="math inline">\(\sigma\)</span>. This distinction becomes pretty important we are taking derivatives – we take the derivative with respect to <span class="math inline">\(\sigma^2\)</span> and not with respect to <span class="math inline">\(\sigma\)</span>. We could call our variance something different, like <span class="math inline">\(\psi=\sigma^2\)</span> – and you can do that if that helps you remember – but it is ubiquitous in statistics that we use <span class="math inline">\(\sigma^2\)</span> and just remember. We will see below when we talk about estimating functions of parameters, that in fact, this is a choice that makes our computations easier, but doesn’t change the end answer!</p>
+</div>
+</div>
+<ol type="1">
+<li><p><strong>Choose the parametric model</strong> I haven’t given a clear data example, so for now you will just have to accept that we are working with a normal distribution. I’m going to further tell you that we will assume they <span class="math inline">\(X_i\)</span> are independent. You see how quickly we get lazy and stop thinking about our assumptions and just dive in…</p></li>
+<li><p><strong>Write down the (log)likelihood</strong> The pdf of a normal distribution <span class="math inline">\(N(\mu,\sigma^2)\)</span> is given by <span class="math display">\[f(x_i)=\frac{1}{2\pi\sqrt{\sigma^2}} \exp{\left\{-\frac{(x_i-\mu)^2}{2\sigma^2}\right\}}.\]</span> Because of my independence assumption, we have <span class="math display">\[\ell(\theta)=\prod_{i=1}^n \frac{1}{2\pi\sqrt{\sigma^2}} \exp{\left\{-\frac{(x_i-\mu)^2}{2\sigma^2}\right\}} \]</span> To maximize the likelihood we will work with the log-likelihood of <span class="math inline">\(X_i\)</span> <span class="math display">\[\log f(x_i|\theta)=-\log(2\pi)-1/2\log(\sigma^2) -\frac{(x_i-\mu)^2}{2\sigma^2}\]</span> which gives us <span class="math display">\[
+\begin{aligned}
+L(\theta)&amp;=-\sum_{i=1}^n \left\{\frac{(x_i-\mu)^2}{2\sigma^2} +\log(2\pi)+1/2\log\sigma^2\right\}\\
+&amp;=-\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2 -\frac{n}{2}\log\sigma^2 - n\log(2\pi)
+\end{aligned}
+\]</span> Again, the last term (<span class="math inline">\(n\log(2\pi)\)</span>) won’t matter since it doesn’t involve any of our parameters.</p></li>
+<li><p><strong>Maximize your likelihood:</strong> Now we have to maximize the likelihood, but simultaneously over both of our parameters. You should review your calculus to remind yourself of how (and why!) this works, but the basic steps are to</p></li>
+</ol>
+<ul>
+<li>take the partial derivatives of <span class="math inline">\(L(\theta)\)</span> with respect to <em>each</em> parameter.</li>
+<li>Set each equal to zero. This should give you a system of 2 equations.</li>
+<li>Find the solutions that simultaneously solve the system of equations.</li>
+<li>Check that they are a global maximum (we will not belabor this point too much)</li>
+</ul>
+<p>Let’s do this in the case of simple regression, <span class="math display">\[
+\begin{aligned}
+\frac{dL(\theta)}{d\mu}=&amp;\frac{1}{2\sigma^2}\sum_{i=1}^n2(x_i-\mu)&amp;=0\\
+&amp;\Rightarrow\frac{1}{\sigma^2}(n\bar{x}-n\mu)&amp;=0\\
+\frac{dL(\theta)}{d\sigma^2}=&amp;\frac{1}{2(\sigma^2)^2}\sum_{i=1}^n(x_i-\mu)^2 -\frac{n}{2}\frac{1}{\sigma^2}&amp;=0
+\end{aligned}
+\]</span> Notice that for the first equation, the solution is independent of <span class="math inline">\(\sigma^2\)</span>, i.e.&nbsp;we just need to solve <span class="math display">\[\bar{x}-\mu=0,\]</span> which gives us our estimator, <span class="math display">\[\hat{\mu}=\bar{X}\]</span> That is handy, and we can now subtitute this value in for <span class="math inline">\(\mu\)</span> in our second equation to get <span class="math display">\[
+\begin{gathered}\frac{1}{2(\sigma^2)^2}\sum_{i=1}^n(x_i-\bar{x})^2 -\frac{n}{2}\frac{1}{\sigma^2}=0\\
+\Rightarrow \sigma^2=\frac{1}{n}\sum_{i=1}^n (x_i-\bar{x})^2
+\end{gathered}\]</span> This gives our estimator, <span class="math display">\[\hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n (X_i-\bar{X})^2\]</span></p>
+</section>
+<section id="simple-regression" class="level3">
+<h3 class="anchored" data-anchor-id="simple-regression">Simple Regression</h3>
+<p>These are pretty simple examples, and we are basically doing nothing more than estimating a mean (or the reciprocal of the mean). Not surprisingly, the MLE tells us in each case to use the mean of the data!</p>
+<p>But let’s consider our simple linear regression setting, with our all parametric modeling assumptions: <span class="math display">\[Y_1,\ldots,Y_n\text{ independent; each } Y_i|X_i\sim N(\beta_0+\beta_1 X_i,\sigma^2)\]</span> We’ve added another parameter here so we have that <span class="math display">\[\theta=(\beta_0,\beta_1,\sigma^2)^T.\]</span></p>
+<ol type="1">
+<li><p><strong>Choose a parametric model</strong>. Done already! We have a model for the data <span class="math inline">\(Y_1,\ldots,Y_n\)</span>. Since we’re conditioning on the <span class="math inline">\(X\)</span>, I get to treat the <span class="math inline">\(X_i\)</span> as fixed values. Notice we’ve chosen the model where not only are the <span class="math inline">\(Y_i\)</span> all independent, but also all have the same variance!</p></li>
+<li><p><strong>Write down the likelihood</strong><br>
+We’ve actually done most of the work already – we just need to replace <span class="math inline">\(\mu\)</span> with <span class="math inline">\(\beta_0+\beta_1 X_i\)</span>, <span class="math display">\[
+\begin{aligned}
+L(\theta)&amp;=-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2 -\frac{n}{2}\log\sigma^2 - n\log(2\pi)
+\end{aligned}
+\]</span></p></li>
+<li><p><strong>Maximize the likelihood</strong> This get’s a little bit more messy, but still totally manageable, <span class="math display">\[
+\begin{aligned}
+\frac{dL(\theta)}{d\beta_0}=&amp;\frac{1}{\sigma^2}\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)&amp;=0 \\
+\frac{dL(\theta)}{d\beta_1}=&amp;\frac{1}{\sigma^2}\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)x_i&amp;=0\\
+\frac{dL(\theta)}{d\sigma^2}=&amp;\frac{1}{2(\sigma^2)^2}\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2 -\frac{n}{2}\frac{1}{\sigma^2}&amp;=0
+\end{aligned}
+\]</span> Importantly, we again don’t need <span class="math inline">\(\sigma^2\)</span> for the first two equations, which simplify to <span class="math display">\[\begin{aligned}
+\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)&amp;=0 \\
+\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)x_i&amp;=0\\
+\end{aligned}
+\]</span> Sorting this out gives us estimators, <span class="math display">\[\hat{\beta}_0=\bar{Y} - \hat\beta_1\bar{X}, \hat{\beta}_1=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2}
+\]</span> And then plugging those into our last equation involving <span class="math inline">\(\sigma^2\)</span> and solving for <span class="math inline">\(\sigma^2\)</span> gives us <span class="math display">\[\hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n(y_i-\hat{\beta}_0-\hat{\beta}_1X_i)^2\]</span></p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The addition of <span class="math inline">\(\frac{1}{n}\)</span> on the numerator and denominator in my definition of <span class="math inline">\(\hat{\beta}_1\)</span> is clearly not necessarily – they cancel out. But it can be nice to have them, because then you see that the denominator is the estimate of the variance in the <span class="math inline">\(X_1,\ldots,X_n\)</span> data, while the numerator is the average of multiplying the distance of <span class="math inline">\(X_i\)</span> from its mean with to the distance of <span class="math inline">\(Y_i\)</span> from its mean. Clearly the expression for <span class="math inline">\(\hat\beta_1\)</span> will have a larger absolute numerator when <span class="math inline">\(Y_i\)</span> deviates from its mean at the same time that <span class="math inline">\(X_i\)</span> deviates from its mean.</p>
+</div>
+</div>
+<p>We can apply this to our college data:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-CreatingEstimators_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Plot of scorecard data with line overplotted corresponding to MLE estimates</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Work through the details above and to show <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> are as I gave above.</p>
+</div>
+<details>
+<summary>
+Check your work
+</summary>
+<p>Let’s expand out the LHS of the equations here. Remember that we always have <span class="math inline">\(n\bar{x}= \sum_{i}x_i\)</span>, a common trick in computations</p>
+<p><span class="math display">\[\begin{aligned}
+\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)&amp;=n(\bar{y}-\beta_0-\beta_1\bar{x})=0\\
+\Rightarrow\beta_0&amp;=\bar{y}-\beta_1\bar{x} \\
+\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)x_i&amp;=\sum_i y_ix_i-n\beta_0\bar{x}-\beta_1\sum_i x_i^2\\
+&amp;=\sum_i y_ix_i-\beta_1\sum_i x_i^2-n(\bar{y}-\beta_1\bar{x})\bar{x}\\
+&amp;=\sum_i y_ix_i-n\bar{y}\bar{x} -\beta_1(\sum_i x_i^2-n\bar{x}^2)=0\\
+\Rightarrow \beta_1&amp;=\frac{\sum_i y_ix_i-n\bar{y}\bar{x}}{\sum_i x_i^2-n\bar{x}^2}
+\end{aligned}
+\]</span></p>
+<p>How does this equal what I gave above? Well, it’s simply an alternative expression of these quantities. These are important tricks working with data with the mean subtracted off – basically when you sum the square, the cross product term combines with other terms: <span class="math display">\[
+\begin{aligned}
+\sum_i (x_i-\bar{x})^2&amp;=\sum_i (x_i^2-2x_i\bar{x}+\bar{x}^2)\\
+&amp;=\sum_i x_i^2-2\bar{x}\sum_i x_i+ \sum_i \bar{x}^2\\
+&amp;=\sum_i x_i^2-2\bar{x}n(\bar{x})+ n\bar{x}^2\\
+&amp;=\sum_i x_i^2-n\bar{x}^2\\
+&amp;=\sum_i (x_i^2-\bar{x}^2)
+\end{aligned}
+\]</span></p>
+You can do the same trick with the numerator.
+</details>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Consider our case of two groups that we briefly discussed as a special case of regression, <span class="math display">\[Y |X \sim \begin{cases}
+N(\alpha_1,\sigma_1^2), &amp; X=1\\
+N(\alpha_0,\sigma_0^2), &amp; X=0
+\end{cases}
+\]</span> Show that the maximum likelihood estimators of these parameters is:</p>
+<p>You can simplify your work by setting your notation by assuming <span class="math inline">\(Y_1,\ldots,Y_{n_0}\)</span> are the <span class="math inline">\(Y\)</span> values for which <span class="math inline">\(X=0\)</span> and <span class="math inline">\(Y_{n_0+1},\ldots,Y_{n_0+n_1}\)</span> are the <span class="math inline">\(Y\)</span> values for which <span class="math inline">\(X=1\)</span>, so there are <span class="math inline">\(n_0\)</span> values with <span class="math inline">\(X=0\)</span> and <span class="math inline">\(n_1\)</span> values with <span class="math inline">\(X=1\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="non-analytical-solutions" class="level2">
+<h2 class="anchored" data-anchor-id="non-analytical-solutions">Non Analytical Solutions</h2>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
+<p>In the cases above, all of the solutions can be found by hand via calculus. But consider our example of regression when we instead had <span class="math inline">\(Y_i\)</span> being binary, taking 0 or 1, so that <span class="math display">\[E(Y_i |X)=P(Y_i=1 | X)\]</span> Let’s see how the MLE works out here</p>
+<ol type="1">
+<li><strong>Choosing a parametric model</strong> We said we could assume <span class="math inline">\(Y|X\)</span> is Bernoulli, with probability <span class="math inline">\(\pi\)</span> given by <span class="math inline">\(\pi=f(X)\)</span>. But we need to assign a model for <span class="math inline">\(f\)</span>. Unlike linear regression, since we need the range of <span class="math inline">\(f(X)\)</span> to be between <span class="math inline">\((0,1)\)</span>, we <strong>don’t</strong> want to just set <span class="math display">\[P(Y_i=1 | X_i)= \beta_0+\beta_1X_i\]</span> But we could pick another equation. A common choice is the <em>logistic function</em> sometimes called the sigmoid function: <span class="math display">\[p(x)=\frac{1}{1+e^{-(\beta_0+\beta_1 x)}}=\frac{e^{\beta_0+\beta_1 x}}{1+e^{\beta_0+\beta_1 x}}\]</span></li>
+</ol>
+<p>This is a mouthful, for sure, but if you look at this figure, you can see that this makes sense for making sure our probability is between 0 and 1</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-CreatingEstimators_files/figure-html/logisticFunction-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Plots of logistic function, with different choices of <span class="math inline">\(\beta_1\)</span>, and <span class="math inline">\(\beta_0=0\)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Not only is our probability between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, but we see the probability increases with <span class="math inline">\(x\)</span> if <span class="math inline">\(\beta_1&gt;0\)</span> and visa versa if <span class="math inline">\(\beta_1&lt;0\)</span>. And the size of <span class="math inline">\(\beta_1\)</span> controls the rate at which the probability changes.</p>
+<p>This choice of <span class="math inline">\(p(x)\)</span> for modeling <span class="math inline">\(P(Y=1|X)\)</span> is often called <strong>logistic</strong> regression. For a non-technical introduction to logistic regression modeling, see <a href="https://epurdom.github.io/Stat131A/book/logistic-regression.html">Chapter 7</a> of my online book written for STAT 131A.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In fact, inverting <span class="math inline">\(p(x)\)</span> shows that you have, <span class="math display">\[log\left(\frac{p(x)}{1-p(x)}\right)=\beta_0+\beta_1 x\]</span> The left-hand side of this equation is called the <em>log-odds</em> of <span class="math inline">\(p(x)\)</span>.</p>
+<p>When we write it like this, we see there is a linear relationship to <span class="math inline">\(x\)</span>, it’s just a linear relationship with a <em>function</em> of <span class="math inline">\(E(Y|X)\)</span>. This is a common way to extend the simple linear regression to other distributions, and common choices exist for other distributions and this strategy is called <em>generalized linear models (GLMs)</em>.</p>
+</div>
+</div>
+<p>How in the world do we estimate the <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>? Well, this is where the MLE becomes awfully handy. We have a process for that. Moreover, we’ve done this work already for our simple Bernoulli example from before, so we can just plug <span class="math inline">\(p(x_i)\)</span> into it, just like we did with linear regression for the normal case.</p>
+<ol start="2" type="1">
+<li><p><strong>Write down the likelihood</strong> Previously, for a Bernoulli with a shared parameter <span class="math inline">\(p\)</span>, we could write the individual pmf as, <span class="math display">\[\begin{aligned}
+f(y_i)&amp;=p^{y_i}\,(1-p)^{1-y_i}\\
+\log f(y_i)&amp;=y_i\log(p)+(1-y_i)\log(1-p)
+\end{aligned}\]</span> Now I just need to replace <span class="math inline">\(p\)</span> with <span class="math inline">\(p(x_i)\)</span>, <span class="math display">\[\log f(y_i)=y_i\log(p(x_i))+(1-y_i)\log(1-p(x_i))\]</span> Again we have (again) <em>assumed</em> independence, we have the joint log-likelihood, <span class="math display">\[\begin{aligned}
+L(\theta)&amp;=\sum_{i=1}^n\log f(y_i)\\
+&amp;=\sum_{i=1}^n y_i\log p(x_i)+\sum_{i=1}^n(1-y_i)\log(1-p(x_i))\\
+\end{aligned}.\]</span> This hides our actual parameters we want to estimate; to see them we need to substitute in <span class="math inline">\(\frac{1}{1+e^{-(\beta_0+\beta_1 x_i)}}\)</span> everywhere I have <span class="math inline">\(p(x_i)\)</span>, <span class="math display">\[\begin{aligned}L(\theta)&amp;=L(\beta_0,\beta_1)\\
+&amp;=\sum_{i=1}^n y_i\log \frac{1}{1+e^{-(\beta_0+\beta_1 x_i)}}+\sum_{i=1}^n(1-y_i)\log(1-\frac{1}{1+e^{-(\beta_0+\beta_1 x_i)}})\\
+&amp;=\sum_{i=1}^n y_i\log \frac{1}{1+e^{-(\beta_0+\beta_1 x_i)}}+\sum_{i=1}^n(1-y_i)\log(\frac{-e^{-(\beta_0+\beta_1 x_i)}}{1+e^{-(\beta_0+\beta_1 x_i)}})
+\end{aligned}\]</span></p></li>
+<li><p><strong>Maximize the likelihood</strong> Now, if you’re looking at that equation and thinking “Oh no, I don’t want to even think about calculating the partial derivatives of that,” you are in luck (though the chain rule can make quick work of the calculations). Because, even if we did the calculus we wouldn’t be able to solve the system of equations analytically. &nbsp; But this is the joy of modern computing. We have excellent optimization tools that allow this to be done numerically (remember Newton’s method from calculus?). We won’t be able to write an equation for the <em>estimators</em> <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span>, but we will have an algorithm that will be able to calculate the <em>estimates</em> for any particular dataset <span class="math inline">\(X_1=x_1,\ldots,X_n=x_n\)</span>. Specifically, we will use a computer to the values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> for the following optimization problem: <span class="math display">\[\max_{\beta_0,\beta_1} L(\beta_0,\beta_1)= \max_{\beta_0,\beta_1}\sum_{i=1}^n y_i\log \frac{e^{\beta_0+\beta_1 x_i}}{1+e^{\beta_0+\beta_1 x_i}}+\sum_{i=1}^n(1-y_i)\log(\frac{-e^{\beta_0+\beta_1 x_i}}{1+e^{\beta_0+\beta_1 x_i}})\]</span></p></li>
+</ol>
+<p>We can look at the estimates on our spam data, where again we plot in red the average (i.e.&nbsp;proportion) for different bins of the data. The blue line is <span class="math inline">\(p(x)\)</span> based on the estimates <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> from solving our MLE problem using the R function <code>glm</code> which numerically solves the optimization problem above.</p>
+<p>The code in R for this looks like the following:</p>
+<pre><code>spam.fit&lt;-glm(y~x,data=spam7, family="binomial")</code></pre>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="04-CreatingEstimators_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Plot of fitted probability function, based on MLE estimates of parameters, with data overlaid</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<!-- ### The Gamma($\alpha, \lambda$) distribution -->
+<!-- The Gamma($\alpha, \beta$) distribution is another example of a distribution with non analytical solutions. Suppose you choose to model $X_1,\ldots,X_n$ as each being independent with distribution Gamma and *shared* parameters $\alpha,\beta$.  -->
+<!-- :::{.QUESTION} -->
+<!-- What characteristics would you want of your data $X_1,\ldots,X_n$ to make Gamma a good choice for modeling your data?  -->
+<!-- ::: -->
+<!-- The PDF of this distribution is $f(x\vert \alpha, \lambda) = \displaystyle \dfrac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\lambda x}$, for $0\le x < \infty$. -->
+<!-- Let's write down the log-likelihood function of $\theta = (\alpha, \lambda)$, using the sample $X_1, \ldots, X_i$: $$ -->
+<!-- \ell(\alpha, \lambda) = \sum_{i=1}^n(\alpha - 1) \log X_i -\lambda\sum_{i=1}^nX_i + n\alpha\log \lambda- n\log \Gamma(\alpha) -->
+<!-- $$ Now we have two variables, so we will need to take *partial* derivatives. -->
+<!-- <details> -->
+<!-- <summary>Check your partial derivatives!</summary> -->
+<!-- First, let's take the partial derivative with respect to $\alpha$, so we will treat $\lambda$ (and the $X_i's$) as constants: $$ -->
+<!-- \frac{\partial \ell(\alpha, \lambda)}{\partial \alpha} = \sum_{i=1}^n \log X_i + n\log \lambda - n \frac{\Gamma ' (\alpha)}{\Gamma(\alpha)}. -->
+<!-- $$ Now, let's find the partial derivative of $\ell(\alpha, \lambda)$ with respect to $\lambda$: $$ -->
+<!-- \frac{\partial \ell(\alpha, \lambda)}{\partial \lambda} = -\sum_{i=1}^n X_i + \frac{n \alpha}{\lambda} -->
+<!-- $$ -->
+<!-- </details> -->
+<!-- We can set the second partial derivative equal to 0, and we get (at the MLE's $\hat\lambda$ and $\hat\alpha$) that: -->
+<!-- $$ -->
+<!-- \hat\lambda = \frac{\hat\alpha}{\overline{X}}. -->
+<!-- $$ -->
+<!-- We take this and plug it into the expression we get when we set the partial with respect to $\alpha$ equal to 0. That is when we can see that we have a problem. We get: $$ -->
+<!-- \sum_{i=1}^n \log X_i + n\log \frac{\hat \alpha}{\overline{X}} - n \frac{\Gamma ' (\hat \alpha)}{\Gamma(\hat \alpha)} = 0 -->
+<!-- $$ which does not give us a closed form solution. We need to use a numerical, iterative procedure.  -->
+<!-- We can use the method of moments estimates for the starting value for this procedure. -->
+</section>
+</section>
+<section id="estimating-a-function-of-parameter-with-mle" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-a-function-of-parameter-with-mle">Estimating a function of Parameter with MLE</h2>
+<p>So far all of our examples where we used the MLE, what we wanted to estimate was the actual parameter of the parametric model.</p>
+<p>But consider the exponential distribution, which was an exercise above. We found a MLE for the rate parameter <span class="math inline">\(\lambda\)</span>, <span class="math display">\[\hat\lambda=\frac{1}{\bar{X}}.\]</span> But what if that isn’t what we are interested in, and we want the MLE for the <em>mean</em> of the distribution, let’s call it <span class="math inline">\(\mu\)</span>? That is given by <span class="math display">\[\mu=E(X)=\frac{1}{\lambda}\]</span> But <span class="math inline">\(\mu\)</span> isn’t part of the density of the exponential… Can we find a MLE for <span class="math inline">\(\mu\)</span>?</p>
+<p>In fact, yes, and there is a very simple solution. If you know the MLE for the parameters of a distribution, and you want the MLE for a function of those parameters, you can just substitute the MLE into the function. So for an exponential, <span class="math display">\[\hat{\mu}=\frac{1}{\hat{\lambda}}=\bar{X}\]</span> Which is both simple, and quite logical – you see almost every time, MLE is going to tell you that the best way to estimate the mean of the distribution is the mean of the data, irrespective of the distribution you assume.</p>
+<p>Specifically, we have the following Theorem:</p>
+<div id="thm-line" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (MLE of functions of <span class="math inline">\(\theta\)</span>)</strong></span> Let <span class="math inline">\(\tau = g(\theta)\)</span> be a function of <span class="math inline">\(\theta\)</span>. Let <span class="math inline">\(\hat\theta\)</span> be the MLE of <span class="math inline">\(\theta\)</span>. Then <span class="math inline">\(\hat\tau = g(\hat\theta)\)</span> is the MLE of <span class="math inline">\(\tau\)</span>.</p>
+</div>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Consider our Bernoulli example above for when we have binary data <span class="math inline">\(X_1,\ldots,X_n\)</span>. What if instead of estimating the probability of success, <span class="math inline">\(p\)</span>, I want to estimate the log-odds, <span class="math display">\[\tau=\log(\frac{p}{1-p})\]</span></p>
+</div>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Suppose you decided to model your data with the Gamma(<span class="math inline">\(\alpha, \beta\)</span>) distribution, where <span class="math inline">\(\beta\)</span> is the <em>rate</em> parameter. In other words, you choose to model <span class="math inline">\(X_1,\ldots,X_n\)</span> as each being independent with distribution Gamma and <em>shared</em> parameters <span class="math inline">\(\alpha,\beta\)</span>. Since there are two ways to <em>parameterize</em> the Gamma distribution, let’s be specific, and write the density as, <span class="math display">\[
+f(x)=\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}; \alpha,\beta &gt;0
+\]</span> Suppose you had a MLE for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, what is <span class="math inline">\(g\)</span> and what would be the MLE for the mean of the distribution?</p>
+</div>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>What characteristics would you want of your data <span class="math inline">\(X_1,\ldots,X_n\)</span> to make Gamma a good choice for modeling your data?</p>
+</div>
+<section id="proof" class="level3">
+<h3 class="anchored" data-anchor-id="proof">Proof</h3>
+<p>The theorem holds for all <span class="math inline">\(g\)</span>, but it’s pretty easy to prove in the case that <span class="math inline">\(g\)</span> is one-to-one (i.e.&nbsp;invertible). In this case, we could rewrite the density with <span class="math inline">\(\tau\)</span> the new parameter of the density by replacing <span class="math inline">\(\theta\)</span> with <span class="math inline">\(g^{-1}(\tau)\)</span>,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, calculate the likelihood <span class="math inline">\(\ell(\tau)\)</span>, and find a <span class="math inline">\(\tau\)</span> that maximizes it. This would give you the MLE of <span class="math inline">\(\tau\)</span>. This theorem says you don’t need to go through this process, because <span class="math inline">\(\hat\tau=g(\hat\theta)\)</span> is the MLE of <span class="math inline">\(\tau\)</span>, i.e.&nbsp;maximizes <span class="math inline">\(\ell(\tau)\)</span>.</p>
+<p>Let’s assume that <span class="math inline">\(\hat{\theta}\)</span> is the MLE for <span class="math inline">\(\theta\)</span>, i.e.&nbsp;it is the value <span class="math inline">\(\theta\)</span> that maximizes <span class="math inline">\(\ell(\theta)\)</span>. Then for for any particular <span class="math inline">\(\tau_0\)</span>, there is a single <span class="math inline">\(\theta_0=g^{-1}(\tau_0)\)</span> and we can calculate the likelihood of our data using the likelihood with <span class="math inline">\(\tau_0\)</span> or with <span class="math inline">\(\theta_0\)</span>, and these values will be the same, <span class="math display">\[\ell(\tau_0)=\ell(g^{-1}(\tau_0))=\ell(\theta_0)\]</span> So for <em>any</em> particular <span class="math inline">\(\tau_0\)</span> and corresponding <span class="math inline">\(\theta_0\)</span>, we have <span class="math display">\[\ell(\tau_0)=\ell(\underbrace{g^{-1}(\tau_0)}_{\theta_0}) \leq \ell(\hat\theta)
+\]</span> because of the definition of <span class="math inline">\(\hat\theta\)</span> as the value that maximizes <span class="math inline">\(\ell(\theta)\)</span>.</p>
+<p>But because <span class="math inline">\(g\)</span> is one-to-one, <span class="math inline">\(\hat\theta\)</span> corresponds to a unique <span class="math inline">\(\hat\tau=g(\hat\theta)\)</span> and <span class="math display">\[\ell(\hat\theta_n)=\ell(\hat\tau_n)\]</span> so that means <span class="math display">\[\ell(\tau_0) \leq \ell(\hat\tau)
+\]</span> This is true for any <span class="math inline">\(\tau_0\)</span>, so therefore <span class="math inline">\(\hat\tau = g(\hat{\theta})\)</span> maximizes <span class="math inline">\(\ell\)</span> over all other possible values of <span class="math inline">\(\tau\)</span>. This means <span class="math inline">\(\hat\tau\)</span> is the MLE for <span class="math inline">\(\tau\)</span>.</p>
+
+
+
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-agresti2021" class="csl-entry" role="listitem">
+Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-kerns2017mle" class="csl-entry" role="listitem">
+Kerns, Jonny. 2017. <span>“Probability Concepts Explained: Maximum Likelihood Estimation.”</span> Medium. <a href="https://medium.com/data-science/probability-concepts-explained-maximum-likelihood-estimation-c7b4342fdbb1">https://medium.com/data-science/probability-concepts-explained-maximum-likelihood-estimation-c7b4342fdbb1</a>.
+</div>
+<div id="ref-rice2006" class="csl-entry" role="listitem">
+Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. Duxbury Press.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Note you can do this with parameters. You can’t do this with random variables<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/spring-2026");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
