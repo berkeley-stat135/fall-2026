@@ -220,7 +220,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Modules/03-CaseStudyRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Case Study: Simple Regression</span></a>
+ <span class="menu-text">Case Study: Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -321,7 +321,8 @@ Note
 <p>Let’s return to our simple example from the first day of class: a survey of US Parents in May of 2025 of 3,054 eligible parents who responded (out of 6,287 who were asked)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../StaticFigures/Pew2025_Youtube2Yr.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+<p><img src="../StaticFigures/Pew2025_Youtube2Yr.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Figure of Results from Pew Survey on children’s YouTube usage</figcaption>
 </figure>
 </div>
 <p>We want to use this data on 3,054 parents estimate something about a larger population. We <em>observe</em> on this data 51% of 2-4 yrs old and 54% of 5-12 yrs old watch YouTube daily.</p>
@@ -349,7 +350,7 @@ Note
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../StaticFigures/inference-sampling.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption>Figure courtesy of Shobhana Stoyanov</figcaption>
+<figcaption>Illustration of sampling from population, figure courtesy of Shobhana Stoyanov</figcaption>
 </figure>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -370,27 +371,34 @@ Note
 <section id="sampling-perspective" class="level2">
 <h2 class="anchored" data-anchor-id="sampling-perspective">Sampling Perspective</h2>
 <p>In this perspective, our population is the larger set of units from which our observed units were drawn. This is the example of our parent survey above.</p>
-<p>Then a population parameter is some summary value of the population that we don’t know, like the proportion of all US parents (or much more complicated characteristics!)<br>
-This makes a lot of sense in settings where the selection of particular units to measure is a significant aspect of our data collection (even if the selection process is non-random or unknown). It allows us to think quite concretely about our sample, and in what ways it might have biases from the full population or even from the sample we <em>wanted</em> to collected but didn’t because of, for example, some units not responding or being unavailable. There can often be a gap between the population you want to generalize to, and the one that your data makes possible.</p>
-<p>This is a common visualization of these components:</p>
+<p>Then a population parameter is some summary value of the population that we don’t know, like the proportion of all US parents (or much more complicated characteristics!) or the average income.</p>
+<p>More mathematically, there is an <span class="math inline">\(X_i\)</span> value for every element in our population of size <span class="math inline">\(N\)</span>, <span class="math display">\[X_1,\ldots,X_N\]</span> If we want to estimate to population mean, that literally means we want to estimate <span class="math display">\[\frac{1}{N}\sum_{i=1}^N X_i.\]</span></p>
+<p>This interpretation makes a lot of sense in settings where the selection of particular units to measure is a significant aspect of our data collection – even if the selection process is non-random or unknown! It allows us to think quite concretely about our sample, and in what ways it might have been sampled from a population that is actually different from the target population. For example, we might have missed parts of the population we <em>wanted</em> to sample from due to, for example, some units not responding or being unavailable. There also might be part of the target population that we’d like to know, but that our sampling mechanism just doesn’t reach. There can often be a gap between the population you want to generalize to, and the one that your data makes possible.</p>
+<p>This is a common visualization of these components, distinguishing the</p>
+<ul>
+<li>the <em>sampling frame population</em>–the population that is included by our sampling mechanism</li>
+<li>the <em>sampled population</em> – the population our usable data came from</li>
+<li>the <em>target population</em> – that we wanted to make estimates about</li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../StaticFigures/sampling-schematic.png" class="img-fluid figure-img" style="width:70.0%"></p>
-<figcaption>Figure courtesy of Shobhana Stoyanov</figcaption>
+<figcaption>Illustration of the relationship between the target population and the sampled population, figure courtesy of Shobhana Stoyanov</figcaption>
 </figure>
 </div>
 <div class="QUESTION">
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
 </div>
-<p>Think about these components for the Pew Survey. What might these different boxes correspond to?</p>
+<p>Think about these components for the Pew Survey. Assume for the purposes of the question, that parents were contacted via calling a sample of telephone numbers. What might these different populations correspond to?</p>
 </div>
 <section id="random-samples" class="level3">
 <h3 class="anchored" data-anchor-id="random-samples">Random Samples</h3>
-<p>How specifically are these samples collected from the population. We’ve seen they can be collected in many ways, but the gold standard is to <em>randomly select</em> units from the population, where the investigator selects a unit based on a known, but random mechanism.</p>
+<p>How specifically are these samples collected from the population? We’ve seen they can be collected in many ways, but the gold standard is to <em>randomly select</em> units from the population, where the investigator selects a unit based on a <em>known, but random mechanism</em>.</p>
 <div id="def-rs" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1</strong></span> <strong>Probability sampling</strong> is a method of selecting a sample through a defined random process in which every (eligible) population unit has a <em>known</em>, positive chance of inclusion. A <strong>random sample</strong> is the resulting sample from performing probability sampling.</p>
 </div>
+<p>We do not call it a random sample if these pieces are not in place; you otherwise often will call it a <em>convenience sample</em>, meaning the selection was not defined by a known random mechanism.</p>
 <p>The most simple and widely known mechanism is a <em>simple random sample</em></p>
 <div id="def-srs" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2</strong></span> A <strong>simple random sample (SRS)</strong> is a random sample where every eligible unit in the population had <em>equal</em> chance of being selected.</p>
@@ -410,6 +418,7 @@ This makes a lot of sense in settings where the selection of particular units to
 </div>
 <p>Consider our spring example from the first class. There is no obvious sampling mechanism described. But what kinds of problems in the data collection might you have that could lead to problems in making conclusions about the process that generated the data?</p>
 </div>
+<p>The</p>
 <div class="QUESTION">
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
@@ -417,7 +426,8 @@ This makes a lot of sense in settings where the selection of particular units to
 <p>Go through the scenarios of data collection from module 1:</p>
 <ol type="1">
 <li>What might be the population you are interested in? There may be more than one answer: how does that affect whether this data will be good for answering that question?</li>
-<li>What kind of parameter(s) would you be estimating?</li>
+<li>If there is sampling involved (random or not), describe it and consider the target population, sampled population, etc and how those differences might cause problems.</li>
+<li>What kind of parameter(s) would you be estimating in these examples?</li>
 </ol>
 </div>
 </section>
@@ -431,7 +441,7 @@ This makes a lot of sense in settings where the selection of particular units to
 </section>
 <section id="estimate-the-variance-of-the-population" class="level3">
 <h3 class="anchored" data-anchor-id="estimate-the-variance-of-the-population">Estimate the Variance of the Population</h3>
-<p>Suppose we have continuous data <span class="math inline">\(X_1, \ldots, X_n\)</span> from a population distribution <span class="math inline">\(\mathcal{F}\)</span>. We <em>assume</em> that a draw of an observation <span class="math inline">\(X\)</span> from <span class="math inline">\(\mathcal{F}\)</span> has the same expected value, <span class="math inline">\(\mu\)</span> <em>and</em> the same variance <span class="math display">\[E(X)=\mu, var(X)=\sigma^2\]</span> Then the standard estimator for this is <span class="math display">\[S^2=\frac{1}{n-1}\sum_{i=1}^n (X-\bar{X})^2\]</span> Notice how this mirrors our definition of variance, <span class="math display">\[var(X)=E[(X-\mu)^2]\]</span></p>
+<p>Suppose we have continuous data <span class="math inline">\(X_1, \ldots, X_n\)</span> from a population distribution <span class="math inline">\(\mathcal{F}\)</span>. We <em>assume</em> that a draw of an observation <span class="math inline">\(X\)</span> from <span class="math inline">\(\mathcal{F}\)</span> has the same expected value, <span class="math inline">\(\mu\)</span> <em>and</em> the same variance <span class="math display">\[E(X)=\mu, var(X)=\sigma^2\]</span> Then the standard estimator for this is <span class="math display">\[S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2\]</span> Notice how this mirrors our definition of variance, <span class="math display">\[var(X)=E[(X-\mu)^2]\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -442,7 +452,8 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You will sometimes see another estimator of variance that comes up this semester, <span class="math display">\[\frac{1}{n}\sum_{i=1}^n (X-\bar{X})^2\]</span> This mirrors our defintion of variance even more closely (replacing the expected value with the mean, rather than a <span class="math inline">\(1/(n-1)\)</span>). However, this is never the preferred estimate, as we will see, because it is <em>biased</em>, but it does come up, for example as a MLE estimator.</p>
+<p>You will sometimes see another estimator of variance that comes up this semester, <span class="math display">\[\hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n (X_i-\bar{X})^2\]</span> This mirrors our defintion of variance even more closely (replacing the expected value with the mean, rather than a <span class="math inline">\(1/(n-1)\)</span>). However, this is never the preferred estimate, as we will see, because it is <em>biased</em>, but it does come up, for example as a MLE estimator.</p>
+<p>However, the difference is just multiplying by <span class="math inline">\(\frac{n-1}{n}\)</span>, which is generally a number very close to one, so the difference is usually negligible unless the sample is very small. We often will not have confidence in that level of precision given the other assumptions that we usually have to make in our analysis.</p>
 </div>
 </div>
 </section>
@@ -457,7 +468,7 @@ Note
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
 </div>
-<p>What will the estimate of variance imply if our data is binary?</p>
+<p>Show that if we apply the estimate <span class="math inline">\(\hat{\sigma}^2\)</span> above for our binary data, we get <span class="math display">\[\hat{\sigma}^2=\hat{p}(1-\hat{p})\]</span> Why is this intuitive? What would <span class="math inline">\(S^2\)</span> be, instead?</p>
 </div>
 </section>
 <section id="notation" class="level3">
@@ -473,7 +484,7 @@ Note
 <section id="what-to-estimate" class="level3">
 <h3 class="anchored" data-anchor-id="what-to-estimate">What to estimate</h3>
 <p>Notice that in my general modeling perspective, to even describe what I want to estimate, I am already making assumptions about <span class="math inline">\(\mathcal{F}\)</span>.</p>
-<p>For example, I said I would use the sample average to estimate the population mean. But if my data generation process is a random number collected over time, like the temperature, and the expected value of that number changes over time, then it may make no sense to talk about the mean of my population. We can talk reasonably about the average temperature in June; it’s less clear that the average temperature over a six month period is a relevant number.</p>
+<p>For example, I said I would use the sample average to estimate the population mean. But if my data generation process is a random number collected over time, like the temperature, then the expected value of that number changes over time. So it may make no sense to talk about “the” mean of my population. We can talk reasonably about the average temperature in June; it’s less clear that the average temperature over a six month period is a relevant number.</p>
 <p>So what it makes sense to estimate depends on what data I have.</p>
 </section>
 </section>
@@ -484,7 +495,10 @@ Note
 <p>Here are examples of some basic assumptions we might add; this can give you a sense of how little we’ve will have otherwise assumed so far:</p>
 <ul>
 <li><strong>Density</strong> We can assume <span class="math inline">\(\mathcal{F}\)</span> has a density <span class="math inline">\(f(x_1,\ldots,x_n)\)</span> – and yes, this is an assumption. Not all distributions have a density!</li>
-<li><strong>Independence</strong> We can assume the <span class="math inline">\(X_1,\ldots,X_n\)</span> are independent from each other. This is probably the most common assumption in the entire field of statistics. It is so common, that people frequently state it automatically without even thinking whether it makes sense. But there are many important problems where this isn’t true, for example when data is collected over time, like stock market. And in our website example, it’s not clear why independence would make sense since the comments very well might be influencing each other.</li>
+<li><strong>Independence</strong> We can assume the <span class="math inline">\(X_1,\ldots,X_n\)</span> are independent from each other. This is probably the most common assumption in the entire field of statistics. It is so common, that people frequently state it automatically without even thinking whether it makes sense. In fact, data collected from a SRS (frequently our gold standard) are not even independent!</li>
+</ul>
+<p>Furthermore, there are many important settings where this assumption doesn’t make sense, for example when data is collected over time, like stock market. And in our website product review example, it’s not clear why independence would make sense since the comments very well might be influencing each other.</p>
+<ul>
 <li><strong>Assumptions about shared moments (or other features)</strong> We could assume that the <span class="math inline">\(X_i\)</span> share the same moments.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> For example, <span class="math display">\[E(X_1)=\ldots=E(X_n)\text{, or }var(X_1)=\ldots=var(X_n)\]</span> Notice if we are going to do this, then we might want to make our life easier and introduce notation to describe these shared values, e.g.&nbsp;<span class="math display">\[E(X_i)=\mu\text{, or }var(X_i)=\sigma^2.\]</span> This is a common point of interest – can we estimate the data’s shared mean or shared variances?</li>
 </ul>
 <ul>
@@ -520,19 +534,19 @@ Note
 <li>Binomial: <span class="math inline">\(Bin(n,p), p\in(0,1)\)</span></li>
 </ul>
 <p>Notice these are are distributions that have parameters that define them. Hence, we call them <strong>parametric models</strong> for the data. Each one of these can more properly be called a <strong>parametric family</strong>, meaning that they are a class or set of distributions that share the same form.</p>
-<p>Importantly, I haven’t assumed I know the parameters – if I already knew the parameters, I wouldn’t need to collect data. Instead, what we mean is that we assume <span class="math inline">\(\mathcal{F}\)</span> is in the parametric family but with the specific values of the parameters unknown. So while we have narrowed down what is unknown to a small set of parameters to estimate, there’s still something left to figure out from our data!</p>
+<p>Importantly, I haven’t assumed I know the parameters – if I already knew the parameters, I wouldn’t need to collect data. Instead, what we mean by assuming it is normally distributed is that we assume <span class="math inline">\(\mathcal{F}\)</span> is in the parametric family but with the specific values of the parameters unknown. So while we have narrowed down what is unknown to a small set of parameters to estimate, there’s still something left to figure out from our data!</p>
 <div class="PARAGRAPH">
 <p>Example</p>
 </div>
 <p>We can return to our example of visitors to a website. We have records of the number of visits to the website in 10min intervals – this is our data <span class="math inline">\(X_1,\ldots,X_n\)</span> (which will be counts). A parametric model for this data might say that each <span class="math inline">\(X_i\)</span> is distributed <span class="math inline">\(Poisson(\lambda)\)</span> <span class="math display">\[X_i\sim Poisson(\lambda)\]</span> Notice that we’ve said how each <span class="math inline">\(X_i\)</span> is distributed, but we haven’t thought about how they are related to each other, specifically whether they are independent from each other or share a dependency structure. <em>Deciding on a dependency structure is a key component of any modeling of data.</em></p>
 <p>The simplest option would be to say they are all independent of each other. When we also assume they are all from the exact same distribution, we will say that the data are “independent and identically distributed” often called <span class="math inline">\(i.i.d\)</span>. This can be written many ways e.g.&nbsp;<span class="math display">\[X_i\stackrel{i.i.d.}{\sim} Poisson(\lambda)\]</span> or <span class="math display">\[X_1,\ldots,X_n\:\text{are}\: i.i.d.\: Poisson(\lambda)\]</span> Independence is an easy modeling choice, and we will frequently make these kind of modeling assumptions in what follows. But these are <em>assumptions</em> and it’s not obvious that they are true!</p>
+<p>The best way to assess your assumptions is to think deeply about where the data is coming from.</p>
 <div class="QUESTION">
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
 </div>
 <p>Think through the website visitors example and the Poisson model we’ve described above. Do you see any problems with these assumptions?</p>
 </div>
-<p>The best way to assess your assumptions is to think deeply about where the data is coming from.</p>
 </section>
 <section id="alternatives-to-parametric-models" class="level3">
 <h3 class="anchored" data-anchor-id="alternatives-to-parametric-models">Alternatives to Parametric Models</h3>

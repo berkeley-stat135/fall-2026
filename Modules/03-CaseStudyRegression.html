@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Case Study: Simple Regression</title>
+<title>Case Study: Regression</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -134,7 +134,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/03-CaseStudyRegression.html">Case Study: Simple Regression</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/03-CaseStudyRegression.html">Case Study: Regression</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -220,7 +220,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Modules/03-CaseStudyRegression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Case Study: Simple Regression</span></a>
+ <span class="menu-text">Case Study: Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -274,9 +274,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/03-CaseStudyRegression.html">Case Study: Simple Regression</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/03-CaseStudyRegression.html">Case Study: Regression</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Case Study: Simple Regression</h1>
+<h1 class="title">Case Study: Regression</h1>
 </div>
 
 
@@ -319,9 +319,10 @@ window.Quarto = {
 <p>We show a scatterplot of two of the variables, the average SAT score and the full-time student retention rate:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-CaseStudyRegression_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Plot of university scorecard data, with SAT score on the x-axis and retention rate on the y-axis</figcaption>
 </figure>
 </div>
 </div>
@@ -389,9 +390,10 @@ window.Quarto = {
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-CaseStudyRegression_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Scatter plot of scorecard data, with function describing the conditional expection of Y|X plotted</figcaption>
 </figure>
 </div>
 </div>
@@ -403,9 +405,10 @@ window.Quarto = {
 <p>Recall from probability, when we condition, then we get a new random variable, <span class="math inline">\(Y|X\)</span>. So far we have only given a specification of the mean of <span class="math inline">\(Y\)</span> as a function of <span class="math inline">\(X\)</span>, but <span class="math inline">\(Y|X\)</span> has an entire distribution for every realization of <span class="math inline">\(X\)</span>!</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-CaseStudyRegression_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Scatter plot of scorecard data, adding the conditional distribution of Y|X at a couple of particular points of x</figcaption>
 </figure>
 </div>
 </div>
@@ -422,9 +425,10 @@ window.Quarto = {
 <p>Then our function <span class="math inline">\(f\)</span> takes as input only two possible values and so there are only two different expected values to consider.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-CaseStudyRegression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Plot of retention rate as a function of binary variable (Public vs.&nbsp;Private), represented as boxplots.</figcaption>
 </figure>
 </div>
 </div>
@@ -441,9 +445,10 @@ window.Quarto = {
 <p>What if instead our <span class="math inline">\(Y\)</span> is categorical? Consider data collected on emails, where <span class="math inline">\(Y\)</span> is whether the email is spam or not. We can ask what relationship there is between an email being spam and other characteristics of the email, like the presence of capital letters or the number of dollar signs.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-CaseStudyRegression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Plot of spam data, with binary variable on x-axis, indicating spam or not, and x-axis giving longest string of capital letters. Plot on left further jitter the points and superimposes a boxplot so can see the variation between spam and not spam.</figcaption>
 </figure>
 </div>
 </div>
@@ -465,9 +470,10 @@ Note
 <p>We can visualize what we are estimating here by taking the proportion of 1’s for small windows of values of our <span class="math inline">\(X\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-CaseStudyRegression_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Plot of binary spam data, with average/proportion for bins of different values of x</figcaption>
 </figure>
 </div>
 </div>
@@ -508,9 +514,10 @@ Note
 <p>A linear form for <span class="math inline">\(f(X)\)</span> is an <em>assumption</em> – and it won’t always be a good one. Consider if instead our <span class="math inline">\(Y\)</span> variable was the school’s out of state tuition,</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-CaseStudyRegression_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Plot of tuition (y-axis) against average SAT score (x-axis)”</figcaption>
 </figure>
 </div>
 </div>
@@ -534,9 +541,10 @@ Note
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-CaseStudyRegression_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Plot of tuition against SAT score, with normal density model per x illustrated, each with the same variance</figcaption>
 </figure>
 </div>
 </div>
@@ -547,9 +555,10 @@ Note
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="03-CaseStudyRegression_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Plot of tuition against SAT score, with normal density model per x illustrated, with increasing variance for larger SAT scores</figcaption>
 </figure>
 </div>
 </div>
