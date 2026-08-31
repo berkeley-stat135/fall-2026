@@ -256,7 +256,10 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#random-samples" id="toc-random-samples" class="nav-link" data-scroll-target="#random-samples">Random Samples</a></li>
   </ul></li>
-  <li><a href="#general-modeling-perspective" id="toc-general-modeling-perspective" class="nav-link" data-scroll-target="#general-modeling-perspective">General Modeling Perspective</a></li>
+  <li><a href="#general-modeling-perspective" id="toc-general-modeling-perspective" class="nav-link" data-scroll-target="#general-modeling-perspective">General Modeling Perspective</a>
+  <ul class="collapse">
+  <li><a href="#known-randomness-is-a-subcase" id="toc-known-randomness-is-a-subcase" class="nav-link" data-scroll-target="#known-randomness-is-a-subcase">Known randomness is a subcase</a></li>
+  </ul></li>
   <li><a href="#some-common-estimators" id="toc-some-common-estimators" class="nav-link" data-scroll-target="#some-common-estimators">Some common estimators</a>
   <ul class="collapse">
   <li><a href="#estimate-of-the-mean-of-the-population" id="toc-estimate-of-the-mean-of-the-population" class="nav-link" data-scroll-target="#estimate-of-the-mean-of-the-population">Estimate of the Mean of the Population</a></li>
@@ -268,9 +271,9 @@ window.Quarto = {
   <li><a href="#general-modeling" id="toc-general-modeling" class="nav-link" data-scroll-target="#general-modeling">General modeling</a>
   <ul class="collapse">
   <li><a href="#parametric-models" id="toc-parametric-models" class="nav-link" data-scroll-target="#parametric-models">Parametric Models</a></li>
+  <li><a href="#random-samples-1" id="toc-random-samples-1" class="nav-link" data-scroll-target="#random-samples-1">Random Samples</a></li>
   <li><a href="#alternatives-to-parametric-models" id="toc-alternatives-to-parametric-models" class="nav-link" data-scroll-target="#alternatives-to-parametric-models">Alternatives to Parametric Models</a></li>
   <li><a href="#why-bother-with-parametric-models" id="toc-why-bother-with-parametric-models" class="nav-link" data-scroll-target="#why-bother-with-parametric-models">Why bother with parametric models?</a></li>
-  <li><a href="#known-probability-structure-random-samples" id="toc-known-probability-structure-random-samples" class="nav-link" data-scroll-target="#known-probability-structure-random-samples">Known Probability Structure – Random Samples</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -418,7 +421,6 @@ Note
 </div>
 <p>Consider our spring example from the first class. There is no obvious sampling mechanism described. But what kinds of problems in the data collection might you have that could lead to problems in making conclusions about the process that generated the data?</p>
 </div>
-<p>The</p>
 <div class="QUESTION">
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
@@ -430,10 +432,16 @@ Note
 <li>What kind of parameter(s) would you be estimating in these examples?</li>
 </ol>
 </div>
+<section id="known-randomness-is-a-subcase" class="level3">
+<h3 class="anchored" data-anchor-id="known-randomness-is-a-subcase">Known randomness is a subcase</h3>
+<p>Note that when we have a known random process, then this is simply a <em>subcase</em> of the general setting.</p>
+<p>For example, if we have units selected by random sampling, then <span class="math inline">\(\mathcal{F}\)</span> is the known random sampling mechanism that determines the random sample we see. The unknown aspect of <span class="math inline">\(\mathcal{F}\)</span> is the unknown values of the entire population – we don’t see that.</p>
+<p>Similarly, if we have a given set of units randomly assigned to different treatments, then <span class="math inline">\(\mathcal{F}\)</span> is the known random assignment mechanism, while the unknown aspect is how the units responds to the treatments.</p>
+</section>
 </section>
 <section id="some-common-estimators" class="level2">
 <h2 class="anchored" data-anchor-id="some-common-estimators">Some common estimators</h2>
-<p>There are common simple estimators that come up all the time. They form part of what fundamental <em>descriptive</em> statistics of data, in that they estimate the center and spread of data and are useful even separate from trying to estimate a population parameter. They will reappear throughout the course – we will see that there are multiple ways that they can be justified as “reasonable” estimators.</p>
+<p>There are common simple estimators that come up all the time. They form part of what are called <em>descriptive</em> statistics of data, in that they estimate the center and spread of data and are useful even separate from trying to estimate a particular population parameter. They will reappear throughout the course – we will see that there are multiple ways that they can be justified as “reasonable” estimators.</p>
 <section id="estimate-of-the-mean-of-the-population" class="level3">
 <h3 class="anchored" data-anchor-id="estimate-of-the-mean-of-the-population">Estimate of the Mean of the Population</h3>
 <p>Suppose we have continuous data <span class="math inline">\(X_1, \ldots, X_n\)</span> from a population distribution <span class="math inline">\(\mathcal{F}\)</span>. We <em>assume</em> that a draw of an observation <span class="math inline">\(X\)</span> from <span class="math inline">\(\mathcal{F}\)</span> will always have the same expected value, <span class="math inline">\(\mu\)</span>, <span class="math display">\[E(X)=\mu\]</span> We can call <span class="math inline">\(\mu\)</span> the population mean, and then we want to estimate it from our data, <span class="math inline">\(X_1\ldots,X_n\)</span>.</p>
@@ -479,18 +487,21 @@ Note
 <li>Estimate of population mean: <span class="math inline">\(\hat{\mu}=\hat{\mu}(X_1,\ldots,X_n)=\bar{X}\)</span></li>
 </ul>
 <p>But these are two quite different quantities! <span class="math inline">\(\mu\)</span> is an unknown constant, while <span class="math inline">\(\hat{\mu}=f(X_1,\ldots,X_n)\)</span> is a function of our <span class="math inline">\(n\)</span> data points and thus a random variable!</p>
-<p>You will see there are deviations to this rule, particularly in really common settings, like using <span class="math inline">\(s^2\)</span> for the estimate of variance. And sometimes we just say <span class="math inline">\(\bar{X}\)</span> and not <span class="math inline">\(\hat{\mu}\)</span>.</p>
+<p>You will see there are deviations to this rule, particularly in really common settings, like using <span class="math inline">\(S^2\)</span> for the estimate of variance. And sometimes we just say <span class="math inline">\(\bar{X}\)</span> and not <span class="math inline">\(\hat{\mu}\)</span>.</p>
 </section>
 <section id="what-to-estimate" class="level3">
 <h3 class="anchored" data-anchor-id="what-to-estimate">What to estimate</h3>
 <p>Notice that in my general modeling perspective, to even describe what I want to estimate, I am already making assumptions about <span class="math inline">\(\mathcal{F}\)</span>.</p>
-<p>For example, I said I would use the sample average to estimate the population mean. But if my data generation process is a random number collected over time, like the temperature, then the expected value of that number changes over time. So it may make no sense to talk about “the” mean of my population. We can talk reasonably about the average temperature in June; it’s less clear that the average temperature over a six month period is a relevant number.</p>
-<p>So what it makes sense to estimate depends on what data I have.</p>
+<p>For example, I said I would use the sample average to estimate the population mean. But if my data generation process is a random number collected over time, like the temperature, then the expected value of that number changes over time. So it may make no sense to talk about “the” mean of my population. We can talk reasonably about the average temperature in June; it’s less clear that the average temperature over a six month period is a relevant number. So what data I have will dictate what it makes sense to estimate.</p>
+<p>This is why in introducing common estimators above, I <em>made assumptions</em> which made each task reasonable. But these assumptions cannot be validated without going back to the specifics of your data.</p>
+<div class="QUESTIONS">
+<p>For each of the above “standard” estimators, think of example situations where <em>the parameter being estimated</em> is inappropriate (this is <em>not</em> a question about whether the estimator I gave above is a good choice!)</p>
+</div>
 </section>
 </section>
 <section id="general-modeling" class="level2">
 <h2 class="anchored" data-anchor-id="general-modeling">General modeling</h2>
-<p>We said previously that when we don’t have the kind of precise information we have from a random sample, we will define our notion of population to be the unknown probability distribution <span class="math inline">\(\mathcal{F}\)</span> that created my data.</p>
+<p>We said previously that if we don’t have the kind of precise information we have from a random sample, we will define our notion of population to be the unknown probability distribution <span class="math inline">\(\mathcal{F}\)</span> that created my data.</p>
 <p>If we leave it at that, we’ve basically gone no farther than saying the <span class="math inline">\(X_i\)</span> are random. <span class="math inline">\(\mathcal{F}\)</span> could be any distribution, there could be any kind of relationship between the <span class="math inline">\(X_i\)</span>, etc. It gives us no idea of what a future data point might look like or in what way the data might resemble each other. Ultimately, we cannot draw any general conclusions without <strong>additional assumptions</strong> on the data that, at a minimum, allow us to assume this data has some relationship to each and share some features in common that we are interested in exploring. Ultimately assumptions narrow down what is unknown about a distribution, leaving us with less to have to try to determine directly from the data. We often call this <strong>modeling</strong> my data generation process.</p>
 <p>Here are examples of some basic assumptions we might add; this can give you a sense of how little we’ve will have otherwise assumed so far:</p>
 <ul>
@@ -520,7 +531,7 @@ Note
 <li><span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> for the shared moments</li>
 <li><span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> for the shared relationship</li>
 </ul>
-<p>These are examples of possible <strong>parameters</strong> of the distribution <span class="math inline">\(\mathcal{F}\)</span> we might want to estimate. This is often part of modeling your data – introducting or defining the parameters of interest.</p>
+<p>These are examples of possible <strong>parameters</strong> of the distribution <span class="math inline">\(\mathcal{F}\)</span> we might want to estimate. This is often part of modeling your data – introducing or defining the parameters of interest.</p>
 </div>
 </div>
 <section id="parametric-models" class="level3">
@@ -535,11 +546,14 @@ Note
 </ul>
 <p>Notice these are are distributions that have parameters that define them. Hence, we call them <strong>parametric models</strong> for the data. Each one of these can more properly be called a <strong>parametric family</strong>, meaning that they are a class or set of distributions that share the same form.</p>
 <p>Importantly, I haven’t assumed I know the parameters – if I already knew the parameters, I wouldn’t need to collect data. Instead, what we mean by assuming it is normally distributed is that we assume <span class="math inline">\(\mathcal{F}\)</span> is in the parametric family but with the specific values of the parameters unknown. So while we have narrowed down what is unknown to a small set of parameters to estimate, there’s still something left to figure out from our data!</p>
+<p><em>Parametric modeling</em> of our data is when we <em>assume</em> that our data comes from a specific parametric family.</p>
 <div class="PARAGRAPH">
 <p>Example</p>
 </div>
-<p>We can return to our example of visitors to a website. We have records of the number of visits to the website in 10min intervals – this is our data <span class="math inline">\(X_1,\ldots,X_n\)</span> (which will be counts). A parametric model for this data might say that each <span class="math inline">\(X_i\)</span> is distributed <span class="math inline">\(Poisson(\lambda)\)</span> <span class="math display">\[X_i\sim Poisson(\lambda)\]</span> Notice that we’ve said how each <span class="math inline">\(X_i\)</span> is distributed, but we haven’t thought about how they are related to each other, specifically whether they are independent from each other or share a dependency structure. <em>Deciding on a dependency structure is a key component of any modeling of data.</em></p>
-<p>The simplest option would be to say they are all independent of each other. When we also assume they are all from the exact same distribution, we will say that the data are “independent and identically distributed” often called <span class="math inline">\(i.i.d\)</span>. This can be written many ways e.g.&nbsp;<span class="math display">\[X_i\stackrel{i.i.d.}{\sim} Poisson(\lambda)\]</span> or <span class="math display">\[X_1,\ldots,X_n\:\text{are}\: i.i.d.\: Poisson(\lambda)\]</span> Independence is an easy modeling choice, and we will frequently make these kind of modeling assumptions in what follows. But these are <em>assumptions</em> and it’s not obvious that they are true!</p>
+<p>We can return to our example of visitors to a website. We have records of the number of visits to the website in 10min intervals – this is our data <span class="math inline">\(X_1,\ldots,X_n\)</span> (which will be counts). A parametric model for this data might say that each <span class="math inline">\(X_i\)</span> is distributed <span class="math inline">\(Poisson(\lambda)\)</span>, <span class="math display">\[X_i\sim Poisson(\lambda).\]</span> In other words, we have chosen to model our data as being in the Poisson parametric family with unknown parameter <span class="math inline">\(\lambda\)</span>.</p>
+<p>Notice that we’ve said how each <span class="math inline">\(X_i\)</span> is distributed, but we haven’t thought about how they are related to each other, specifically whether they are independent from each other or share a dependency structure. <em>Deciding on a dependency structure is a key component of any modeling of data.</em></p>
+<p>The simplest option would be to say they are all independent of each other, which does not make it the right decision. Independence is an easy modeling choice, and we will frequently make these kind of modeling assumptions in what follows. But these are <em>assumptions</em> and it’s not obvious that they are true!</p>
+<p>When we further assume they are all from the exact same distribution, we will say that the data are <em>independent and identically distributed</em> often called <span class="math inline">\(i.i.d\)</span>. This can be written many ways e.g.&nbsp;<span class="math display">\[X_i\stackrel{i.i.d.}{\sim} Poisson(\lambda)\]</span> or <span class="math display">\[X_1,\ldots,X_n\:\text{are}\: i.i.d.\: Poisson(\lambda)\]</span></p>
 <p>The best way to assess your assumptions is to think deeply about where the data is coming from.</p>
 <div class="QUESTION">
 <div class="block-title">
@@ -547,6 +561,11 @@ Note
 </div>
 <p>Think through the website visitors example and the Poisson model we’ve described above. Do you see any problems with these assumptions?</p>
 </div>
+</section>
+<section id="random-samples-1" class="level3">
+<h3 class="anchored" data-anchor-id="random-samples-1">Random Samples</h3>
+<p>Notice that if we have a random sample, we actually know a lot about the probability structure of our data, so we don’t have to make these assumptions (or not as many of them).</p>
+<p>For example, because we know how we sampled our data from the larger population, we will <em>know</em> the dependency structure between our <span class="math inline">\(X_i\)</span>. In particular, if we have a simple random sample (i.e.&nbsp;sampled <em>without replacement</em> from our population), then we can calculate the covariance of two elements of our sample, <span class="math inline">\(X_i\)</span>, <span class="math inline">\(X_j\)</span>. And in fact data from a SRS are <em>not</em> independent! This is because we sampled from a finite population and since you don’t sample with replacement, knowing <span class="math inline">\(X_i=x\)</span> tells you something about what choices are left for what <span class="math inline">\(X_j\)</span> can be.</p>
 </section>
 <section id="alternatives-to-parametric-models" class="level3">
 <h3 class="anchored" data-anchor-id="alternatives-to-parametric-models">Alternatives to Parametric Models</h3>
@@ -561,15 +580,10 @@ Note
 <section id="why-bother-with-parametric-models" class="level3">
 <h3 class="anchored" data-anchor-id="why-bother-with-parametric-models">Why bother with parametric models?</h3>
 <p>If alternative to parametric models exist, why are we going to bother with parametric models? That is a question that can prompt large debate!</p>
-<p>Generally, writing down a model (whether fully assuming a parametric distribution or not) can allow an investigator to be precise mathematically about what they are doing. Parametric models can be good starting point for thinking about data problems, particularly complex problems. We will see that there are ``out-of-the-box” strategies for inference in the context of parametric models, and thus they can be helpful for thinking how to tackled a new problem, or adjust existing techniques for a new wrinkle. Parametric models also immediately provide a strategy for simulating data, which can be helpful to get a handle on how methods work.</p>
+<p>Generally, writing down a model (whether fully assuming a parametric distribution or not) can allow an investigator to be precise mathematically about what they are doing. Parametric models can be good starting point for thinking about data problems, particularly complex problems. We will see that there are “out-of-the-box” strategies for creating new estimators and other inference procedures in the context of parametric models, and thus they can be helpful for thinking how to tackled a new problem, or adjust existing techniques for a new wrinkle. Parametric models also immediately provide a strategy for simulating data, which can be helpful to get an understanding on how methods work.</p>
 <p>We will see that non-parametric strategies also have assumptions and situations in which they perform better, and once you satisfy them, it is not uncommon to discover the non-parametric methods are close to a standard parametric model. Putting that together with the ease of having out-of-the-box solutions that don’t require extensive compute time for common scenarios, you will find parametric models are still widely used (and reported in scientific publications, for example).</p>
 <p>Finally, we would note that dependency in your data can sometimes basically <em>require</em> parametric models to handle the dependency correctly and get valid results. As we said, independence is a strong assumption.</p>
 <p>Thus parametric models still have a large place in statistical thinking and methodology development, even if in practical data analysis, practitioners are now much more likely to use non-parametric methods in many situations.</p>
-</section>
-<section id="known-probability-structure-random-samples" class="level3">
-<h3 class="anchored" data-anchor-id="known-probability-structure-random-samples">Known Probability Structure – Random Samples</h3>
-<p>Notice that if we have a random sample, we actually know a lot about the probability structure of our data, so we don’t have to make these assumptions (or not as many of them).</p>
-<p>For example, we will <em>know</em> the dependency structure between our <span class="math inline">\(X_i\)</span>. In particular, if we have a simple random sample (i.e.&nbsp;sampled <em>without replacement</em> from our population), then we can calculate the covariance of two elements of our sample, <span class="math inline">\(X_i\)</span>, <span class="math inline">\(X_j\)</span>. And in fact they are <em>not</em> independent! This is because we sampled from a finite population and since you don’t sample with replacement, knowing <span class="math inline">\(X_i=x\)</span> tells you something about what <span class="math inline">\(X_j\)</span> can be (for example, if the population you drew your samples from had all unique values, then <span class="math inline">\(X_j\)</span> can’t be <span class="math inline">\(x\)</span> if you know <span class="math inline">\(X_i\)</span> was).</p>
 
 
 
