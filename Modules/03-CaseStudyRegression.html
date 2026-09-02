@@ -265,7 +265,8 @@ window.Quarto = {
   </ul></li>
   <li><a href="#adding-a-parametric-model-assumption" id="toc-adding-a-parametric-model-assumption" class="nav-link" data-scroll-target="#adding-a-parametric-model-assumption">Adding a parametric model assumption</a>
   <ul class="collapse">
-  <li><a href="#alternative-description-in-terms-of-error" id="toc-alternative-description-in-terms-of-error" class="nav-link" data-scroll-target="#alternative-description-in-terms-of-error">Alternative description in terms of error</a></li>
+  <li><a href="#special-case-of-non-constant-variance-two-groups" id="toc-special-case-of-non-constant-variance-two-groups" class="nav-link" data-scroll-target="#special-case-of-non-constant-variance-two-groups">Special Case of non-constant variance: Two Groups</a></li>
+  <li><a href="#alternative-description-of-normal-model-in-terms-of-error" id="toc-alternative-description-of-normal-model-in-terms-of-error" class="nav-link" data-scroll-target="#alternative-description-of-normal-model-in-terms-of-error">Alternative description of normal model in terms of error</a></li>
   <li><a href="#categorical-y-logistic-regression" id="toc-categorical-y-logistic-regression" class="nav-link" data-scroll-target="#categorical-y-logistic-regression">Categorical <span class="math inline">\(Y\)</span>: Logistic Regression</a></li>
   </ul></li>
   </ul>
@@ -386,7 +387,7 @@ window.Quarto = {
 <p>What’s the problem? Well, just like we didn’t previously expect our observed data to be exactly equal to the population mean, we don’t expect our <span class="math inline">\(Y_i\)</span> to be exactly equal to <span class="math inline">\(f(X_i)\)</span> for any reasonable <span class="math inline">\(f\)</span>. So one way we can fix this problem is formulate our model in terms of the average value of <span class="math inline">\(Y_i\)</span> <span class="math display">\[E(Y_i)=f(X_i)\]</span> However, notice that we have now made the expected value of <span class="math inline">\(Y\)</span> equal to a random variable! That’s not an option. Instead:</p>
 <ol type="1">
 <li>We can consider the <span class="math inline">\(X\)</span> variable as a fixed value, i.e.&nbsp;not random. This makes a lot of sense for data where the investigator set the variable, like the spring example or the dosage variable. <span class="math display">\[E(Y_i)=f(x_i).\]</span> You will often see regression models described in this way.</li>
-<li>Alternatively, we recognize that <span class="math inline">\(X\)</span> is random, but we want to describe the relationship of <span class="math inline">\(Y\)</span> if when the corresponding value is <span class="math inline">\(X\)</span>. Conditional distributions allow for this, <span class="math display">\[E(Y_i |X_i)=f(X_i)\]</span> This is effectively equivalent to the first option, but it is a notation that more explicitly indicates that <span class="math inline">\(X\)</span> might be random, but we’re not worrying about it.</li>
+<li>Alternatively, we recognize that <span class="math inline">\(X\)</span> is random, but we want to describe the relationship of <span class="math inline">\(Y\)</span> if when the corresponding value is <span class="math inline">\(X\)</span>. Conditional distributions allow for this, <span class="math display">\[E(Y_i |X_i=x_i)=f(x_i)\]</span> This is effectively equivalent to the first option, but it is a notation that more explicitly indicates that <span class="math inline">\(X\)</span> might be random, but we’re not worrying about it.</li>
 </ol>
 <div class="cell">
 <div class="cell-output-display">
@@ -399,7 +400,7 @@ window.Quarto = {
 </div>
 </div>
 <p>This is the basic (simple) regression model – simple just refers to the fact that we only have one predictor variable <span class="math inline">\(X\)</span>, thought everything we’ve said so far can work for multiple <span class="math inline">\(X\)</span>.</p>
-<p>Notice that we are <em>assuming</em> that <span class="math inline">\(f\)</span> is the same for all observations – once I know an observation’s <span class="math inline">\(X\)</span> value, this is a model for the average of the <span class="math inline">\(Y\)</span> value. So we will frequently drop the <span class="math inline">\(i\)</span> to describe the relationship as one that is general for any <span class="math inline">\((X,Y)\)</span> from the population distribution, <span class="math display">\[E(Y |X)=f(X)\]</span></p>
+<p>Notice that we are <em>assuming</em> that <span class="math inline">\(f\)</span> is the same for all observations – once I know an observation’s realized <span class="math inline">\(X\)</span> value, this is a model for the average of the <span class="math inline">\(Y\)</span> value. So we will frequently drop the <span class="math inline">\(i\)</span> to describe the relationship as one that is general for any <span class="math inline">\((X,Y)\)</span> from the population distribution, <span class="math display">\[E(Y |X=x)=f(x)\]</span></p>
 <section id="distribution-of-yx" class="level3">
 <h3 class="anchored" data-anchor-id="distribution-of-yx">Distribution of <span class="math inline">\(Y|X\)</span></h3>
 <p>Recall from probability, when we condition, then we get a new random variable, <span class="math inline">\(Y|X\)</span>. So far we have only given a specification of the mean of <span class="math inline">\(Y\)</span> as a function of <span class="math inline">\(X\)</span>, but <span class="math inline">\(Y|X\)</span> has an entire distribution for every realization of <span class="math inline">\(X\)</span>!</p>
@@ -433,12 +434,12 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>So any possible function that does this can be re-written as: <span class="math display">\[E(Y |X)=\begin{cases}
-\alpha_1 &amp; X=1\\
-\alpha_0 &amp; X=0
+<p>So any possible function that does this can be re-written as: <span class="math display">\[E(Y |X=x)=\begin{cases}
+\alpha_1 &amp; x=1\\
+\alpha_0 &amp; x=0
 \end{cases}
 \]</span> where <span class="math inline">\(\alpha_1\)</span> and <span class="math inline">\(\alpha_0\)</span> are some constant. Notice that we can write this model simply with just two <strong>parameters</strong>.</p>
-<p>We could rewrite this more succinctly as <span class="math display">\[E(Y |X)= \alpha_0 I(X=0)+ \alpha_1 I(X=1)\]</span> where <span class="math inline">\(I(\cdot)\)</span> is the indicator function that is 1 if the quantity inside the parentheses is true and 0 otherwise.</p>
+<p>We could rewrite this more succinctly as <span class="math display">\[E(Y |X=x)= \alpha_0 I(x=0)+ \alpha_1 I(x=1)\]</span> where <span class="math inline">\(I(\cdot)\)</span> is the indicator function that is 1 if the quantity inside the parentheses is true and 0 otherwise.</p>
 </section>
 <section id="categorical-y" class="level3">
 <h3 class="anchored" data-anchor-id="categorical-y">Categorical <span class="math inline">\(Y\)</span></h3>
@@ -466,7 +467,7 @@ Note
 <p>Notice that scatter plots with categorical variables are not satisifying since the points all plot over each other. Boxplots are much better for demonstrating the data.</p>
 </div>
 </div>
-<p>Again, <span class="math inline">\(Y\)</span> is a binary variable <span class="math display">\[Y\in \{0,1\}\]</span> Then <span class="math display">\[E(Y_i |X)=P(Y_i=1 | X)\]</span> So our modeling of <span class="math inline">\(E(Y|X=x)=f(x)\)</span> now becomes a model for the probability of outcome <span class="math inline">\(1\)</span> given a certain value of the predictor <span class="math inline">\(X\)</span>.</p>
+<p>Again, <span class="math inline">\(Y\)</span> is a binary variable <span class="math display">\[Y\in \{0,1\}\]</span> Then <span class="math display">\[E(Y_i |X=x)=P(Y_i=1 | X=x)\]</span> So our modeling of <span class="math inline">\(E(Y|X=x)=f(x)\)</span> now becomes a model for the probability of outcome <span class="math inline">\(1\)</span> given a certain value of the predictor <span class="math inline">\(X\)</span>.</p>
 <p>We can visualize what we are estimating here by taking the proportion of 1’s for small windows of values of our <span class="math inline">\(X\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -486,11 +487,11 @@ Note
 <section id="linear-regression" class="level3">
 <h3 class="anchored" data-anchor-id="linear-regression">Linear Regression</h3>
 <p>If we let <span class="math inline">\(f\)</span> be anything, then it’s going to be very hard to estimate. So we can try to restrict <span class="math inline">\(f\)</span> to make it easier to estimate by writing it in terms of a small number of parameters, like we saw with categorical <span class="math inline">\(X\)</span>.</p>
-<p>The simplest such model is a <strong>linear model</strong>: <span class="math display">\[E(Y |X)= \beta_0 + \beta_1 X\]</span> Now we have a two-parameter model for <span class="math inline">\(E(Y|X)\)</span>. Usually these will be the parameters of the population we want to estimate as well!</p>
+<p>The simplest such model is a <strong>linear model</strong>: <span class="math display">\[E(Y |X=x)= \beta_0 + \beta_1 x\]</span> Now we have a two-parameter model for <span class="math inline">\(E(Y|X)\)</span>. Usually these will be the parameters of the population we want to estimate as well!</p>
 <section id="categorical-x-1" class="level4">
 <h4 class="anchored" data-anchor-id="categorical-x-1">Categorical <span class="math inline">\(X\)</span></h4>
-<p>Notice what happens if <span class="math inline">\(X\)</span> is binary, either 0,1: <span class="math display">\[E(Y |X)= \beta_0 + \beta_1 X=\begin{cases}\beta_0+\beta_1 &amp;X=1\\
-\beta_0 &amp;X=0
+<p>Notice what happens if <span class="math inline">\(X\)</span> is binary, either 0,1: <span class="math display">\[E(Y |X=x)= \beta_0 + \beta_1 X=\begin{cases}\beta_0+\beta_1 &amp;x=1\\
+\beta_0 &amp;x=0
 \end{cases} \]</span> This is the same as my above model, with <span class="math inline">\(\alpha_0=\beta_0\)</span> and <span class="math inline">\(\alpha_1=\beta_0+\beta_1\)</span>. So we see that we have two ways to write the same model (by same, I mean both ways of writing the model results in the set of values of <span class="math inline">\(E(Y_i |X)\)</span>).</p>
 <p>But the coefficients are different and have a different meaning. <span class="math inline">\(\alpha_0=\beta_0\)</span> is always the mean of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X=0\)</span>, but <span class="math inline">\(\alpha_1\)</span> is the mean of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X=1\)</span>, while <span class="math inline">\(\beta_1\)</span> is the <em>change</em> in the mean of <span class="math inline">\(Y\)</span> from going from <span class="math inline">\(X=0\)</span> to <span class="math inline">\(X=1\)</span>.</p>
 <p>This is frequently the case for models with categorical predictors, and neither is “right”. They give different parameters for describing the <span class="math inline">\(Y\)</span> response, but they are equivalent models and you can always go back and forth between the two sets of parameters to describe the relationship of <span class="math inline">\(X\)</span> to <span class="math inline">\(Y\)</span>.</p>
@@ -504,14 +505,14 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What if I didn’t encode <span class="math inline">\(X\)</span> as <span class="math inline">\(\{0,1\}\)</span> but something else like <span class="math inline">\(\{-1,1\}\)</span>? (This is a common encoding in machine learning…) It’s still the same idea, we would just write our <span class="math inline">\((\beta_0,\beta_1)\)</span> model with indicator functions, like we did with <span class="math inline">\((\alpha_0,\alpha_1)\)</span>, <span class="math display">\[E(Y|X)= \beta_0 + \beta_1 I(X=1)\]</span> Standard computing packages, however, will just re-encode the data to <span class="math inline">\(\{0,1\}\)</span></p>
+<p>What if I didn’t encode <span class="math inline">\(X\)</span> as <span class="math inline">\(\{0,1\}\)</span> but something else like <span class="math inline">\(\{-1,1\}\)</span>? (This is a common encoding in some settings in machine learning…) It’s still the same idea, we would just write our <span class="math inline">\((\beta_0,\beta_1)\)</span> model with indicator functions, like we did with <span class="math inline">\((\alpha_0,\alpha_1)\)</span>, <span class="math display">\[E(Y|X=x)= \beta_0 + \beta_1 I(x=1)\]</span> Standard computing packages, however, will just re-encode the data to <span class="math inline">\(\{0,1\}\)</span></p>
 </div>
 </div>
 </section>
 </section>
 <section id="non-linear-model" class="level3">
 <h3 class="anchored" data-anchor-id="non-linear-model">Non-linear model</h3>
-<p>A linear form for <span class="math inline">\(f(X)\)</span> is an <em>assumption</em> – and it won’t always be a good one. Consider if instead our <span class="math inline">\(Y\)</span> variable was the school’s out of state tuition,</p>
+<p>A linear form for <span class="math inline">\(f(x)\)</span> is an <em>assumption</em> – and it won’t always be a good one. Consider if instead our <span class="math inline">\(Y\)</span> variable was the school’s out of state tuition,</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -535,9 +536,9 @@ Note
 <li>Assume <span class="math inline">\(Y|X\)</span> follows a parametric model, usually normal if <span class="math inline">\(Y\)</span> is real-valued.</li>
 </ol>
 <p>The first is straightforward to understand and we have discussed the assumption frequently. The second deserves more explanation.</p>
-<p>Recall your conditional distribution theory: <span class="math inline">\(Y|X\)</span> is a random variable with a distribution that depends on the realization of <span class="math inline">\(X\)</span>. Now we are proposing that distribution be normal, which means it is defined by two parameters, a mean and variance. We’ve already said what the mean of that normal distribution should be, <span class="math inline">\(f(X)=\beta_0+\beta_1 X\)</span>. So it remains to say what the variance is.</p>
+<p>Recall your conditional distribution theory: <span class="math inline">\(Y|X\)</span> is a random variable with a distribution that depends on the realization of <span class="math inline">\(X\)</span>. Now we are proposing that distribution be normal, which means it is defined by two parameters, a mean and variance. We’ve already said what the mean of that normal distribution should be, <span class="math inline">\(f(x)=\beta_0+\beta_1 x\)</span>. So it remains to say what the variance is.</p>
 <ol type="1">
-<li>The simplest (and most common) option is to say all observations have the same variance, let’s call it <span class="math inline">\(\sigma^2\)</span>, <span class="math display">\[Y|X \sim N(\beta_0+\beta_1 X , \sigma^2)\]</span></li>
+<li>The simplest (and most common) option is to say all observations have the same variance, let’s call it <span class="math inline">\(\sigma^2\)</span>, <span class="math display">\[Y|X=x \sim N(\beta_0+\beta_1 x , \sigma^2)\]</span></li>
 </ol>
 <div class="cell">
 <div class="cell-output-display">
@@ -551,7 +552,7 @@ Note
 </div>
 <p>Like independence, this is an extremely common assumption that is quickly assumed, but is quite strong and we will see has a very important impact on our later conclusions.</p>
 <ol start="2" type="1">
-<li>We could let the variance vary with <span class="math inline">\(X\)</span>, <span class="math display">\[Y|X \sim N(\beta_0+\beta_1 X , \sigma^2(X))\]</span> We can see with our example here, that might make sense – the points look more variable for lower values of <span class="math inline">\(X\)</span> than higher values of <span class="math inline">\(X\)</span>:</li>
+<li>We could let the variance vary with <span class="math inline">\(X\)</span>, <span class="math display">\[Y|X=x \sim N(\beta_0+\beta_1 x , \sigma^2(x))\]</span> We can see with our example here, that might make sense – the points look more variable for lower values of <span class="math inline">\(x\)</span> than higher values of <span class="math inline">\(x\)</span>:</li>
 </ol>
 <div class="cell">
 <div class="cell-output-display">
@@ -563,17 +564,21 @@ Note
 </div>
 </div>
 </div>
-<p>While totally possible, in general you do not see this frequently because it adds another task of figuring out what <span class="math inline">\(\sigma^2(X)\)</span> should be and people just accept the assumption.</p>
-<p>The exception is in the special case when <span class="math inline">\(X\)</span> is categorical. In this case, letting the variance “vary with <span class="math inline">\(X\)</span>” simply means a different variance for each category of <span class="math inline">\(X\)</span>. So in the two-group setting this would be <span class="math display">\[Y |X \sim \begin{cases}
-N(\alpha_1,\sigma_1^2), &amp; X=1\\
-N(\alpha_0,\sigma_0^2), &amp; X=0
+<p>While totally possible, in general you do not see this frequently because it adds another task of figuring out what <span class="math inline">\(\sigma^2(x)\)</span> should be. Thus people frequently just accept the assumption of constant variance.</p>
+<section id="special-case-of-non-constant-variance-two-groups" class="level3">
+<h3 class="anchored" data-anchor-id="special-case-of-non-constant-variance-two-groups">Special Case of non-constant variance: Two Groups</h3>
+<p>An exception where you do see that it is common to not assume shared variance is in the special case when <span class="math inline">\(X\)</span> is categorical. In this case, letting the variance “vary with <span class="math inline">\(X\)</span>” simply means a different variance for each category of <span class="math inline">\(X\)</span>. So in the two-group setting this would be <span class="math display">\[Y |X=x \sim \begin{cases}
+N(\alpha_1,\sigma_1^2), &amp; x=1\\
+N(\alpha_0,\sigma_0^2), &amp; x=0
 \end{cases}
 \]</span></p>
-<p>This is probably one of the most common statistical models in all of statistics, and is called a two group analysis, meaning we have two groups</p>
-<section id="alternative-description-in-terms-of-error" class="level3">
-<h3 class="anchored" data-anchor-id="alternative-description-in-terms-of-error">Alternative description in terms of error</h3>
+<p>This is probably one of the most common statistical models in all of statistics, and is called a two group analysis, meaning we have two groups each of which has it’s own mean and variance.</p>
+<p>Even for categorical data, when there are more than two groups, you still frequently see an assumption that all the groups have the same variance (often called “ANOVA”).</p>
+</section>
+<section id="alternative-description-of-normal-model-in-terms-of-error" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-description-of-normal-model-in-terms-of-error">Alternative description of normal model in terms of error</h3>
 <p>Recall that if a random variable <span class="math inline">\(Z \sim N(0,\sigma^2)\)</span> then if we define <span class="math inline">\(Y=Z+\mu\)</span>, then $YN(,^2).</p>
-<p>We can use this in reverse to realize that our model of independent <span class="math inline">\(Y_i\)</span> each distributed as <span class="math display">\[Y_i|X_i \sim N(\beta_0+\beta_1 X_i , \sigma^2)\]</span> can be equivalently written, conditional on <span class="math inline">\(X_i=x_i\)</span> as <span class="math display">\[Y_i = \beta_0+\beta_1 x_i +\epsilon_i\]</span> where <span class="math display">\[\epsilon_i\stackrel{i.i.d}{\sim}N(0,\sigma^2).\]</span> This means that we can consider <span class="math inline">\(Y_i\)</span> to be a linear function of <span class="math inline">\(x_i\)</span>, plus a random error <span class="math inline">\(\epsilon_i\)</span>. <span class="math inline">\(\epsilon_i\)</span> is often equated to measurement error, particularly in physical experiments like our spring example.</p>
+<p>We can use this in reverse to realize that our model of independent <span class="math inline">\(Y_i\)</span> each distributed as <span class="math display">\[Y_i|X_i=x_i \sim N(\beta_0+\beta_1 x_i , \sigma^2)\]</span> can be equivalently written, conditional on <span class="math inline">\(X_i=x_i\)</span> as <span class="math display">\[Y_i = \beta_0+\beta_1 x_i +\epsilon_i\]</span> where <span class="math display">\[\epsilon_i\stackrel{i.i.d}{\sim}N(0,\sigma^2).\]</span> This means that we can consider <span class="math inline">\(Y_i\)</span> to be a linear function of <span class="math inline">\(x_i\)</span>, plus a random error <span class="math inline">\(\epsilon_i\)</span>. <span class="math inline">\(\epsilon_i\)</span> is often equated to measurement error, particularly in physical experiments like our spring example.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -590,8 +595,8 @@ Note
 </section>
 <section id="categorical-y-logistic-regression" class="level3">
 <h3 class="anchored" data-anchor-id="categorical-y-logistic-regression">Categorical <span class="math inline">\(Y\)</span>: Logistic Regression</h3>
-<p>The above can be extended to other distributions of <span class="math inline">\(Y\)</span>. In particular, if <span class="math inline">\(Y\)</span> is binary, we could say that <span class="math inline">\(Y|X\)</span> is Bernoulli, with probability <span class="math inline">\(P(Y=1|X)\)</span> given by a function <span class="math inline">\(f(X)\)</span>.</p>
-<p>Of course, we need the range of <span class="math inline">\(f(X)\)</span> to be between <span class="math inline">\((0,1)\)</span>! So a linear function of <span class="math inline">\(X\)</span> will not be a good choice since the range of a line is outside of <span class="math inline">\((0,1)\)</span>. We will introduce a common alternative of how to do this as the course progresses, which leads to what is often called <em>logistic regression</em>.</p>
+<p>The above can be extended to other distributions of <span class="math inline">\(Y\)</span>. In particular, if <span class="math inline">\(Y\)</span> is binary, we could say that <span class="math inline">\(Y|X\)</span> is Bernoulli, with probability <span class="math inline">\(P(Y=1|X=x)\)</span> given by a function <span class="math inline">\(f(x)\)</span>.</p>
+<p>Of course, we need the range of <span class="math inline">\(f(x)\)</span> to be between <span class="math inline">\((0,1)\)</span>! So a linear function of <span class="math inline">\(x\)</span> will not be a good choice since the range of a line is outside of <span class="math inline">\((0,1)\)</span>. We will in what follows introduce a common alternative of how to do this as the course progresses, which leads to what is often called <em>logistic regression</em>.</p>
 
 
 

@@ -291,6 +291,7 @@ window.Quarto = {
 <ul>
 <li>Chapter 4.2, 7.1.1-7.1.2, 7.2.1-7.2.3 in <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span></li>
 <li>Chapter 8.5 in <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span></li>
+<li>For a non-technical introduction to logistic regression modeling, see <a href="https://epurdom.github.io/Stat131A/book/logistic-regression.html">Chapter 7</a> of my online book written for STAT 131A.</li>
 </ul>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -582,11 +583,11 @@ L(\theta)&amp;=-\sum_{i=1}^n \left\{\frac{(x_i-\mu)^2}{2\sigma^2} +\log(2\pi)+1/
 <section id="simple-regression" class="level3">
 <h3 class="anchored" data-anchor-id="simple-regression">Simple Regression</h3>
 <p>These are pretty simple examples, and we are basically doing nothing more than estimating a mean (or the reciprocal of the mean). Not surprisingly, the MLE tells us in each case to use the mean of the data!</p>
-<p>But let’s consider our simple linear regression setting, with our all parametric modeling assumptions: <span class="math display">\[Y_1,\ldots,Y_n\text{ independent; each } Y_i|X_i\sim N(\beta_0+\beta_1 X_i,\sigma^2)\]</span> We’ve added another parameter here so we have that <span class="math display">\[\theta=(\beta_0,\beta_1,\sigma^2)^T.\]</span></p>
+<p>But let’s consider our simple linear regression setting, with our all parametric modeling assumptions: <span class="math display">\[Y_1,\ldots,Y_n\text{ independent;}\\\text{each } Y_i|X_i=x_i\sim N(\beta_0+\beta_1 x_i,\sigma^2)\]</span> We’ve added another parameter here so we have that <span class="math display">\[\theta=(\beta_0,\beta_1,\sigma^2)^T.\]</span></p>
 <ol type="1">
 <li><p><strong>Choose a parametric model</strong>. Done already! We have a model for the data <span class="math inline">\(Y_1,\ldots,Y_n\)</span>. Since we’re conditioning on the <span class="math inline">\(X\)</span>, I get to treat the <span class="math inline">\(X_i\)</span> as fixed values. Notice we’ve chosen the model where not only are the <span class="math inline">\(Y_i\)</span> all independent, but also all have the same variance!</p></li>
 <li><p><strong>Write down the likelihood</strong><br>
-We’ve actually done most of the work already – we just need to replace <span class="math inline">\(\mu\)</span> with <span class="math inline">\(\beta_0+\beta_1 X_i\)</span>, <span class="math display">\[
+We’ve actually done most of the work already – we just need to replace <span class="math inline">\(\mu\)</span> with <span class="math inline">\(\beta_0+\beta_1 x_i\)</span>, <span class="math display">\[
 \begin{aligned}
 L(\theta)&amp;=-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2 -\frac{n}{2}\log\sigma^2 - n\log(2\pi)
 \end{aligned}
@@ -601,8 +602,8 @@ L(\theta)&amp;=-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2 -\frac
 \sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)&amp;=0 \\
 \sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)x_i&amp;=0\\
 \end{aligned}
-\]</span> Sorting this out gives us estimators, <span class="math display">\[\hat{\beta}_0=\bar{Y} - \hat\beta_1\bar{X}, \hat{\beta}_1=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2}
-\]</span> And then plugging those into our last equation involving <span class="math inline">\(\sigma^2\)</span> and solving for <span class="math inline">\(\sigma^2\)</span> gives us <span class="math display">\[\hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n(y_i-\hat{\beta}_0-\hat{\beta}_1X_i)^2\]</span></p></li>
+\]</span> Sorting this out gives us estimators, <span class="math display">\[\hat{\beta}_0=\bar{Y} - \hat\beta_1\bar{X}\\ \hat{\beta}_1=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2}
+\]</span> And then plugging those into our last equation involving <span class="math inline">\(\sigma^2\)</span> and solving for <span class="math inline">\(\sigma^2\)</span> gives us our estimator <span class="math display">\[\hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n(Y_i-\hat{\beta}_0-\hat{\beta}_1X_i)^2\]</span></p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -657,15 +658,18 @@ Check your work
 &amp;=\sum_i (x_i^2-\bar{x}^2)
 \end{aligned}
 \]</span></p>
-You can do the same trick with the numerator.
+<p>You can do the same kind of tricks with the numerator. In fact we can note that <span class="math display">\[\begin{aligned}\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})&amp;=\sum_{i=1}^n(X_i-\bar{X})Y_i-\bar{Y}\sum_{i=1}^n(X_i-\bar{X}))\\
+&amp;=\sum_{i=1}^n(X_i-\bar{X})Y_i
+\end{aligned}\]</span> In other words, <span class="math display">\[\bar{Y}\sum_{i=1}^n(X_i-\bar{X})=0\]</span> which gives us that the numerator is</p>
+<span class="math display">\[\sum_{i=1}^n(X_i-\bar{X})Y_i=\sum_{i=1}^nX_iY_i-n\bar{X}\bar{Y}\]</span>
 </details>
 <div class="QUESTION">
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
 </div>
-<p>Consider our case of two groups that we briefly discussed as a special case of regression, <span class="math display">\[Y |X \sim \begin{cases}
-N(\alpha_1,\sigma_1^2), &amp; X=1\\
-N(\alpha_0,\sigma_0^2), &amp; X=0
+<p>Consider our case of two groups that we briefly discussed as a special case of regression, <span class="math display">\[Y |X=x \sim \begin{cases}
+N(\alpha_1,\sigma_1^2), &amp; x=1\\
+N(\alpha_0,\sigma_0^2), &amp; x=0
 \end{cases}
 \]</span> Show that the maximum likelihood estimators of these parameters is:</p>
 <p>You can simplify your work by setting your notation by assuming <span class="math inline">\(Y_1,\ldots,Y_{n_0}\)</span> are the <span class="math inline">\(Y\)</span> values for which <span class="math inline">\(X=0\)</span> and <span class="math inline">\(Y_{n_0+1},\ldots,Y_{n_0+n_1}\)</span> are the <span class="math inline">\(Y\)</span> values for which <span class="math inline">\(X=1\)</span>, so there are <span class="math inline">\(n_0\)</span> values with <span class="math inline">\(X=0\)</span> and <span class="math inline">\(n_1\)</span> values with <span class="math inline">\(X=1\)</span>.</p>
@@ -678,7 +682,7 @@ N(\alpha_0,\sigma_0^2), &amp; X=0
 <h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
 <p>In the cases above, all of the solutions can be found by hand via calculus. But consider our example of regression when we instead had <span class="math inline">\(Y_i\)</span> being binary, taking 0 or 1, so that <span class="math display">\[E(Y_i |X)=P(Y_i=1 | X)\]</span> Let’s see how the MLE works out here</p>
 <ol type="1">
-<li><strong>Choosing a parametric model</strong> We said we could assume <span class="math inline">\(Y|X\)</span> is Bernoulli, with probability <span class="math inline">\(\pi\)</span> given by <span class="math inline">\(\pi=f(X)\)</span>. But we need to assign a model for <span class="math inline">\(f\)</span>. Unlike linear regression, since we need the range of <span class="math inline">\(f(X)\)</span> to be between <span class="math inline">\((0,1)\)</span>, we <strong>don’t</strong> want to just set <span class="math display">\[P(Y_i=1 | X_i)= \beta_0+\beta_1X_i\]</span> But we could pick another equation. A common choice is the <em>logistic function</em> sometimes called the sigmoid function: <span class="math display">\[p(x)=\frac{1}{1+e^{-(\beta_0+\beta_1 x)}}=\frac{e^{\beta_0+\beta_1 x}}{1+e^{\beta_0+\beta_1 x}}\]</span></li>
+<li><strong>Choosing a parametric model</strong> We said we could assume <span class="math inline">\(Y|X\)</span> is Bernoulli, with probability <span class="math inline">\(\pi\)</span> given by <span class="math inline">\(\pi=f(x)\)</span>. But we need to assign a model for <span class="math inline">\(f\)</span>. Unlike linear regression, since we need the range of <span class="math inline">\(f(X)\)</span> to be between <span class="math inline">\((0,1)\)</span>, we <strong>don’t</strong> want to just set <span class="math display">\[P(Y_i=1 | X_i=x_i)= \beta_0+\beta_1x_i\]</span> But we could pick another equation. A common choice is the <em>logistic function</em> sometimes called the sigmoid function: <span class="math display">\[p(x)=\frac{1}{1+e^{-(\beta_0+\beta_1 x)}}=\frac{e^{\beta_0+\beta_1 x}}{1+e^{\beta_0+\beta_1 x}}\]</span></li>
 </ol>
 <p>This is a mouthful, for sure, but if you look at this figure, you can see that this makes sense for making sure our probability is between 0 and 1</p>
 <div class="cell">
@@ -764,7 +768,7 @@ L(\theta)&amp;=\sum_{i=1}^n\log f(y_i)\\
 <section id="estimating-a-function-of-parameter-with-mle" class="level2">
 <h2 class="anchored" data-anchor-id="estimating-a-function-of-parameter-with-mle">Estimating a function of Parameter with MLE</h2>
 <p>So far all of our examples where we used the MLE, what we wanted to estimate was the actual parameter of the parametric model.</p>
-<p>But consider the exponential distribution, which was an exercise above. We found a MLE for the rate parameter <span class="math inline">\(\lambda\)</span>, <span class="math display">\[\hat\lambda=\frac{1}{\bar{X}}.\]</span> But what if that isn’t what we are interested in, and we want the MLE for the <em>mean</em> of the distribution, let’s call it <span class="math inline">\(\mu\)</span>? That is given by <span class="math display">\[\mu=E(X)=\frac{1}{\lambda}\]</span> But <span class="math inline">\(\mu\)</span> isn’t part of the density of the exponential… Can we find a MLE for <span class="math inline">\(\mu\)</span>?</p>
+<p>But consider the exponential distribution, which was an exercise above. We found a MLE for the rate parameter <span class="math inline">\(\lambda\)</span>, <span class="math display">\[\hat\lambda=\frac{1}{\bar{X}}.\]</span> But what if <span class="math inline">\(\lambda\)</span> isn’t what we are interested in, and we want the MLE for the <em>mean</em> of the distribution, let’s call it <span class="math inline">\(\mu\)</span>? The mean of an exponential is given by <span class="math display">\[\mu=E(X)=\frac{1}{\lambda}\]</span> But <span class="math inline">\(\mu\)</span> isn’t part of the density of the exponential… Can we find a MLE for <span class="math inline">\(\mu\)</span>?</p>
 <p>In fact, yes, and there is a very simple solution. If you know the MLE for the parameters of a distribution, and you want the MLE for a function of those parameters, you can just substitute the MLE into the function. So for an exponential, <span class="math display">\[\hat{\mu}=\frac{1}{\hat{\lambda}}=\bar{X}\]</span> Which is both simple, and quite logical – you see almost every time, MLE is going to tell you that the best way to estimate the mean of the distribution is the mean of the data, irrespective of the distribution you assume.</p>
 <p>Specifically, we have the following Theorem:</p>
 <div id="thm-line" class="theorem">
