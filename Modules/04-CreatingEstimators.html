@@ -555,12 +555,12 @@ Note
 </div>
 <ol type="1">
 <li><p><strong>Choose the parametric model</strong> I haven’t given a clear data example, so for now you will just have to accept that we are working with a normal distribution. I’m going to further tell you that we will assume they <span class="math inline">\(X_i\)</span> are independent. You see how quickly we get lazy and stop thinking about our assumptions and just dive in…</p></li>
-<li><p><strong>Write down the (log)likelihood</strong> The pdf of a normal distribution <span class="math inline">\(N(\mu,\sigma^2)\)</span> is given by <span class="math display">\[f(x_i)=\frac{1}{2\pi\sqrt{\sigma^2}} \exp{\left\{-\frac{(x_i-\mu)^2}{2\sigma^2}\right\}}.\]</span> Because of my independence assumption, we have <span class="math display">\[\ell(\theta)=\prod_{i=1}^n \frac{1}{2\pi\sqrt{\sigma^2}} \exp{\left\{-\frac{(x_i-\mu)^2}{2\sigma^2}\right\}} \]</span> To maximize the likelihood we will work with the log-likelihood of <span class="math inline">\(X_i\)</span> <span class="math display">\[\log f(x_i|\theta)=-\log(2\pi)-1/2\log(\sigma^2) -\frac{(x_i-\mu)^2}{2\sigma^2}\]</span> which gives us <span class="math display">\[
+<li><p><strong>Write down the (log)likelihood</strong> The pdf of a normal distribution <span class="math inline">\(N(\mu,\sigma^2)\)</span> is given by <span class="math display">\[f(x_i)=\frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left\{-\frac{(x_i-\mu)^2}{2\sigma^2}\right\}}.\]</span> Because of my independence assumption, we have <span class="math display">\[\ell(\theta)=\prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left\{-\frac{(x_i-\mu)^2}{2\sigma^2}\right\}} \]</span> To maximize the likelihood we will work with the log-likelihood of <span class="math inline">\(X_i\)</span> <span class="math display">\[\log f(x_i|\theta)=-1/2\log(2\pi)-1/2\log(\sigma^2) -\frac{(x_i-\mu)^2}{2\sigma^2}\]</span> which gives us <span class="math display">\[
 \begin{aligned}
-L(\theta)&amp;=-\sum_{i=1}^n \left\{\frac{(x_i-\mu)^2}{2\sigma^2} +\log(2\pi)+1/2\log\sigma^2\right\}\\
-&amp;=-\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2 -\frac{n}{2}\log\sigma^2 - n\log(2\pi)
+L(\theta)&amp;=-\sum_{i=1}^n \left\{\frac{(x_i-\mu)^2}{2\sigma^2} +1/2\log(2\pi)+1/2\log\sigma^2\right\}\\
+&amp;=-\frac{1}{2\sigma^2}\sum_{i=1}^n(x_i-\mu)^2 -\frac{n}{2}\log\sigma^2 - \frac{n}{2}\log(2\pi)
 \end{aligned}
-\]</span> Again, the last term (<span class="math inline">\(n\log(2\pi)\)</span>) won’t matter since it doesn’t involve any of our parameters.</p></li>
+\]</span> Again, the last term (<span class="math inline">\(n\log(2\pi)/2\)</span>) won’t matter since it doesn’t involve any of our parameters.</p></li>
 <li><p><strong>Maximize your likelihood:</strong> Now we have to maximize the likelihood, but simultaneously over both of our parameters. You should review your calculus to remind yourself of how (and why!) this works, but the basic steps are to</p></li>
 </ol>
 <ul>
@@ -589,7 +589,7 @@ L(\theta)&amp;=-\sum_{i=1}^n \left\{\frac{(x_i-\mu)^2}{2\sigma^2} +\log(2\pi)+1/
 <li><p><strong>Write down the likelihood</strong><br>
 We’ve actually done most of the work already – we just need to replace <span class="math inline">\(\mu\)</span> with <span class="math inline">\(\beta_0+\beta_1 x_i\)</span>, <span class="math display">\[
 \begin{aligned}
-L(\theta)&amp;=-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2 -\frac{n}{2}\log\sigma^2 - n\log(2\pi)
+L(\theta)&amp;=-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2 -\frac{n}{2}\log\sigma^2 - \frac{n}{2}\log(2\pi)
 \end{aligned}
 \]</span></p></li>
 <li><p><strong>Maximize the likelihood</strong> This get’s a little bit more messy, but still totally manageable, <span class="math display">\[
