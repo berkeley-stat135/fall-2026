@@ -2,54 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://stat135.berkeley.edu/spring-2026/Modules/00-OverviewIntro.html</loc>
-    <lastmod>2026-09-10T21:05:05.982Z</lastmod>
+    <lastmod>2026-09-11T17:39:30.717Z</lastmod>
   </url>
   <url>
     <loc>https://stat135.berkeley.edu/spring-2026/Modules/03-CaseStudyRegression.html</loc>
-    <lastmod>2026-09-10T21:05:05.984Z</lastmod>
+    <lastmod>2026-09-11T17:39:30.718Z</lastmod>
   </url>
   <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/Modules/02-EstimationBasics.html</loc>
-    <lastmod>2026-09-10T21:05:05.984Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/syllabus.html</loc>
-    <lastmod>2026-09-10T21:05:06.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/data.html</loc>
-    <lastmod>2026-09-10T21:05:05.999Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/index.html</loc>
-    <lastmod>2026-09-10T21:05:05.999Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/CBTesting.html</loc>
-    <lastmod>2026-09-10T21:05:05.981Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/staff.html</loc>
-    <lastmod>2026-09-10T21:05:06.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/calendar.html</loc>
-    <lastmod>2026-09-10T21:05:05.999Z</lastmod>
-  </url>
-  <url>
-    <loc>https://stat135.berkeley.edu/spring-2026/license.html</loc>
-    <lastmod>2026-09-10T21:05:05.999Z</lastmod>
+    <loc>https://stat135.berkeley.edu/spring-2026/Modules/05-LossMEstimators.html</loc>
+    <lastmod>2026-09-11T17:39:30.718Z</lastmod>
   </url>
   <url>
     <loc>https://stat135.berkeley.edu/spring-2026/Modules/04-CreatingEstimators.html</loc>
-    <lastmod>2026-09-10T21:05:05.984Z</lastmod>
+    <lastmod>2026-09-11T17:39:30.718Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/license.html</loc>
+    <lastmod>2026-09-11T17:39:30.732Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/calendar.html</loc>
+    <lastmod>2026-09-11T17:39:30.732Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/staff.html</loc>
+    <lastmod>2026-09-11T17:39:30.733Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/CBTesting.html</loc>
+    <lastmod>2026-09-11T17:39:30.716Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/index.html</loc>
+    <lastmod>2026-09-11T17:39:30.732Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/data.html</loc>
+    <lastmod>2026-09-11T17:39:30.732Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/syllabus.html</loc>
+    <lastmod>2026-09-11T17:39:30.733Z</lastmod>
+  </url>
+  <url>
+    <loc>https://stat135.berkeley.edu/spring-2026/Modules/02-EstimationBasics.html</loc>
+    <lastmod>2026-09-11T17:39:30.718Z</lastmod>
   </url>
   <url>
     <loc>https://stat135.berkeley.edu/spring-2026/Modules/macros.html</loc>
-    <lastmod>2026-09-10T21:05:05.984Z</lastmod>
+    <lastmod>2026-09-11T17:39:30.718Z</lastmod>
   </url>
   <url>
     <loc>https://stat135.berkeley.edu/spring-2026/Modules/01-ThinkProb.html</loc>
-    <lastmod>2026-09-10T21:05:05.984Z</lastmod>
+    <lastmod>2026-09-11T17:39:30.718Z</lastmod>
   </url>
 </urlset>

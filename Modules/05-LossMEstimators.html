@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Thinking probabilistically about data</title>
+<title>Estimating with Loss Functions and M-Estimators</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -134,7 +134,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/01-ThinkProb.html">Thinking probabilistically about data</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/05-LossMEstimators.html">Estimating with Loss Functions and M-Estimators</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -207,7 +207,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Modules/01-ThinkProb.html" class="sidebar-item-text sidebar-link active">
+  <a href="../Modules/01-ThinkProb.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Thinking probabilistically about data</span></a>
   </div>
 </li>
@@ -231,7 +231,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Modules/05-LossMEstimators.html" class="sidebar-item-text sidebar-link">
+  <a href="../Modules/05-LossMEstimators.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Estimating with Loss Functions and M-Estimators</span></a>
   </div>
 </li>
@@ -253,17 +253,26 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#why-consider-data-random" id="toc-why-consider-data-random" class="nav-link active" data-scroll-target="#why-consider-data-random">Why consider data random?</a></li>
-  <li><a href="#vocabulary" id="toc-vocabulary" class="nav-link" data-scroll-target="#vocabulary">Vocabulary</a></li>
+  <li><a href="#least-squares-regression" id="toc-least-squares-regression" class="nav-link active" data-scroll-target="#least-squares-regression">Least Squares Regression</a></li>
+  <li><a href="#loss-functions" id="toc-loss-functions" class="nav-link" data-scroll-target="#loss-functions">Loss Functions</a>
+  <ul class="collapse">
+  <li><a href="#the-median-as-a-l_1-estimator" id="toc-the-median-as-a-l_1-estimator" class="nav-link" data-scroll-target="#the-median-as-a-l_1-estimator">The Median as a <span class="math inline">\(L_1\)</span> estimator</a></li>
+  </ul></li>
+  <li><a href="#m-estimators" id="toc-m-estimators" class="nav-link" data-scroll-target="#m-estimators">M-estimators</a>
+  <ul class="collapse">
+  <li><a href="#example-mle-and-logistic-regression" id="toc-example-mle-and-logistic-regression" class="nav-link" data-scroll-target="#example-mle-and-logistic-regression">Example: MLE and Logistic Regression</a></li>
+  <li><a href="#example-pca-regression" id="toc-example-pca-regression" class="nav-link" data-scroll-target="#example-pca-regression">Example: PCA “Regression”</a></li>
+  </ul></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/01-ThinkProb.html">Thinking probabilistically about data</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/05-LossMEstimators.html">Estimating with Loss Functions and M-Estimators</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Thinking probabilistically about data</h1>
+<h1 class="title">Estimating with Loss Functions and M-Estimators</h1>
 </div>
 
 
@@ -284,73 +293,38 @@ window.Quarto = {
 <div class="block-title">
 <p><strong>Corresponding reading</strong></p>
 </div>
+<p>This topic is not covered in our text book. The following references discuss loss functions</p>
 <ul>
-<li>Chapter 1 of <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span></li>
+<li><span class="citation" data-cites="fox-weisberg2019robust">(<a href="#ref-fox-weisberg2019robust" role="doc-biblioref"><strong>fox-weisberg2019robust?</strong></a>)</span> (<a href="https://www.john-fox.ca/Companion/appendices/Appendix-Robust-Regression.pdf">pdf</a>)</li>
+<li><span class="citation" data-cites="faraway2005">(<a href="#ref-faraway2005" role="doc-biblioref"><strong>faraway2005?</strong></a>)</span>, Section 6.4.1 (<a href="https://utstat.utoronto.ca/brunner/books/LinearModelsWithR.pdf">pdf</a>)</li>
 </ul>
+<p>These do not cover the material in exactly the same way as I do, and may refer to topics outside the scope of this class. But you may find them to be a useful outside reference, so try to focus on the parts that link back to what is discussed here.</p>
 </div>
+<p>The MLE procedure gives us standard way to find the best estimator if we make assumptions about the parametric model of the data. The MLE uses knowledge of the parametric model to calculate the likelihood and define an optimization goal. The estimator is the result of solving that optimization.</p>
+<p>When we step back, we can see that the role of the parametric model was to define the quantity to optimization. We will now consider other alternatives for defining an optimization goal (and justifications for why they might be better in some situations). Much of modern statistics now takes this optimization perspective in defining and improving estimators, though MLE is still a natural starting point.</p>
 <div class="GOALS">
 <div class="block-title">
 <p><strong>Questions/Goals for this Module</strong></p>
 </div>
+<p>Extend the MLE to a more general optimization strategy of defining estimators</p>
 <ul>
-<li><p>Why do we think of data as random? What do we mean by this?</p></li>
-<li><p>What are possible sources of randomness in data?</p></li>
+<li>Learn what is a Loss function</li>
+<li>Define squared error loss, <span class="math inline">\(L_1\)</span> loss, and others</li>
+<li>Understand how they emphasize different aspects of the data</li>
+<li>Describe the MLE as an optimization procedure</li>
+<li>Learn about M-estimations as a further generalization</li>
 </ul>
 </div>
-<p>Let’s return to what we said in the introduction: We are able to perform inference by thinking of our data as random, and we use probability to model aspects of our data. In this module we are going to discuss what probabilistic modeling of a data generation process might look like.</p>
-<p>A common way to think about how probability and statistics interact is given by this diagram:</p>
-<p><img src="../StaticFigures/wassermanbigpic_v001.png" class="img-fluid" alt="Relationship of Statistics and Probability, from All of Statistics"> The idea is that probability studies what kind of data you would expect if you <em>knew</em> the data generating process, while Statistics looks at data and tries to understand what type of data generating process might have created the data we observed.</p>
-<div class="PARAGRAPH">
-<p>Example</p>
-</div>
-<p>Let’s consider a concrete example of the difference here. We consider a simple problem of visitors to a website. We could use probability to model this process.</p>
-<p>For example, we could assume that the number of visitors in an interval of 10min is distributed <span class="math inline">\(Poisson(\lambda)\)</span> and independent of the number in any other such interval. <span class="math inline">\(\lambda\)</span> would give the rate of visitation to the site. We have described a data generating process, also called a <em>probabilistic model</em> and we could ask questions such as</p>
-<ul>
-<li>on average how many visitors to expect in a particular time interval for a particular <span class="math inline">\(\lambda\)</span></li>
-<li>determine the <span class="math inline">\(\lambda\)</span> at which the probability is greater than 0.80 that the demand in a time interval would be above capacity of the host (i.e.&nbsp;crashes the website)</li>
-</ul>
-<p>These are probability questions – we start with a probability model and describe what results we would be likely to see.</p>
-<p>Alternatively, you could have records of visits to the website in 10min intervals – this is our data. Using only this data, how could we answer? Well, we’d like to not assume a <span class="math inline">\(\lambda\)</span> but instead <em>estimate</em> what is it’s actual rate. I could still assume the same probabilistic model as above, but rather than trying to understand what type of data the probability model will generate for an arbitrary <span class="math inline">\(\lambda\)</span>, I want to estimate something about that probability model based on my data. More than that – I’d like to be able to say something about how <em>accurate</em> my estimate is. This is where statistics comes in and diverges from probability.</p>
-<section id="why-consider-data-random" class="level2">
-<h2 class="anchored" data-anchor-id="why-consider-data-random">Why consider data random?</h2>
-<p>Why should we consider our data random? This is actually a really important question. After all, if I just hand you a spreadsheet of numbers in columns, what about it is random? They seem pretty fixed and determinate at that point.</p>
-<p>Consider the following scatter plots that shows imagined data collected on two variables:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="01-ThinkProb_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="1152"></p>
-<figcaption>Plots of data that might have been created by the scenarios</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Consider the following possible descriptions of this data and consider what about this data you might consider random? How is that influenced by how the data was collected? What kind of statement might you want to make about this data, and how does randomness play into this? Scenarios 1-3 go with the left plot and Scenarios 4-5 go with the right plot.</p>
-<ol type="1">
-<li><p>The data comes from a government survey of randomly selected mid-aged people. The survey asks them a bunch of questions about their life, and two variables are shown above. Each point is the response from a single respondent. The y-axis is their measure of how happy they are with their life and their x-axis is their current income</p></li>
-<li><p>I take the list of current phone numbers of my high school class and call them <em>all</em> up (it was a small high school!). Each point is the response from a single respondent. The y-axis is their current income and the x-axis is their GPA in high school.</p></li>
-<li><p>I scrap a website that provides user reviews of a product and use a language processing app to process all of the review to give a numerical score based on the review. Each point is a single review. The y-axis shows the score and the x-axis shows the length of the comment.</p></li>
-<li><p>A physics class puts different masses on a spring and measure the length of the spring. The x-axis shows the mass added to the spring, and the y-axis shows the length of the spring. The same mass was put on the spring and measured multiple times.</p></li>
-<li><p>A company is testing the effectiveness of different doses of a drug for weight loss. Each participant is randomly assigned a dosage, and monitored for their weight loss. Each point is a participant in the trial. The y-axis is the weight loss, the x-axis is the dosage of the drug.</p></li>
-</ol>
-<div class="QUESTION">
-<div class="block-title">
-<p><strong>Exercise/Question</strong></p>
-</div>
-<p>What differences do you notice about the two plots and how does that relate to the description of the source of the data?</p>
-</div>
-<p>In thinking through these settings, we can see several common <em>sources</em> of randomness we can encounter in the real world, and in the same dataset we can see multiple sources of randomness.</p>
-<ol type="1">
-<li>Randomness due in our selection of which people (or units) we study</li>
-<li>Randomness due to measurement error</li>
-<li>Randomness due to our choice of <em>intervention</em> (meaning we changed something for specific people or units)</li>
-</ol>
-<p>We can also divide randomness in a different way based on what we know about the randomness</p>
-<ol type="1">
-<li><strong>The investigator <em>creates</em> or <em>controls</em> the randomness.</strong> For example in the government survey, the government uses a random sample, and <em>they setup that selection process.</em> Similarly, in the drug dosage example, the company controls the random assignment to dosages.</li>
-<li><strong>The investigator doesn’t control the randomness, but we have reason to think it follows a random generating process</strong> In the spring example, the randomness (measurement error) comes from life and we don’t know what it is exactly. But we have good reasons to think that the measurement error would behave similarly if we repeated the experiment, i.e.&nbsp;like a random process. Not that we would get the <em>same</em> measurement error, but that it’s reasonable to think of it coming as if it is drawn from the same random process every time.</li>
-<li><strong>Not random, but arbitrary</strong> In the case of the website review, we could think of the selection of people that left reviews as a random process, similar to measurement error. But we don’t know <em>anything</em> about it nor any idea in what sense is it random. In this case the selection of people is often better to be though of as <em>arbitrary</em> rather than <em>random</em>, since in statistics “random” has a specific meaning (unlike the colloquial use of the word).</li>
-</ol>
+<section id="least-squares-regression" class="level2">
+<h2 class="anchored" data-anchor-id="least-squares-regression">Least Squares Regression</h2>
+<p>Let’s return to our MLE for simple regression. In the end, we made the modeling assumption that <span class="math inline">\(E(Y|X)\)</span> could be well described by a line, so that we’re interested in estimating the parameters that define that line. Our MLE estimates, based on a normality assumption, where found as the values that maximized <span class="math display">\[\max_{\beta_0,\beta_1} \left(- \sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2\right) \]</span> (Recall <span class="math inline">\(\sigma^2\)</span> didn’t wind up coming into the problem for finding <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>)</p>
+<p>Equivalently, we could get rid of that negative and write this as a minimization problem, <span class="math display">\[\min_{\beta_0,\beta_1} \sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2 \]</span> Looking at just this end result, we can see that we have an observed value <span class="math inline">\(y_i\)</span> and a prediction of what it’s mean value would be if we knew <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. Then we could also describe our estimators as the result of finding the <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that minimize the difference or the error in that prediction. Stated this way, we are still making the assumption that we want to fit a line to describe <span class="math inline">\(E(Y|X)\)</span>, but we are not explicitly making assumptions about the distribution of the data.</p>
+<p>Formulating the goal of our problem directly as a minimization problem is often called <strong>least squares regression</strong>, and it gives the exact same estimators as our MLE approach.</p>
+</section>
+<section id="loss-functions" class="level2">
+<h2 class="anchored" data-anchor-id="loss-functions">Loss Functions</h2>
+<p>How are we measuring that error? We are taking the squared difference for each <span class="math inline">\(i\)</span>. We often call this the <strong>loss</strong> or <strong>observed error</strong> incurred for each observation by using our prediction model, <span class="math display">\[l(y_i, \hat{y}_i)=(y_i - \hat{y}_i)^{2}\]</span> where <span class="math inline">\(\hat{y}_i=\hat{y}_i(\theta)=\beta_0+\beta_1 x_i\)</span> is our predicted value of an observed <span class="math inline">\(y_i\)</span> and it is a function of our unknown parameter <span class="math inline">\(\theta.\)</span> This loss is often called <strong>squared error</strong> or <strong><span class="math inline">\(L_2\)</span> loss</strong>.</p>
+<p>We are creating an estimator of <span class="math inline">\(\theta\)</span> by minimizing the average of this value over all our data, <span class="math display">\[\min_\theta\frac{1}{n}\sum_{i=1}^n l(Y_i, \hat{Y}_i)=\min_\theta\frac{1}{n}\sum_{i=1}^n(Y_i - \hat{Y}_i(\theta))^{2}\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -361,25 +335,172 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Notice that a lot of our thought process here involves some variant of thinking “what would change if I collected this data again”? This is a common way of thinking about randomness, and this view of randomness is often called <strong>long-term probability</strong> or the <strong>frequentist</strong> perspective.</p>
-<p>Such a thought experiment underlies much of what we will cover, but is not always satisfying. For example, what does it mean for weather or stock market data? We are never going be able to rerun the stock market nor the weather and so the notion of long-term frequency can be unsatisfying.</p>
-<p>Frequentist probability is not the only way to think about uncertainty in the data – the Bayesian perspective is another approach but we will not have time to be able to cover it in this class (the book has examples of Bayesian analysis that I encourage you to read).</p>
+<p>Notice I added a <span class="math inline">\(\frac{1}{n}\)</span> into our formulation. Obviously the <span class="math inline">\(\frac{1}{n}\)</span> plays no role in the optimization since it’s just a fixed constant. But it allows us to talk about minimimizing the average loss observed on our data, and in general allows us to think of this quantity clearly an estimate of the unknown expectation of the <em>population loss</em>, i.e.&nbsp;the expectation of this loss with a random draw from the population distribution.</p>
+</div>
+</div>
+<p>Why choose squared-error? Well, it fell out of the normal assumption naturally, but that is just an assumption, as we’ve discussed. It also has the (historical) attraction that we can analytically find the solution, which means we can calculate an explicit equation for the solution to the optimization. But we’ve already seen interesting solutions from the MLE often require using a computer to find the estimate.</p>
+<p>However, by writing what we are doing in terms of a loss-function, it clearly opens up the question of using alternative loss functions. The most common alternative could be <strong><span class="math inline">\(L_1\)</span> loss</strong> or <strong>absolute error</strong> <span class="math display">\[l(y_i, \hat{y}_i)=|y_i - \hat{y}_i(\theta)|\]</span> We can no longer analytically solve the solution, but average loss can be optimized to find the best <span class="math inline">\(\beta_0\)</span>,<span class="math inline">\(\beta_1\)</span> for this setting.</p>
+<p>You can see with our university data it doesn’t make a huge difference</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Scatter plot of university scorecard data with least squares and L1 regression lines</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>But if we had data with significant outliers, it could be more different. Consider this data on violent crimes per state (from <span class="citation" data-cites="agresti1997">(<a href="#ref-agresti1997" role="doc-biblioref"><strong>agresti1997?</strong></a>)</span>),</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Scatter plot of crime data with least squares and L1 regression lines</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The two ways of creating estimators of the parameters of the line start to look more distinct with this dataset. In particular, the <span class="math inline">\(L_1\)</span> regression line is less “pulled” toward what looks to be an potential outlier. This is the effect of using a different loss function.</p>
+<p>If we look at the equations that we optimize, we can think that the loss assigns to each point how much it “contributes” to the overall loss based on how different <span class="math inline">\(y_i\)</span> is from <span class="math inline">\(\hat{y}_i\)</span>. Let’s call that difference <span class="math inline">\(r_i\)</span> (“r” for “residual”). Clearly making each <span class="math inline">\(r_i=0\)</span> is not possible, so by taking the average of the loss we are in some sense balancing between them. However, the choice of loss function changes that balancing. With <span class="math inline">\(L_1\)</span>, each point’s contribution is <span class="math inline">\(|r_i|\)</span>, but with squared-error loss, each point contributes <span class="math inline">\(r_i^2\)</span>. Points that are really far away from a candidate <span class="math inline">\((\beta_0,\beta_1)\)</span> combination are going to contribute a larger amount to squared error loss than to <span class="math inline">\(L_1\)</span> loss. So in looking for the best <span class="math inline">\((\beta_0,\beta_1)\)</span>, squared error loss will have higher “motivation” to pull the line toward individual points, even if it adds a small amount more error to other points.</p>
+<p>We can visualize this by graphing the loss as a function of the residual <span class="math inline">\(r\)</span> of a potential point and its prediction</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Visualization of the two loss functions: squared error and L1.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Because the absolute value function is not differentiable at 0, however, <span class="math inline">\(L_1\)</span> can be difficult to work with. There are other losses that are differentiable that similarly try to better balance the contribution of the points. Here’s a classic example called “Huber’s Loss” that makes a piecewise function to match squared-error loss for small values (and thus is differentiable at 0), but behaves like <span class="math inline">\(L_1\)</span> for large values: <span class="math display">\[l(y_i, \hat{y})=\begin{cases}
+\frac{1}{2}(y_i - \hat{y}_i(\theta))^2 &amp; |y_i - \hat{y}_i(\theta)|\leq \delta\\
+\delta(|y_i - \hat{y}_i(\theta)|-\frac{1}{2}\delta) &amp; otherwise
+\end{cases}
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We will see, when we get to discussing the behavior of estimates and how they perform with large sample sizes that being differentiable at 0 helps prove more theory about their behavior.</p>
+</div>
+</div>
+<p>We can visualize it’s difference to the other two losses:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Visualization of the three loss functions: squared error, L1, and Huber’s loss.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Here’s what creating estimates using these three different loss functions looks like on our two datasets:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Plot of regression lines fit to data with squared error, L1, and Huber loss.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Not surprisingly, Huber’s loss is most similar to <span class="math inline">\(L_1\)</span> loss, especially in terms of how it is affected by the outlier, but is still a slightly different estimate.</p>
+<section id="the-median-as-a-l_1-estimator" class="level3">
+<h3 class="anchored" data-anchor-id="the-median-as-a-l_1-estimator">The Median as a <span class="math inline">\(L_1\)</span> estimator</h3>
+<p>Even on much simpler settings, it’s worth considering our procedures in terms of a loss function. Consider our simpler model, where our data <span class="math inline">\(Y_i\)</span> had the same mean <span class="math inline">\(\mu\)</span>, <span class="math display">\[Y_i\stackrel{i.i.d}{\sim}N(\mu,\sigma^2).\]</span> Another way we could say this is since we assume <span class="math inline">\(Y_i\)</span> have the same mean, our prediction of <span class="math inline">\(Y_i\)</span> is going to be <span class="math inline">\(\hat{Y_i}=\hat\mu\)</span>, i.e.&nbsp;in the absence of other information, we predict each observation the same, and <span class="math inline">\(\hat{\mu}\)</span> will be that prediction.</p>
+<p>Then MLE estimator <span class="math inline">\(\hat{\mu}\)</span> was the <span class="math inline">\(\mu\)</span> that minimized <span class="math display">\[\min_\mu\frac{1}{n}\sum_{i=1}^n(Y_i - \mu)^2\]</span> In our loss notation, we could write this as <span class="math display">\[ \min_\mu \frac{1}{n}\sum_{i=1}^n(Y_i - \hat{Y}(\mu))^2\]</span> Notice that again we are relying on squared error loss. What if we used <span class="math inline">\(L_1\)</span> loss here instead? What would be our estimator of <span class="math inline">\(\mu\)</span>?</p>
+<p>With <span class="math inline">\(L_1\)</span> loss we would be minimizing <span class="math display">\[\min_\mu \frac{1}{n}\sum_{i=1}^n|Y_i - \hat{Y}(\mu)|=\min_\mu \frac{1}{n}\sum_{i=1}^n|Y_i - \mu|\]</span> This is minimized by setting <span class="math inline">\(\hat{\mu}=median(Y_1,\ldots,Y_n)\)</span>.</p>
+</section>
+</section>
+<section id="m-estimators" class="level2">
+<h2 class="anchored" data-anchor-id="m-estimators">M-estimators</h2>
+<p>Generally, when we find our estimator of <span class="math inline">\(\theta\)</span> by minimizing the average of <span class="math inline">\(\rho(y_i,\theta)\)</span>, <span class="math display">\[\min_\theta \frac{1}{n}\sum_{i=1}^n \rho(Y_i,\theta)\]</span> the resulting <span class="math inline">\(\hat{\theta}\)</span> is called a <strong>M-Estimator</strong>.</p>
+<p>If we return to our loss examples, we see that they are a special case of <span class="math inline">\(\rho\)</span>, because we can write loss instead in terms of our unknown <span class="math inline">\(\theta,\)</span> <span class="math display">\[\rho(y_i, \theta)=(y_i - \hat{y}_i(\theta))^{2}=(y_i - \beta_0-\beta_1 x_i)^{2}\]</span></p>
+<section id="example-mle-and-logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="example-mle-and-logistic-regression">Example: MLE and Logistic Regression</h3>
+<p>We can also see that MLE estimators are a subset of M-estimators, where we choose <span class="math inline">\(\rho(y_i,\theta)\)</span> to be the <em>negative</em> log-likelihood at the single data point <span class="math inline">\(y_i\)</span>, <span class="math display">\[\rho(y_i,\theta)= -\log f(y_i|\theta)\]</span> Unlike our loss functions, the negative log-likelihood may not be just a comparison of <span class="math inline">\(y_i\)</span> and its predicted value <span class="math inline">\(\hat{y}_i\)</span>.</p>
+<p>We can see this illustrated in the case of logistic regression, <span class="math display">\[\rho(y_i,\theta)= -\log f(y_i)=-y_i\log(p(x_i))-(1-y_i)\log(1-p(x_i))\]</span> that <span class="math inline">\(\rho(y_i,\theta)\)</span> not obviously written in terms of an error or loss in <span class="math inline">\(y_i\)</span> compared to a prediction – at least not via a direct subtraction.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>M-estimators versus Loss Functions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>M-estimators are described as a generalization of the loss function approach because loss functions are traditionally defined based on focused only on comparing our predicted value to the observed value via the residual <span class="math inline">\(r_i=y_i-\hat{y}_i\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\(\theta\)</span> is only involved in the loss function terms of how it creates a prediction <span class="math inline">\(\hat{y}_i\)</span>. M-estimators allow a more generalized measure per observations, that can intermingle the parameter <span class="math inline">\(\theta\)</span> in ways other than just creating a predicted <span class="math inline">\(\hat{y}(\theta)\)</span>.</p>
+<p>However, sometimes people will use the term “loss” for this kind of function too. Indeed, <span class="math inline">\(\rho(y_i,\theta)\)</span> used above for logistic regression is often called <strong>cross-entropy</strong> loss in machine learning/statistical prediction literature.</p>
+<p>You will also see people discuss M-estimates for only the case of <span class="math inline">\(\rho\)</span> being loss functions of residuals, as in the reading suggestions I provide above.</p>
 </div>
 </div>
 </section>
-<section id="vocabulary" class="level2">
-<h2 class="anchored" data-anchor-id="vocabulary">Vocabulary</h2>
-<p>There is some important vocabulary that goes along to help describe types of data we might observe, and these are generally related to how the data was collected and the randomness we will observe.</p>
-<ul>
-<li><strong>Units:</strong> These are the objects we can collect data on</li>
-<li><strong>Sample:</strong> A set of units (often used to describe the set of units in our data). By describing them as a sample, we are implicitly saying they are a <em>subset</em> of all possible units of interest. This is unlike my high school alumni example, were I collected data on everyone. I shouldn’t say that was a sample of the high school from my graduating class – we call a dataset a <strong>census</strong> when you collect all units of a population.</li>
-<li><strong>Population:</strong> This is the larger set of units from which our sample comes.</li>
-<li><strong>Experimental Data</strong> or an <strong>Intervention:</strong> This describes both the spring and the drug dosage data. This is when the data are the result of the investigator setting a particular condition or setting, and then collecting data on what is the response under that condition. As we will see this is a gold-standard for determining how changing the condition of our unit will result in a change in other variables. As a side note, we will often see with intervention data that you will have shared values among your units in what interventions they are given – you don’t generally pick an arbitrary dosage to give a patient. You pick a few carefully selected dosages to explore, and then assign each patient one of them.</li>
-<li><strong>Observational Data</strong> This describes all of the remaining datasets. The variables measured are as the investigator observes them – there’s no intervention on the part of the investigator. We only see what naturally occurs together, not what <em>would have happen</em> if we assigned one of the variables to the unit. This will be an important distinction when we think about causality and multiple regression later. Notice that you can have very high quality, and well designed data, such as the government survey, but it is still an observational study. The government doesn’t intervene and give someone a salary at a certain amount and then come back and see how happy they are a year later. It measures what is co-occurring naturally.</li>
-<li><strong>Random Sample</strong> This describes <em>how</em> we select the sample of units in our data, and it specifically implies that the investigator used a <strong>known</strong> random process to select the units. The key property distinguishing a random sample from an arbitrary sample is that the random mechanism for selecting units from the population is <strong>known</strong>.</li>
-<li><strong>Simple Random Sample</strong> The most common example of a random sample, where every unit in the population is equally likely to be selected. But there are other ways to randomly select samples where you preference some units over others.</li>
-<li><strong>Convenience sample</strong> Data that are collected based on some convenient mechanism, with no randomness introduced by the investigator into the choice of which samples are picked. It might also be called a <strong>sample of convenience.</strong> Many datasets fall under this category. Frequently the investigator doesn’t even choose the units – they are given the units by processes they do not completely control, like the website scrapping example or people who choose to enroll in a drug study. Other times the investigator does choose the units, but their mechanism is not random, e.g.&nbsp;picking every 10th person in the school directory.</li>
-</ul>
+<section id="example-pca-regression" class="level3">
+<h3 class="anchored" data-anchor-id="example-pca-regression">Example: PCA “Regression”</h3>
+<p>Previously, when we considered fitting a line to our cloud of points, we considered solely how well the line predicted <span class="math inline">\(y_i\)</span> for our loss function. But we might instead ask how close the <em>point</em> <span class="math inline">\((x_i,y_i)\)</span> is to the line. This is not the same!</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="1728"></p>
+<figcaption>Illustration of measurement of fit, courtesy of <a href="https://benediktehinger.de/blog/science/scatterplots-regression-lines-and-the-first-principal-component/" class="uri">https://benediktehinger.de/blog/science/scatterplots-regression-lines-and-the-first-principal-component/</a></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Instead we could take the squared distance of each point <span class="math inline">\((x_i,y_i)\)</span> to the line <span class="math inline">\(y=\beta_0+\beta_1\)</span>, which is given by the squared-distance to its orthogonal projection to the line, <span class="math display">\[d^2_\perp=\frac{(y_i-(\beta_0+\beta_1x_i))^2}{\beta_1^2+1}\]</span></p>
+<p>We can define this as our <span class="math inline">\(\rho(y_i,\theta)\)</span>, and then find estimators of <span class="math inline">\(\beta_0,\beta_1\)</span> as those which minimizes this quantity, <span class="math display">\[\min_{\beta_0,\beta_1}\frac{1}{n}\sum_{i=1}^n\rho(Y_i,\theta)=\min_{\beta_0,\beta_1}\frac{1}{n}\sum_{i=1}^n\frac{(Y_i-(\beta_0+\beta_1X_i))^2}{\beta_1^2+1}\]</span> This is sometimes called the “PCA line”, because it’s a simple 2-dimensional example of PCA (Principal Components Analysis).</p>
+<p>Here’s an example of the PCA line on our scorecard data</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Unlike regression, the PCA line treats the <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span> data symmetrically in trying to “fit” the data. Furthermore, if I regress <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span> versus if I regress <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span>, I do not get the same line. We are making different choices of how we want to measure a good fit to the line, and the choice of line reflects this.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="1728"></p>
+<figcaption>Illustration of measurement of fit, courtesy of (https://benediktehinger.de/blog/science/scatterplots-regression-lines-and-the-first-principal-component/)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see in this toy illustration the differences between the resulting lines.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Illustration of differences in fitted line, courtesy of (https://benediktehinger.de/blog/science/scatterplots-regression-lines-and-the-first-principal-component/)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
+<p>So by just viewing estimators as the solution to an optimization problem, we are no longer making explicit probabalistic assumptions. Is probability an unnecessary part of estimation?</p>
+<p>The answer to this is both yes and no. We can justify the appropriateness of our loss <span class="math inline">\(l\)</span> or more generally <span class="math inline">\(\rho\)</span> on more heuristic or intuitive grounds without appealing to a specific probability model. We can make it more tailored to the problem we have, perhaps with more complex treatment of certain aspects of the data. On the other hand, we have to come up with <span class="math inline">\(l\)</span> or <span class="math inline">\(\rho\)</span>, and generally the starting place is something like a MLE calculation which is then adapted or modified to improve its performance.</p>
+<p>This brings us to the next question where probabilitistic modeling has a big role – if we have all of these possible estimators, which ones are best? We will see “best” can be defined in different ways, but regardless our estimators are random variables and their probabilisitic behavior is the only way we have to evaluate them. We will also see that even if we do not use a probabilistic model to define our estimators, the estimators will still perform better or worse under different assumptions about the distribution of our data. So by choosing a particular choice of criteria, we are often implicitly making assumptions about our data distribution, just less formalized.</p>
 
 
 
@@ -393,7 +514,7 @@ Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Sc
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>This is not real data, but simulated data to make a point!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>You will also see these same loss functions used to compare an estimator <span class="math inline">\(\hat\theta\)</span> with <span class="math inline">\(\theta\)</span>. This is often used in <em>decision theory</em> approach to estimation. It’s still usually the same idea that your function compares the two inputs <span class="math inline">\(\hat\theta\)</span> and <span class="math inline">\(\theta\)</span>. See Problem 4.81 in our textbook, <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
