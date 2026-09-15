@@ -356,7 +356,20 @@ Note
 <p>Asking these kinds of questions, where you purposefully look what happens when the assumptions you used for creating your estimator are not true, often fall under the evaluation of the estimator’s <em>robustness</em> to assumptions.</p>
 </div>
 </div>
-<p>Similarly, we can use the <em>assumption</em> of independence to get the variance of our estimator, <span class="math display">\[var(\hat{\mu})=\sigma^2_{\bar{X}}=\frac{1}{n^2}\sum_i var(X_i)\]</span> We can again add <em>yet another assumption</em> – that all of the <span class="math inline">\(X_i\)</span> have the same variance, <span class="math inline">\(var(X_i)=\sigma^2\)</span> – and get <span class="math display">\[var(\hat{\mu})=\frac{1}{n^2}\sum_i var(X_i)=\frac{1}{n^2}\sum_i \sigma^2=\frac{\sigma^2}{n}\]</span> This gives us the <strong>standard error</strong> for our estimate <span class="math inline">\(\hat{\mu}\)</span> as <span class="math inline">\(\sigma/\sqrt{n}\)</span>. :::{.callout-note} It is very important property that we like to see of our statistical estimators: that with more data, the variance of the estimator gets smaller, so more and more tightly focused around the parameter <span class="math inline">\(\theta\)</span> that we want to estimate. :::</p>
+<p>Similarly, we can use the <em>assumption</em> of independence to get the variance of our estimator, <span class="math display">\[var(\hat{\mu})=\sigma^2_{\bar{X}}=\frac{1}{n^2}\sum_i var(X_i)\]</span> We can again add <em>yet another assumption</em> – that all of the <span class="math inline">\(X_i\)</span> have the same variance, <span class="math inline">\(var(X_i)=\sigma^2\)</span> – and get <span class="math display">\[var(\hat{\mu})=\frac{1}{n^2}\sum_i var(X_i)=\frac{1}{n^2}\sum_i \sigma^2=\frac{\sigma^2}{n}\]</span> This gives us the <strong>standard error</strong> for our estimate <span class="math inline">\(\hat{\mu}\)</span> as <span class="math inline">\(\sigma/\sqrt{n}\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is very important property that we like to see of our statistical estimators: that with more data, the variance of the estimator gets smaller, so more and more tightly focused around the parameter <span class="math inline">\(\theta\)</span> that we want to estimate.</p>
+</div>
+</div>
 <div class="QUESTION">
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
@@ -439,9 +452,25 @@ E(\hat{\beta}_0|X_1\ldots,X_n)= \beta_0\\
 <section id="estimating-the-variance-of-our-estimators" class="level2">
 <h2 class="anchored" data-anchor-id="estimating-the-variance-of-our-estimators">Estimating the Variance of Our Estimators</h2>
 <p>It’s very important to notice that the expectation and variance of our estimators involve our unknown parameters. This is to be expected. These are theoretical properties of our estimators, and they <em>should</em> vary based on the true distribution of the data.</p>
-<p>However, it would be nice to be able to estimate what the variance or our estimator is, in particular. Now that we have an expression for the variance of our estimators, we could try to estimate them.</p>
+<p>For example, in our above examples, the expected value of <span class="math inline">\(\hat\theta\)</span>, <span class="math inline">\(E(\hat\theta)=\theta.\)</span> That’s good! It says that, over repeated realizations of our data, the average value of <span class="math inline">\(\hat\theta\)</span> is <span class="math inline">\(\theta\)</span>. When <span class="math inline">\(E(\hat\theta)=\theta\)</span> we call an estimator <strong>unbiased</strong>.</p>
+<p>So for the expectation, its not a problem that it depends on the unknown parameter, since we mainly want to check that the <span class="math inline">\(E(\hat\theta)\)</span> is equal to <span class="math inline">\(\theta\)</span> (or close).</p>
+<p>However, for the variance of our estimator, we’d really like to have a quantitative idea what the variance is, since the variance gives us an idea of the <em>size</em> of the variations of <span class="math inline">\(\hat\theta\)</span> from it’s mean. The below illustration from a text of Lohr, show different variations between unbiasedness, and variance.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../StaticFigures/lohr-precise-accurate.png" class="img-fluid figure-img" style="width:70.0%" alt="A figure from a text by Lohr showing the difference between accuracy, unbiasedness, and precision."></p>
+<figcaption>Unbiased archers, precise archers, and accurate archers</figcaption>
+</figure>
+</div>
+<p>Knowing the variance of <span class="math inline">\(\bar{X}\)</span> is <span class="math inline">\(\sigma^2/n\)</span> doesn’t tell us that because we don’t know <span class="math inline">\(\sigma^2\)</span>. However, having computed that expression for the variance means we could try to estimate the variance of the estimator.</p>
 <p>And in fact for all of these examples we can do exactly this by plugging in our estimators of the unknown parameters.</p>
-<p>Let’s start with the proportion, which is easiest, <span class="math display">\[\sigma^2_{\hat{\pi}}=\frac{\pi(1-\pi)}{n}\]</span> So a natural estimator is <span class="math display">\[\hat\sigma^2_{\hat{\pi}}=\frac{\hat\pi(1-\hat\pi)}{n}\]</span> How about the variance of our mean, <span class="math inline">\(\hat{\mu}\)</span>? We have <span class="math display">\[\sigma^2_{\hat{\mu}}=\frac{\sigma^2}{n}\]</span> where <span class="math inline">\(\sigma^2\)</span> is the variance <em>of our individual <span class="math inline">\(X_i\)</span></em>. Well, we’ve seen a standard estimate of <span class="math inline">\(\sigma^2\)</span> is <span class="math display">\[S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2\]</span> so we can estimate</p>
+<div class="PARAGRAPH">
+<p>Proportion</p>
+</div>
+<p>Let’s start with the proportion, which is easiest, <span class="math display">\[\sigma^2_{\hat{\pi}}=\frac{\pi(1-\pi)}{n}\]</span> So a natural estimator is <span class="math display">\[\hat\sigma^2_{\hat{\pi}}=\frac{\hat\pi(1-\hat\pi)}{n}\]</span></p>
+<div class="PARAGRAPH">
+<p>Mean</p>
+</div>
+<p>How about the variance of our mean, <span class="math inline">\(\hat{\mu}\)</span>? We have <span class="math display">\[\sigma^2_{\hat{\mu}}=\frac{\sigma^2}{n}\]</span> where <span class="math inline">\(\sigma^2\)</span> is the variance <em>of our individual <span class="math inline">\(X_i\)</span></em>. Well, we’ve seen a standard estimate of <span class="math inline">\(\sigma^2\)</span> is <span class="math display">\[S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2\]</span> so we can estimate</p>
 <p><span class="math display">\[\sigma^2_{\hat{\mu}}=\frac{1}{n}S^2\]</span> Notice how it is important to distinguish between our estimator of the variance of an <em>individual</em> <span class="math inline">\(X_i\)</span> and the estimator of the variance of the estimator <span class="math inline">\(\hat{\mu}\)</span>! <span class="math inline">\(S^2\)</span> is <em>not</em> an estimator of the variance of <span class="math inline">\(\bar{X}\)</span>.</p>
 <div class="PARAGRAPH">
 <p>Simple Regression</p>
