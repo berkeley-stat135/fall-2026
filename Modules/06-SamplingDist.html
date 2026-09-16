@@ -298,8 +298,9 @@ window.Quarto = {
 <p><strong>Questions/Goals for this Module</strong></p>
 </div>
 <ul>
-<li>What is the distribution of an estimator?</li>
+<li>What is the sampling distribution of an estimator?</li>
 <li>How do we find the distribution of an estimator?</li>
+<li>What does it tell us about the estimator?</li>
 </ul>
 </div>
 <section id="the-sampling-distribution" class="level2">
@@ -316,11 +317,19 @@ window.Quarto = {
 <p>Two important aspect of the distribution we will consider to begin with:</p>
 <ol type="1">
 <li><strong>Expectation of <span class="math inline">\(\hat{\mu}\)</span></strong>: <span class="math display">\[E(\hat{\mu})=\mu.\]</span> We are interested in this quantity to understand whether on average is <span class="math inline">\(\hat{\mu}\)</span> equal to <span class="math inline">\(\mu\)</span>?</li>
-<li><strong>Standard deviation of <span class="math inline">\(\hat{\mu}\)</span></strong> How <span class="math display">\[\sqrt{var(\hat{\mu})}=\sqrt{E[\hat{\mu}-E(\hat{\mu})]^2}.\]</span> This allows us to ask, how much does the estimate vary from its mean from sample to sample? If our estimator is equal to the population parameter on average, then our estimator’s sampling distribution spreads about the mean. The tighter the spread (the smaller the standard deviation), the more accurate the estimator.</li>
 </ol>
-<div class="def">
-<p><strong>Standard Error</strong>: The standard deviation of the sampling distribution of an estimator is given a special name <strong>standard error</strong>. Among other things, this helps to distinguish it from the standard deviation of our individual observations <span class="math inline">\(X_i\)</span>, see caution below!</p>
+<p>When an estimator <span class="math inline">\(\hat\theta\)</span> has <span class="math inline">\(E(\hat\theta)=\theta\)</span> we call an estimator <strong>unbiased</strong>. It says that, over repeated realizations of our data, the average value of <span class="math inline">\(\hat\theta\)</span> is <span class="math inline">\(\theta\)</span>. 2. <strong>Standard deviation of <span class="math inline">\(\hat{\mu}\)</span></strong> How <span class="math display">\[\sqrt{var(\hat{\mu})}=\sqrt{E[\hat{\mu}-E(\hat{\mu})]^2}.\]</span> This allows us to ask, how much does the estimate vary from its mean from sample to sample? If our estimator is equal to the population parameter on average, then our estimator’s sampling distribution spreads about the mean. The tighter the spread (the smaller the standard deviation), the more accurate the estimator. The below illustration from a text of Lohr, show different variations between unbiasedness and variance.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../StaticFigures/lohr-precise-accurate.png" class="img-fluid figure-img" style="width:70.0%" alt="A figure from a text by Lohr showing the difference between accuracy, unbiasedness, and precision."></p>
+<figcaption>Unbiased archers, precise archers, and accurate archers</figcaption>
+</figure>
 </div>
+<p>We have a special term for the standard deviation of an estimator,</p>
+<div class="def">
+<p><strong>Standard Error</strong>: The standard deviation of the sampling distribution of an estimator is given a special name <strong>standard error</strong>.</p>
+</div>
+<p>Among other things, this helps to distinguish it from the standard deviation of our individual observations <span class="math inline">\(X_i\)</span>.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -452,17 +461,9 @@ E(\hat{\beta}_0|X_1\ldots,X_n)= \beta_0\\
 <section id="estimating-the-variance-of-our-estimators" class="level2">
 <h2 class="anchored" data-anchor-id="estimating-the-variance-of-our-estimators">Estimating the Variance of Our Estimators</h2>
 <p>It’s very important to notice that the expectation and variance of our estimators involve our unknown parameters. This is to be expected. These are theoretical properties of our estimators, and they <em>should</em> vary based on the true distribution of the data.</p>
-<p>For example, in our above examples, the expected value of <span class="math inline">\(\hat\theta\)</span>, <span class="math inline">\(E(\hat\theta)=\theta.\)</span> That’s good! It says that, over repeated realizations of our data, the average value of <span class="math inline">\(\hat\theta\)</span> is <span class="math inline">\(\theta\)</span>. When <span class="math inline">\(E(\hat\theta)=\theta\)</span> we call an estimator <strong>unbiased</strong>.</p>
-<p>So for the expectation, its not a problem that it depends on the unknown parameter, since we mainly want to check that the <span class="math inline">\(E(\hat\theta)\)</span> is equal to <span class="math inline">\(\theta\)</span> (or close).</p>
-<p>However, for the variance of our estimator, we’d really like to have a quantitative idea what the variance is, since the variance gives us an idea of the <em>size</em> of the variations of <span class="math inline">\(\hat\theta\)</span> from it’s mean. The below illustration from a text of Lohr, show different variations between unbiasedness, and variance.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../StaticFigures/lohr-precise-accurate.png" class="img-fluid figure-img" style="width:70.0%" alt="A figure from a text by Lohr showing the difference between accuracy, unbiasedness, and precision."></p>
-<figcaption>Unbiased archers, precise archers, and accurate archers</figcaption>
-</figure>
-</div>
-<p>Knowing the variance of <span class="math inline">\(\bar{X}\)</span> is <span class="math inline">\(\sigma^2/n\)</span> doesn’t tell us that because we don’t know <span class="math inline">\(\sigma^2\)</span>. However, having computed that expression for the variance means we could try to estimate the variance of the estimator.</p>
-<p>And in fact for all of these examples we can do exactly this by plugging in our estimators of the unknown parameters.</p>
+<p>For example, in our above examples, the expected value of <span class="math inline">\(\hat\theta\)</span>, <span class="math inline">\(E(\hat\theta)=\theta,\)</span> so it depends on the unknown <span class="math inline">\(\theta\)</span>. That’s good! It means they are unbiased – <span class="math inline">\(\hat\theta\)</span> itself is a good quantitative estimate of <span class="math inline">\(\theta\)</span>. So for the expectation, its not a problem that it depends on the unknown parameter, since our goal is to check that the <span class="math inline">\(E(\hat\theta)\)</span> is equal to <span class="math inline">\(\theta\)</span> (or close).</p>
+<p>However, for the variance of our estimator, we’d really like to have a quantitative idea what the variance is, since the variance gives us an idea of the <em>size</em> of the variations of <span class="math inline">\(\hat\theta\)</span> from it’s mean. Knowing the variance of <span class="math inline">\(\bar{X}\)</span> is <span class="math inline">\(\sigma^2/n\)</span> doesn’t tell anything about the size of these variations, because we don’t know <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>However, having computed that expression for the variance means we could try to estimate the variance of the estimator. And in fact for all of these examples we can do exactly this by plugging in our estimators of the unknown parameters.</p>
 <div class="PARAGRAPH">
 <p>Proportion</p>
 </div>
