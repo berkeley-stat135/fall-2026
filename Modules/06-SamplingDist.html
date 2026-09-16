@@ -134,7 +134,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/06-SamplingDist.html">Sampling distribution of Estimators</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/06-SamplingDist.html">Sampling distribution of the Men</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -238,7 +238,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Modules/06-SamplingDist.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Sampling distribution of Estimators</span></a>
+ <span class="menu-text">Sampling distribution of the Men</span></a>
   </div>
 </li>
       </ul>
@@ -259,7 +259,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sampling-distribution-of-estimators" id="toc-sampling-distribution-of-estimators" class="nav-link active" data-scroll-target="#sampling-distribution-of-estimators">Sampling distribution of Estimators</a>
+  <li><a href="#sampling-distribution-of-the-men" id="toc-sampling-distribution-of-the-men" class="nav-link active" data-scroll-target="#sampling-distribution-of-the-men">Sampling distribution of the Men</a>
   <ul class="collapse">
   <li><a href="#the-sampling-distribution" id="toc-the-sampling-distribution" class="nav-link" data-scroll-target="#the-sampling-distribution">The Sampling Distribution</a></li>
   <li><a href="#direct-calculation-of-mean-and-variance-of-estimator" id="toc-direct-calculation-of-mean-and-variance-of-estimator" class="nav-link" data-scroll-target="#direct-calculation-of-mean-and-variance-of-estimator">Direct calculation of Mean and Variance of Estimator</a>
@@ -280,13 +280,13 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/06-SamplingDist.html">Sampling distribution of Estimators</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/06-SamplingDist.html">Sampling distribution of the Men</a></li></ol></nav></header>
 
 
 
 
-<section id="sampling-distribution-of-estimators" class="level1">
-<h1>Sampling distribution of Estimators</h1>
+<section id="sampling-distribution-of-the-men" class="level1">
+<h1>Sampling distribution of the Men</h1>
 <div class="READING">
 <div class="block-title">
 <p><strong>Corresponding reading</strong></p>
@@ -302,8 +302,8 @@ window.Quarto = {
 </div>
 <ul>
 <li>What is the sampling distribution of an estimator?</li>
-<li>How do we find the distribution of an estimator?</li>
 <li>What does it tell us about the estimator?</li>
+<li>What is the sampling distribution of a particular estimator, the mean?</li>
 </ul>
 </div>
 <section id="the-sampling-distribution" class="level2">
@@ -319,8 +319,13 @@ window.Quarto = {
 <p>We can use this distribution to ask questions about how <span class="math inline">\(\hat{\mu}\)</span> behaves.</p>
 <p>Two important aspect of the distribution we will consider to begin with:</p>
 <ol type="1">
-<li><p><strong>Expectation of <span class="math inline">\(\hat{\mu}\)</span></strong>: <span class="math display">\[E(\hat{\mu})=\mu.\]</span> We are interested in this quantity to understand whether on average is <span class="math inline">\(\hat{\mu}\)</span> equal to <span class="math inline">\(\mu\)</span>? When an estimator <span class="math inline">\(\hat\theta\)</span> has <span class="math inline">\(E(\hat\theta)=\theta\)</span> we call an estimator <strong>unbiased</strong>. It says that, over repeated realizations of our data, the average value of <span class="math inline">\(\hat\theta\)</span> is <span class="math inline">\(\theta\)</span>.</p></li>
-<li><p><strong>Standard deviation of <span class="math inline">\(\hat{\mu}\)</span></strong> How <span class="math display">\[\sqrt{var(\hat{\mu})}=\sqrt{E[\hat{\mu}-E(\hat{\mu})]^2}.\]</span> This allows us to ask, how much does the estimate vary from its mean from sample to sample? If our estimator is equal to the population parameter on average, then our estimator’s sampling distribution spreads about the mean. The tighter the spread (the smaller the standard deviation), the more accurate the estimator. The below illustration from a text of Lohr, show different variations between unbiasedness and variance.</p></li>
+<li><strong>Expectation of <span class="math inline">\(\hat{\mu}\)</span></strong>: <span class="math display">\[E(\hat{\mu})=\mu.\]</span> We are interested in this quantity to understand whether on average is <span class="math inline">\(\hat{\mu}\)</span> equal to <span class="math inline">\(\mu\)</span>?</li>
+</ol>
+<div id="def-sterror" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Unbiased)</strong></span> When an estimator <span class="math inline">\(\hat\theta\)</span> has <span class="math inline">\(E(\hat\theta)=\theta\)</span> we call an estimator <strong>unbiased</strong>. It says that, over repeated realizations of our data, the average value of <span class="math inline">\(\hat\theta\)</span> is <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<ol start="2" type="1">
+<li><strong>Standard deviation of <span class="math inline">\(\hat{\mu}\)</span></strong> How <span class="math display">\[\sqrt{var(\hat{\mu})}=\sqrt{E[\hat{\mu}-E(\hat{\mu})]^2}.\]</span> This allows us to ask, how much does the estimate vary from its mean from sample to sample? If our estimator is equal to the population parameter on average, then our estimator’s sampling distribution spreads about the mean. The tighter the spread (the smaller the standard deviation), the more accurate the estimator. The below illustration from a text of Lohr, show different variations between unbiasedness and variance.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -329,10 +334,10 @@ window.Quarto = {
 </figure>
 </div>
 <p>We have a special term for the standard deviation of an estimator,</p>
-<div class="def">
-<p><strong>Standard Error</strong>: The standard deviation of the sampling distribution of an estimator is given a special name <strong>standard error</strong>.</p>
+<div id="def-sterror" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Standard Error)</strong></span> The standard deviation of the sampling distribution of an estimator is called the <strong>standard error</strong>.</p>
 </div>
-<p>Among other things, this helps to distinguish it from the standard deviation of our individual observations <span class="math inline">\(X_i\)</span>.</p>
+<p>Among other things, the term “standard error” helps to distinguish it from the standard deviation of our individual observations <span class="math inline">\(X_i\)</span>.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -475,7 +480,7 @@ E(\hat{\beta}_0|X_1\ldots,X_n)= \beta_0\\
 <p>Mean</p>
 </div>
 <p>How about the variance of our mean, <span class="math inline">\(\hat{\mu}\)</span>? We have <span class="math display">\[\sigma^2_{\hat{\mu}}=\frac{\sigma^2}{n}\]</span> where <span class="math inline">\(\sigma^2\)</span> is the variance <em>of our individual <span class="math inline">\(X_i\)</span></em>. Well, we’ve seen a standard estimate of <span class="math inline">\(\sigma^2\)</span> is <span class="math display">\[S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2\]</span> so we can estimate</p>
-<p><span class="math display">\[\sigma^2_{\hat{\mu}}=\frac{1}{n}S^2\]</span> Notice how it is important to distinguish between our estimator of the variance of an <em>individual</em> <span class="math inline">\(X_i\)</span> and the estimator of the variance of the estimator <span class="math inline">\(\hat{\mu}\)</span>! <span class="math inline">\(S^2\)</span> is <em>not</em> an estimator of the variance of <span class="math inline">\(\bar{X}\)</span>.</p>
+<p><span class="math display">\[\hat\sigma^2_{\hat{\mu}}=\frac{1}{n}S^2\]</span> Notice how it is important to distinguish between our estimator of the variance of an <em>individual</em> <span class="math inline">\(X_i\)</span> and the estimator of the variance of the estimator <span class="math inline">\(\hat{\mu}\)</span>! <span class="math inline">\(S^2\)</span> is <em>not</em> an estimator of the variance of <span class="math inline">\(\bar{X}\)</span>.</p>
 <div class="PARAGRAPH">
 <p>Simple Regression</p>
 </div>
