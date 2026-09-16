@@ -404,26 +404,38 @@ Note
 </section>
 <section id="example-simple-regression" class="level3">
 <h3 class="anchored" data-anchor-id="example-simple-regression">Example: Simple Regression</h3>
-<p>Recall we have numerous ways we can express the estimator <span class="math inline">\(\hat{\beta}_1\)</span>. The easiest for what follows is <span class="math display">\[
-\hat\beta_1=\frac{\sum_{i=1}^n(X_i-\bar{X})Y_i}{\sum_{i=1}(X_i-\bar{X})^2}
-\]</span> Remember in our simple regression model, we are <em>conditioning</em> on <span class="math inline">\(X_i=x_i\)</span>, i.e.&nbsp;treating them as fixed and non-random. So for expectations, they will behave like constants.</p>
+<p>Recall we have numerous ways we can express the estimator <span class="math inline">\(\hat{\beta}_1\)</span>, <span class="math display">\[
+\hat\beta_1=\frac{\sum_{i=1}^n Y_iX_i-n\bar{Y}\bar{X}}{\sum_{i=1}^n X_i^2-n\bar{X}^2}=\frac{\sum_{i=1}^n(X_i-\bar{X})(Y_i-\bar{Y})}{\sum_{i=1}^n(X_i-\bar{X})^2}=\frac{\sum_{i=1}^n(X_i-\bar{X})Y_i}{\sum_{i=1}(X_i-\bar{X})^2}
+\]</span> The first equality we showed in the earlier module on the MLE estimate of <span class="math inline">\(\beta_1\)</span> (we use <span class="math inline">\(\sum_{i=1}(X_i-\bar{X})^2=\sum_i X_i^2-n\bar{X}^2\)</span> and similarly for the numerator). The second equality follows because <span class="math inline">\(\sum_{i=1}^n(X_i-\bar{X})=0\)</span>.</p>
+<p>Remember in our simple regression model, we are <em>conditioning</em> on <span class="math inline">\(X_i=x_i\)</span>, i.e.&nbsp;treating them as fixed and non-random. So for expectations, they will behave like constants.</p>
 <div class="PARAGRAPH">
 <p>Expectation of <span class="math inline">\(\hat{\beta}_1\)</span></p>
 </div>
-<p>We have <span class="math display">\[
-E(\hat{\beta}_1|X_1=x_1,\ldots,X_n=x_n)=\frac{1}{\sum_{i=1}^n(x_i-\bar{x})^2}\sum_{i=1}^n (x_i-\bar{x})E (Y_i|X_1=x_1,\ldots,X_n=x_n)
-\]</span> If we use the assumption of our linear model, we have that <span class="math display">\[E(Y_i|X_1=x_1,\ldots,X_n=x_n)=\beta_0+\beta_1 x_i\]</span> which gives us that <span class="math display">\[
+<p>I’m going to use the middle expression for finding the conditional expectation of <span class="math inline">\(\beta_1\)</span> (it works either way, but is slightly shorter like this). We have <span class="math display">\[
+E(\hat{\beta}_1|X_1=x_1,\ldots,X_n=x_n)=\frac{1}{\sum_{i=1}^n(x_i-\bar{x})^2}\sum_{i=1}^n (x_i-\bar{x})E (Y_i-\bar{Y})|X_1=x_1,\ldots,X_n=x_n)
+\]</span></p>
+<p>If we use the assumption of our linear model, we have that <span class="math display">\[E(Y_i|X_1=x_1,\ldots,X_n=x_n)=\beta_0+\beta_1 x_i\]</span> which gives us that <span class="math display">\[
 \begin{aligned}
 E(\bar{Y_i}|X_1=x_1,\ldots,X_n=x_n)&amp;=\frac{1}{n}\sum_{i=1}^n E(Y_i|X_1=x_1,\ldots,X_n=x_n)\\
 &amp;=\frac{1}{n}\sum_{i=1}^n (\beta_0+\beta_1 x_i)\\
 &amp;=\beta_0+\beta_1\bar{x}
 \end{aligned}\]</span> Putting this together we have <span class="math display">\[
-E(\hat{\beta}_1|X_1=x_1,\ldots,X_n=x_n)=\frac{1}{\sum_{i=1}^n(x_i-\bar{x})^2}\sum_{i=1}^n \beta_1(x_i-\bar{x})^2=\beta_1
+\begin{aligned}
+E(\hat{\beta}_1|X_1=x_1,\ldots,X_n=x_n)&amp;=\frac{1}{\sum_{i=1}^n(x_i-\bar{x})^2}\sum_{i=1}^n (x_i-\bar{x})[(\beta_0+\beta_1x_i)-(\beta_0+\beta_1\bar{x})]\\
+&amp;= \frac{1}{\sum_{i=1}^n(x_i-\bar{x})^2} \sum_{i=1}^n\beta_1 (x_i-\bar{x})^2\\
+&amp;=\beta_1\frac{\sum_{i=1}^n (x_i-\bar{x})^2}{\sum_{i=1}^n(x_i-\bar{x})^2}=\beta_1
+\end{aligned}
 \]</span></p>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Can you show that <span class="math inline">\(E(\beta_1|X)=\beta_1\)</span>, using the other formula for <span class="math inline">\(\hat\beta_1\)</span>? i.e.&nbsp;with <span class="math display">\[\hat\beta_1=\frac{\sum_{i=1}^n(X_i-\bar{X})Y_i}{\sum_{i=1}(X_i-\bar{X})^2}\]</span></p>
+</div>
 <div class="PARAGRAPH">
 <p>Variance of <span class="math inline">\(\hat{\beta}_1\)</span></p>
 </div>
-<p>We can similarly calculate the variance of <span class="math inline">\(\hat{\beta}_1\)</span> <span class="math display">\[\begin{aligned}
+<p>We can similarly calculate the variance of <span class="math inline">\(\hat{\beta}_1\)</span> and in the end we will get (proof follows): <span class="math display">\[\begin{aligned}
 \mathrm{Var}(\hat{\beta}_1|X_1=x_1,\ldots,X_n=x_n)
 &amp;= \frac{\sigma^2}{\sum_{i=1}^n(x_i-\bar{x})^2}\\
 &amp;= \frac{\sigma^2}{n}\frac{1}{\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2}\\
@@ -432,6 +444,7 @@ E(\hat{\beta}_1|X_1=x_1,\ldots,X_n=x_n)=\frac{1}{\sum_{i=1}^n(x_i-\bar{x})^2}\su
 \]</span> I have reworked this equation to emphasize that we still have the variance of our estimator <span class="math inline">\(\hat{\beta}_1\)</span> is decreasing with more data, and in fact looks similar to the variance of the regular mean, except for the factor <span class="math inline">\(1/\hat{\sigma}_{x}^{2}\)</span>. Again, since we consider the <span class="math inline">\(X\)</span> values fixed, this is a fixed constant.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>In what follows I will drop the explicit conditioning on <span class="math inline">\(X_1,\ldots,X_n\)</span>, so if I write <span class="math inline">\(var(Y)\)</span> it means <span class="math inline">\(var(Y|X_1=x_1,\ldots,X_n=x_n)\)</span></p>
+<p>I will also use the last version of <span class="math inline">\(\beta_1\)</span> as it makes the calculations much simpler, <span class="math display">\[\hat\beta_1=\frac{\sum_{i=1}^n(X_i-\bar{X})Y_i}{\sum_{i=1}(X_i-\bar{X})^2}?\]</span></p>
 <p><span class="math display">\[
 \begin{aligned}
 var(\hat\beta_1)&amp;=var\left(\frac{\sum_{i=1}^n (x_i-\bar{x})(Y_i-\bar{Y})}{\sum_{i=1}^n(x_i-\bar{x})^2}\right)\\
