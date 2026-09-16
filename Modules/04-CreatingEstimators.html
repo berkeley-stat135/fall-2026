@@ -679,12 +679,18 @@ Check your work
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
 </div>
-<p>Consider our case of two groups that we briefly discussed as a special case of regression, <span class="math display">\[Y |X=x \sim \begin{cases}
-N(\alpha_1,\sigma_1^2), &amp; x=1\\
-N(\alpha_0,\sigma_0^2), &amp; x=0
+<p>Consider our case of two groups that we briefly discussed as a special case of regression, <span class="math display">\[Y |X \sim \begin{cases}
+N(\alpha_1,\sigma_1^2), &amp; X=1\\
+N(\alpha_0,\sigma_0^2), &amp; X=0
 \end{cases}
-\]</span> Show that the maximum likelihood estimators of these parameters is:</p>
-<p>You can simplify your work by setting your notation by assuming <span class="math inline">\(Y_1,\ldots,Y_{n_0}\)</span> are the <span class="math inline">\(Y\)</span> values for which <span class="math inline">\(X=0\)</span> and <span class="math inline">\(Y_{n_0+1},\ldots,Y_{n_0+n_1}\)</span> are the <span class="math inline">\(Y\)</span> values for which <span class="math inline">\(X=1\)</span>, so there are <span class="math inline">\(n_0\)</span> values with <span class="math inline">\(X=0\)</span> and <span class="math inline">\(n_1\)</span> values with <span class="math inline">\(X=1\)</span>.</p>
+\]</span> We will simplify our notation by setting your notation by assuming <span class="math inline">\(Y_1,\ldots,Y_{n_0}\)</span> are the <span class="math inline">\(Y\)</span> values for which <span class="math inline">\(X=0\)</span> and <span class="math inline">\(Y_{n_0+1},\ldots,Y_{n_0+n_1}\)</span> are the <span class="math inline">\(Y\)</span> values for which <span class="math inline">\(X=1\)</span>, so there are <span class="math inline">\(n_0\)</span> values with <span class="math inline">\(X=0\)</span> and <span class="math inline">\(n_1\)</span> values with <span class="math inline">\(X=1\)</span>.</p>
+<p>Show that the maximum likelihood estimators of these parameters are: <span class="math display">\[
+\begin{gathered}
+\hat\alpha_0=\bar{Y}_0=\frac{1}{n_0}\sum_{i=1}^{n_0} Y_i,\hspace{3ex}
+\hat\alpha_1=\bar{Y}_1=\frac{1}{n_1}\sum_{i=n_0+1}^{n_1+n_0} Y_i\\
+\hat\sigma_0^2=\frac{1}{n_0}\sum_{i=1}^{n_0} (Y_i-\bar{Y}_0)^2,\hspace{3ex}
+\hat\sigma_1^2=\frac{1}{n_1}\sum_{i=n_0+1}^{n_1+n_0} (Y_i-\bar{Y}_1)^2\\\end{gathered}
+\]</span></p>
 </div>
 </section>
 </section>
