@@ -331,7 +331,7 @@ window.Quarto = {
 <p><span class="theorem-title"><strong>Definition 1 (Unbiased)</strong></span> When an estimator <span class="math inline">\(\hat\theta\)</span> has <span class="math inline">\(E(\hat\theta)=\theta\)</span> we call an estimator <strong>unbiased</strong>. It says that, over repeated realizations of our data, the average value of <span class="math inline">\(\hat\theta\)</span> is <span class="math inline">\(\theta\)</span>.</p>
 </div>
 <ol start="2" type="1">
-<li><strong>Standard deviation of <span class="math inline">\(\hat{\mu}\)</span></strong> We can consider the standard deviation of our estimator, <span class="math display">\[\sqrt{var(\hat{\mu})}=\sqrt{E[\hat{\mu}-E(\hat{\mu})]^2}.\]</span> This allows us to ask, how much does the estimate vary from its mean from sample to sample? If our estimator is equal to the population parameter on average, then our estimator’s sampling distribution spreads about the mean. The smaller the standard deviation, then the tighter the spread of <span class="math inline">\(\hat{\mu}\)</span> over repeated samples, and thus the more accurate the estimator. The below illustration from a text of Lohr, illustrate the different variations of the expectation and variance by analogy to an archer shooting at a target.</li>
+<li><strong>Standard deviation of <span class="math inline">\(\hat{\mu}\)</span></strong> We can consider the standard deviation of our estimator, <span class="math display">\[\sqrt{var(\hat{\mu})}=\sqrt{E[\hat{\mu}-E(\hat{\mu})]^2}.\]</span> This allows us to ask, how much does the estimate vary from its mean from sample to sample? If our estimator is equal to the population parameter on average, then our estimator’s sampling distribution spreads about the mean. The Smaller the standard deviation, then the tighter the spread of <span class="math inline">\(\hat{\mu}\)</span> over repeated samples, and thus the more accurate the estimator. The below illustration from a text of Lohr, illustrate the different variations of the expectation and variance by analogy to an archer shooting at a target.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -390,7 +390,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>It is very important property that we like to see of our statistical estimators: that with more data, the variance of the estimator gets smaller, so more and more tightly focused around the parameter <span class="math inline">\(\theta\)</span> that we want to estimate.</p>
+<p>It is very important property that we like to see of our statistical estimators: that with more data, the variance of the estimator gets Smaller, so more and more tightly focused around the parameter <span class="math inline">\(\theta\)</span> that we want to estimate.</p>
 </div>
 </div>
 <div class="QUESTION">
@@ -492,14 +492,26 @@ E(\hat{\beta}_0|X_1\ldots,X_n)= \beta_0\\
 <p>However, for the variance of our estimator, we’d really like to have a quantitative idea what the variance is, since the variance gives us an idea of the <em>size</em> of the variations of <span class="math inline">\(\hat\theta\)</span> from it’s mean. Knowing the variance of <span class="math inline">\(\bar{X}\)</span> is <span class="math inline">\(\sigma^2/n\)</span> doesn’t tell anything about the size of these variations, because we don’t know <span class="math inline">\(\sigma^2\)</span>.</p>
 <p>However, having computed that expression for the variance means we could try to estimate the variance of the estimator. And in fact for all of these examples we can do exactly this by plugging in our estimators of the unknown parameters.</p>
 <div class="PARAGRAPH">
-<p>Proportion</p>
-</div>
-<p>Let’s start with the proportion, which is easiest, <span class="math display">\[\sigma^2_{\hat{\pi}}=\frac{\pi(1-\pi)}{n}\]</span> So a natural estimator is <span class="math display">\[\hat\sigma^2_{\hat{\pi}}=\frac{\hat\pi(1-\hat\pi)}{n}\]</span></p>
-<div class="PARAGRAPH">
 <p>Mean</p>
 </div>
 <p>How about the variance of our mean, <span class="math inline">\(\hat{\mu}\)</span>? We have <span class="math display">\[\sigma^2_{\hat{\mu}}=\frac{\sigma^2}{n}\]</span> where <span class="math inline">\(\sigma^2\)</span> is the variance <em>of our individual <span class="math inline">\(X_i\)</span></em>. Well, we’ve seen a standard estimate of <span class="math inline">\(\sigma^2\)</span> is <span class="math display">\[S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2\]</span> so we can estimate</p>
 <p><span class="math display">\[\hat\sigma^2_{\hat{\mu}}=\frac{1}{n}S^2\]</span> Notice how it is important to distinguish between our estimator of the variance of an <em>individual</em> <span class="math inline">\(X_i\)</span> and the estimator of the variance of the estimator <span class="math inline">\(\hat{\mu}\)</span>! <span class="math inline">\(S^2\)</span> is <em>not</em> an estimator of the variance of <span class="math inline">\(\bar{X}\)</span>.</p>
+<div class="PARAGRAPH">
+<p>Proportion</p>
+</div>
+<p>The proportion is a mean, so again, <span class="math display">\[\sigma^2_{\hat{\pi}}=\frac{\sigma}{n}\]</span> where <span class="math inline">\(\sigma^2\)</span> is the variance of an individual observation. In the case of the binary data, however, we know that <span class="math inline">\(\sigma^2=\pi(1-\pi)\)</span></p>
+<p>So we have two ways we could estimate <span class="math inline">\(\sigma^2\)</span>,</p>
+<ol type="1">
+<li><span class="math inline">\(\hat{\sigma}^2=\hat\pi(1-\hat\pi)\)</span></li>
+<li><span class="math inline">\(\hat{\sigma}^2=S^2\)</span> (like any mean).</li>
+</ol>
+<p>In fact (was a question in earlier module!), <span class="math inline">\(S^2\)</span> is related to <span class="math inline">\(\hat\pi(1-\hat\pi)\)</span>, because we can use the trick that <span class="math inline">\(X_i^2=X_i\)</span>, <span class="math display">\[
+\begin{aligned}
+S^2&amp;=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2\\
+&amp;=\frac{1}{n-1}\left(\sum_{i=1}^n(X_i-2X_i\hat{\pi})+n\hat{\pi}^2\right)\\
+&amp;=\frac{1}{n-1}(n\hat{\pi}-2n\hat{\pi}^2+n\hat{\pi}^2)=\frac{n}{n-1}\hat{\pi}(1-\hat{\pi})
+\end{aligned}
+\]</span> In other words, <span class="math inline">\(\hat\pi(1-\hat\pi)\)</span> is our estimate of variance, only using <span class="math inline">\(1/n\)</span> instead of <span class="math inline">\(1/(n-1),\)</span> <span class="math display">\[\hat{\sigma}^2=\frac{1}{n}\sum(X_i-\bar{X})=\hat\pi(1-\hat\pi).\]</span> So in fact our two choices boil down to our familiar choice of using <span class="math inline">\(1/n\)</span> versus <span class="math inline">\(1/(n-1)\)</span> for estimating the variance. However, when we are estimating proportions, we generally use <span class="math display">\[\hat{\sigma}^2=\hat\pi(1-\hat\pi),\]</span> which gets us <span class="math display">\[\hat\sigma^2_{\hat{\pi}}=\frac{\hat\pi(1-\hat\pi)}{n}.\]</span></p>
 <div class="PARAGRAPH">
 <p>Simple Regression</p>
 </div>
@@ -610,11 +622,26 @@ Note
 </div>
 <p>This is because with the mean I have the Central Limit Theorem:</p>
 <div id="thm-centralLimitThm" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Central Limit Theorem)</strong></span> For <span class="math inline">\(n\)</span> independent observations from a population with mean <span class="math inline">\(\mu\)</span> and finite standard deviation <span class="math inline">\(\sigma\)</span>, the standardized version of the sample mean <span class="math display">\[\frac{\bar{X}-\mu}{\sigma_{\bar{X}}}=\frac{\sqrt{n}(\bar{Y}-\mu)}{\sigma}\overset{D}{\rightarrow} N(0,1)\]</span></p>
+<p><span class="theorem-title"><strong>Theorem 1 (Central Limit Theorem (CLT))</strong></span> For <span class="math inline">\(n\)</span> independent observations from a population with mean <span class="math inline">\(\mu\)</span> and finite standard deviation <span class="math inline">\(\sigma\)</span>, the standardized version of the sample mean <span class="math display">\[\frac{\bar{X}-\mu}{\sigma_{\bar{X}}}=\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}\overset{D}{\rightarrow} N(0,1)\]</span></p>
 </div>
 <p>In words, this says that for a large number of samples <span class="math inline">\(n\)</span>, of i.i.d. <span class="math inline">\(X_i\)</span> with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>, then <span class="math inline">\(\bar{X}\)</span> is approximately normal with mean <span class="math inline">\(\mu\)</span> and standard error <span class="math inline">\(\sigma_{\bar{X}}=\sigma/\sqrt{n}\)</span>.</p>
 <p>This is an <em>asymptotic</em> statement, meaning it is a mathematical statement about the limit behavior or convergence of <span class="math inline">\(\bar{X}\)</span> as <span class="math inline">\(n\rightarrow\infty\)</span>.</p>
+<div id="def-convDist" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Convergence in Distribution)</strong></span> Specifically, convergence in distribution of <span class="math inline">\(Z_n\)</span> to another random variable <span class="math inline">\(Z\)</span>, <span class="math display">\[Z_n \overset{D}{\rightarrow} Z\]</span> means that the CDF <span class="math inline">\(F_n(z)\)</span> of <span class="math inline">\(Z_n\)</span> converges to the CDF <span class="math inline">\(F(z)\)</span> of <span class="math inline">\(Z\)</span> at every point for which <span class="math inline">\(F\)</span> is continuous.</p>
+</div>
 <p>For some estimators, we will have exactly knowledge of the sampling distribution (for a particular set of parametric assumptions), but for many estimators, even with parametric assumptions, we will not be able to analytically express the sampling distribution of the estimator.</p>
+<p>In interpreting the CLT, it is important to keep the distinction between the distribution of <span class="math inline">\(X_i\)</span> versus <span class="math inline">\(\bar{X}\)</span> – this goes back to the difference between the data distribution of individual observations and the sampling distribution of the estimator.</p>
+<p>Here are examples of the histograms of the mean simulated for several distributions for different sample sizes. Notice that even though the distribution of the individual <span class="math inline">\(X_i\)</span> is very non-normal for the Beta and Exponential Distribution, you start to see the central limit theorem kicking in, with a tighter and more normal distribution as <span class="math inline">\(n\)</span> gets larger. The last distribution (Cauchy), does not behave however. This is because the Cauchy distribution doesn’t have a finite variance, which is a requirement of the CLT, so the CLT doesn’t apply. The mean of Cauchy data continues to get very large values of the mean regardless of sample size (and indeed, I had to cut off the bounds of the histograms – otherwise it would go into the hundreds)</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="06-SamplingDist_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="1728"></p>
+<figcaption>Sampling Distribution of mean for different distributions and sample sizes</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 
@@ -632,7 +659,7 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Notice even if we considered <span class="math inline">\(X\)</span> random, <span class="math inline">\(\hat{\sigma}_{x}^2\)</span> is an estimate of the estimate of the shared variance of a <em>single</em> <span class="math inline">\(X\)</span>, and so is not necessarily getting smaller with <span class="math inline">\(n\)</span> – though it might be getting closer to the true variance <span class="math inline">\(\sigma^2_X\)</span>, whatever that is.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Notice even if we considered <span class="math inline">\(X\)</span> random, <span class="math inline">\(\hat{\sigma}_{x}^2\)</span> is an estimate of the estimate of the shared variance of a <em>single</em> <span class="math inline">\(X\)</span>, and so is not necessarily getting Smaller with <span class="math inline">\(n\)</span> – though it might be getting closer to the true variance <span class="math inline">\(\sigma^2_X\)</span>, whatever that is.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>I have to have <em>some</em> assumptions, like that the distribution has enough moments, which rules out some distributions. But I’m not required to specify a specific distribution.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
