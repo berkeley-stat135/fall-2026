@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -276,15 +311,15 @@ window.Quarto = {
   <li><a href="#back-to-reality-unknown-sigma2" id="toc-back-to-reality-unknown-sigma2" class="nav-link" data-scroll-target="#back-to-reality-unknown-sigma2">Back to Reality: unknown <span class="math inline">\(\sigma^2\)</span></a>
   <ul class="collapse">
   <li><a href="#confidence-intervals-using-the-t-distribution" id="toc-confidence-intervals-using-the-t-distribution" class="nav-link" data-scroll-target="#confidence-intervals-using-the-t-distribution">Confidence intervals using the <span class="math inline">\(t\)</span>-distribution</a></li>
+  <li><a href="#example-chicago-income-data" id="toc-example-chicago-income-data" class="nav-link" data-scroll-target="#example-chicago-income-data">Example – Chicago Income Data</a></li>
+  <li><a href="#example-proportion" id="toc-example-proportion" class="nav-link" data-scroll-target="#example-proportion">Example – Proportion</a></li>
   </ul></li>
   <li><a href="#the-t-distribution" id="toc-the-t-distribution" class="nav-link" data-scroll-target="#the-t-distribution">The <span class="math inline">\(t\)</span>-Distribution</a>
   <ul class="collapse">
   <li><a href="#properties-of-the-t-distribution" id="toc-properties-of-the-t-distribution" class="nav-link" data-scroll-target="#properties-of-the-t-distribution">Properties of the <span class="math inline">\(t\)</span>-distribution</a></li>
   <li><a href="#distribution-of-t-key-theorems" id="toc-distribution-of-t-key-theorems" class="nav-link" data-scroll-target="#distribution-of-t-key-theorems">Distribution of <span class="math inline">\(T\)</span>: Key Theorems</a></li>
-  <li><a href="#asymptotic-confidence-intervals-wald-statistics" id="toc-asymptotic-confidence-intervals-wald-statistics" class="nav-link" data-scroll-target="#asymptotic-confidence-intervals-wald-statistics">Asymptotic Confidence Intervals (Wald Statistics)</a></li>
   </ul></li>
   <li><a href="#planning-to-get-a-ci-of-a-certain-width" id="toc-planning-to-get-a-ci-of-a-certain-width" class="nav-link" data-scroll-target="#planning-to-get-a-ci-of-a-certain-width">Planning to get a CI of a certain width</a></li>
-  <li><a href="#role-of-pivotal-statistic-in-constructing-ci" id="toc-role-of-pivotal-statistic-in-constructing-ci" class="nav-link" data-scroll-target="#role-of-pivotal-statistic-in-constructing-ci">Role of Pivotal Statistic in constructing CI</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -356,6 +391,18 @@ Note
 <p>In probability, you often see expressions like <span class="math inline">\(P(2\leq X \leq 3)\)</span> where <span class="math inline">\(X\)</span> is the random variable. Our above formula for a CI is confusing, because it makes it look like the value <span class="math inline">\(\theta\)</span> is random because it is in the middle of the expression: <span class="math display">\[P(T_L(X)\leq \theta \leq T_U(X))=1-\alpha\]</span> Sometimes it can help to see the probability expression written like this instead, <span class="math display">\[P\big(T_L(X)\leq \theta \text{ and } T_U(X) \geq \theta\big)=1-\alpha.\]</span> This can help to anchor which parts are random (any functions of <span class="math inline">\(X\)</span>) versus fixed (<span class="math inline">\(\theta\)</span>)</p>
 </div>
 </div>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>20 different polling companies have conducted independent surveys to estimate the proportion of US voters who approve of RFK Jr’s stewardship of Health and Human Services. Each company estimates this proportion using a 95% confidence interval. About how many do you think will be successful in covering the true proportion?</p>
+</div>
+<details>
+<summary>
+Check your answer
+</summary>
+If we let <span class="math inline">\(Y\)</span> be the number of confidence intervals out of 20 that are successful, then since each interval has a 0.95 chance of success, we see that <span class="math inline">\(Y\sim Bin(20, 0.95)\)</span>. Therefore the expected number of successful intervals is <span class="math inline">\(E(Y) = 20\times 0.95 = 19.\)</span>
+</details>
 </section>
 <section id="quantiles" class="level3">
 <h3 class="anchored" data-anchor-id="quantiles">Quantiles</h3>
@@ -437,7 +484,7 @@ Note
 <li>We could use the fact that the central limit theorem (CLT) tells us that with only minimal assumptions, <span class="math inline">\(\bar{X}\)</span> is approximately distributed <span class="math inline">\(N(\mu,\sigma/n)\)</span> even if the <span class="math inline">\(X_i\)</span> are not themselves normal, i.e.&nbsp;<span class="math display">\[\dfrac{\overline{X}-\mu}{\sigma_{\overline{X}}} \approx \mathcal{N}(0,1)\]</span></li>
 </ol>
 <p>Putting these together would give us an potential 95% confidence interval for <span class="math inline">\(\mu\)</span>:</p>
-<p><span class="math display">\[\bar{X}\pm 1.96\sqrt{\frac{S^2}{n}}\]</span></p>
+<p><span class="math display">\[\bar{X}\pm 1.96\frac{S}{\sqrt{n}}\]</span></p>
 <p><strong>But is this a valid confidence interval?</strong> To be a valid confidence inverval requires that <span class="math display">\[
 \begin{aligned}
 0.95&amp;=P(\bar{X}- 1.96\sqrt{\frac{S^2}{n}}\leq \mu \leq \bar{X}+ 1.96\sqrt{\frac{S^2}{n}})\\
@@ -446,7 +493,7 @@ Note
 \]</span> What do I know about the distribution of <span class="math display">\[T=\frac{\bar{X}-\mu}{S/\sqrt{n}}\hspace{3ex}?\]</span> This is quite a different random variable than before. Now we have randomness in both the numerator (<span class="math inline">\(\bar{X}\)</span>) <em>and</em> the denominator (<span class="math inline">\(S\)</span>), so <span class="math inline">\(T\)</span> is a function of <em>two</em> random variables. Having <span class="math inline">\(S\)</span> in the denominator results in more variability of <span class="math inline">\(T\)</span>. If <span class="math inline">\(n\)</span> is large, then <span class="math inline">\(S^2\)</span> as an estimate of <span class="math inline">\(\sigma^2\)</span> will be very close to <span class="math inline">\(\sigma^2\)</span>, so it might not be a big difference to our previous <span class="math inline">\(Z\)</span> random variable. But if <span class="math inline">\(n\)</span> is small, then <span class="math inline">\(S^2\)</span> as an estimate of <span class="math inline">\(\sigma^2\)</span> can be noisy, adding more variability to <span class="math inline">\(T\)</span> than we would expect for a <span class="math inline">\(N(0,1)\)</span>.</p>
 <p>Thus, there are two answers to the question: what is the distribution of <span class="math inline">\(T\)</span>?</p>
 <ol type="1">
-<li>From an asymptotic perspective (<span class="math inline">\(n\)</span> large), <span class="math inline">\(T\)</span> converges to a <span class="math inline">\(N(0,1)\)</span> distribution, <span class="math display">\[T \overset{D}{\rightarrow}  N(0,1).\]</span> (when we dive into asymptotics, we will discuss why we can replace <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(S^2\)</span> more fully).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> So in large sample sizes, the above confidence interval, <span class="math display">\[\bar{X}\pm z_\alpha \sqrt{\frac{S^2}{n}}\]</span> where we still use <span class="math inline">\(z_\alpha\)</span> and simply plug in <span class="math inline">\(S\)</span> for <span class="math inline">\(\sigma\)</span>, will be approximately valid, meaning the probability that the CI covers the true <span class="math inline">\(\mu\)</span> is approaching 0.95 as <span class="math inline">\(n \rightarrow \infty.\)</span> Even better, <span class="math inline">\(n\)</span> doesn’t have to be very large for this to be a good approximation (e.g.&nbsp;<span class="math inline">\(n&gt;30-50\)</span> usually suffices).</li>
+<li>From an asymptotic perspective (<span class="math inline">\(n\)</span> large), <span class="math inline">\(T\)</span> converges to a <span class="math inline">\(N(0,1)\)</span> distribution, <span class="math display">\[T \overset{D}{\rightarrow}  N(0,1).\]</span> (when we dive into asymptotics, we will discuss why we can replace <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(S^2\)</span> more fully).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> So in large sample sizes, the above confidence interval, <span class="math display">\[\bar{X}\pm z_\alpha \frac{S}{\sqrt{n}}\]</span> where we still use <span class="math inline">\(z_\alpha\)</span> and simply plug in <span class="math inline">\(S\)</span> for <span class="math inline">\(\sigma\)</span>, will be approximately valid, meaning the probability that the CI covers the true <span class="math inline">\(\mu\)</span> is approaching 0.95 as <span class="math inline">\(n \rightarrow \infty.\)</span> Even better, <span class="math inline">\(n\)</span> doesn’t have to be very large for this to be a good approximation (e.g.&nbsp;<span class="math inline">\(n&gt;30-50\)</span> usually suffices).</li>
 <li>However, from a finite sample perspective (<span class="math inline">\(n\)</span> small), things are harder. <span class="math inline">\(T\)</span> does <em>not</em> follow a <span class="math inline">\(N(0,1)\)</span> distribution, <em>even if <span class="math inline">\(X_i\sim N(\mu,\sigma^2)\)</span></em>.</li>
 </ol>
 <p>So what can we do for small <span class="math inline">\(n\)</span>? In fact, if <span class="math inline">\(X_i\sim N(\mu,\sigma^2)\)</span>, then <span class="math inline">\(T\)</span> follows a distribution called the <strong><span class="math inline">\(t\)</span>-distribution</strong>. The <span class="math inline">\(t\)</span>-distribution is not the same as a <span class="math inline">\(N(0,1)\)</span> distribution, so <span class="math inline">\(z_\alpha\)</span> is not the right value to use, but we can instead use the corresponding quantile of the <span class="math inline">\(t\)</span>-distribution and get valid CI.</p>
@@ -542,19 +589,112 @@ P\!\left(-t_{\alpha/2,\,n-1} \le \frac{\bar{X}-\mu}{S/\sqrt{n}} \le t_{\alpha/2,
 </table>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="PARAGRAPH">
+<p>When to use <span class="math inline">\(t\)</span> versus <span class="math inline">\(N(0,1)\)</span>?</p>
 </div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
 <p>If <span class="math inline">\(n\)</span> is large (e.g.&nbsp;<span class="math inline">\(n&gt;50\)</span>), its almost equivalent to just use <span class="math inline">\(z_\alpha\)</span> instead, unless you are picking a <em>very</em> small value of <span class="math inline">\(\alpha\)</span>. For most “standard” values of <span class="math inline">\(\alpha\)</span>, like <span class="math inline">\(0.01\)</span> or <span class="math inline">\(0.05\)</span>, there will not be a meaningful difference, particularly relative to other sources of possible error in your analysis.</p>
+<p>However, we see that we will always get a wider confidence interval with a <span class="math inline">\(t\)</span>-distribution. This is because the <span class="math inline">\(t\)</span> distribution has wider tails than the <span class="math inline">\(N(0,1)\)</span>, so the <span class="math inline">\(t\)</span> quantiles are always larger in absolute value. This means you will indicate less confidence in your estimate with the <span class="math inline">\(t\)</span> distribution, regardless of whether the normality assumption makes sense or not.</p>
+<p>For this reason, the <span class="math inline">\(t\)</span> is always the more conservative choice, even if we are not sure about the normality assumption. Thus the <span class="math inline">\(t\)</span> distribution is in practice always preferred over the <span class="math inline">\(z\)</span>-based confidence intervals (its just that at a certain point they don’t really give you a different answer).</p>
+</section>
+<section id="example-chicago-income-data" class="level3">
+<h3 class="anchored" data-anchor-id="example-chicago-income-data">Example – Chicago Income Data</h3>
+<p>Let’s look at some data from the book of the annual income for heads of households living in public housing in Chicago<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. It consists of a random sample of 40 households.</p>
+<p>We can easily calculate a 95% CI for this data:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>chicago<span class="ot">&lt;-</span><span class="fu">read.table</span>(<span class="st">"https://stat4ds.rwth-aachen.de/data/Chicago.dat"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>meanIncome<span class="ot">&lt;-</span><span class="fu">mean</span>(chicago<span class="sc">$</span>income)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sdIncome<span class="ot">&lt;-</span><span class="fu">sd</span>(chicago<span class="sc">$</span>income)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>seMean<span class="ot">&lt;-</span>sdIncome<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">nrow</span>(chicago))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>tquantile<span class="ot">&lt;-</span><span class="fu">qt</span>((<span class="dv">1</span><span class="fl">-0.05</span><span class="sc">/</span><span class="dv">2</span>),<span class="at">df=</span><span class="fu">nrow</span>(chicago)<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>upperCI<span class="ot">&lt;-</span>meanIncome<span class="sc">+</span>tquantile<span class="sc">*</span>seMean</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>lowerCI<span class="ot">&lt;-</span>meanIncome<span class="sc">-</span>tquantile<span class="sc">*</span>seMean</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="at">lower=</span>lowerCI,<span class="at">mean=</span>meanIncome,<span class="at">upper=</span>upperCI))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   lower     mean    upper 
+18.95878 20.33333 21.70788 </code></pre>
 </div>
 </div>
+<p>We can check our answer with the automatic answer from a built in function in R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(chicago<span class="sc">$</span>income)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  chicago$income
+t = 30.255, df = 29, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 18.95878 21.70788
+sample estimates:
+mean of x 
+ 20.33333 </code></pre>
+</div>
+</div>
+<p>Is this a good idea? We are making strong assumptions about normality.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="07-CIMean_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Histogram of Income in ‘Chicago’ dataset, Problem 4.9 of <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see some possible concerns, like that the data has a long right tail. Income is a common variable that has a heavy right tail. So there are some question marks about the validity of this CI for this data.</p>
+<p>What was the effect of using a <span class="math inline">\(t\)</span> quantile in our income data? The only difference was our choice of the quantile.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>zquantile<span class="ot">&lt;-</span><span class="fu">qnorm</span>((<span class="dv">1</span><span class="fl">-0.05</span><span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>upperCI.z<span class="ot">&lt;-</span>meanIncome<span class="sc">+</span>zquantile<span class="sc">*</span>seMean</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>lowerCI.z<span class="ot">&lt;-</span>meanIncome<span class="sc">-</span>zquantile<span class="sc">*</span>seMean</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">rbind</span>(<span class="st">"Z"</span><span class="ot">=</span><span class="fu">c</span>(<span class="at">lower=</span>lowerCI.z,<span class="at">mean=</span>meanIncome,<span class="at">upper=</span>upperCI.z),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">"t"</span><span class="ot">=</span><span class="fu">c</span>(<span class="at">lower=</span>lowerCI,<span class="at">mean=</span>meanIncome,<span class="at">upper=</span>upperCI)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     lower     mean    upper
+Z 19.01609 20.33333 21.65058
+t 18.95878 20.33333 21.70788</code></pre>
+</div>
+</div>
+<p>Given our concerns with the distribution of the data, does the asymptotic distribution make more sense here? Not really. We only have 30 data points, which is border-line for moving to an asymptotic assumption, even for the CLT which is quite powerful. This is particularly the case when we suspect our data is <em>skewed</em> (i.e.&nbsp;not symmetric); the CLT needs a larger sample size to have good approximations for skewed distributions than for symmetric distributions.</p>
+<p>Furthermore, as we said above, even with our concerns about normality, the <span class="math inline">\(t\)</span> distribution is always the conservative choice, indicating more uncertainty. Therefore, if we have to choose between the <span class="math inline">\(t\)</span> CI and the normal, we would pick the <span class="math inline">\(t\)</span>. However, we would still keep in mind that our CI might still be <em>overestimating</em> our confidence given our concerns.</p>
+</section>
+<section id="example-proportion" class="level3">
+<h3 class="anchored" data-anchor-id="example-proportion">Example – Proportion</h3>
+<p>What about a CI for a proportion? Here it makes sense to use our normal asymptotic confidence interval to get a CI for our proportion.</p>
+<p>Another example from the book is a survey in 2018 regarding whether people believed in life after death. Out of 2123 people, 1720 people said “Yes”. Our estimate of the proportion in the population is <span class="math inline">\(\hat\pi=0.81\)</span>.</p>
+<p>To get a confidence interval, we would generally use an asymptotic normal CI here, since this is a large sample size.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>Our CI above was <span class="math display">\[\bar{X}\pm z_\alpha \frac{S}{\sqrt{n}}\]</span> where <span class="math inline">\(\frac{S}{\sqrt{n}}\)</span> is our estimate of the standard error of <span class="math inline">\(\bar{X}\)</span>. But recall with a proportion, we usually estimate our standard error as <span class="math display">\[\sqrt{\frac{\hat\pi(1-\hat\pi)}{n}},\]</span> (which is our estimate dividing by <span class="math inline">\(n\)</span> rather than <span class="math inline">\(n-1\)</span>).</p>
+<p>This gives us a CI, <span class="math display">\[\hat\pi \pm z_\alpha \sqrt{\frac{\hat\pi(1-\hat\pi)}{n}}\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pihat<span class="ot">&lt;-</span><span class="dv">1720</span><span class="sc">/</span><span class="dv">2123</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sepi<span class="ot">&lt;-</span><span class="fu">sqrt</span>(pihat<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>pihat)<span class="sc">/</span><span class="dv">2123</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>upperCI.pi<span class="ot">&lt;-</span>pihat<span class="sc">+</span>zquantile<span class="sc">*</span>sepi</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>lowerCI.pi<span class="ot">&lt;-</span>pihat<span class="sc">-</span>zquantile<span class="sc">*</span>sepi</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(<span class="at">lower=</span>lowerCI.pi,<span class="at">mean=</span>pihat,<span class="at">upper=</span>upperCI.pi))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    lower      mean     upper 
+0.7934926 0.8101743 0.8268560 </code></pre>
+</div>
+</div>
+<p>This time we see that we get a slightly different answer than the built-in function <code>prop.test</code> for normal confidence intervals for proportions in R,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="at">x=</span><span class="dv">1720</span>,<span class="at">n=</span><span class="dv">2123</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    1-sample proportions test with continuity correction
+
+data:  1720 out of 2123, null probability 0.5
+X-squared = 815.76, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: true p is not equal to 0.5
+95 percent confidence interval:
+ 0.7926950 0.8265173
+sample estimates:
+        p 
+0.8101743 </code></pre>
+</div>
+</div>
+<p>This is because the built in function is using a “continuity correction” to make the normal approximation better. You also see in the book that they develop a <em>score confidence interval</em> for the proportion going back to basic principles and redoing the calculation for the confidence interval. You will often see there are a variety of different ways to calculate confidence intervals for well-known and important distributions, especially for a proportion which is such an important non-normal use-case.</p>
 </section>
 </section>
 <section id="the-t-distribution" class="level2">
@@ -642,15 +782,6 @@ T=\dfrac{\bar{X}-\mu}{S/\sqrt{n}} = \dfrac{\left(\dfrac{\bar{X}-\mu}{\sigma}\rig
 \]</span></p>
 </div>
 </section>
-<section id="asymptotic-confidence-intervals-wald-statistics" class="level3">
-<h3 class="anchored" data-anchor-id="asymptotic-confidence-intervals-wald-statistics">Asymptotic Confidence Intervals (Wald Statistics)</h3>
-<p>Generally, if we have a large number of samples, we will not need to worry about the <span class="math inline">\(t\)</span>-distribution nor do we have to worry about the assumption regarding the distribution of the individual <span class="math inline">\(X_i\)</span>.</p>
-<div class="PARAGRAPH">
-<p>CI for Proportions</p>
-</div>
-<p>This is particularly helpful for binary data <span class="math inline">\(X_i\)</span>, where <span class="math inline">\(\hat{\pi}=\bar{X}\)</span> is the proportion of 1’s in the data. These clearly do not have a normal distribution, but the CLT does apply, so we can use an asymptotic confidence interval. <span class="math display">\[\hat\pi\pm z_{\alpha}S/\sqrt{n} \]</span> Again, we have a simplification, This makes “sense” because the variance of a Bernoulli is <span class="math display">\[var(X_i)=p(1-p)\]</span> so we can just plug in <span class="math inline">\(\hat{p}\)</span> into that equation.</p>
-<p>Notice that if I used <span class="math inline">\(S^2\)</span> instead, I would get $$S^2=</p>
-</section>
 </section>
 <section id="planning-to-get-a-ci-of-a-certain-width" class="level2">
 <h2 class="anchored" data-anchor-id="planning-to-get-a-ci-of-a-certain-width">Planning to get a CI of a certain width</h2>
@@ -659,10 +790,10 @@ T=\dfrac{\bar{X}-\mu}{S/\sqrt{n}} = \dfrac{\left(\dfrac{\bar{X}-\mu}{\sigma}\rig
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
 </div>
-<p>(Problem 8 from section 7.7 <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span>) A sample of size 100 is taken from a population that has a proportion <span class="math inline">\(p = 1/5\)</span>.</p>
+<p>(Problem 8 from section 7.7 <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span>) A sample of size 100 is taken from a population that has a proportion <span class="math inline">\(\pi = 1/5\)</span>.</p>
 <ol type="a">
-<li><p>Find <span class="math inline">\(\delta\)</span> such that <span class="math inline">\(P\big(\lvert \hat{p}-p\rvert \ge \delta\big)=0.025\)</span></p></li>
-<li><p>If, in the sample, <span class="math inline">\(\hat{p} = 0.25\)</span>, will the 95% confidence interval for <span class="math inline">\(p\)</span> contain the true value for <span class="math inline">\(p\)</span>?</p></li>
+<li><p>Find <span class="math inline">\(\delta\)</span> such that <span class="math inline">\(P\big(\lvert \hat{\pi}-\pi\rvert \ge \delta\big)=0.025\)</span></p></li>
+<li><p>If, in the sample, <span class="math inline">\(\hat{\pi} = 0.25\)</span>, will the 95% confidence interval for <span class="math inline">\(\pi\)</span> contain the true value for <span class="math inline">\(\pi\)</span>?</p></li>
 </ol>
 </div>
 <details>
@@ -670,53 +801,25 @@ T=\dfrac{\bar{X}-\mu}{S/\sqrt{n}} = \dfrac{\left(\dfrac{\bar{X}-\mu}{\sigma}\rig
 Check your answer
 </summary>
 <ol type="a">
-<li><span class="math inline">\(\delta = 0.0896\)</span>, <span class="math inline">\(p\)</span> is given to be <span class="math inline">\(\dfrac{1}{5}\)</span>. Therefore, <span class="math inline">\(\sigma_{\hat{p}} = \displaystyle \sqrt{\dfrac{\frac{1}{5}\cdot \frac{4}{5}}{100}} = \frac{2}{50}.\)</span></li>
+<li><span class="math inline">\(\delta = 0.0896\)</span>, <span class="math inline">\(\pi\)</span> is given to be <span class="math inline">\(\dfrac{1}{5}\)</span>. Therefore, <span class="math inline">\(\sigma_{\hat{\pi}} = \displaystyle \sqrt{\dfrac{\frac{1}{5}\cdot \frac{4}{5}}{100}} = \frac{2}{50}.\)</span></li>
 </ol>
-<p>By the Central Limit Theorem, <span class="math inline">\(\hat{p}\)</span> is approximately <span class="math inline">\(\mathcal{N}(p, \sigma_{\hat{p}}^2)\)</span>.</p>
+<p>By the Central Limit Theorem, <span class="math inline">\(\hat{\pi}\)</span> is approximately <span class="math inline">\(\mathcal{N}(\pi, \sigma_{\hat{\pi}}^2)\)</span>.</p>
 <p><span class="math display">\[\begin{align*}
-P\big(\lvert \hat{p}-p\rvert \ge \delta\big) &amp;= 0.025 \\
-\Rightarrow P\big(\lvert \hat{p}-p\rvert &lt; \delta\big) &amp;= 0.975 \\
-\Rightarrow P(-\delta &lt; \hat{p}-p &lt; \delta)  &amp;= 0.975 \\
-\Rightarrow P\left(-\frac{\delta}{\sigma_{\hat{p}}} &lt; \frac{\hat{p}-p}{\sigma_{\hat{p}}} &lt; \frac{\delta}{\sigma_{\hat{p}}}\right)  &amp;= 0.975 \\
-\Rightarrow P\left(-\frac{\delta}{\sigma_{\hat{p}}} &lt; Z &lt; \frac{\delta}{\sigma_{\hat{p}}}\right)  &amp;\approx 0.975 \\
-\Rightarrow \Phi\left(\frac{\delta}{\sigma_{\hat{p}}}\right) - \Phi\left(-\frac{\delta}{\sigma_{\hat{p}}}\right) &amp;\approx 0.975 \\
-\Rightarrow 2\Phi\left(\frac{\delta}{\sigma_{\hat{p}}}\right) -1 &amp;\approx 0.975 \\
-\Rightarrow \Phi\left(\frac{\delta}{\sigma_{\hat{p}}}\right) &amp;\approx 0.9875 \\
-\Rightarrow \frac{\delta}{\sigma_{\hat{p}}} &amp;\approx 2.24\\
+P\big(\lvert \hat{\pi}-\pi\rvert \ge \delta\big) &amp;= 0.025 \\
+\Rightarrow P\big(\lvert \hat{\pi}-\pi\rvert &lt; \delta\big) &amp;= 0.975 \\
+\Rightarrow P(-\delta &lt; \hat{\pi}-\pi &lt; \delta)  &amp;= 0.975 \\
+\Rightarrow P\left(-\frac{\delta}{\sigma_{\hat{\pi}}} &lt; \frac{\hat{\pi}-\pi}{\sigma_{\hat{\pi}}} &lt; \frac{\delta}{\sigma_{\hat{\pi}}}\right)  &amp;= 0.975 \\
+\Rightarrow P\left(-\frac{\delta}{\sigma_{\hat{\pi}}} &lt; Z &lt; \frac{\delta}{\sigma_{\hat{\pi}}}\right)  &amp;\approx 0.975 \\
+\Rightarrow \Phi\left(\frac{\delta}{\sigma_{\hat{\pi}}}\right) - \Phi\left(-\frac{\delta}{\sigma_{\hat{\pi}}}\right) &amp;\approx 0.975 \\
+\Rightarrow 2\Phi\left(\frac{\delta}{\sigma_{\hat{\pi}}}\right) -1 &amp;\approx 0.975 \\
+\Rightarrow \Phi\left(\frac{\delta}{\sigma_{\hat{\pi}}}\right) &amp;\approx 0.9875 \\
+\Rightarrow \frac{\delta}{\sigma_{\hat{\pi}}} &amp;\approx 2.24\\
 \end{align*}\]</span> Where we used <code>qnorm(0.9875)</code> to obtain 2.24. Plugging in the value of <span class="math inline">\(\sigma_{\hat{p}} = \dfrac{2}{50}\)</span>, we get that <span class="math inline">\(\delta\)</span> is about <span class="math inline">\(0.0896\)</span>.</p>
 <ol start="2" type="a">
 <li>Yes.</li>
 </ol>
-<p><span class="math inline">\(z(\alpha/2) = 1.96\)</span>, and the 95% confidence interval is given by <span class="math inline">\(\hat{p} \pm 1.96\times \dfrac{2}{50}\)</span>. Since <span class="math inline">\(\hat{p} = 0.25\)</span>, this gives us <span class="math inline">\(0.25 \pm 1.96\times \dfrac{2}{50} = (0.1716, 0.3284)\)</span> which contains <span class="math inline">\(p = \dfrac{1}{5}.\)</span></p>
+<p><span class="math inline">\(z(\alpha/2) = 1.96\)</span>, and the 95% confidence interval is given by <span class="math inline">\(\hat{\pi} \pm 1.96\times \dfrac{2}{50}\)</span>. Since <span class="math inline">\(\hat{\pi} = 0.25\)</span>, this gives us <span class="math inline">\(0.25 \pm 1.96\times \dfrac{2}{50} = (0.1716, 0.3284)\)</span> which contains <span class="math inline">\(\pi = \dfrac{1}{5}.\)</span></p>
 </details>
-<div class="QUESTION">
-<div class="block-title">
-<p><strong>Exercise/Question</strong></p>
-</div>
-<p>20 different polling companies have conducted independent surveys to estimate the proportion of US voters who approve of RFK Jr’s stewardship of Health and Human Services. Each company estimates this proportion using a 95% confidence interval. About how many do you think will be successful in covering the true proportion?</p>
-</div>
-<details>
-<summary>
-Check your answer
-</summary>
-If we let <span class="math inline">\(Y\)</span> be the number of confidence intervals out of 20 that are successful, then since each interval has a 0.95 chance of success, we see that <span class="math inline">\(Y\sim Bin(20, 0.95)\)</span>. Therefore the expected number of successful intervals is <span class="math inline">\(E(Y) = 20\times 0.95 = 19.\)</span>
-</details>
-</section>
-<section id="role-of-pivotal-statistic-in-constructing-ci" class="level2">
-<h2 class="anchored" data-anchor-id="role-of-pivotal-statistic-in-constructing-ci">Role of Pivotal Statistic in constructing CI</h2>
-<p>How do we construct confidence intervals more generally, i.e.&nbsp;other than for the mean or something normally approximated?</p>
-<p>The short answer is: it’s tricky. When we look back at what we did, we had some random variable that depended on our unknown parameter <span class="math inline">\(\mu\)</span>, e.g.&nbsp;<span class="math display">\[T(\mu)=\frac{\bar{X}-\mu}{S/\sqrt{n}}\]</span> And the distribution of <span class="math inline">\(T(\mu)\)</span> was the same <em>regardless of <span class="math inline">\(\mu\)</span></em>. This allowed us to write (for large <span class="math inline">\(n\)</span>) <span class="math display">\[1-\alpha=P(-z_{\alpha}\leq T(\mu)\leq z_{\alpha})=P(T^{-1}(-z_{\alpha})\geq \mu \geq T^{-1}(z_{\alpha}))\]</span> (because <span class="math inline">\(T(\mu)\)</span> is monotone decreasing in <span class="math inline">\(\mu\)</span>, we had to change the direction of the inequalities). This gave us our lower and upper bounds of our CI.</p>
-<p>We can describe this property more generally,</p>
-<div id="def-pivotal" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (Pivotal Quantity)</strong></span> A function <span class="math inline">\(f(X,\theta)\)</span> has a distribution that does not depend on the parameter <span class="math inline">\(\theta\)</span> is called a <strong>pivotal quantity</strong>.</p>
-</div>
-<p>If you can find a pivotal quantity for your problem, you can use this same strategy to construct confidence intervals for <span class="math inline">\(\theta\)</span>. However, finding a pivotal quantity can be pretty difficult in other settings than the normal.</p>
-<div class="QUESTION">
-<div class="block-title">
-<p><strong>Exercise/Question</strong></p>
-</div>
-<p>Give an expression for <span class="math inline">\(T^{-1}(z)\)</span> and verify the above equality, <span class="math display">\[P(-z_{\alpha}\leq T(\mu)\leq z_{alpha})=P(T^{-1}(-z_{alpha})\geq \mu \geq T^{-1}(z_{\alpha}))\]</span> and that it gives us the standard asymptotic confidence interval for the mean, <span class="math display">\[\bar{X}\pm z_{\alpha}S/\sqrt{n}\]</span></p>
-</div>
 
 
 
@@ -735,6 +838,8 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
 
 <ol>
 <li id="fn1"><p><span class="math inline">\(S^2\)</span> is an <em>consistent</em> estimator of <span class="math inline">\(\sigma^2\)</span>, meaning that <span class="math inline">\(S^2\)</span> <em>converges in probability</em> to <span class="math inline">\(\sigma^2\)</span>. So by Slutsky’s Theorem, this means <span class="math inline">\(T\)</span> converges in distribution to a <span class="math inline">\(N(0,1)\)</span> even after replacing <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(S^2\)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Problem 4.9<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>For proportions, we often judge whether we have a large sample size based on the actual proportion we are estimating. This is because the CLT gives a worse approximation depending on the value of the true proportion. So if we are estimating very small or large proportions, we need a larger sample size to rely on the CLT.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
