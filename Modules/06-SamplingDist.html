@@ -544,7 +544,7 @@ Note
 <div class="PARAGRAPH">
 <p>Proportion</p>
 </div>
-<p>The proportion is a mean, so again, <span class="math display">\[\sigma^2_{\hat{\pi}}=\frac{\sigma}{n}\]</span> where <span class="math inline">\(\sigma^2\)</span> is the variance of an individual observation. In the case of the binary data, however, we know that <span class="math inline">\(\sigma^2=\pi(1-\pi)\)</span></p>
+<p>The proportion is a mean, so again, <span class="math display">\[\sigma^2_{\hat{\pi}}=\frac{\sigma^2}{n}\]</span> where <span class="math inline">\(\sigma^2\)</span> is the variance of an individual observation. In the case of the binary data, however, we know that <span class="math inline">\(\sigma^2=\pi(1-\pi)\)</span></p>
 <p>So we have two ways we could estimate <span class="math inline">\(\sigma^2\)</span>,</p>
 <ol type="1">
 <li><span class="math inline">\(\hat{\sigma}^2=\hat\pi(1-\hat\pi)\)</span></li>
@@ -556,7 +556,7 @@ S^2&amp;=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2\\
 &amp;=\frac{1}{n-1}\left(\sum_{i=1}^n(X_i-2X_i\hat{\pi})+n\hat{\pi}^2\right)\\
 &amp;=\frac{1}{n-1}(n\hat{\pi}-2n\hat{\pi}^2+n\hat{\pi}^2)=\frac{n}{n-1}\hat{\pi}(1-\hat{\pi})
 \end{aligned}
-\]</span> In other words, <span class="math inline">\(\hat\pi(1-\hat\pi)\)</span> is our estimate of variance, only using <span class="math inline">\(1/n\)</span> instead of <span class="math inline">\(1/(n-1),\)</span> <span class="math display">\[\hat{\sigma}^2=\frac{1}{n}\sum(X_i-\bar{X})=\hat\pi(1-\hat\pi).\]</span> So in fact our two choices boil down to our familiar choice of using <span class="math inline">\(1/n\)</span> versus <span class="math inline">\(1/(n-1)\)</span> for estimating the variance. However, when we are estimating proportions, we often do use <span class="math display">\[\hat{\sigma}^2=\hat\pi(1-\hat\pi),\]</span> which gets us <span class="math display">\[\hat\sigma^2_{\hat{\pi}}=\frac{\hat\pi(1-\hat\pi)}{n},\]</span> rather than dividing by <span class="math inline">\(n-1\)</span>.</p>
+\]</span> In other words, <span class="math inline">\(\hat\pi(1-\hat\pi)\)</span> is our estimate of variance, only using <span class="math inline">\(1/n\)</span> instead of <span class="math inline">\(1/(n-1),\)</span> <span class="math display">\[\hat{\sigma}^2=\frac{1}{n}\sum(X_i-\bar{X})=\hat\pi(1-\hat\pi).\]</span> So in fact our two choices boil down to our familiar choice of using <span class="math inline">\(1/n\)</span> versus <span class="math inline">\(1/(n-1)\)</span> for estimating the variance. However, when we are estimating proportions, we often do use <span class="math inline">\(\hat{\sigma}^2=\hat\pi(1-\hat\pi),\)</span> rather than dividing by <span class="math inline">\(n-1\)</span>, which gets us <span class="math display">\[\hat\sigma^2_{\hat{\pi}}=\frac{\hat\pi(1-\hat\pi)}{n}.\]</span></p>
 <div class="PARAGRAPH">
 <p>Simple Regression</p>
 </div>
