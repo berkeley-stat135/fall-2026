@@ -460,7 +460,9 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Notice that the whole line of reasoning to get these CI for small sample sizes <strong>only holds if <span class="math inline">\(X_i\sim N(\mu,\sigma^2)\)</span></strong>. If that assumption is not true, then we do not have a solution. So if we have small sized data sets, we are going to rely really heavily on our assumption of normality. And because we have small amounts of data, it is going to be much harder to check our assumptions!</p>
+<p>Notice that the whole line of reasoning to get these CI for small sample sizes <strong>only holds if <span class="math inline">\(X_i\sim N(\mu,\sigma^2)\)</span></strong>. If that assumption is not true, then we do not have a solution.</p>
+<p>So if we have small sized data sets, we are going to rely really heavily on our assumption of normality. And because we have small amounts of data, it is going to be much harder to check our assumptions!</p>
+<p>Furthermore, for clearly non-normal data, like binary data or count data, we certainly can’t use the <span class="math inline">\(t\)</span>-distribution. So we will frequently rely on the CLT theorem and use our asymptotic CI for these situations.</p>
 </div>
 </div>
 <section id="confidence-intervals-using-the-t-distribution" class="level3">
