@@ -274,7 +274,11 @@ window.Quarto = {
   <li><a href="#example-proportion" id="toc-example-proportion" class="nav-link" data-scroll-target="#example-proportion">Example: Proportion</a></li>
   <li><a href="#example-simple-regression" id="toc-example-simple-regression" class="nav-link" data-scroll-target="#example-simple-regression">Example: Simple Regression</a></li>
   </ul></li>
-  <li><a href="#estimating-the-variance-of-our-estimators" id="toc-estimating-the-variance-of-our-estimators" class="nav-link" data-scroll-target="#estimating-the-variance-of-our-estimators">Estimating the Variance of Our Estimators</a></li>
+  <li><a href="#estimating-the-variance-of-our-estimators" id="toc-estimating-the-variance-of-our-estimators" class="nav-link" data-scroll-target="#estimating-the-variance-of-our-estimators">Estimating the Variance of Our Estimators</a>
+  <ul class="collapse">
+  <li><a href="#s2-is-a-unbiased-estimate-of-individual-variance" id="toc-s2-is-a-unbiased-estimate-of-individual-variance" class="nav-link" data-scroll-target="#s2-is-a-unbiased-estimate-of-individual-variance"><span class="math inline">\(S^2\)</span> is a unbiased estimate of <em>individual</em> variance</a></li>
+  <li><a href="#variance-of-our-estimators" id="toc-variance-of-our-estimators" class="nav-link" data-scroll-target="#variance-of-our-estimators">Variance of our estimators</a></li>
+  </ul></li>
   <li><a href="#exact-sampling-distribution" id="toc-exact-sampling-distribution" class="nav-link" data-scroll-target="#exact-sampling-distribution">Exact Sampling Distribution</a>
   <ul class="collapse">
   <li><a href="#example-estimating-the-mean-1" id="toc-example-estimating-the-mean-1" class="nav-link" data-scroll-target="#example-estimating-the-mean-1">Example: Estimating the Mean</a></li>
@@ -491,6 +495,46 @@ E(\hat{\beta}_0|X_1\ldots,X_n)= \beta_0\\
 <p>For example, in our above examples, the expected value of <span class="math inline">\(\hat\theta\)</span>, <span class="math inline">\(E(\hat\theta)=\theta,\)</span> so it depends on the unknown <span class="math inline">\(\theta\)</span>. That’s good! It means they are unbiased – <span class="math inline">\(\hat\theta\)</span> itself is a good quantitative estimate of <span class="math inline">\(\theta\)</span>. So for the expectation, its not a problem that it depends on the unknown parameter, since our goal is to check that the <span class="math inline">\(E(\hat\theta)\)</span> is equal to <span class="math inline">\(\theta\)</span> (or close).</p>
 <p>However, for the variance of our estimator, we’d really like to have a quantitative idea what the variance is, since the variance gives us an idea of the <em>size</em> of the variations of <span class="math inline">\(\hat\theta\)</span> from it’s mean. Knowing the variance of <span class="math inline">\(\bar{X}\)</span> is <span class="math inline">\(\sigma^2/n\)</span> doesn’t tell anything about the size of these variations, because we don’t know <span class="math inline">\(\sigma^2\)</span>.</p>
 <p>However, having computed that expression for the variance means we could try to estimate the variance of the estimator. And in fact for all of these examples we can do exactly this by plugging in our estimators of the unknown parameters.</p>
+<section id="s2-is-a-unbiased-estimate-of-individual-variance" class="level3">
+<h3 class="anchored" data-anchor-id="s2-is-a-unbiased-estimate-of-individual-variance"><span class="math inline">\(S^2\)</span> is a unbiased estimate of <em>individual</em> variance</h3>
+<p>Before we look at estimating the variance of our estimators, let’s first remind ourselves of how we estimate the variance of our data <em>when we assume the data all are independent and have the same mean and variance (i.i.d)</em>.</p>
+<p>The first thing to notice is that under this assumption we only see <strong>one</strong> realization of our estimator, but <em>many</em> realizations of the distribution of our individual data. Each <span class="math inline">\(X_i\)</span> is a realization from whatever distribution is creating our data. So we can use the data to estimate the variance of our data distribution.</p>
+<p>We’ve seen that when we assume our data is normal, the MLE estimate of <span class="math inline">\(\sigma^2\)</span> is <span class="math inline">\(\hat{\sigma}^2\)</span>, <span class="math display">\[\begin{align*}
+\hat{\sigma}^2 &amp;= \dfrac{1}{n} \sum_{i=1}^n (X_i -\overline{X})^2 \\
+    &amp;= \dfrac{1}{n} \sum_{i=1}^n X_i^2 -\overline{X}^2. \\
+\end{align*}\]</span> But indeed, this is an estimator of variance of data that is natural <em>without assuming normality of the data</em>. If we consider the definition of variance, <span class="math display">\[var(X):= E(X-E(X))^2\]</span> so it is natural to replace the expectations with averages on our sample.</p>
+<p>Is this estimator <strong>unbiased</strong>? Is <span class="math inline">\(E(\hat{\sigma}^2) = \sigma^2\)</span>? The answer is, no. And we can show it by only assuming <span class="math inline">\(E(X_i)=\mu\)</span> and <span class="math inline">\(var(X_i)=\sigma^2\)</span> and the <span class="math inline">\(X_i\)</span> are independent. <span class="math display">\[\begin{align*}
+E(\hat{\sigma}^2) &amp;= E\left( \dfrac{1}{n} \sum_{i=1}^n X_i^2 -\overline{X}^2 \right) \\
+   &amp;= \dfrac{1}{n} \sum_{i=1}^n E\left(X_i^2\right) - E\big(\overline{X}^2 \big)\\
+   &amp;=  (\sigma^2 + \mu^2) - E\big(\overline{X}^2 \big)\\
+\end{align*}\]</span> The last line is because <span class="math inline">\(\mathrm{Var}(X_i) = \sigma^2 = E(X_i^2) - \mu^2\)</span>. Doing a similar computation with <span class="math inline">\(E\big(\overline{X}^2 \big)\)</span>, we see that: <span class="math display">\[
+E\big(\overline{X}^2 \big) = \mathrm{Var}(\overline{X}) + \mu^2 = \dfrac{\sigma^2}{n} + \mu^2.
+\]</span> Putting these together, we have <span class="math display">\[
+\begin{aligned}
+E(\hat{\sigma}^2) &amp;= (\sigma^2 + \mu^2) - \dfrac{\sigma^2}{n} - \mu^2\\
+   &amp;= \frac{n-1}{n}\sigma^2\\
+\end{aligned}
+\]</span> This means that <span class="math inline">\(E(\hat{\sigma}^2) \ne \sigma^2\)</span>, and also that <span class="math inline">\(\hat{\sigma}^2\)</span> <strong>underestimates</strong> <span class="math inline">\(\sigma^2\)</span> on average. Notice that this holds true for binary data as well; we didn’t make any assumptions on the distribution of our data.</p>
+<p>To get an <strong>unbiased</strong> estimator of the variance of the sample mean, we need to multiply <span class="math inline">\(\hat{\sigma}^2\)</span> by the appropriate factor, namely <span class="math inline">\(n/(n-1)\)</span>, <span class="math display">\[S^2=\left(\frac{n}{n-1}\right) \hat{\sigma}^2=\frac{1}{n-1}\sum_{i=1}^n (X_i -\overline{X})^2
+\]</span> and so <span class="math inline">\(E\left[S^2\right] = \sigma^2\)</span></p>
+<p>We discussed before that we use <span class="math inline">\(S^2\)</span> generally, where we divide by <span class="math inline">\(n-1\)</span>, rather than the MLE estimator. This is because <span class="math inline">\(S^2\)</span> is an <strong>unbiased</strong> estimator of <span class="math inline">\(\sigma^2\)</span>. However, the bias of the MLE estimator is <span class="math display">\[bias(\hat{\sigma}^2)=E(\sigma^2)-\sigma^2=\frac{1}{n}\sigma^2\]</span> so the bias of the MLE estimator is converging to 0 as <span class="math inline">\(n\rightarrow \infty\)</span>. So the difference between <span class="math inline">\(S^2\)</span> and <span class="math inline">\(\hat\sigma^2\)</span> is not particularly meaningful with large sample sizes.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In general, if the expectation of the estimator is the true value multiplied by a constant, then we can just divide the estimator by the constant and this will make the estimator unbiased. That is, if <span class="math inline">\(E(\hat{\theta}) = c\theta\)</span>, where <span class="math inline">\(c\)</span> is a constant, then since <span class="math inline">\(E(\dfrac{\hat{\theta}}{c}) = \dfrac{c\theta}{c} = \theta\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="variance-of-our-estimators" class="level3">
+<h3 class="anchored" data-anchor-id="variance-of-our-estimators">Variance of our estimators</h3>
+<p>Now we can return to the variance of the <em>estimators</em>. Notice that unlike i.i.d data we only have one realization of our estimator; our illustration of the estimators we would have gotten if we reran our data is only a thought experiment. To get an estimate of the variance of our estimator, we are going to need to use our theory from above combined with what we can estimate about the data distribution from our i.i.d. data.</p>
 <div class="PARAGRAPH">
 <p>Mean</p>
 </div>
@@ -511,7 +555,7 @@ S^2&amp;=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2\\
 &amp;=\frac{1}{n-1}\left(\sum_{i=1}^n(X_i-2X_i\hat{\pi})+n\hat{\pi}^2\right)\\
 &amp;=\frac{1}{n-1}(n\hat{\pi}-2n\hat{\pi}^2+n\hat{\pi}^2)=\frac{n}{n-1}\hat{\pi}(1-\hat{\pi})
 \end{aligned}
-\]</span> In other words, <span class="math inline">\(\hat\pi(1-\hat\pi)\)</span> is our estimate of variance, only using <span class="math inline">\(1/n\)</span> instead of <span class="math inline">\(1/(n-1),\)</span> <span class="math display">\[\hat{\sigma}^2=\frac{1}{n}\sum(X_i-\bar{X})=\hat\pi(1-\hat\pi).\]</span> So in fact our two choices boil down to our familiar choice of using <span class="math inline">\(1/n\)</span> versus <span class="math inline">\(1/(n-1)\)</span> for estimating the variance. However, when we are estimating proportions, we generally use <span class="math display">\[\hat{\sigma}^2=\hat\pi(1-\hat\pi),\]</span> which gets us <span class="math display">\[\hat\sigma^2_{\hat{\pi}}=\frac{\hat\pi(1-\hat\pi)}{n}.\]</span></p>
+\]</span> In other words, <span class="math inline">\(\hat\pi(1-\hat\pi)\)</span> is our estimate of variance, only using <span class="math inline">\(1/n\)</span> instead of <span class="math inline">\(1/(n-1),\)</span> <span class="math display">\[\hat{\sigma}^2=\frac{1}{n}\sum(X_i-\bar{X})=\hat\pi(1-\hat\pi).\]</span> So in fact our two choices boil down to our familiar choice of using <span class="math inline">\(1/n\)</span> versus <span class="math inline">\(1/(n-1)\)</span> for estimating the variance. However, when we are estimating proportions, we often do use <span class="math display">\[\hat{\sigma}^2=\hat\pi(1-\hat\pi),\]</span> which gets us <span class="math display">\[\hat\sigma^2_{\hat{\pi}}=\frac{\hat\pi(1-\hat\pi)}{n},\]</span> rather than dividing by <span class="math inline">\(n-1\)</span>; we will see this is largely because we often rely on the CLT for working with proportions, and thus there’s no small sample advantage to using <span class="math inline">\(S^2\)</span>.</p>
 <div class="PARAGRAPH">
 <p>Simple Regression</p>
 </div>
@@ -533,7 +577,7 @@ Note
 <p>Note that it would <strong>not</strong> be appropriate to use our just our standard estimator of the variance of <span class="math inline">\(Y_i\)</span>, <span class="math display">\[\frac{1}{n-1}\sum_{i=1}^n (Y_i-\bar{Y})^2,\]</span> since that is only appropriate when we assume the data have the same mean. We are assuming exactly the opposite – that each <span class="math inline">\(Y_i\)</span> has a different mean depending on it’s corresponding <span class="math inline">\(X_i\)</span>.</p>
 </div>
 </div>
-<p>However, just like the for estimating the mean, the standard estimator of <span class="math inline">\(\sigma^2\)</span> used in regression is slightly different than what our MLE would imply. We are again going to adjust the MLE estimate and use as our standard estimate, <span class="math display">\[\hat\sigma^2=\frac{1}{n-2}\sum_{i=1}^n(Y_i-(\hat\beta_0+\hat \beta_1 X_i))^2\]</span></p>
+<p>However, just like the for estimating the mean, the standard estimator of <span class="math inline">\(\sigma^2\)</span> used in regression is slightly different than what our MLE would imply. We are again going to adjust the MLE estimate and use as our standard estimate, <span class="math display">\[\hat\sigma^2=\frac{1}{n-2}\sum_{i=1}^n(Y_i-(\hat\beta_0+\hat \beta_1 X_i))^2\]</span> Again, this is an <strong>unbiased</strong> estimate of <span class="math inline">\(\sigma^2\)</span> for the linear model.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -544,10 +588,11 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Why <span class="math inline">\(n-2\)</span> instead of <span class="math inline">\(n-1\)</span>? Before we were substituting <span class="math inline">\(\bar{X}\)</span> for <span class="math inline">\(\mu\)</span>, which is 1 parameter substituted with its estimate. Now we are substituting both <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span> for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, which is 2 parameters substituted with their estimates.</p>
-<p>This is only a rule of thumb, but we are going to see that for regression, this adjustments result in estimates that are <em>unbiased</em>.</p>
+<p>Why <span class="math inline">\(n-2\)</span> instead of <span class="math inline">\(n-1\)</span>? The simple answer is that it is unbiased, and <span class="math inline">\(n-1\)</span> is not.</p>
+<p>The intuition is that before we were substituting <span class="math inline">\(\bar{X}\)</span> for <span class="math inline">\(\mu\)</span>, which is 1 parameter substituted with its estimate. Now we are substituting both <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span> for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, which is 2 parameters substituted with their estimates. This is a rule of thumb that works exactly in linear regression as you add parameters.</p>
 </div>
 </div>
+</section>
 </section>
 <section id="exact-sampling-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="exact-sampling-distribution">Exact Sampling Distribution</h2>
