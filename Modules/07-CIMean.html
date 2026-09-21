@@ -281,6 +281,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#properties-of-the-t-distribution" id="toc-properties-of-the-t-distribution" class="nav-link" data-scroll-target="#properties-of-the-t-distribution">Properties of the <span class="math inline">\(t\)</span>-distribution</a></li>
   <li><a href="#distribution-of-t-key-theorems" id="toc-distribution-of-t-key-theorems" class="nav-link" data-scroll-target="#distribution-of-t-key-theorems">Distribution of <span class="math inline">\(T\)</span>: Key Theorems</a></li>
+  <li><a href="#asymptotic-confidence-intervals-wald-statistics" id="toc-asymptotic-confidence-intervals-wald-statistics" class="nav-link" data-scroll-target="#asymptotic-confidence-intervals-wald-statistics">Asymptotic Confidence Intervals (Wald Statistics)</a></li>
   </ul></li>
   <li><a href="#planning-to-get-a-ci-of-a-certain-width" id="toc-planning-to-get-a-ci-of-a-certain-width" class="nav-link" data-scroll-target="#planning-to-get-a-ci-of-a-certain-width">Planning to get a CI of a certain width</a></li>
   <li><a href="#role-of-pivotal-statistic-in-constructing-ci" id="toc-role-of-pivotal-statistic-in-constructing-ci" class="nav-link" data-scroll-target="#role-of-pivotal-statistic-in-constructing-ci">Role of Pivotal Statistic in constructing CI</a></li>
@@ -304,7 +305,6 @@ window.Quarto = {
 <li>Chapter 4.3-4.4 of <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span>.</li>
 <li>Chapter 6 (t-distribution), 7.3.3 of <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span>.</li>
 </ul>
-<p>These lecture notes</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -316,7 +316,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>These lecture notes weave in material from Shobhana Stoyanov’s lecture notes from <a href="https://stat135.berkeley.edu/spring-2026/">Spring 2026</a>, <a href="https://stat135.berkeley.edu/spring-2026/lectures/lecture-35.html">Lecture 35</a>.</p>
+<p>These lecture notes weave in material from Shobhana Stoyanov’s lecture notes about the t-distribution from <a href="https://stat135.berkeley.edu/spring-2026/">Spring 2026</a>, <a href="https://stat135.berkeley.edu/spring-2026/lectures/lecture-35.html">Lecture 35</a>.</p>
 </div>
 </div>
 <p>Since we know our estimate will never exactly be the true parameter, we’d really like to be able to give a range of likely values. This is the intuitive goal of <strong>confidence intervals</strong></p>
@@ -446,11 +446,23 @@ Note
 \]</span> What do I know about the distribution of <span class="math display">\[T=\frac{\bar{X}-\mu}{S/\sqrt{n}}\hspace{3ex}?\]</span> This is quite a different random variable than before. Now we have randomness in both the numerator (<span class="math inline">\(\bar{X}\)</span>) <em>and</em> the denominator (<span class="math inline">\(S\)</span>), so <span class="math inline">\(T\)</span> is a function of <em>two</em> random variables. Having <span class="math inline">\(S\)</span> in the denominator results in more variability of <span class="math inline">\(T\)</span>. If <span class="math inline">\(n\)</span> is large, then <span class="math inline">\(S^2\)</span> as an estimate of <span class="math inline">\(\sigma^2\)</span> will be very close to <span class="math inline">\(\sigma^2\)</span>, so it might not be a big difference to our previous <span class="math inline">\(Z\)</span> random variable. But if <span class="math inline">\(n\)</span> is small, then <span class="math inline">\(S^2\)</span> as an estimate of <span class="math inline">\(\sigma^2\)</span> can be noisy, adding more variability to <span class="math inline">\(T\)</span> than we would expect for a <span class="math inline">\(N(0,1)\)</span>.</p>
 <p>Thus, there are two answers to the question: what is the distribution of <span class="math inline">\(T\)</span>?</p>
 <ol type="1">
-<li>From an asymptotic perspective (<span class="math inline">\(n\)</span> large), <span class="math inline">\(T\)</span> converges to a <span class="math inline">\(N(0,1)\)</span> distribution, <span class="math display">\[T \overset{D}{\rightarrow}  N(0,1).\]</span> So in large sample sizes, the above confidence interval, <span class="math display">\[\bar{X}\pm z_\alpha \sqrt{\frac{S^2}{n}}\]</span> where we still use <span class="math inline">\(z_\alpha\)</span> and simply plug in <span class="math inline">\(S\)</span> for <span class="math inline">\(\sigma\)</span>, will be valid (when we dive into asymptotics, we will discuss why this is the case more fully).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Even better, <span class="math inline">\(n\)</span> doesn’t have to be very large for this to be a good approximation (e.g.&nbsp;<span class="math inline">\(n&gt;30-50\)</span> usually suffices).</li>
+<li>From an asymptotic perspective (<span class="math inline">\(n\)</span> large), <span class="math inline">\(T\)</span> converges to a <span class="math inline">\(N(0,1)\)</span> distribution, <span class="math display">\[T \overset{D}{\rightarrow}  N(0,1).\]</span> (when we dive into asymptotics, we will discuss why we can replace <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(S^2\)</span> more fully).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> So in large sample sizes, the above confidence interval, <span class="math display">\[\bar{X}\pm z_\alpha \sqrt{\frac{S^2}{n}}\]</span> where we still use <span class="math inline">\(z_\alpha\)</span> and simply plug in <span class="math inline">\(S\)</span> for <span class="math inline">\(\sigma\)</span>, will be approximately valid, meaning the probability that the CI covers the true <span class="math inline">\(\mu\)</span> is approaching 0.95 as <span class="math inline">\(n \rightarrow \infty.\)</span> Even better, <span class="math inline">\(n\)</span> doesn’t have to be very large for this to be a good approximation (e.g.&nbsp;<span class="math inline">\(n&gt;30-50\)</span> usually suffices).</li>
 <li>However, from a finite sample perspective (<span class="math inline">\(n\)</span> small), things are harder. <span class="math inline">\(T\)</span> does <em>not</em> follow a <span class="math inline">\(N(0,1)\)</span> distribution, <em>even if <span class="math inline">\(X_i\sim N(\mu,\sigma^2)\)</span></em>.</li>
 </ol>
 <p>So what can we do for small <span class="math inline">\(n\)</span>? In fact, if <span class="math inline">\(X_i\sim N(\mu,\sigma^2)\)</span>, then <span class="math inline">\(T\)</span> follows a distribution called the <strong><span class="math inline">\(t\)</span>-distribution</strong>. The <span class="math inline">\(t\)</span>-distribution is not the same as a <span class="math inline">\(N(0,1)\)</span> distribution, so <span class="math inline">\(z_\alpha\)</span> is not the right value to use, but we can instead use the corresponding quantile of the <span class="math inline">\(t\)</span>-distribution and get valid CI.</p>
-<p>We are going explain how to get CI with the <span class="math inline">\(t\)</span> distribution, but notice that the whole line of reasoning to get these CI only holds if <span class="math inline">\(X_i\sim N(\mu,\sigma^2)\)</span>. If that assumption is not true, then we do not have a solution. So the summary is that when we have small sized data, we are going to rely really heavily on our assumption of normality. And because we have small amounts of data, it is going to be much harder to check our assumptions!</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that the whole line of reasoning to get these CI for small sample sizes <strong>only holds if <span class="math inline">\(X_i\sim N(\mu,\sigma^2)\)</span></strong>. If that assumption is not true, then we do not have a solution. So if we have small sized data sets, we are going to rely really heavily on our assumption of normality. And because we have small amounts of data, it is going to be much harder to check our assumptions!</p>
+</div>
+</div>
 <section id="confidence-intervals-using-the-t-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="confidence-intervals-using-the-t-distribution">Confidence intervals using the <span class="math inline">\(t\)</span>-distribution</h3>
 <p>If we cannot use the central limit theorem (because the sample size is too small) AND if we are willing to <em>assume</em> that our <span class="math inline">\(X_i \overset{\text{IID}}{\sim} N(\mu, \sigma^2)\)</span>, we can use what is called the <strong><span class="math inline">\(t\)</span>-distribution</strong> to construct confidence intervals. This is because if <span class="math inline">\(X_i \overset{i.i.d}{\sim}N(\mu,\sigma^2)\)</span>, <span class="math display">\[T = \frac{\bar{X} - \mu}{S/\sqrt{n}} \sim t_{n-1}\]</span> where <span class="math inline">\(t_{n-1}\)</span> is a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n-1\)</span> degrees of freedom.</p>
@@ -628,6 +640,15 @@ T=\dfrac{\bar{X}-\mu}{S/\sqrt{n}} = \dfrac{\left(\dfrac{\bar{X}-\mu}{\sigma}\rig
 \]</span></p>
 </div>
 </section>
+<section id="asymptotic-confidence-intervals-wald-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="asymptotic-confidence-intervals-wald-statistics">Asymptotic Confidence Intervals (Wald Statistics)</h3>
+<p>Generally, if we have a large number of samples, we will not need to worry about the <span class="math inline">\(t\)</span>-distribution nor do we have to worry about the assumption regarding the distribution of the individual <span class="math inline">\(X_i\)</span>.</p>
+<div class="PARAGRAPH">
+<p>CI for Proportions</p>
+</div>
+<p>This is particularly helpful for binary data <span class="math inline">\(X_i\)</span>, where <span class="math inline">\(\hat{\pi}=\bar{X}\)</span> is the proportion of 1’s in the data. These clearly do not have a normal distribution, but the CLT does apply, so we can use an asymptotic confidence interval. <span class="math display">\[\hat\pi\pm z_{\alpha}S/\sqrt{n} \]</span> Again, we have a simplification, This makes “sense” because the variance of a Bernoulli is <span class="math display">\[var(X_i)=p(1-p)\]</span> so we can just plug in <span class="math inline">\(\hat{p}\)</span> into that equation.</p>
+<p>Notice that if I used <span class="math inline">\(S^2\)</span> instead, I would get $$S^2=</p>
+</section>
 </section>
 <section id="planning-to-get-a-ci-of-a-certain-width" class="level2">
 <h2 class="anchored" data-anchor-id="planning-to-get-a-ci-of-a-certain-width">Planning to get a CI of a certain width</h2>
@@ -711,7 +732,7 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p><span class="math inline">\(S^2\)</span> is an <em>consistent</em> estimator of <span class="math inline">\(\sigma^2\)</span>, meaning that <span class="math inline">\(S^2\)</span> <em>converges in probability</em> to <span class="math inline">\(\sigma^2\)</span>. So by Slutsky’s Theorem, this means <span class="math inline">\(T\)</span> converges in distribution to a <span class="math inline">\(N(0,1)\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><span class="math inline">\(S^2\)</span> is an <em>consistent</em> estimator of <span class="math inline">\(\sigma^2\)</span>, meaning that <span class="math inline">\(S^2\)</span> <em>converges in probability</em> to <span class="math inline">\(\sigma^2\)</span>. So by Slutsky’s Theorem, this means <span class="math inline">\(T\)</span> converges in distribution to a <span class="math inline">\(N(0,1)\)</span> even after replacing <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(S^2\)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
