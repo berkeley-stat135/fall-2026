@@ -306,8 +306,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#examples-of-two-group-comparison" id="toc-examples-of-two-group-comparison" class="nav-link active" data-scroll-target="#examples-of-two-group-comparison">Examples of two group comparison</a></li>
-  <li><a href="#modeling-two-groups" id="toc-modeling-two-groups" class="nav-link" data-scroll-target="#modeling-two-groups">Modeling two groups</a>
+  <li><a href="#modeling-two-groups" id="toc-modeling-two-groups" class="nav-link active" data-scroll-target="#modeling-two-groups">Modeling two groups</a>
   <ul class="collapse">
   <li><a href="#relationship-of-these-models-to-regression" id="toc-relationship-of-these-models-to-regression" class="nav-link" data-scroll-target="#relationship-of-these-models-to-regression">Relationship of these models to Regression</a></li>
   </ul></li>
@@ -359,8 +358,6 @@ window.Quarto = {
 </ul>
 </div>
 <p>So far we have only considered creating confidence intervals for the mean of a single population. Now we are going to consider what if we have two different populations.</p>
-<section id="examples-of-two-group-comparison" class="level2">
-<h2 class="anchored" data-anchor-id="examples-of-two-group-comparison">Examples of two group comparison</h2>
 <p>Consider the following examples:</p>
 <ol type="1">
 <li>We are interested in the difference in wages between men and women. We collect a random sample of men and women to and ask them their annual income.</li>
@@ -369,20 +366,43 @@ window.Quarto = {
 <li>We want to compare political opinions between generations. We randomly recruit families and recruit two members to answer a survey, one of age 18-30 and the other of age 45-60.</li>
 </ol>
 <p>These examples all have the common property that we are trying to compare two populations, rather than estimate something about <em>one</em> population.</p>
-</section>
+<div class="GOALS">
+<div class="block-title">
+<p><strong>Questions/Goals for this Module</strong></p>
+</div>
+<ul>
+<li>How to model comparisons between two groups</li>
+<li>Extend CI concepts to two groups.</li>
+<li>Understand the statistical differences between paired and unpaired data</li>
+</ul>
+</div>
 <section id="modeling-two-groups" class="level2">
 <h2 class="anchored" data-anchor-id="modeling-two-groups">Modeling two groups</h2>
 <p>We can consider that we have data from two populations <span class="math display">\[(X_1,\ldots,X_{n_X}) \text{ and } (Y_1,\ldots, Y_{n_Y})\]</span> Since these are two different populations, we consider that they each have a different mean, but we’ll assume that within each group their means are the same, <span class="math display">\[E(X_i)=\mu_X, E(Y_i)=\mu_Y\]</span></p>
-<p>What are common additional modeling choices that we might make?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Notation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I am deviating from the book’s notation here. The book has group 1 be <span class="math inline">\(Y_{11},\ldots,Y_{1n_1}\)</span> and the second group <span class="math inline">\(Y_{21},\ldots,Y_{2n_2}\)</span>, with means <span class="math inline">\(\bar{Y}_1\)</span> and <span class="math inline">\(\bar{Y}_2\)</span>. The book’s notation fits into our regression notation better, but I find from past experience that students find double indices harder to follow – and they are harder to write on the board!</p>
+</div>
+</div>
+<p>What are common <em>additional</em> modeling choices that we might make?</p>
 <ol type="1">
 <li><p><strong>What do we estimate?</strong> The important question with all these parameters floating around is what are we interested in estimating? We could be interested in <span class="math inline">\(\mu_X\)</span> and <span class="math inline">\(\mu_Y\)</span> separately. But in many two group comparisons, we are primarily interested in comparing the two groups. This usually translates into evaluating how different these means are from each other. So we might define another parameter <span class="math display">\[\Delta=\mu_X-\mu_Y.\]</span> This is an example of creating a parameter of interest that isn’t explicitly a parameter of our distribution, but rather a function of our parameters.</p></li>
 <li><p><strong>Dependence Structure</strong>: We could assume that within each group the <span class="math inline">\(X_i\)</span> are independent from each other and the <span class="math inline">\(Y_i\)</span> are independent from each other. This would make sense if each observation in the group comes from a different individual. What about between the <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span>? This depends on the data we are considering.</p>
 <p>In our first two examples, each <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_j\)</span> are from separate individuals/units. It seems reasonable to assume that each response <span class="math inline">\(X_i\)</span> is independent from each <span class="math inline">\(Y_j\)</span>. However, in the last two, the <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span> are measurements that are linked in some way: in example 3 measurement <span class="math inline">\(X_j\)</span> is the before and <span class="math inline">\(Y_j\)</span> the after on the same individual; in example 4, <span class="math inline">\(X_j\)</span> is the answer of the younger person and <span class="math inline">\(Y_j\)</span> is the answer of the older person <em>in the same family</em>. It does <em>not</em> make sense to assume they are independent. Knowing the weight of an individual before treatment gives you information about what their weight might be after treatment (you have different expectations of the final weight for someone who starts out 180lbs versus 240lbs).</p>
 <p>This is called <strong>paired data</strong>, because the data comes in the form of pairs (and thus <span class="math inline">\(n_X=n_Y\)</span>). In fact we could instead think of the data as pairs indexed by the same value: <span class="math inline">\((X_1,Y_1),\ldots,(X_n,Y_n)\)</span>. In which case it might make sense to think of the <em>pairs</em> <span class="math inline">\((X_i,Y_i)\)</span> as independent from each other – i.e.&nbsp;to rewrite our data as observations <span class="math inline">\(i\)</span> which consist of a vector <span class="math inline">\((X_i,Y_i)\)</span>. However, note that the <span class="math inline">\(ith\)</span> pair wouldn’t necessarily correspond to the same unit. For example, in our example 4, <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span> are from two <em>different people</em> but they are from the same household <span class="math inline">\(i\)</span>.</p></li>
-<li><p> We could also consider what is an appropriate model for our data. If our <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> data are both continuous, we are likely to choose a normal distribution, <span class="math display">\[X_i \overset{i.i.d}{\sim}N(\mu_X,\sigma^2_X),
-Y_i \overset{i.i.d}{\sim}N(\mu_Y,\sigma^2_Y).\]</span> Notice that this doesn’t address correlation between the <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span>, which we might have to consider if we have paired data. We might, for example, assume that they are bivariate normal, with covariance, <span class="math display">\[cov(X_i,Y_i)=\sigma_{XY}\]</span> However, we will see for paired data, we can avoid needing to explicitly model (or estimate) <span class="math inline">\(\sigma_{XY}\)</span>.</p>
+<li><p> We could also consider what is an appropriate parametric model for our data. If our <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> data are both continuous, we are likely to choose a normal distribution, <span class="math display">\[X_i \overset{i.i.d}{\sim}N(\mu_X,\sigma^2_X),
+Y_i \overset{i.i.d}{\sim}N(\mu_Y,\sigma^2_Y).\]</span></p>
 <p>If our data are binary, then we would often use a Bernoulli model, <span class="math display">\[X_i \overset{i.i.d}{\sim}Be(\pi_X),
-Y_i \overset{i.i.d}{\sim}Be(\pi_Y).\]</span></p></li>
+Y_i \overset{i.i.d}{\sim}Be(\pi_Y).\]</span></p>
+<p>Notice that this doesn’t address correlation between the <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span>, which we might have to consider if we have paired data. We might, for example, assume that they are bivariate normal, with covariance, <span class="math display">\[cov(X_i,Y_i)=\sigma_{XY}\]</span> However, we will see for paired data, we can avoid needing to explicitly model (or estimate) <span class="math inline">\(\sigma_{XY}\)</span>.</p></li>
 </ol>
 <section id="relationship-of-these-models-to-regression" class="level3">
 <h3 class="anchored" data-anchor-id="relationship-of-these-models-to-regression">Relationship of these models to Regression</h3>
@@ -390,12 +410,13 @@ Y_i \overset{i.i.d}{\sim}Be(\pi_Y).\]</span></p></li>
 \alpha_1, &amp; X=1\\
 \alpha_0, &amp; X=0
 \end{cases}
-\]</span> So we’ve changed the notation (<span class="math inline">\(X\)</span> means something different in the regression frame work), but this is the same idea.</p>
-<p>We also introduced a parametric for independent <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span> categorical, <span class="math display">\[Y |X \sim \begin{cases}
+\]</span> So in this chapter, we’ve changed the notation (<span class="math inline">\(X\)</span> means something different in the regression frame work), but it is ultimately describing the same setting.</p>
+<p>We also previously introduced a parametric for independent <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span> categorical, <span class="math display">\[Y |X \sim \begin{cases}
 N(\alpha_1,\sigma_1^2), &amp; X=1\\
 N(\alpha_0,\sigma_0^2), &amp; X=0
 \end{cases}
-\]</span> Is the standard model for independent, non-paired data. Our standard <em>normal parametric model</em> for regression, however, doesn’t handle dependency between our data. Moreover, even for independent groups, the standard model doesn’t allow for different variances in the two groups. So while we can use the general notation and framework of regression for two groups as a model of <span class="math inline">\(E(Y|X)\)</span>, if we go further and just roll out our standard parametric model, we will be making different modeling choices than what are usually done for two groups.</p>
+\]</span> This is the standard model for independent, non-paired data, and matches our model above. This model, however, didn’t handle dependency between our data, as we have with paired data.</p>
+<p>Moreover, if instead we consider the standard regression model for linear models, <span class="math display">\[Y_i=\beta_0+\beta_1 X_i +\epsilon_i\]</span> with <span class="math inline">\(\epsilon_i\)</span> i.i.d. <span class="math inline">\(N(0,\sigma^2)\)</span>, then it doesn’t even allow for different variances in the two groups. So while the general notation and framework of regression works for two groups, the specific analysis we usually do with the standard model doesn’t match what is usually done for analyzing even two independent groups.</p>
 <div class="QUESTION">
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>

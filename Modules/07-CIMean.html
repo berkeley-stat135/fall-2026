@@ -326,6 +326,8 @@ window.Quarto = {
   <li><a href="#distribution-of-t-key-theorems" id="toc-distribution-of-t-key-theorems" class="nav-link" data-scroll-target="#distribution-of-t-key-theorems">Distribution of <span class="math inline">\(T\)</span>: Key Theorems</a></li>
   </ul></li>
   <li><a href="#planning-to-get-a-ci-of-a-certain-width" id="toc-planning-to-get-a-ci-of-a-certain-width" class="nav-link" data-scroll-target="#planning-to-get-a-ci-of-a-certain-width">Planning to get a CI of a certain width</a></li>
+  <li><a href="#role-of-pivotal-statistic-in-constructing-ci" id="toc-role-of-pivotal-statistic-in-constructing-ci" class="nav-link" data-scroll-target="#role-of-pivotal-statistic-in-constructing-ci">Role of Pivotal Statistic in constructing CI</a></li>
+  <li><a href="#asymptotic-wald-statistics" id="toc-asymptotic-wald-statistics" class="nav-link" data-scroll-target="#asymptotic-wald-statistics">Asymptotic (Wald) Statistics</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -733,9 +735,9 @@ sample estimates:
 <p>We can rewrite our random variable <span class="math inline">\(T\)</span> as <span class="math display">\[
 T=\dfrac{\bar{X}-\mu}{S/\sqrt{n}} = \dfrac{\left(\dfrac{\bar{X}-\mu}{\sigma}\right)}{\dfrac{S}{\sqrt{n}\sigma}}
   = \dfrac{\left(\dfrac{\bar{X}-\mu}{\sigma/\sqrt{n}}\right)}{\sqrt{S^2/\sigma^2}}
-\]</span> Clearly the numerator satisfies the requirement; if we let <span class="math display">\[Z=\dfrac{\bar{X}-\mu}{\sigma/\sqrt{n}}\sim N(0,1)\]</span> So it remains to show two things:</p>
+\]</span> Clearly the numerator satisfies the requirement if we let <span class="math display">\[Z=\dfrac{\bar{X}-\mu}{\sigma/\sqrt{n}}\sim N(0,1)\]</span> Let’s also write <span class="math display">\[U_{n-1}=(n-1)\sqrt{S^2/\sigma^2}\sim \chi_{n-1}\]</span> Then we have rewritten <span class="math inline">\(T\)</span> as <span class="math display">\[T=\frac{Z}{\sqrt{U_{n-1}/(n-1)}}\]</span> This means we’ve written <span class="math inline">\(T\)</span> in the potential form of a <span class="math inline">\(t\)</span> distribution, but for that to mean it is <span class="math inline">\(t\)</span>-distributed, it remains to show two things:</p>
 <ol type="1">
-<li><span class="math inline">\(U_{n-1}=\sqrt{S^2/\sigma^2}\sim \chi_{n-1}\)</span></li>
+<li><span class="math inline">\(U_{n-1}\sim \chi_{n-1}\)</span></li>
 <li><span class="math inline">\(Z\)</span> and <span class="math inline">\(U_{n-1}\)</span> are independent.</li>
 </ol>
 <p>Notice that the same <span class="math inline">\(X_i\)</span> are used in both <span class="math inline">\(Z\)</span> and <span class="math inline">\(U_{n-1}\)</span>, so the question of independence has to be carefully considered.</p>
@@ -763,13 +765,13 @@ T=\dfrac{\bar{X}-\mu}{S/\sqrt{n}} = \dfrac{\left(\dfrac{\bar{X}-\mu}{\sigma}\rig
 <p>Since <span class="math inline">\(X_i \sim N(0,1)\)</span>, we have <span class="math inline">\(X_i^2 \sim \chi^2_1\)</span>, hence <span class="math inline">\(\displaystyle\sum_{i=1}^n X_i^2 \sim \chi^2_n\)</span>.</p>
 <p>Further, we know that <span class="math inline">\(\bar{X}/(1/\sqrt{n}) \sim N(0,1)\)</span>, we have <span class="math inline">\(\sqrt{n}\,\bar{X} \sim N(0,1)\)</span>, hence <span class="math inline">\(n\bar{X}^2 \sim \chi^2_1\)</span>.</p>
 <p>Therefore <span class="math inline">\((n-1)S^2 \sim \chi^2_{n-1}\)</span> . <span class="math inline">\(\blacksquare\)</span></p>
+</div>
 <p>Note that:</p>
 <ol type="1">
 <li><span class="math inline">\(\displaystyle\sum X_i^2\)</span> and <span class="math inline">\(\bar{X}^2\)</span> are dependent</li>
 <li>The decomposition <span class="math inline">\(\displaystyle\sum X_i^2 = (n-1)S^2 + n\bar{X}^2\)</span> implies that <span class="math inline">\(n\)</span> df <span class="math inline">\(= (n-1)\)</span> df <span class="math inline">\(+ 1\)</span> df).</li>
 </ol>
-</div>
-<p>Putting these together gives that our <span class="math inline">\(T\)</span> random variable is distributed as <span class="math inline">\(t\)</span> distribution.</p>
+<p>Putting these theorems together gives that our <span class="math inline">\(T\)</span> random variable is distributed as <span class="math inline">\(t\)</span> distribution.</p>
 <div id="thm-t-statistic" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3</strong></span> If <span class="math inline">\(X_1, \ldots, X_n \overset{\text{IID}}{\sim} N(\mu, \sigma^2)\)</span>, then <span class="math display">\[T = \frac{\bar{X} - \mu}{S/\sqrt{n}} \sim t_{n-1}\]</span></p>
 </div>
@@ -826,6 +828,31 @@ P\big(\lvert \hat{\pi}-\pi\rvert \ge \delta\big) &amp;= 0.025 \\
 </ol>
 <p><span class="math inline">\(z(\alpha/2) = 1.96\)</span>, and the 95% confidence interval is given by <span class="math inline">\(\hat{\pi} \pm 1.96\times \dfrac{2}{50}\)</span>. Since <span class="math inline">\(\hat{\pi} = 0.25\)</span>, this gives us <span class="math inline">\(0.25 \pm 1.96\times \dfrac{2}{50} = (0.1716, 0.3284)\)</span> which contains <span class="math inline">\(\pi = \dfrac{1}{5}.\)</span></p>
 </details>
+</section>
+<section id="role-of-pivotal-statistic-in-constructing-ci" class="level2">
+<h2 class="anchored" data-anchor-id="role-of-pivotal-statistic-in-constructing-ci">Role of Pivotal Statistic in constructing CI</h2>
+<p>How do we construct confidence intervals more generally, i.e.&nbsp;other than for the mean or something normally approximated?</p>
+<p>The short answer is: it’s tricky. When we look back at what we did, we had some random variable that depended on our unknown parameter <span class="math inline">\(\mu\)</span>, e.g.&nbsp;<span class="math display">\[T(\mu)=\frac{\bar{X}-\mu}{S/\sqrt{n}}\]</span> And the distribution of <span class="math inline">\(T(\mu)\)</span> was the same <em>regardless of <span class="math inline">\(\mu\)</span></em>. This allowed us to write (for large <span class="math inline">\(n\)</span>) <span class="math display">\[1-\alpha=P(-z_{\alpha/2}\leq T(\mu)\leq z_{\alpha})=P(T^{-1}(-z_{\alpha/2})\geq \mu \geq T^{-1}(z_{\alpha/2}))\]</span> (because <span class="math inline">\(T(\mu)\)</span> is monotone decreasing in <span class="math inline">\(\mu\)</span>, we had to change the direction of the inequalities). This gave us our lower and upper bounds of our CI. (We did the same thing for the <span class="math inline">\(t\)</span> distribution, so we could replace the above with our exact <span class="math inline">\(t\)</span> confidence intervals if we assume normality).</p>
+<p>We can describe this property more generally,</p>
+<div id="def-pivotal" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Pivotal Quantity)</strong></span> A function <span class="math inline">\(f(X,\theta)\)</span> has a distribution that does not depend on the parameter <span class="math inline">\(\theta\)</span> is called a <strong>pivotal quantity</strong>.</p>
+</div>
+<p>If you can find a pivotal quantity for your problem, you can use this same strategy to construct confidence intervals for <span class="math inline">\(\theta\)</span>. However, finding a pivotal quantity can be pretty difficult in other settings than the normal.</p>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Give an expression for <span class="math inline">\(T^{-1}(z)\)</span> and verify the above equality, <span class="math display">\[P(-z_{\alpha/2}\leq T(\mu)\leq z_{\alpha/2})=P(T^{-1}(-z_{\alpha/2})\geq \mu \geq T^{-1}(z_{\alpha/2}))\]</span> and that it gives us the standard asymptotic confidence interval for the mean, <span class="math display">\[\bar{X}\pm z_{\alpha/2}S/\sqrt{n}\]</span></p>
+</div>
+</section>
+<section id="asymptotic-wald-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="asymptotic-wald-statistics">Asymptotic (Wald) Statistics</h2>
+<p>Getting pivotal quantities is generally tricky and even more, the exact sampling distribution of <span class="math inline">\(\hat\theta\)</span> may not be known or tractable. Generically, if we have a estimator <span class="math inline">\(\hat\theta\)</span> that is asymptotically normally distributed, we can similarly build asymptotic confidence intervals. The main thing we need is an <em>estimate of its standard error</em>, <span class="math inline">\(\hat{SE}_{\hat\theta}\)</span>. Indeed this is exactly what we did with the proportion.</p>
+<p>Then we can construct what are known as <strong>Wald Confidence Intervals,</strong> <span class="math display">\[\hat\theta \pm z_{\alpha/2} \hat{SE}_{\hat\theta}\]</span> Wald intervals (or asymptotically normal confidence intervals) are a primary source for getting confidence intervals for all kinds estimators.</p>
+<p>Notice that this formulation goes far beyond the mean, and works for any asymptotically normally distributed estimator <span class="math inline">\(\hat\theta\)</span> for which we have an estimate of its standard error.</p>
+<p>The main question becomes not to find a pivotal quantity, but to determine whether an estimator is asymptotically normal, and if so how to estimate the asymptotic standard error? We will turn to asymptotic distributions shortly, and see that many of the estimators we have been discussing (MLE and M-estimators) have asymptotically normal distributions <em>and</em> we have a method of estimating their standard errors that relies just on manipulating the function we are optimizing (and doesn’t require having a closed-form solution for the estimator).</p>
+<p>This makes Wald Confidence intervals (as opposed to developing a new pivotal quantity), a central method for constructing confidence intervals.</p>
+<p>The other main way to construct confidence intervals is to use the bootstrap, a computational method, which we will also discuss after we discuss asymptotics.</p>
 
 
 
