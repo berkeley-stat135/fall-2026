@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Thinking probabilistically about data</title>
+<title>Functions of Estimators and the Delta Method</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -134,7 +134,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/01-ThinkProb.html">Thinking probabilistically about data</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/11-DeltaMethod.html">Functions of Estimators and the Delta Method</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -207,7 +207,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Modules/01-ThinkProb.html" class="sidebar-item-text sidebar-link active">
+  <a href="../Modules/01-ThinkProb.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Thinking probabilistically about data</span></a>
   </div>
 </li>
@@ -267,7 +267,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Modules/11-DeltaMethod.html" class="sidebar-item-text sidebar-link">
+  <a href="../Modules/11-DeltaMethod.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Functions of Estimators and the Delta Method</span></a>
   </div>
 </li>
@@ -289,17 +289,25 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#why-consider-data-random" id="toc-why-consider-data-random" class="nav-link active" data-scroll-target="#why-consider-data-random">Why consider data random?</a></li>
-  <li><a href="#vocabulary" id="toc-vocabulary" class="nav-link" data-scroll-target="#vocabulary">Vocabulary</a></li>
+  <li><a href="#estimating-a-function-of-parameter-with-mle" id="toc-estimating-a-function-of-parameter-with-mle" class="nav-link active" data-scroll-target="#estimating-a-function-of-parameter-with-mle">Estimating a function of Parameter with MLE</a>
+  <ul class="collapse">
+  <li><a href="#proof" id="toc-proof" class="nav-link" data-scroll-target="#proof">Proof</a></li>
+  </ul></li>
+  <li><a href="#the-distribution-of-ghattheta" id="toc-the-distribution-of-ghattheta" class="nav-link" data-scroll-target="#the-distribution-of-ghattheta">The distribution of <span class="math inline">\(g(\hat\theta)\)</span></a>
+  <ul class="collapse">
+  <li><a href="#variance-of-ghattheta" id="toc-variance-of-ghattheta" class="nav-link" data-scroll-target="#variance-of-ghattheta">Variance of <span class="math inline">\(g(\hat\theta)\)</span></a></li>
+  <li><a href="#delta-method-theorem" id="toc-delta-method-theorem" class="nav-link" data-scroll-target="#delta-method-theorem">Delta Method Theorem</a></li>
+  </ul></li>
+  <li><a href="#distribution-of-functions-of-our-mle" id="toc-distribution-of-functions-of-our-mle" class="nav-link" data-scroll-target="#distribution-of-functions-of-our-mle">Distribution of functions of our MLE</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/01-ThinkProb.html">Thinking probabilistically about data</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/11-DeltaMethod.html">Functions of Estimators and the Delta Method</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Thinking probabilistically about data</h1>
+<h1 class="title">Functions of Estimators and the Delta Method</h1>
 </div>
 
 
@@ -321,101 +329,146 @@ window.Quarto = {
 <p><strong>Corresponding reading</strong></p>
 </div>
 <ul>
-<li>Chapter 1 of <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span></li>
+<li>Chapter 3.4, 4.2.6 (invariance of MLE) in <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span></li>
+<li>Chapter 4.6 (page 162) in <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span></li>
 </ul>
+<p>The discussion of the delta method draws extensively from material from Shobhana Stoyanov’s lecture notes from <a href="https://stat135.berkeley.edu/spring-2026/">Spring 2026</a>, <a href="https://stat135.berkeley.edu/spring-2026/lectures/lecture-8.html">Lecture 8</a>.</p>
 </div>
 <div class="GOALS">
 <div class="block-title">
 <p><strong>Questions/Goals for this Module</strong></p>
 </div>
 <ul>
-<li><p>Why do we think of data as random? What do we mean by this?</p></li>
-<li><p>What are possible sources of randomness in data?</p></li>
+<li>How do you estimate a function of your MLE?</li>
+<li>How does the Delta Method allow you to find the asymptotic variance of these estimators?</li>
+<li>Why these estimators are also asymptotically normal</li>
 </ul>
 </div>
-<p>Let’s return to what we said in the introduction: We are able to perform inference by thinking of our data as random, and we use probability to model aspects of our data. In this module we are going to discuss what probabilistic modeling of a data generation process might look like.</p>
-<p>A common way to think about how probability and statistics interact is given by this diagram:</p>
-<p><img src="../StaticFigures/wassermanbigpic_v001.png" class="img-fluid" alt="Relationship of Statistics and Probability, from All of Statistics"> The idea is that probability studies what kind of data you would expect if you <em>knew</em> the data generating process, while Statistics looks at data and tries to understand what type of data generating process might have created the data we observed.</p>
+<section id="estimating-a-function-of-parameter-with-mle" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-a-function-of-parameter-with-mle">Estimating a function of Parameter with MLE</h2>
+<p>So far all of our examples where we used the MLE, what we wanted to estimate was the actual parameter of the parametric model.</p>
+<p>But consider the exponential distribution, with density <span class="math display">\[f(x|\lambda)= \lambda e^{-\lambda x},\]</span> which was an exercise in the MLE section. We found a MLE for the rate parameter <span class="math inline">\(\lambda\)</span>, <span class="math display">\[\hat\lambda=\frac{1}{\bar{X}}.\]</span> But what if that isn’t what we are interested in, and we want the MLE for the <em>mean</em> of the distribution, let’s call it <span class="math inline">\(\mu\)</span>? That is given by <span class="math display">\[\mu=E(X)=\frac{1}{\lambda}\]</span> But <span class="math inline">\(\mu\)</span> isn’t part of the density of the exponential… Can we find a MLE for <span class="math inline">\(\mu\)</span>?</p>
+<p>In fact, yes, and there is a very simple solution. If you know the MLE for the parameters of a distribution, and you want the MLE for a function of those parameters, you can just substitute the MLE into the function. So for an exponential, <span class="math display">\[\hat{\mu}=\frac{1}{\hat{\lambda}}=\bar{X}\]</span> Which is both simple, and quite logical – you see almost every time, MLE is going to tell you that the best way to estimate the mean of the distribution is the mean of the data, irrespective of the distribution you assume.</p>
+<p>Specifically, we have the following Theorem:</p>
+<div id="thm-mlefcns" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (The MLE of functions of <span class="math inline">\(\theta\)</span> (Invariance of MLE))</strong></span> Let <span class="math inline">\(\tau = g(\theta)\)</span> be a function of <span class="math inline">\(\theta\)</span>. Let <span class="math inline">\(\hat\theta\)</span> be the MLE of <span class="math inline">\(\theta\)</span>. Then <span class="math inline">\(\hat\tau = g(\hat\theta)\)</span> is the MLE of <span class="math inline">\(\tau\)</span>.</p>
+</div>
 <div class="PARAGRAPH">
-<p>Example</p>
+<p>Example: standard deviation</p>
 </div>
-<p>Let’s consider a concrete example of the difference here. We consider a simple problem of visitors to a website. We could use probability to model this process.</p>
-<p>For example, we could assume that the number of visitors in an interval of 10min is distributed <span class="math inline">\(Poisson(\lambda)\)</span> and independent of the number in any other such interval. <span class="math inline">\(\lambda\)</span> would give the rate of visitation to the site. We have described a data generating process, also called a <em>probabilistic model</em> and we could ask questions such as</p>
-<ul>
-<li>on average how many visitors to expect in a particular time interval for a particular <span class="math inline">\(\lambda\)</span></li>
-<li>determine the <span class="math inline">\(\lambda\)</span> at which the probability is greater than 0.80 that the demand in a time interval would be above capacity of the host (i.e.&nbsp;crashes the website)</li>
-</ul>
-<p>These are probability questions – we start with a probability model and describe what results we would be likely to see.</p>
-<p>Alternatively, you could have records of visits to the website in 10min intervals – this is our data. Using only this data, how could we answer? Well, we’d like to not assume a <span class="math inline">\(\lambda\)</span> but instead <em>estimate</em> what is it’s actual rate. I could still assume the same probabilistic model as above, but rather than trying to understand what type of data the probability model will generate for an arbitrary <span class="math inline">\(\lambda\)</span>, I want to estimate something about that probability model based on my data. More than that – I’d like to be able to say something about how <em>accurate</em> my estimate is. This is where statistics comes in and diverges from probability.</p>
-<section id="why-consider-data-random" class="level2">
-<h2 class="anchored" data-anchor-id="why-consider-data-random">Why consider data random?</h2>
-<p>Why should we consider our data random? This is actually a really important question. After all, if I just hand you a spreadsheet of numbers in columns, what about it is random? They seem pretty fixed and determinate at that point.</p>
-<p>Consider the following scatter plots that shows imagined data collected on two variables:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="01-ThinkProb_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="1152"></p>
-<figcaption>Plots of data that might have been created by the scenarios</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Consider the following possible descriptions of this data and consider what about this data you might consider random? How is that influenced by how the data was collected? What kind of statement might you want to make about this data, and how does randomness play into this? Scenarios 1-3 go with the left plot and Scenarios 4-5 go with the right plot.</p>
-<ol type="1">
-<li><p>The data comes from a government survey of randomly selected mid-aged people. The survey asks them a bunch of questions about their life, and two variables are shown above. Each point is the response from a single respondent. The y-axis is their measure of how happy they are with their life and their x-axis is their current income</p></li>
-<li><p>I take the list of current phone numbers of my high school class and call them <em>all</em> up (it was a small high school!). Each point is the response from a single respondent. The y-axis is their current income and the x-axis is their GPA in high school.</p></li>
-<li><p>I scrap a website that provides user reviews of a product and use a language processing app to process all of the review to give a numerical score based on the review. Each point is a single review. The y-axis shows the score and the x-axis shows the length of the comment.</p></li>
-<li><p>A physics class puts different masses on a spring and measure the length of the spring. The x-axis shows the mass added to the spring, and the y-axis shows the length of the spring. The same mass was put on the spring and measured multiple times.</p></li>
-<li><p>A company is testing the effectiveness of different doses of a drug for weight loss. Each participant is randomly assigned a dosage, and monitored for their weight loss. Each point is a participant in the trial. The y-axis is the weight loss, the x-axis is the dosage of the drug.</p></li>
-</ol>
+<p>Another example is the parameter <span class="math inline">\(\sigma^2\)</span> in our normal. We emphasized that we will make our life easier by working with <span class="math inline">\(\sigma^2\)</span> as our parameter, not <span class="math inline">\(\sigma\)</span>. But now we see that the MLE of <span class="math inline">\(\sigma\)</span> will just be the square-root of our MLE of <span class="math inline">\(\sigma^2\)</span>, which justifies our approach!</p>
 <div class="QUESTION">
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
 </div>
-<p>What differences do you notice about the two plots and how does that relate to the description of the source of the data?</p>
+<p>Consider our Bernoulli example for when we have binary data <span class="math inline">\(X_1,\ldots,X_n\)</span>. What if instead of estimating the probability of success, <span class="math inline">\(p\)</span>, I want to estimate the log-odds, <span class="math display">\[\tau=\log(\frac{p}{1-p}).\]</span> What would be the MLE?</p>
 </div>
-<p>In thinking through these settings, we can see several common <em>sources</em> of randomness we can encounter in the real world, and in the same dataset we can see multiple sources of randomness.</p>
-<ol type="1">
-<li>Randomness due in our selection of which people (or units) we study</li>
-<li>Randomness due to measurement error</li>
-<li>Randomness due to our choice of <em>intervention</em> (meaning we changed something for specific people or units)</li>
-</ol>
-<p>We can also divide randomness in a different way based on what we know about the randomness</p>
-<ol type="1">
-<li><strong>The investigator <em>creates</em> or <em>controls</em> the randomness.</strong> For example in the government survey, the government uses a random sample, and <em>they setup that selection process.</em> Similarly, in the drug dosage example, the company controls the random assignment to dosages.</li>
-<li><strong>The investigator doesn’t control the randomness, but we have reason to think it follows a random generating process</strong> In the spring example, the randomness (measurement error) comes from life and we don’t know what it is exactly. But we have good reasons to think that the measurement error would behave similarly if we repeated the experiment, i.e.&nbsp;like a random process. Not that we would get the <em>same</em> measurement error, but that it’s reasonable to think of it coming as if it is drawn from the same random process every time.</li>
-<li><strong>Not random, but arbitrary</strong> In the case of the website review, we could think of the selection of people that left reviews as a random process, similar to measurement error. But we don’t know <em>anything</em> about it nor any idea in what sense is it random. In this case the selection of people is often better to be though of as <em>arbitrary</em> rather than <em>random</em>, since in statistics “random” has a specific meaning (unlike the colloquial use of the word).</li>
-</ol>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
 </div>
-<div class="callout-title-container flex-fill">
-Note
+<p>Consider what happens if we assume our data is i.i.d. <span class="math inline">\(N(\mu,\sigma^2)\)</span>, and we want to estimate the coefficient of variation (CV): <span class="math inline">\(\mu/\sigma\)</span>. What is the MLE for the CV?</p>
 </div>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
 </div>
-<div class="callout-body-container callout-body">
-<p>Notice that a lot of our thought process here involves some variant of thinking “what would change if I collected this data again”? This is a common way of thinking about randomness, and this view of randomness is often called <strong>long-term probability</strong> or the <strong>frequentist</strong> perspective.</p>
-<p>Such a thought experiment underlies much of what we will cover, but is not always satisfying. For example, what does it mean for weather or stock market data? We are never going be able to rerun the stock market nor the weather and so the notion of long-term frequency can be unsatisfying.</p>
-<p>Frequentist probability is not the only way to think about uncertainty in the data – the Bayesian perspective is another approach but we will not have time to be able to cover it in this class (the book has examples of Bayesian analysis that I encourage you to read).</p>
+<p>Suppose you decided to model your data with the Gamma(<span class="math inline">\(\alpha, \beta\)</span>) distribution, where <span class="math inline">\(\beta\)</span> is the <em>rate</em> parameter. In other words, you choose to model <span class="math inline">\(X_1,\ldots,X_n\)</span> as each being independent with distribution Gamma and <em>shared</em> parameters <span class="math inline">\(\alpha,\beta\)</span>. Since there are two ways to <em>parameterize</em> the Gamma distribution, let’s be specific, and write the density as, <span class="math display">\[
+f(x)=\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}; \alpha,\beta &gt;0
+\]</span> Suppose you had a MLE for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, what is <span class="math inline">\(g\)</span> and what would be the MLE for the mean of the distribution?</p>
 </div>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
 </div>
+<p>What characteristics would you want of your data <span class="math inline">\(X_1,\ldots,X_n\)</span> to make Gamma a good choice for modeling your data?</p>
+</div>
+<section id="proof" class="level3">
+<h3 class="anchored" data-anchor-id="proof">Proof</h3>
+<p>The theorem holds for all <span class="math inline">\(g\)</span>, but it’s pretty easy to prove in the case that <span class="math inline">\(g\)</span> is one-to-one (i.e.&nbsp;invertible). In this case, we could rewrite the density with <span class="math inline">\(\tau\)</span> the new parameter of the density by replacing <span class="math inline">\(\theta\)</span> with <span class="math inline">\(g^{-1}(\tau)\)</span>,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, calculate the likelihood <span class="math inline">\(\ell(\tau)\)</span>, and find a <span class="math inline">\(\tau\)</span> that maximizes it. This would give you the MLE of <span class="math inline">\(\tau\)</span>. This theorem says you don’t need to go through this process, because <span class="math inline">\(\hat\tau=g(\hat\theta)\)</span> is the MLE of <span class="math inline">\(\tau\)</span>, i.e.&nbsp;maximizes <span class="math inline">\(\ell(\tau)\)</span>.</p>
+<p>Let’s assume that <span class="math inline">\(\hat{\theta}\)</span> is the MLE for <span class="math inline">\(\theta\)</span>, i.e.&nbsp;it is the value <span class="math inline">\(\theta\)</span> that maximizes <span class="math inline">\(\ell(\theta)\)</span>. Then for for any particular <span class="math inline">\(\tau_0\)</span>, there is a single <span class="math inline">\(\theta_0=g^{-1}(\tau_0)\)</span> and we can calculate the likelihood of our data using the likelihood with <span class="math inline">\(\tau_0\)</span> or with <span class="math inline">\(\theta_0\)</span>, and these values will be the same, <span class="math display">\[\ell(\tau_0)=\ell(g^{-1}(\tau_0))=\ell(\theta_0)\]</span> So for <em>any</em> particular <span class="math inline">\(\tau_0\)</span> and corresponding <span class="math inline">\(\theta_0\)</span>, we have <span class="math display">\[\ell(\tau_0)=\ell(\underbrace{g^{-1}(\tau_0)}_{\theta_0}) \leq \ell(\hat\theta)
+\]</span> because of the definition of <span class="math inline">\(\hat\theta\)</span> as the value that maximizes <span class="math inline">\(\ell(\theta)\)</span>.</p>
+<p>But because <span class="math inline">\(g\)</span> is one-to-one, <span class="math inline">\(\hat\theta\)</span> corresponds to a unique <span class="math inline">\(\hat\tau=g(\hat\theta)\)</span> and <span class="math display">\[\ell(\hat\theta_n)=\ell(\hat\tau_n)\]</span> so that means <span class="math display">\[\ell(\tau_0) \leq \ell(\hat\tau)
+\]</span> This is true for any <span class="math inline">\(\tau_0\)</span>, so therefore <span class="math inline">\(\hat\tau = g(\hat{\theta})\)</span> maximizes <span class="math inline">\(\ell\)</span> over all other possible values of <span class="math inline">\(\tau\)</span>. This means <span class="math inline">\(\hat\tau\)</span> is the MLE for <span class="math inline">\(\tau\)</span>.</p>
 </section>
-<section id="vocabulary" class="level2">
-<h2 class="anchored" data-anchor-id="vocabulary">Vocabulary</h2>
-<p>There is some important vocabulary that goes along to help describe types of data we might observe, and these are generally related to how the data was collected and the randomness we will observe.</p>
-<ul>
-<li><strong>Units:</strong> These are the objects we can collect data on</li>
-<li><strong>Sample:</strong> A set of units (often used to describe the set of units in our data). By describing them as a sample, we are implicitly saying they are a <em>subset</em> of all possible units of interest. This is unlike my high school alumni example, were I collected data on everyone. I shouldn’t say that was a sample of the high school from my graduating class – we call a dataset a <strong>census</strong> when you collect all units of a population.</li>
-<li><strong>Population:</strong> This is the larger set of units from which our sample comes.</li>
-<li><strong>Experimental Data</strong> or an <strong>Intervention:</strong> This describes both the spring and the drug dosage data. This is when the data are the result of the investigator setting a particular condition or setting, and then collecting data on what is the response under that condition. As we will see this is a gold-standard for determining how changing the condition of our unit will result in a change in other variables. As a side note, we will often see with intervention data that you will have shared values among your units in what interventions they are given – you don’t generally pick an arbitrary dosage to give a patient. You pick a few carefully selected dosages to explore, and then assign each patient one of them.</li>
-<li><strong>Observational Data</strong> This describes all of the remaining datasets. The variables measured are as the investigator observes them – there’s no intervention on the part of the investigator. We only see what naturally occurs together, not what <em>would have happen</em> if we assigned one of the variables to the unit. This will be an important distinction when we think about causality and multiple regression later. Notice that you can have very high quality, and well designed data, such as the government survey, but it is still an observational study. The government doesn’t intervene and give someone a salary at a certain amount and then come back and see how happy they are a year later. It measures what is co-occurring naturally.</li>
-<li><strong>Random Sample</strong> This describes <em>how</em> we select the sample of units in our data, and it specifically implies that the investigator used a <strong>known</strong> random process to select the units. The key property distinguishing a random sample from an arbitrary sample is that the random mechanism for selecting units from the population is <strong>known</strong>.</li>
-<li><strong>Simple Random Sample</strong> The most common example of a random sample, where every unit in the population is equally likely to be selected. But there are other ways to randomly select samples where you preference some units over others.</li>
-<li><strong>Convenience sample</strong> Data that are collected based on some convenient mechanism, with no randomness introduced by the investigator into the choice of which samples are picked. It might also be called a <strong>sample of convenience.</strong> Many datasets fall under this category. Frequently the investigator doesn’t even choose the units – they are given the units by processes they do not completely control, like the website scrapping example or people who choose to enroll in a drug study. Other times the investigator does choose the units, but their mechanism is not random, e.g.&nbsp;picking every 10th person in the school directory.</li>
-</ul>
+</section>
+<section id="the-distribution-of-ghattheta" class="level2">
+<h2 class="anchored" data-anchor-id="the-distribution-of-ghattheta">The distribution of <span class="math inline">\(g(\hat\theta)\)</span></h2>
+<section id="variance-of-ghattheta" class="level3">
+<h3 class="anchored" data-anchor-id="variance-of-ghattheta">Variance of <span class="math inline">\(g(\hat\theta)\)</span></h3>
+<p>We have the MLE of <span class="math inline">\(g(\theta)\)</span> is given by <span class="math inline">\(g(\hat\theta)\)</span>, but how do we find it’s variance?</p>
+<p>This type of situation is common in statistics. We have a random variable <span class="math inline">\(U\)</span> for which we know the mean and variance. But we are actually interested in a <em>different</em> random variable, <span class="math inline">\(V = g(U)\)</span>, and we want the mean and variance of <span class="math inline">\(Y\)</span>.</p>
+<p>The problem is that <span class="math inline">\(g\)</span> is not a linear function, so <span class="math inline">\(E\left(g(U)\right) \ne g\left(E(U)\right)\)</span>.</p>
+<p>We are going to discuss a different method called the <strong>delta method</strong> or the <strong>propagation of error</strong> formula.</p>
+<p>The main idea behind the delta method is that we use a Taylor series expansion of <span class="math inline">\(g\)</span>, so let’s remind ourselves what the Taylor series expansion is.</p>
+<div id="thm-taylor" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Taylor series expansion)</strong></span> Let $ k$ be an integer and let the function $g: R R $ be <span class="math inline">\(k\)</span> times differentiable at the point <span class="math inline">\(a\in R\)</span>. Then there exists a function <span class="math inline">\({\displaystyle h_{k}:R\rightarrow R }\)</span> such that</p>
+<p><span class="math display">\[{\displaystyle g(x)=\sum _{i=0}^{k}{\frac {g^{(i)}(a)}{i!}}(x-a)^{i}+h_{k}(x)(x-a)^{k},}
+\]</span> and</p>
+<p><span class="math display">\[{\displaystyle \lim_{x\to a}h_{k}(x)=0.}\]</span> The term <span class="math display">\[R_k(x)=h_{k}(x)(x-a)^{k}\]</span> is often called the remainder term.</p>
+</div>
+<p>This means we can approximate <span class="math inline">\(g(x)\)</span> by a <span class="math inline">\(n\)</span>th order polynomial if <span class="math inline">\(x\)</span> is sufficiently near <span class="math inline">\(a\)</span>. So for example, this allows us to say <span class="math display">\[g(x)\approx b_0+b_1 x\]</span> or <span class="math display">\[g(x)\approx b_0+b_1x+b_2x^2\]</span> with coefficients that depend on the point <span class="math inline">\(a\)</span> where we are trying to approximate the function <span class="math inline">\(g\)</span>.</p>
+<p>Why is this useful for random variables? We are going to apply this to our function <span class="math inline">\(g\)</span> so that we can say something about <span class="math inline">\(Y = g(X)\)</span>, when <span class="math inline">\(X\)</span> is near <span class="math inline">\(a=\mu_X\)</span>.</p>
+<p>If we do that, it will be easy to determine the approximate expectation and variance of <span class="math inline">\(Y\)</span> because we assume we know the expectation and variance of <span class="math inline">\(X\)</span>. For example, if <span class="math inline">\(Y=a+bX\)</span>, we know <span class="math display">\[E(a+bX)=b\mu_X \qquad var(a+bX)=b^2var(X).\]</span> With a first order expansion of <span class="math inline">\(g(x)\)</span>, we will be able to do this, only approximately. This method of linearizing <span class="math inline">\(Y\)</span> in order to approximate its mean and variance is called the <strong>Delta method</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Let’s do the first order expansion: <span class="math display">\[
+Y = g(\mu_X) + (X-\mu_X)g'(\mu_X) + R.
+\]</span></p>
+<p><span class="math inline">\(R\)</span> is the remainder term that will be negligible if <span class="math inline">\(X\)</span> is closely concentrated around its mean.</p>
+<p>This implies that <span class="math display">\[\displaystyle Y \approx g(\mu_X) + (X-\mu_X)g'(\mu_X),\]</span> and by linearity we get: <span class="math display">\[\begin{aligned}
+E(Y) &amp;\approx E\left[g(\mu_X)\right]\quad\text{since }E(X-\mu_X) = 0\\
+var(Y) &amp;\approx \left[g'(\mu_X)\right]^2 var(X)
+\end{aligned}
+\]</span> Note we just said <span class="math inline">\(E(g(X))\neq g(E(X))\)</span>. Delta’s method only says this is <em>approximately</em> true. We can also do a second order Taylor’s series expansion to improve our approximation and see what we are ignoring in our approximation. <span class="math display">\[
+Y = g(X) \approx g(\mu_X) + (X-\mu_X)g'(\mu_X) + \dfrac{1}{2}(X-\mu_X)^2 g''(\mu_X)
+\]</span> And we see indeed that <span class="math inline">\(E(g(X))\neq g(E(X))\)</span> if you have more careful approximation, and taking expectations gives us that <span class="math display">\[
+E(Y) \approx g(\mu_X) + \dfrac{1}{2} \sigma_X^2 g''(\mu_X).
+\]</span> This additional term tells us that how good the approximation <span class="math inline">\(E(Y) \approx E\left[g(\mu_X)\right]\)</span> will depends on:</p>
+<ol type="1">
+<li>How nonlinear <span class="math inline">\(g\)</span> is in a neighborhood of <span class="math inline">\(\mu_X\)</span> (because of <span class="math inline">\(g''(\mu_X)\)</span>) and</li>
+<li>On the variance of <span class="math inline">\(X\)</span> (because of the <span class="math inline">\(\sigma_X^2\)</span>).</li>
+</ol>
+<p>Note that we can apply the delta method in a multivariate setting, but here we will only consider univariate functions.</p>
+<p>And now, we have the mean and the variance (approximately) of <span class="math inline">\(g(X)\)</span>, and we are ready for its asymptotic distribution.</p>
+</section>
+<section id="delta-method-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="delta-method-theorem">Delta Method Theorem</h3>
+<p>Suppose we have a sequence of random variables <span class="math inline">\(\{U_n\}\)</span> that is asymptotically normal,that is, there exist constants <span class="math inline">\(\mu, \sigma\)</span>, where <span class="math inline">\(\sigma &gt; 0\)</span>, such that <span class="math display">\[
+\sqrt{n} \left(\dfrac{U_n -\mu}{\sigma} \right)\overset{D} \longrightarrow \mathcal{N}(0,1).
+\]</span> That is, the distribution of <span class="math inline">\(U_n\)</span>, suitably standardized, converges to a standard normal distribution. Then, for any differentiable function <span class="math inline">\(g\)</span>, such that <span class="math inline">\(\lvert g'(\mu)\rvert \ne 0\)</span>, we have: <span class="math display">\[
+\sqrt{n} \left(\dfrac{g(U_n) -g(\mu)}{\lvert g'(\mu)\rvert \sigma} \right)\overset{D} \longrightarrow \mathcal{N}(0,1).
+\]</span> That is, <span class="math inline">\(g(U_n)\)</span> is also approximately normal for large <span class="math inline">\(n\)</span>: <span class="math display">\[
+g(U_n) \approx \mathcal{N}\left(g(\mu), \frac{\lvert g'(\mu)\rvert^2 \sigma^2}{n}\right)
+\]</span></p>
+<p><strong>Proof sketch</strong></p>
+<p>Using Taylor expansion (or the delta method) of <span class="math inline">\(g\)</span> about <span class="math inline">\(\mu\)</span>, we have that <span class="math display">\[
+g(U_n) = g(\mu) + (U_n - \mu)g'(\mu) + R,
+\]</span> where <span class="math inline">\(R\)</span> is a remainder term that goes to <span class="math inline">\(0\)</span> as <span class="math inline">\(n \rightarrow \infty\)</span>.</p>
+<p>Subracting <span class="math inline">\(g(\mu)\)</span> from both sides and multiplying both sides by <span class="math inline">\(\sqrt{n}\)</span> we get: <span class="math display">\[
+\sqrt{n}\left[g(U_n) - g(\mu)\right] = \sqrt{n} (U_n - \mu)g'(\mu) + R
+\]</span> Notice that multiplying the remainder term by <span class="math inline">\(\sqrt{n}\)</span> makes no difference, it will still go to <span class="math inline">\(0\)</span> as <span class="math inline">\(n \rightarrow \infty\)</span>, so we just continue to write it as <span class="math inline">\(R\)</span>.</p>
+<p>We know that <span class="math inline">\(\sqrt{n} (U_n - \mu)/\sigma\)</span> is approximately standard normal(that is <span class="math inline">\(\sqrt{n} (U_n - \mu)/\sigma \approx \mathcal{N}(0, 1))\)</span> which implies that <span class="math inline">\(\sqrt{n} (U_n - \mu)\)</span> is approximately normal with mean <span class="math inline">\(0\)</span> and variance <span class="math inline">\((\sigma\cdot g'(\mu))^2\)</span>. Therefore the lefthand side also must be approximately normal with the same parameters: <span class="math display">\[
+\sqrt{n}\left[g(U_n) - g(\mu)\right] \approx \mathcal{N}\left(0, [\sigma\cdot g'(\mu)]^2\right).
+\]</span></p>
+<p>which gives us the result of the theorem (by dividing by <span class="math inline">\(\lvert \sigma\cdot g'(\mu)\rvert\)</span>).</p>
+</section>
+</section>
+<section id="distribution-of-functions-of-our-mle" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-of-functions-of-our-mle">Distribution of functions of our MLE</h2>
+<p>Returning to our problem. Instead of <span class="math inline">\(\{U_n\}\)</span>, we have an MLE estimator <span class="math inline">\(\hat\theta_n\)</span> which is asymptotically normally distributed <span class="math display">\[
+\hat{\theta}_n \approx N\!\left(\theta_0,\ \frac{1}{ n I(\theta_0)}\right),
+\]</span> So <span class="math inline">\(I(\theta_0)^{-1}\)</span> will take on the role of <span class="math inline">\(\sigma^2\)</span> in our earlier theorem, and <span class="math inline">\(\theta_0\)</span> will take on the role of <span class="math inline">\(\mu\)</span>.</p>
+<p>We want to estimate <span class="math inline">\(\tau=g(\theta)\)</span>, and we know from earlier that <span class="math inline">\(\hat\tau_n=g(\hat\theta_n)\)</span> is the MLE for <span class="math inline">\(\tau\)</span>.</p>
+<p>From the delta method, the asymptotic variance of <span class="math inline">\(\hat\tau_n\)</span> is given by <span class="math display">\[ SE(\hat\tau)=\lvert g'(\theta)\rvert I(\theta_0)^{-1/2}/\sqrt{n}\]</span> Note I call this quantity <span class="math inline">\(SE(\hat\tau)\)</span> with the understanding that it is its asymptotic standard error.</p>
+<p>We can also use the delta method theorem to get the asymptotic distribution of <span class="math inline">\(\hat\tau_n\)</span>, <span class="math display">\[
+\left(\frac{\hat\tau_n - \tau}{SE(\hat\tau)}\right)=\sqrt{n}\left(\frac{g(\hat\theta_n) - g(\theta)}{\lvert g'(\mu)\rvert I(\theta_0)^{-1/2}}\right)\overset{D}{\longrightarrow}\mathcal{N}(0,1).
+\]</span> This implies that <span class="math display">\[
+\hat\tau \approx \mathcal{N}\left(\tau, \frac{(g'(\theta))^2}{nI(\theta_0)}\right)
+\]</span> ### Confidence Intervals</p>
+<p>Note that <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are unknown constants, and so we can estimate the parameters of this asymptotic normal distribution with our estimate for <span class="math inline">\(\theta\)</span>: <span class="math display">\[
+\hat{\theta} = g(\hat{\mu}_1),
+\]</span> and estimate <span class="math inline">\(\sigma^2\)</span> by the sample variance <span class="math inline">\(S^2\)</span>. Thus we conclude that <span class="math display">\[
+\hat{\theta}_{MoM} = g(\hat{\mu}_1) \approx \mathcal{N}\left(\theta, \frac{(g'(\hat{\mu}_1))^2 S^2}{n}\right).
+\]</span></p>
 
 
 
@@ -426,10 +479,17 @@ Note
 <div id="ref-agresti2021" class="csl-entry" role="listitem">
 Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
 </div>
+<div id="ref-chi-hest2018" class="csl-entry" role="listitem">
+Chihara, Laura M., and Tim C. Hesterberg. 2018. <em>Mathematical Statistics with Resampling and r</em>. John Wiley &amp; Sons, Hoboken, NJ.
+</div>
+<div id="ref-rice2006" class="csl-entry" role="listitem">
+Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. Duxbury Press.
+</div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>This is not real data, but simulated data to make a point!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Note you can do this with parameters. You can’t do this with random variables<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>because it comes from writing <span class="math inline">\(\delta = \hat{\theta} - \theta\)</span> and then expanding <span class="math inline">\(g(\theta + \delta)\)</span> as a function of <span class="math inline">\(\delta\)</span>. <span class="citation" data-cites="chi-hest2018">(<a href="#ref-chi-hest2018" role="doc-biblioref">Chihara and Hesterberg 2018</a>)</span><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

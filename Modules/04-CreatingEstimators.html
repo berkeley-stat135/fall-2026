@@ -253,6 +253,24 @@ window.Quarto = {
  <span class="menu-text">Case Study: Comparing Two Groups</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/09-CIregression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Confidence intervals for linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/10-MLEAsyNormal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Large Sample Theory for the Maximum Likelihood Estimator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/11-DeltaMethod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functions of Estimators and the Delta Method</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -504,7 +522,7 @@ P(X_1 = x_1, \ldots, X_n = x_n) &amp;= P(X_1 = x_1)\times P(X_2 = x_2) \times \l
 L(\pi) = \log(\ell(\pi)) = \left(\sum_{i=1}^n x_i \right) \log(\pi) + (n-\sum_{i=1}^n x_i)\log(1-\pi).
 \]</span></p>
 <p>Since we want to maximize <span class="math inline">\(L(\pi)\)</span> with respect to <span class="math inline">\(\pi\)</span>, we differentiate it w.r.t <span class="math inline">\(\pi\)</span>: <span class="math display">\[
-\dfrac{dL(\pi)}{d\pi} = \frac{\sum_{i=1}^n x_i}}{\pi} - \frac{(n-\sum_{i=1}^n x_i})}{1- \pi}.
+\dfrac{dL(\pi)}{d\pi} = \frac{\sum_{i=1}^n x_i}{\pi} - \frac{n-\sum_{i=1}^n x_i}{1- \pi}.
 \]</span> Setting this equal to 0 and solving for <span class="math inline">\(\pi\)</span> gives us that the maximizing <span class="math inline">\(\pi\)</span> is given by <span class="math inline">\(\dfrac{\sum_{i=1}^n x_i}{n} = \bar{x}\)</span> (assuming that <span class="math inline">\(\pi\)</span> is not <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>). You can check that this is indeed a maximum by doing the first or second derivative test.</p>
 <p>The maximum likelihood <em>estimate</em> for <span class="math inline">\(\pi\)</span> is given by <span class="math inline">\(\frac{1}{n}\sum_{i=1}^n x_i\)</span>. The corresponding <em>estimator</em> <span class="math inline">\(\hat{\pi}\)</span> is given by: <span class="math display">\[
 \hat{\pi} = \frac{1}{n}\sum_{i=1}^n X_i = \bar{X}.
