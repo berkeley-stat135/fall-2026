@@ -295,10 +295,16 @@ window.Quarto = {
   </ul></li>
   <li><a href="#the-distribution-of-ghattheta" id="toc-the-distribution-of-ghattheta" class="nav-link" data-scroll-target="#the-distribution-of-ghattheta">The distribution of <span class="math inline">\(g(\hat\theta)\)</span></a>
   <ul class="collapse">
-  <li><a href="#variance-of-ghattheta" id="toc-variance-of-ghattheta" class="nav-link" data-scroll-target="#variance-of-ghattheta">Variance of <span class="math inline">\(g(\hat\theta)\)</span></a></li>
-  <li><a href="#delta-method-theorem" id="toc-delta-method-theorem" class="nav-link" data-scroll-target="#delta-method-theorem">Delta Method Theorem</a></li>
+  <li><a href="#taylor-series" id="toc-taylor-series" class="nav-link" data-scroll-target="#taylor-series">Taylor Series</a></li>
+  <li><a href="#expectation-and-variance-of-ghattheta" id="toc-expectation-and-variance-of-ghattheta" class="nav-link" data-scroll-target="#expectation-and-variance-of-ghattheta">Expectation and Variance of <span class="math inline">\(g(\hat\theta)\)</span></a></li>
+  <li><a href="#delta-method-theorem-for-asymptotic-normality" id="toc-delta-method-theorem-for-asymptotic-normality" class="nav-link" data-scroll-target="#delta-method-theorem-for-asymptotic-normality">Delta Method Theorem for Asymptotic Normality</a></li>
+  <li><a href="#sketch-of-proof" id="toc-sketch-of-proof" class="nav-link" data-scroll-target="#sketch-of-proof">Sketch of Proof</a></li>
   </ul></li>
-  <li><a href="#distribution-of-functions-of-our-mle" id="toc-distribution-of-functions-of-our-mle" class="nav-link" data-scroll-target="#distribution-of-functions-of-our-mle">Distribution of functions of our MLE</a></li>
+  <li><a href="#distribution-of-functions-of-our-mle" id="toc-distribution-of-functions-of-our-mle" class="nav-link" data-scroll-target="#distribution-of-functions-of-our-mle">Distribution of functions of our MLE</a>
+  <ul class="collapse">
+  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals">Confidence Intervals</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -394,22 +400,28 @@ f(x)=\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}; \alpha,\beta &
 </section>
 <section id="the-distribution-of-ghattheta" class="level2">
 <h2 class="anchored" data-anchor-id="the-distribution-of-ghattheta">The distribution of <span class="math inline">\(g(\hat\theta)\)</span></h2>
-<section id="variance-of-ghattheta" class="level3">
-<h3 class="anchored" data-anchor-id="variance-of-ghattheta">Variance of <span class="math inline">\(g(\hat\theta)\)</span></h3>
-<p>We have the MLE of <span class="math inline">\(g(\theta)\)</span> is given by <span class="math inline">\(g(\hat\theta)\)</span>, but how do we find it’s variance?</p>
-<p>This type of situation is common in statistics. We have a random variable <span class="math inline">\(U\)</span> for which we know the mean and variance. But we are actually interested in a <em>different</em> random variable, <span class="math inline">\(V = g(U)\)</span>, and we want the mean and variance of <span class="math inline">\(Y\)</span>.</p>
+<p>We have the MLE of <span class="math inline">\(g(\theta)\)</span> is given by <span class="math inline">\(g(\hat\theta)\)</span>, but how do we find it’s variance or distribution?</p>
+<p>This type of situation is common in statistics, and not at all limited to MLEs. We have a random variable <span class="math inline">\(U\)</span> for which we know the mean and variance. But we are actually interested in a <em>different</em> random variable, <span class="math inline">\(V = g(U)\)</span>, and we want the mean and variance of <span class="math inline">\(Y\)</span>.</p>
 <p>The problem is that <span class="math inline">\(g\)</span> is not a linear function, so <span class="math inline">\(E\left(g(U)\right) \ne g\left(E(U)\right)\)</span>.</p>
-<p>We are going to discuss a different method called the <strong>delta method</strong> or the <strong>propagation of error</strong> formula.</p>
+<p>We are going to discuss a method to approximate the distribution of <span class="math inline">\(Y\)</span> called the <strong>delta method</strong> or the <strong>propagation of error</strong> formula.</p>
+<section id="taylor-series" class="level3">
+<h3 class="anchored" data-anchor-id="taylor-series">Taylor Series</h3>
 <p>The main idea behind the delta method is that we use a Taylor series expansion of <span class="math inline">\(g\)</span>, so let’s remind ourselves what the Taylor series expansion is.</p>
 <div id="thm-taylor" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (Taylor series expansion)</strong></span> Let $ k$ be an integer and let the function $g: R R $ be <span class="math inline">\(k\)</span> times differentiable at the point <span class="math inline">\(a\in R\)</span>. Then there exists a function <span class="math inline">\({\displaystyle h_{k}:R\rightarrow R }\)</span> such that</p>
-<p><span class="math display">\[{\displaystyle g(x)=\sum _{i=0}^{k}{\frac {g^{(i)}(a)}{i!}}(x-a)^{i}+h_{k}(x)(x-a)^{k},}
-\]</span> and</p>
-<p><span class="math display">\[{\displaystyle \lim_{x\to a}h_{k}(x)=0.}\]</span> The term <span class="math display">\[R_k(x)=h_{k}(x)(x-a)^{k}\]</span> is often called the remainder term.</p>
+<p><span class="theorem-title"><strong>Theorem 2 (Taylor series expansion)</strong></span> Let <span class="math inline">\(k\geq 1\)</span> be an integer and let the function <span class="math inline">\(g: R \rightarrow R\)</span> be <span class="math inline">\(k\)</span> times differentiable at the point <span class="math inline">\(a\in R\)</span>. Then there exists a function <span class="math inline">\({\displaystyle h_{k}:R\rightarrow R }\)</span> such that</p>
+<p><span class="math display">\[{\displaystyle g(x)=\sum _{i=0}^{k}{\frac {g^{(i)}(a)}{i!}}(x-a)^{i}+R_k(x),}
+\]</span> where <span class="math display">\[R_k(x)=h_{k}(x)(x-a)^{k}\]</span> and <span class="math display">\[{\displaystyle \lim_{x\to a}h_{k}(x)=0.}\]</span> <span class="math inline">\(R_k(x)\)</span> is often called the remainder term.</p>
+<p>This is called the Taylor series expansion of <span class="math inline">\(g\)</span> <em>around</em> <span class="math inline">\(a\)</span>.</p>
 </div>
-<p>This means we can approximate <span class="math inline">\(g(x)\)</span> by a <span class="math inline">\(n\)</span>th order polynomial if <span class="math inline">\(x\)</span> is sufficiently near <span class="math inline">\(a\)</span>. So for example, this allows us to say <span class="math display">\[g(x)\approx b_0+b_1 x\]</span> or <span class="math display">\[g(x)\approx b_0+b_1x+b_2x^2\]</span> with coefficients that depend on the point <span class="math inline">\(a\)</span> where we are trying to approximate the function <span class="math inline">\(g\)</span>.</p>
+<p>This means that if <span class="math inline">\(x\)</span> is sufficiently near <span class="math inline">\(a\)</span>, we can approximate <span class="math inline">\(g(x)\)</span> by a <span class="math inline">\(n\)</span>th order polynomial. So for example, this allows us to say <span class="math display">\[g(x)\approx b_0+b_1 x\]</span> or <span class="math display">\[g(x)\approx b_0+b_1x+b_2x^2\]</span> with coefficients that depend on the point <span class="math inline">\(a\)</span> where we are trying to approximate the function <span class="math inline">\(g\)</span>. Moreover, these coefficients are of the form <span class="math inline">\((x-a)^k\)</span>, so if <span class="math inline">\(x\)</span> is near <span class="math inline">\(a\)</span>, the higher order terms of the polynomial become much smaller.</p>
+</section>
+<section id="expectation-and-variance-of-ghattheta" class="level3">
+<h3 class="anchored" data-anchor-id="expectation-and-variance-of-ghattheta">Expectation and Variance of <span class="math inline">\(g(\hat\theta)\)</span></h3>
 <p>Why is this useful for random variables? We are going to apply this to our function <span class="math inline">\(g\)</span> so that we can say something about <span class="math inline">\(Y = g(X)\)</span>, when <span class="math inline">\(X\)</span> is near <span class="math inline">\(a=\mu_X\)</span>.</p>
-<p>If we do that, it will be easy to determine the approximate expectation and variance of <span class="math inline">\(Y\)</span> because we assume we know the expectation and variance of <span class="math inline">\(X\)</span>. For example, if <span class="math inline">\(Y=a+bX\)</span>, we know <span class="math display">\[E(a+bX)=b\mu_X \qquad var(a+bX)=b^2var(X).\]</span> With a first order expansion of <span class="math inline">\(g(x)\)</span>, we will be able to do this, only approximately. This method of linearizing <span class="math inline">\(Y\)</span> in order to approximate its mean and variance is called the <strong>Delta method</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>If we do that, it will be easy to determine the approximate expectation and variance of <span class="math inline">\(Y\)</span> because we assume we know the expectation and variance of <span class="math inline">\(X\)</span>. For example, if <span class="math inline">\(Y=a+bX\)</span>, we know <span class="math display">\[E(a+bX)=b\mu_X \qquad var(a+bX)=b^2var(X).\]</span> With a first order expansion of <span class="math inline">\(g(x)\)</span>, we will be able to do this approximately. This method of linearizing <span class="math inline">\(Y\)</span> in order to approximate its mean and variance is called the <strong>Delta method.</strong></p>
+<div class="PARAGRAPH">
+<p>First-order expansion</p>
+</div>
 <p>Let’s do the first order expansion: <span class="math display">\[
 Y = g(\mu_X) + (X-\mu_X)g'(\mu_X) + R.
 \]</span></p>
@@ -418,7 +430,11 @@ Y = g(\mu_X) + (X-\mu_X)g'(\mu_X) + R.
 E(Y) &amp;\approx E\left[g(\mu_X)\right]\quad\text{since }E(X-\mu_X) = 0\\
 var(Y) &amp;\approx \left[g'(\mu_X)\right]^2 var(X)
 \end{aligned}
-\]</span> Note we just said <span class="math inline">\(E(g(X))\neq g(E(X))\)</span>. Delta’s method only says this is <em>approximately</em> true. We can also do a second order Taylor’s series expansion to improve our approximation and see what we are ignoring in our approximation. <span class="math display">\[
+\]</span></p>
+<div class="PARAGRAPH">
+<p>Second-order expansion</p>
+</div>
+<p>Note we just said <span class="math inline">\(E(g(X))\neq g(E(X))\)</span>. Delta’s method only says this is <em>approximately</em> true. We can also do a second order Taylor’s series expansion to improve our approximation and see what we are ignoring in our approximation. <span class="math display">\[
 Y = g(X) \approx g(\mu_X) + (X-\mu_X)g'(\mu_X) + \dfrac{1}{2}(X-\mu_X)^2 g''(\mu_X)
 \]</span> And we see indeed that <span class="math inline">\(E(g(X))\neq g(E(X))\)</span> if you have more careful approximation, and taking expectations gives us that <span class="math display">\[
 E(Y) \approx g(\mu_X) + \dfrac{1}{2} \sigma_X^2 g''(\mu_X).
@@ -428,18 +444,22 @@ E(Y) \approx g(\mu_X) + \dfrac{1}{2} \sigma_X^2 g''(\mu_X).
 <li>On the variance of <span class="math inline">\(X\)</span> (because of the <span class="math inline">\(\sigma_X^2\)</span>).</li>
 </ol>
 <p>Note that we can apply the delta method in a multivariate setting, but here we will only consider univariate functions.</p>
-<p>And now, we have the mean and the variance (approximately) of <span class="math inline">\(g(X)\)</span>, and we are ready for its asymptotic distribution.</p>
 </section>
-<section id="delta-method-theorem" class="level3">
-<h3 class="anchored" data-anchor-id="delta-method-theorem">Delta Method Theorem</h3>
-<p>Suppose we have a sequence of random variables <span class="math inline">\(\{U_n\}\)</span> that is asymptotically normal,that is, there exist constants <span class="math inline">\(\mu, \sigma\)</span>, where <span class="math inline">\(\sigma &gt; 0\)</span>, such that <span class="math display">\[
+<section id="delta-method-theorem-for-asymptotic-normality" class="level3">
+<h3 class="anchored" data-anchor-id="delta-method-theorem-for-asymptotic-normality">Delta Method Theorem for Asymptotic Normality</h3>
+<p>Now we have the mean and the variance (approximately) of <span class="math inline">\(g(X)\)</span>, and we are ready for its asymptotic distribution.</p>
+<div class="thm-deltaMethod">
+<p>Suppose we have a sequence of random variables <span class="math inline">\(\{U_n\}\)</span> that is asymptotically normal. In other words, there exist constants <span class="math inline">\(\mu, \sigma\)</span>, where <span class="math inline">\(\sigma &gt; 0\)</span>, such that <span class="math display">\[
 \sqrt{n} \left(\dfrac{U_n -\mu}{\sigma} \right)\overset{D} \longrightarrow \mathcal{N}(0,1).
 \]</span> That is, the distribution of <span class="math inline">\(U_n\)</span>, suitably standardized, converges to a standard normal distribution. Then, for any differentiable function <span class="math inline">\(g\)</span>, such that <span class="math inline">\(\lvert g'(\mu)\rvert \ne 0\)</span>, we have: <span class="math display">\[
 \sqrt{n} \left(\dfrac{g(U_n) -g(\mu)}{\lvert g'(\mu)\rvert \sigma} \right)\overset{D} \longrightarrow \mathcal{N}(0,1).
 \]</span> That is, <span class="math inline">\(g(U_n)\)</span> is also approximately normal for large <span class="math inline">\(n\)</span>: <span class="math display">\[
 g(U_n) \approx \mathcal{N}\left(g(\mu), \frac{\lvert g'(\mu)\rvert^2 \sigma^2}{n}\right)
 \]</span></p>
-<p><strong>Proof sketch</strong></p>
+</div>
+</section>
+<section id="sketch-of-proof" class="level3">
+<h3 class="anchored" data-anchor-id="sketch-of-proof">Sketch of Proof</h3>
 <p>Using Taylor expansion (or the delta method) of <span class="math inline">\(g\)</span> about <span class="math inline">\(\mu\)</span>, we have that <span class="math display">\[
 g(U_n) = g(\mu) + (U_n - \mu)g'(\mu) + R,
 \]</span> where <span class="math inline">\(R\)</span> is a remainder term that goes to <span class="math inline">\(0\)</span> as <span class="math inline">\(n \rightarrow \infty\)</span>.</p>
@@ -457,18 +477,23 @@ g(U_n) = g(\mu) + (U_n - \mu)g'(\mu) + R,
 <p>Returning to our problem. Instead of <span class="math inline">\(\{U_n\}\)</span>, we have an MLE estimator <span class="math inline">\(\hat\theta_n\)</span> which is asymptotically normally distributed <span class="math display">\[
 \hat{\theta}_n \approx N\!\left(\theta_0,\ \frac{1}{ n I(\theta_0)}\right),
 \]</span> So <span class="math inline">\(I(\theta_0)^{-1}\)</span> will take on the role of <span class="math inline">\(\sigma^2\)</span> in our earlier theorem, and <span class="math inline">\(\theta_0\)</span> will take on the role of <span class="math inline">\(\mu\)</span>.</p>
-<p>We want to estimate <span class="math inline">\(\tau=g(\theta)\)</span>, and we know from earlier that <span class="math inline">\(\hat\tau_n=g(\hat\theta_n)\)</span> is the MLE for <span class="math inline">\(\tau\)</span>.</p>
-<p>From the delta method, the asymptotic variance of <span class="math inline">\(\hat\tau_n\)</span> is given by <span class="math display">\[ SE(\hat\tau)=\lvert g'(\theta)\rvert I(\theta_0)^{-1/2}/\sqrt{n}\]</span> Note I call this quantity <span class="math inline">\(SE(\hat\tau)\)</span> with the understanding that it is its asymptotic standard error.</p>
+<p>We want to estimate <span class="math inline">\(\tau_0=g(\theta_0)\)</span>, and we know from earlier that <span class="math inline">\(\hat\tau_n=g(\hat\theta_n)\)</span> is the MLE for <span class="math inline">\(\tau_0\)</span>.</p>
+<p>From the delta method, the asymptotic variance of <span class="math inline">\(\hat\tau_n\)</span> is given by <span class="math display">\[ SE(\hat\tau)=\lvert g'(\theta_0)\rvert I(\theta_0)^{-1/2}/\sqrt{n}\]</span> Note I call this quantity <span class="math inline">\(SE(\hat\tau)\)</span> with the understanding that it is its asymptotic standard error.</p>
 <p>We can also use the delta method theorem to get the asymptotic distribution of <span class="math inline">\(\hat\tau_n\)</span>, <span class="math display">\[
-\left(\frac{\hat\tau_n - \tau}{SE(\hat\tau)}\right)=\sqrt{n}\left(\frac{g(\hat\theta_n) - g(\theta)}{\lvert g'(\mu)\rvert I(\theta_0)^{-1/2}}\right)\overset{D}{\longrightarrow}\mathcal{N}(0,1).
+\left(\frac{\hat\tau_n - \tau_0}{SE(\hat\tau)}\right)=\sqrt{n}\left(\frac{g(\hat\theta_n) - g(\theta_0)}{\lvert g'(\theta_0)\rvert I(\theta_0)^{-1/2}}\right)\overset{D}{\longrightarrow}\mathcal{N}(0,1).
 \]</span> This implies that <span class="math display">\[
-\hat\tau \approx \mathcal{N}\left(\tau, \frac{(g'(\theta))^2}{nI(\theta_0)}\right)
-\]</span> ### Confidence Intervals</p>
-<p>Note that <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are unknown constants, and so we can estimate the parameters of this asymptotic normal distribution with our estimate for <span class="math inline">\(\theta\)</span>: <span class="math display">\[
-\hat{\theta} = g(\hat{\mu}_1),
-\]</span> and estimate <span class="math inline">\(\sigma^2\)</span> by the sample variance <span class="math inline">\(S^2\)</span>. Thus we conclude that <span class="math display">\[
-\hat{\theta}_{MoM} = g(\hat{\mu}_1) \approx \mathcal{N}\left(\theta, \frac{(g'(\hat{\mu}_1))^2 S^2}{n}\right).
-\]</span></p>
+\hat\tau \approx \mathcal{N}\left(g(\theta_0), \frac{(g'(\theta_0))^2}{nI(\theta_0)}\right)
+\]</span> This is perhaps a slightly confusing statement, since it only involves <span class="math inline">\(\theta_0\)</span> and nothing about the parameter we are estimating, <span class="math inline">\(\tau_0\)</span>. But remember, we have defined <span class="math inline">\(\tau_0=g(\theta_0)\)</span>, so we can write it in terms of either one.</p>
+<section id="confidence-intervals" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-intervals">Confidence Intervals</h3>
+<p>We will of course, have to estimate the unknown quantity <span class="math inline">\(\theta_0\)</span> to get our estimate of standard error.</p>
+<p><span class="math display">\[ \hat{SE}(\hat\tau)=\lvert g'(\hat\theta_0)\rvert I(\hat\theta_0)^{-1/2}/\sqrt{n}\]</span> We can substitute in <span class="math inline">\(\hat{SE}(\hat\tau)\)</span> and the normal asymptotics still apply, <span class="math display">\[
+\frac{\hat\tau_n - \tau_0}{\hat{SE}(\hat\tau)}\overset{D}{\longrightarrow}\mathcal{N}(0,1).\]</span></p>
+<p>This allows us to make asymptotic Wald confidence intervals, <span class="math display">\[\hat\tau \pm z_{\alpha/2}\hat{SE}(\hat\tau)\]</span></p>
+</section>
+</section>
+<section id="references" class="level2">
+
 
 
 
@@ -479,9 +504,6 @@ g(U_n) = g(\mu) + (U_n - \mu)g'(\mu) + R,
 <div id="ref-agresti2021" class="csl-entry" role="listitem">
 Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
 </div>
-<div id="ref-chi-hest2018" class="csl-entry" role="listitem">
-Chihara, Laura M., and Tim C. Hesterberg. 2018. <em>Mathematical Statistics with Resampling and r</em>. John Wiley &amp; Sons, Hoboken, NJ.
-</div>
 <div id="ref-rice2006" class="csl-entry" role="listitem">
 Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. Duxbury Press.
 </div>
@@ -489,7 +511,6 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
 
 <ol>
 <li id="fn1"><p>Note you can do this with parameters. You can’t do this with random variables<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>because it comes from writing <span class="math inline">\(\delta = \hat{\theta} - \theta\)</span> and then expanding <span class="math inline">\(g(\theta + \delta)\)</span> as a function of <span class="math inline">\(\delta\)</span>. <span class="citation" data-cites="chi-hest2018">(<a href="#ref-chi-hest2018" role="doc-biblioref">Chihara and Hesterberg 2018</a>)</span><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
