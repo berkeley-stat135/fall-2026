@@ -478,7 +478,7 @@ S^2_Y=\frac{1}{n_Y-1}\sum_{i=1}^{n_Y} (Y_i-\bar{Y})^2\]</span></p>
 <p>The same logic holds as in the one sample case:</p>
 <ol type="1">
 <li>If <span class="math inline">\(n\)</span> is large, then <span class="math inline">\(T_{\Delta}\)</span> converges to a <span class="math inline">\(N(0,1)\)</span> distribution, <span class="math display">\[T_{\Delta} \overset{D}{\rightarrow}  N(0,1).\]</span> and we have a CI <span class="math display">\[\hat{\Delta}\pm z_\alpha S_{\hat{\Delta}}\]</span></li>
-<li>If <span class="math inline">\(n\)</span> is small, and we are willing to assume <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are normally distributed, then we will use a <span class="math inline">\(t\)</span>-distribution for <span class="math inline">\(T_{\Delta}\)</span> and get a CI <span class="math display">\[\hat{\Delta}\pm t_{\nu,\alpha} S_{\hat{\Delta}}\]</span> <span class="math inline">\(\nu\)</span> is a complicated function of <span class="math inline">\(n_X\)</span> and <span class="math inline">\(n_Y\)</span> as well as the <span class="math inline">\(S_X\)</span> and <span class="math inline">\(S_Y\)</span>, but can often be substituted with <span class="math inline">\(min(n_X-1,n_Y-1)\)</span> if one were to actually calculate the values by hand (rather than use a built-in function).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> This is a conservative choice, meaning it is the smallest possible value that <span class="math inline">\(\nu\)</span> could be, so it gives you the largest possible <span class="math inline">\(t_{\nu,\alpha}\)</span> (and thus the widest intervals)</li>
+<li>If <span class="math inline">\(n\)</span> is small, and we are willing to assume <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are normally distributed, then we will use a <span class="math inline">\(t\)</span>-distribution for <span class="math inline">\(T_{\Delta}\)</span> and get a CI <span class="math display">\[\hat{\Delta}\pm t_{\alpha_2,\nu} S_{\hat{\Delta}}\]</span> <span class="math inline">\(\nu\)</span> is a complicated function of <span class="math inline">\(n_X\)</span> and <span class="math inline">\(n_Y\)</span> as well as the <span class="math inline">\(S_X\)</span> and <span class="math inline">\(S_Y\)</span>, but can often be substituted with <span class="math inline">\(min(n_X-1,n_Y-1)\)</span> if one were to actually calculate the values by hand (rather than use a built-in function).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> This is a conservative choice, meaning it is the smallest possible value that <span class="math inline">\(\nu\)</span> could be, so it gives you the largest possible <span class="math inline">\(t_{\alpha_2,\nu}\)</span> (and thus the widest intervals)</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -510,7 +510,7 @@ Note
 <pre><code>[1] 2.144787</code></pre>
 </div>
 </div>
-<p>and our confidence interval as <span class="math display">\[\hat{\Delta}\pm t_{\nu,\alpha} S_{\hat{\Delta}}=11.2\pm 2.14 \cdot 4.06=11.2\pm 8.71\]</span> The more careful calculation of <span class="math inline">\(\nu\)</span>, our degrees of freedom gives</p>
+<p>and our confidence interval as <span class="math display">\[\hat{\Delta}\pm t_{\alpha_2,\nu} S_{\hat{\Delta}}=11.2\pm 2.14 \cdot 4.06=11.2\pm 8.71\]</span> The more careful calculation of <span class="math inline">\(\nu\)</span>, our degrees of freedom gives</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 30.42119</code></pre>
@@ -522,7 +522,7 @@ Note
 <pre><code>[1] 2.041091</code></pre>
 </div>
 </div>
-<p><span class="math display">\[\hat{\Delta}\pm t_{\nu,\alpha} S_{\hat{\Delta}}=11.2\pm 2.04 \cdot 4.06=11.2\pm 8.28\]</span> So, as expected, using our “by hand” version of <span class="math inline">\(min(n_X-1,n_Y-1)\)</span></p>
+<p><span class="math display">\[\hat{\Delta}\pm t_{\alpha_2,\nu} S_{\hat{\Delta}}=11.2\pm 2.04 \cdot 4.06=11.2\pm 8.28\]</span> So, as expected, using our “by hand” version of <span class="math inline">\(min(n_X-1,n_Y-1)\)</span> is more conservative, meaning the CI are a bit wider than the more complicated approximation would give.</p>
 </section>
 <section id="assuming-equal-variance" class="level3">
 <h3 class="anchored" data-anchor-id="assuming-equal-variance">Assuming Equal Variance</h3>
@@ -569,7 +569,7 @@ T_{\Delta,pooled}  = \frac{(\bar{X}-\bar{Y}) - (\mu_X - \mu_Y)}{S_{pooled}\sqrt{
 <pre><code>[1] 2.034515</code></pre>
 </div>
 </div>
-<p>our confidence interval as <span class="math display">\[\hat{\Delta}\pm t_{\nu,\alpha} S_{\hat{\Delta},pooled}=11.2\pm 2.03 \cdot 4.07=11.2\pm 8.28\]</span> So we basically get all of the same answers as assuming different variances, which is <em>expected</em> when you start with two groups with similar standard deviations. However, with larger differences in <span class="math inline">\(S_X\)</span> and <span class="math inline">\(S_Y\)</span> and greater differences in sample size, you can get larger differences.</p>
+<p>our confidence interval as <span class="math display">\[\hat{\Delta}\pm t_{\alpha_2,\nu} S_{\hat{\Delta},pooled}=11.2\pm 2.03 \cdot 4.07=11.2\pm 8.28\]</span> So we basically get all of the same answers as assuming different variances, which is <em>expected</em> when you start with two groups with similar standard deviations. However, with larger differences in <span class="math inline">\(S_X\)</span> and <span class="math inline">\(S_Y\)</span> and greater differences in sample size, you can get larger differences.</p>
 </section>
 </section>
 <section id="paired-data" class="level2">
@@ -593,7 +593,7 @@ E(D_i)&amp;=\mu_X-\mu_Y\\
 </section>
 <section id="ci" class="level3">
 <h3 class="anchored" data-anchor-id="ci">CI</h3>
-<p>Again, we will need to estimate <span class="math inline">\(\sigma^2_{\bar{D}}\)</span>. Since we are just talking about the standard error of the mean of <span class="math inline">\(D_i\)</span>, we will use our standard estimate of the standard deviation of the <em>differences</em>, <span class="math inline">\(\sigma_{D}^2\)</span>, <span class="math display">\[S_{D}^2=\frac{1}{n-1}\sum_{i=1}^n(D_i-\bar{D})^2=\frac{1}{n-1}\sum_{i=1}^n((X_i-Y_i)-(\bar{X}-\bar{Y}))^2\]</span> We then define <span class="math display">\[T_{D}=\frac{\bar{D}-\mu_D}{S_{\bar{D}}}=\frac{(\bar{X}-\bar{Y})-(\mu_X-\mu_Y)}{S_D/\sqrt{n}}\]</span> If we assume the <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span> are each normally distributed, then so is <span class="math inline">\(D_i\)</span>, so we have <span class="math display">\[T_{D}\sim t_{n-1},\]</span> and a CI given by <span class="math display">\[\bar{D}\pm t_{n-1,\alpha/2}S_{\bar{D}}.\]</span> Alternatively, for large sample sizes <span class="math inline">\(n\)</span>, we can use the CLT and have <span class="math display">\[\bar{D}\pm z_{\alpha/2}S_{\bar{D}}.\]</span></p>
+<p>Again, we will need to estimate <span class="math inline">\(\sigma^2_{\bar{D}}\)</span>. Since we are just talking about the standard error of the mean of <span class="math inline">\(D_i\)</span>, we will use our standard estimate of the standard deviation of the <em>differences</em>, <span class="math inline">\(\sigma_{D}^2\)</span>, <span class="math display">\[S_{D}^2=\frac{1}{n-1}\sum_{i=1}^n(D_i-\bar{D})^2=\frac{1}{n-1}\sum_{i=1}^n((X_i-Y_i)-(\bar{X}-\bar{Y}))^2\]</span> We then define <span class="math display">\[T_{D}=\frac{\bar{D}-\mu_D}{S_{\bar{D}}}=\frac{(\bar{X}-\bar{Y})-(\mu_X-\mu_Y)}{S_D/\sqrt{n}}\]</span> If we assume the <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span> are each normally distributed, then so is <span class="math inline">\(D_i\)</span>, so we have <span class="math display">\[T_{D}\sim t_{n-1},\]</span> and a CI given by <span class="math display">\[\bar{D}\pm t_{\alpha/2,n-1}S_{\bar{D}}.\]</span> Alternatively, for large sample sizes <span class="math inline">\(n\)</span>, we can use the CLT and have <span class="math display">\[\bar{D}\pm z_{\alpha/2}S_{\bar{D}}.\]</span></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
