@@ -367,7 +367,7 @@ window.Quarto = {
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
 </div>
-<p>Consider our Bernoulli example for when we have binary data <span class="math inline">\(X_1,\ldots,X_n\)</span>. What if instead of estimating the probability of success, <span class="math inline">\(p\)</span>, I want to estimate the log-odds, <span class="math display">\[\tau=\log(\frac{p}{1-p}).\]</span> What would be the MLE?</p>
+<p>Consider our Bernoulli example for when we have binary data <span class="math inline">\(X_1,\ldots,X_n\)</span>. What if instead of estimating the probability of success, <span class="math inline">\(\pi\)</span>, I want to estimate the log-odds, <span class="math display">\[\tau=\log(\frac{\pi}{1-p}).\]</span> What would be the MLE?</p>
 </div>
 <div class="QUESTION">
 <div class="block-title">
@@ -484,12 +484,26 @@ g(U_n) = g(\mu) + (U_n - \mu)g'(\mu) + R,
 \]</span> This implies that <span class="math display">\[
 \hat\tau \approx \mathcal{N}\left(g(\theta_0), \frac{(g'(\theta_0))^2}{nI(\theta_0)}\right)
 \]</span> This is perhaps a slightly confusing statement, since it only involves <span class="math inline">\(\theta_0\)</span> and nothing about the parameter we are estimating, <span class="math inline">\(\tau_0\)</span>. But remember, we have defined <span class="math inline">\(\tau_0=g(\theta_0)\)</span>, so we can write it in terms of either one.</p>
+<div class="PARAGRAPH">
+<p>Example: Log-Odds</p>
+</div>
+<p>Above we considered trying to estimate the for when we have binary <span class="math inline">\(X_1,\ldots,X_n\)</span> and model our data as Bernoulli(<span class="math inline">\(\pi_0\)</span>). The log odds is defined as <span class="math display">\[\tau=g(\pi)=\log(\frac{\pi}{1-\pi}).\]</span> Our MLE of <span class="math inline">\(\pi\)</span> is <span class="math inline">\(\hat{\pi}=\bar{X}\)</span>, which is asymptotically normally distributed, <span class="math inline">\(N(\pi_0, \frac{\pi_0(1-\pi_0)}{n})\)</span>.</p>
+<p>The MLE of <span class="math inline">\(\tau\)</span> by the invariance principle is <span class="math display">\[\hat\tau=\log(\frac{\bar{X}}{1-\bar{X}})\]</span> and by the Delta Theorem, <span class="math display">\[\hat\tau=g(\hat\pi) \approx \mathcal{N}\left(g(\pi_0), \lvert g'(\pi_0)\rvert^2 \frac{\pi_0(1-\pi_0)}{n}\right)\]</span> Then <span class="math display">\[
+\begin{aligned}
+g'(\pi)&amp;=\frac{1-\pi}{\pi}\left(\frac{1}{1-\pi}+\frac{\pi}{(1-\pi)^2}  \right)\\
+&amp;=\frac{1}{\pi}+\frac{1}{1-\pi}\\
+&amp;=\frac{(1-\pi)+\pi}{\pi(1-\pi)}=\frac{1}{\pi(1-\pi)}.
+\end{aligned}\]</span> So the asymptotic variance of <span class="math inline">\(\hat\tau\)</span> is given by <span class="math display">\[\frac{1}{[\pi_0(1-\pi_0)]^2}\frac{\pi_0(1-\pi_0)}{n}=\frac{1}{n\pi_0(1-\pi_0)},\]</span> and <span class="math display">\[\hat\tau \approx \mathcal{N}\left(log(\frac{\pi_0}{1-\pi_0}),\frac{1}{n\pi_0(1-\pi_0)}\right)\]</span> We can notice that if we invert <span class="math inline">\(g\)</span>, we have that <span class="math display">\[\pi_0=\frac{e^{\tau_0}}{1+e^{\tau_0}}\]</span> so that <span class="math display">\[\pi_0(1-\pi_0)=\frac{e^{\tau_0}}{1+e^{\tau_0}}(1-\frac{e^{\tau_0}}{1+e^{\tau_0}})=\frac{e^{\tau_0}}{1+e^{\tau_0}}\frac{1}{1+e^{\tau_0}}=\frac{e^{\tau_0}}{(1+e^{\tau_0})^2} \]</span> so we can write this in terms of <span class="math inline">\(\tau_0\)</span>, <span class="math display">\[\hat\tau \approx \mathcal{N}\left(\tau_0,\frac{e^{\tau_0}}{n(1+e^{\tau_0})^2}\right)\]</span></p>
 <section id="confidence-intervals" class="level3">
 <h3 class="anchored" data-anchor-id="confidence-intervals">Confidence Intervals</h3>
 <p>We will of course, have to estimate the unknown quantity <span class="math inline">\(\theta_0\)</span> to get our estimate of standard error.</p>
 <p><span class="math display">\[ \hat{SE}(\hat\tau)=\lvert g'(\hat\theta_0)\rvert I(\hat\theta_0)^{-1/2}/\sqrt{n}\]</span> We can substitute in <span class="math inline">\(\hat{SE}(\hat\tau)\)</span> and the normal asymptotics still apply, <span class="math display">\[
 \frac{\hat\tau_n - \tau_0}{\hat{SE}(\hat\tau)}\overset{D}{\longrightarrow}\mathcal{N}(0,1).\]</span></p>
 <p>This allows us to make asymptotic Wald confidence intervals, <span class="math display">\[\hat\tau \pm z_{\alpha/2}\hat{SE}(\hat\tau)\]</span></p>
+<div class="PARAGRAPH">
+<p>Back to Example: Log-Odds</p>
+</div>
+<p>We can estimate the asymptotic standard error of <span class="math inline">\(\hat\tau\)</span> with <span class="math display">\[\hat{SE}(\hat\tau)\approx (1+e^{\hat\tau})\sqrt{\frac{e^{\hat\tau}}{n}}\]</span> to get a confidence interval, <span class="math display">\[\hat\tau \pm z_{\alpha/2}(1+e^{\hat\tau})\sqrt{\frac{e^{\hat\tau}}{n}}\]</span></p>
 </section>
 </section>
 <section id="references" class="level2">
