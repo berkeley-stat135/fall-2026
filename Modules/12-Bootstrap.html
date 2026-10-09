@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Estimating with Loss Functions and M-Estimators</title>
+<title>bootstrap</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -134,7 +169,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/05-LossMEstimators.html">Estimating with Loss Functions and M-Estimators</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/12-Bootstrap.html">Bootstrap</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -231,7 +266,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Modules/05-LossMEstimators.html" class="sidebar-item-text sidebar-link active">
+  <a href="../Modules/05-LossMEstimators.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Estimating with Loss Functions and M-Estimators</span></a>
   </div>
 </li>
@@ -273,7 +308,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Modules/12-Bootstrap.html" class="sidebar-item-text sidebar-link">
+  <a href="../Modules/12-Bootstrap.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Bootstrap</span></a>
   </div>
 </li>
@@ -295,279 +330,213 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#least-squares-regression" id="toc-least-squares-regression" class="nav-link active" data-scroll-target="#least-squares-regression">Least Squares Regression</a></li>
-  <li><a href="#loss-functions" id="toc-loss-functions" class="nav-link" data-scroll-target="#loss-functions">Loss Functions</a>
+  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link active" data-scroll-target="#bootstrap">Bootstrap</a>
   <ul class="collapse">
-  <li><a href="#the-median-as-a-l_1-estimator" id="toc-the-median-as-a-l_1-estimator" class="nav-link" data-scroll-target="#the-median-as-a-l_1-estimator">The Median as a <span class="math inline">\(L_1\)</span> estimator</a></li>
-  </ul></li>
-  <li><a href="#m-estimators" id="toc-m-estimators" class="nav-link" data-scroll-target="#m-estimators">M-estimators</a>
+  <li><a href="#confidence-intervals-using-the-bootstrap" id="toc-confidence-intervals-using-the-bootstrap" class="nav-link" data-scroll-target="#confidence-intervals-using-the-bootstrap">Confidence intervals using the bootstrap</a></li>
+  <li><a href="#example-of-rainfall-data-rice2006" id="toc-example-of-rainfall-data-rice2006" class="nav-link" data-scroll-target="#example-of-rainfall-data-rice2006">Example of rainfall data <span class="citation" data-cites="rice2006">(Rice 2006)</span></a>
   <ul class="collapse">
-  <li><a href="#example-mle-and-logistic-regression" id="toc-example-mle-and-logistic-regression" class="nav-link" data-scroll-target="#example-mle-and-logistic-regression">Example: MLE and Logistic Regression</a></li>
-  <li><a href="#example-pca-regression" id="toc-example-pca-regression" class="nav-link" data-scroll-target="#example-pca-regression">Example: PCA “Regression”</a></li>
+  <li><a href="#compare-to-asymptotic-normal-distribution" id="toc-compare-to-asymptotic-normal-distribution" class="nav-link" data-scroll-target="#compare-to-asymptotic-normal-distribution">Compare to asymptotic normal distribution</a></li>
   </ul></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#what-is-the-bootstrap-doing" id="toc-what-is-the-bootstrap-doing" class="nav-link" data-scroll-target="#what-is-the-bootstrap-doing">What is the bootstrap doing?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/12-Bootstrap.html">Bootstrap</a></li></ol></nav></header>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/05-LossMEstimators.html">Estimating with Loss Functions and M-Estimators</a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title">Estimating with Loss Functions and M-Estimators</h1>
+
+
+
+<section id="bootstrap" class="level1">
+<h1>Bootstrap</h1>
+<p>The bootstrap is a <em>resampling</em> method for estimating measures of accuracy for the estimator (such as variance or confidence intervals) when obtaining them analytically is difficult. Resampling methods have become extremely common and absolutely indispensable in statistics due to the widespread availability of computing power. We use the bootstrap to quantify the uncertainty associated with an estimator.</p>
+<p>We can view the sample as the population in two ways, leading to two different kinds of bootstrap.</p>
+<ol type="1">
+<li><p>We are willing to assume that the distribution of the population is from a particular parametric family of distributions. We estimate the parameters of that distribution, and then resample from the estimated distribution, using these samples to build a probability distribution for our parameter estimator. This method is called the <strong>parametric bootstrap</strong>. The results will be similar to what you would get if you manipulate the exact sampling distribution of your estimator under your distributional assumption.</p></li>
+<li><p>We don’t know the population distribution, and don’t know if a parametric family is appropriate. We just resample from the sample. This is called a <strong>nonparametric bootstrap</strong> as we make no assumption about the distribution, and can be used in a very wide variety of situations. This makes no specific distributional assumptions about the data, so it is robust to parametric assumptions. But, as we will see, even the nonparametric bootstrap has assumptions, like assumptions of independence and sufficiently large sample size.</p></li>
+</ol>
+<p>In what follows we are going to focus on the non-parametric bootstrap, since that is what is most commonly used in practice.</p>
+<p>The basic idea of the bootstrap is to use the empirical distribution of the sample as an approximating distribution of the population when the sample is large. That is, we use the sample as a stand-in for the population, and resample from it.</p>
+<p>The name comes from the phrase, “pull yourself up by your bootstraps” which means to succeed by your own cleverness/hard work - without getting help from others; here we estimating something tricky by cleverly reusing the same sample we started with.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<div class="READING">
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bootstrap works only if the sample is large enough to accurately represent the population distribution. Bootstrapping cannot fix the problem of using a small sample for inference.</p>
+</div>
+</div>
+<p>We’re first going to go through the procedure before we try to understand why it works. The bootstrap procedure to approximate the sampling distribution for <span class="math inline">\(\hat\theta\)</span>, given a sample <span class="math inline">\(X_1, \ldots, X_n\)</span> would be:</p>
+<ol type="1">
+<li>Compute the observed value of <span class="math inline">\(\hat\theta\)</span> from our data</li>
+<li>Let <span class="math inline">\(B\)</span> be some large number (such as 5000).</li>
+<li>For each <span class="math inline">\(i\)</span>, <span class="math inline">\(i = 1, 2, \ldots, B\)</span>, do the following steps:</li>
+</ol>
+<ol type="i">
+<li>Get a new sample of <strong>the same size, n</strong> by resampling <strong>with replacement</strong> from the original sample.</li>
+<li>Compute the observed value of the estimator for this new sample, and call it <span class="math inline">\(\hat\theta_i^*\)</span>. Repeat steps (i) and (ii) to get <span class="math inline">\(\hat\theta_1^*, \hat\theta_2^*, \ldots, \hat\theta_B^*\)</span>. The <span class="math inline">\(*\)</span> indicates that it is a <strong>bootstrap estimate,</strong> i.e.&nbsp;calculated from our bootstrap sample.</li>
+</ol>
+<ol start="4" type="1">
+<li>Estimate quantities from the distribution of <span class="math inline">\(\hat\theta_i^*\)</span></li>
+</ol>
+<ol type="i">
+<li>the variance as <span class="math inline">\(\displaystyle \dfrac{1}{B} \sum_{i=1}^B \left(\hat\theta_i^*-\overline{\hat\theta^*}\right)^2\)</span>, where <span class="math inline">\(\overline{\hat\theta^*} = \displaystyle \dfrac{1}{B} \sum_{i=1}^B\hat\theta_i^*\)</span> is the mean of <span class="math inline">\(\hat\theta_1^*, \hat\theta_2^*, \ldots, \hat\theta_B^*\)</span>. The <strong>bootstrap SE estimate</strong>, denoted <span class="math inline">\(s_{\mathrm{boot}}\)</span> will be the square root of the bootstrap estimate of the variance.</li>
+<li>The <strong>bootstrap bias estimate</strong> will be <span class="math inline">\(\overline{\hat\theta^*}-\hat\theta\)</span>.</li>
+<li>We will go into confidence intervals in more detail in the next section</li>
+</ol>
+<section id="confidence-intervals-using-the-bootstrap" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals-using-the-bootstrap">Confidence intervals using the bootstrap</h2>
+<p>There are a number of ways to using the bootstrap to compute confidence intervals. Here are three ways of finding a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval (<span class="math inline">\(0&lt;\alpha&lt;1\)</span>).</p>
+<ol type="1">
+<li><strong>Bootstrap percentile interval</strong></li>
+</ol>
+<p>The confidence interval is given by <span class="math inline">\((q_{\alpha/2}, q_{1-\alpha/2})\)</span>, where <span class="math inline">\(q_{\alpha/2}\)</span> is the <span class="math inline">\(\alpha/2\)</span>th quantile of the bootstrap distribution and <span class="math inline">\(q_{1-\alpha/2}\)</span> is the <span class="math inline">\((1-\alpha/2)\)</span>th quantile of the bootstrap distribution. Since <span class="math inline">\(P(\hat\theta^* \le q_{\alpha/2}) = \alpha/2\)</span>, and <span class="math inline">\(P(\hat\theta^* \le q_{1-\alpha/2}) = 1-\alpha/2\)</span>, the area captured in the middle is <span class="math inline">\(1-\alpha\)</span>, which is what we need. This method is usually fine unless the distribution is very skewed.</p>
+<ol start="2" type="1">
+<li><strong>Bootstrap basic (pivotal) interval</strong></li>
+</ol>
+<p>This is sometimes called the <em>reverse percentile interval</em> and is the one defined in your textbook. We can use the bootstrap to compute approximate confidence intervals for the true value of <span class="math inline">\(\theta\)</span>. Suppose the true value of the parameter <span class="math inline">\(\theta\)</span> is given by <span class="math inline">\(\theta_0\)</span>.</p>
+<p>Define <span class="math inline">\(\Delta = \hat\theta - \theta_0\)</span>, and suppose we <em>know</em> the distribution of <span class="math inline">\(\Delta\)</span>. This means that we know the quantiles of this distribution, and if we want to capture the middle 95% of the values, we can use the 2.5th percentile and 97.5th percentiles to do this. Denote the 2.5th percentile by <span class="math inline">\(q_{0.025}\)</span> and the 97.5th percentile by <span class="math inline">\(q_{0.975}\)</span>.</p>
+<p>This means that <span class="math inline">\(P(\Delta \le q_{0.025}) = 0.025\)</span> and <span class="math inline">\(P(\Delta \le q_{0.975}) = 0.975\)</span></p>
+<p>Then we have that: <span class="math display">\[
+P(q_{0.025}\le \Delta \le q_{0.975}) = 0.95 \Rightarrow P(q_{0.025}\le \hat\theta - \theta_0 \le q_{0.975}) = 0.95
+\]</span> We can manipulate the inequalities to isolate <span class="math inline">\(\theta_0\)</span> in the center: <span class="math display">\[
+\begin{align}
+0.95 &amp;= P(q_{0.025}\le \hat\theta - \theta_0 \le q_{0.975})\\
+      &amp;=  P(q_{0.025} -\hat\theta \le  - \theta_0 \le q_{0.975} -\hat\theta)\\
+      &amp;= P(- q_{0.025} + \hat\theta \ge   \theta_0 \ge - q_{0.975} + \hat\theta)\\
+      &amp;= P( \hat\theta - q_{0.975}\le \theta_0 \le  \hat\theta -q_{0.025}) \\
+\end{align}
+\]</span> This gives us a 95% confidence interval for <span class="math inline">\(\theta_0\)</span>. There is nothing special about 95%, except that it is commonly used as a confidence level. We could use any confidence level, say <span class="math inline">\(1-\alpha\)</span>. (When we use a 95% CI, <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(0.05\)</span>.)</p>
+<p>Then, to capture <span class="math inline">\(1-\alpha\)</span> in the middle, we need the <span class="math inline">\(\dfrac{\alpha}{2}\)</span> and <span class="math inline">\(1-\dfrac{\alpha}{2}\)</span> quantiles in place of <span class="math inline">\(q_{0.025}\)</span> and <span class="math inline">\(q_{0.975}\)</span> respectively. Denote these quantiles by <span class="math inline">\(q_{\alpha/2}\)</span> and <span class="math inline">\(q_{1-\alpha/2}\)</span> We do the manipulation above and get the following: <span class="math display">\[
+P( \hat\theta - q_{1-\alpha/2}\le \theta_0 \le  \hat\theta -q_{\alpha/2}) = 1-\alpha.
+\]</span> The only problem of course is that we <em>don’t</em> know the distribution of <span class="math inline">\(\Delta = \hat\theta - \theta_0\)</span>. This is where we can use the bootstrap. We generate many samples (<span class="math inline">\(B\)</span> samples, as mentioned above, where <span class="math inline">\(B\)</span> is large), and compute <span class="math inline">\(\hat\theta_1^*, \hat\theta_2^*, \ldots, \hat\theta_B^*\)</span> from each sample. Then the distribution of <span class="math inline">\(\hat\theta -\theta_0\)</span> is approximated by the distribution of <span class="math inline">\(\hat\theta^* - \hat\theta\)</span>.</p>
+<p>Note that the quantiles of the approximated <span class="math inline">\(\Delta\)</span> distribution (using <span class="math inline">\(\hat\theta^* -\hat\theta\)</span>) are just the quantiles of the <span class="math inline">\(\hat\theta^*\)</span> distribution less <span class="math inline">\(\hat\theta\)</span>. That is, if we let <span class="math inline">\(q_\alpha\)</span> be the <span class="math inline">\(\alpha\)</span>th quantile of the <span class="math inline">\(\Delta\)</span> distribution, and <span class="math inline">\(q_\alpha^*\)</span> be the <span class="math inline">\(\alpha\)</span>th quantile of the <span class="math inline">\(\hat\theta^*\)</span> distribution, <span class="math inline">\(q_\alpha = q_\alpha^* - \hat\theta\)</span>. Substituting this into our confidence interval above, we get that the basic <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\theta_0\)</span> can be written as <span class="math inline">\((2\hat\theta - q_{1-\alpha/2}^*,2\hat\theta - q_{\alpha/2}^* )\)</span>.</p>
+<ol start="3" type="1">
+<li>The Normal interval</li>
+</ol>
+<p>This is the simplest, and will be fine if the sampling distribution of <span class="math inline">\(\hat\theta\)</span> is approximately normal. It is simply given by <span class="math inline">\(\hat\theta \pm z_{\alpha/2}\times  s_{\mathrm{boot}}\)</span>, where <span class="math inline">\(s_{\mathrm{boot}}\)</span> is the bootstrap estimate of the standard error of <span class="math inline">\(\theta\)</span>.</p>
+</section>
+<section id="example-of-rainfall-data-rice2006" class="level2">
+<h2 class="anchored" data-anchor-id="example-of-rainfall-data-rice2006">Example of rainfall data <span class="citation" data-cites="rice2006">(<a href="#ref-rice2006" role="doc-biblioref">Rice 2006</a>)</span></h2>
+<p>The data are from a study of the natural variability of rainfall. The rainfall of summer storms was measured by a network of rain gauges in southern Illinois for the years 1960–1964 <span class="citation" data-cites="rice2006">(<a href="#ref-rice2006" role="doc-biblioref">Rice 2006</a>)</span>. The average amount of rainfall (in inches) from each storm, by year.</p>
+<p>A snapshot of the data:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 227
+Columns: 2
+$ rain_inches &lt;dbl&gt; 0.020, 0.001, 0.001, 0.120, 0.080, 0.420, 1.720, 0.050, 0.…
+$ year        &lt;fct&gt; 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960…</code></pre>
+</div>
+</div>
+<p>We can see that the data is quite skewed, with heavy right tails. Suppose we want to estimate the median <span class="math inline">\(\theta\)</span> of the distribution of rainfall. The median will be more robust to large right tails. We’ve never discussed the sampling distribution of the median, and so we don’t immediately have any tools to make confidence intervals (in fact, the median is asymptotically normally distributed as well).</p>
+<p>Let’s consider the nonparametric bootstrap. Our sample size is 227, so that will be the size of each sample we generate. We will set <span class="math inline">\(B = 10,000\)</span>. That means that we wil resample <strong>with replacement</strong> 10,000 times from the original sample. Each time, the size of the sample we draw will be 227, and we will compute the estimates <span class="math inline">\(\hat\theta*\)</span>.</p>
+<div class="QUESTION">
 <div class="block-title">
-<p><strong>Corresponding reading</strong></p>
+<p><strong>Exercise/Question</strong></p>
 </div>
-<p>This topic is not covered in our text book. The following references discuss loss functions</p>
-<ul>
-<li><span class="citation" data-cites="fox-weisberg2019robust">Fox and Weisberg (<a href="#ref-fox-weisberg2019robust" role="doc-biblioref">2019</a>)</span> (<a href="https://www.john-fox.ca/Companion/appendices/Appendix-Robust-Regression.pdf">pdf</a>)</li>
-<li><span class="citation" data-cites="faraway2005">Faraway (<a href="#ref-faraway2005" role="doc-biblioref">2005</a>)</span>, Section 6.4.1 (<a href="https://utstat.utoronto.ca/brunner/books/LinearModelsWithR.pdf">pdf</a>)</li>
-</ul>
-<p>These do not cover the material in exactly the same way as I do, and may refer to topics outside the scope of this class. But you may find them to be a useful outside reference, so try to focus on the parts that link back to what is discussed here.</p>
+<p>What would happen if I <em>didn’t</em> sample with replacement?</p>
 </div>
-<p>The MLE procedure gives us standard way to find the best estimator if we make assumptions about the parametric model of the data. The MLE uses knowledge of the parametric model to calculate the likelihood and define an optimization goal. The estimator is the result of solving that optimization.</p>
-<p>When we step back, we can see that the role of the parametric model was to define the quantity to optimization. We will now consider other alternatives for defining an optimization goal (and justifications for why they might be better in some situations). Much of modern statistics now takes this optimization perspective in defining and improving estimators, though MLE is still a natural starting point.</p>
-<div class="GOALS">
-<div class="block-title">
-<p><strong>Questions/Goals for this Module</strong></p>
-</div>
-<p>Extend the MLE to a more general optimization strategy of defining estimators</p>
-<ul>
-<li>Learn what is a Loss function</li>
-<li>Define squared error loss, <span class="math inline">\(L_1\)</span> loss, and others</li>
-<li>Understand how they emphasize different aspects of the data</li>
-<li>Describe the MLE as an optimization procedure</li>
-<li>Learn about M-estimations as a further generalization</li>
-</ul>
-</div>
-<section id="least-squares-regression" class="level2">
-<h2 class="anchored" data-anchor-id="least-squares-regression">Least Squares Regression</h2>
-<p>Let’s return to our MLE for simple regression. In the end, we made the modeling assumption that <span class="math inline">\(E(Y|X)\)</span> could be well described by a line, so that we’re interested in estimating the parameters that define that line. Our MLE estimates, based on a normality assumption, where found as the values that maximized <span class="math display">\[\max_{\beta_0,\beta_1} \left(- \sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2\right) \]</span> (Recall <span class="math inline">\(\sigma^2\)</span> didn’t wind up coming into the problem for finding <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>)</p>
-<p>Equivalently, we could get rid of that negative and write this as a minimization problem, <span class="math display">\[\min_{\beta_0,\beta_1} \sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2 \]</span> Looking at just this end result, we can see that we have an observed value <span class="math inline">\(y_i\)</span> and a prediction of what it’s mean value would be if we knew <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. Then we could also describe our estimators as the result of finding the <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that minimize the difference or the error in that prediction. Stated this way, we are still making the assumption that we want to fit a line to describe <span class="math inline">\(E(Y|X)\)</span>, but we are not explicitly making assumptions about the distribution of the data.</p>
-<p>Formulating the goal of our problem directly as a minimization problem is often called <strong>least squares regression</strong>, and it gives the exact same estimators as our MLE approach.</p>
-</section>
-<section id="loss-functions" class="level2">
-<h2 class="anchored" data-anchor-id="loss-functions">Loss Functions</h2>
-<p>How are we measuring that error? We are taking the squared difference for each <span class="math inline">\(i\)</span>. We often call this the <strong>loss</strong> or <strong>observed error</strong> incurred for each observation by using our prediction model, <span class="math display">\[l(y_i, \hat{y}_i)=(y_i - \hat{y}_i)^{2}\]</span> where <span class="math inline">\(\hat{y}_i=\hat{y}_i(\theta)=\beta_0+\beta_1 x_i\)</span> is our predicted value of an observed <span class="math inline">\(y_i\)</span> and it is a function of our unknown parameter <span class="math inline">\(\theta.\)</span> This loss is often called <strong>squared error</strong> or <strong><span class="math inline">\(L_2\)</span> loss</strong>.</p>
-<p>We are creating an estimator of <span class="math inline">\(\theta\)</span> by minimizing the average of this value over all our data, <span class="math display">\[\min_\theta\frac{1}{n}\sum_{i=1}^n l(Y_i, \hat{Y}_i)=\min_\theta\frac{1}{n}\sum_{i=1}^n(Y_i - \hat{Y}_i(\theta))^{2}\]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Notice I added a <span class="math inline">\(\frac{1}{n}\)</span> into our formulation. Obviously the <span class="math inline">\(\frac{1}{n}\)</span> plays no role in the optimization since it’s just a fixed constant. But it allows us to talk about minimimizing the average loss observed on our data, and in general allows us to think of this quantity clearly an estimate of the unknown expectation of the <em>population loss</em>, i.e.&nbsp;the expectation of this loss with a random draw from the population distribution.</p>
-</div>
-</div>
-<p>Why choose squared-error? Well, it fell out of the normal assumption naturally, but that is just an assumption, as we’ve discussed. It also has the (historical) attraction that we can analytically find the solution, which means we can calculate an explicit equation for the solution to the optimization. But we’ve already seen interesting solutions from the MLE often require using a computer to find the estimate.</p>
-<p>However, by writing what we are doing in terms of a loss-function, it clearly opens up the question of using alternative loss functions. The most common alternative could be <strong><span class="math inline">\(L_1\)</span> loss</strong> or <strong>absolute error</strong> <span class="math display">\[l(y_i, \hat{y}_i)=|y_i - \hat{y}_i(\theta)|\]</span> We can no longer analytically solve the solution, but average loss can be optimized to find the best <span class="math inline">\(\beta_0\)</span>,<span class="math inline">\(\beta_1\)</span> for this setting.</p>
-<p>You can see with our university data it doesn’t make a huge difference</p>
+<p>In this next bit of code, we will first compute the 0.025th and 0.975th quantiles of the bootstrap distribution of the median</p>
 <div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="576"></p>
-<figcaption>Scatter plot of university scorecard data with least squares and L1 regression lines</figcaption>
-</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Computing the lower and upper quantiles</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>med_lq_np <span class="ot">&lt;-</span> <span class="fu">quantile</span>(boot_np, <span class="at">probs =</span> <span class="fl">0.025</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>med_uq_np <span class="ot">&lt;-</span> <span class="fu">quantile</span>(boot_np, <span class="at">probs =</span> <span class="fl">0.975</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<p>But if we had data with significant outliers, it could be more different. Consider this data on violent crimes per state (from <span class="citation" data-cites="agresti1997">Agresti and Finlay (<a href="#ref-agresti1997" role="doc-biblioref">1997</a>)</span>),</p>
+<p>Now we can create percentile confidence intervals:</p>
 <div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="576"></p>
-<figcaption>Scatter plot of crime data with least squares and L1 regression lines</figcaption>
-</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## percentile confidence intervals</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>med_ci_np <span class="ot">&lt;-</span> <span class="fu">c</span>(med_lq_np, med_uq_np)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A percentile 95% CI for the median:</span><span class="sc">\n</span><span class="st"> "</span>, med_ci_np)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A percentile 95% CI for the median:
+  0.05 0.11</code></pre>
 </div>
 </div>
-</div>
-<p>The two ways of creating estimators of the parameters of the line start to look more distinct with this dataset. In particular, the <span class="math inline">\(L_1\)</span> regression line is less “pulled” toward what looks to be an potential outlier. This is the effect of using a different loss function.</p>
-<p>If we look at the equations that we optimize, we can think that the loss assigns to each point how much it “contributes” to the overall loss based on how different <span class="math inline">\(y_i\)</span> is from <span class="math inline">\(\hat{y}_i\)</span>. Let’s call that difference <span class="math inline">\(r_i\)</span> (“r” for “residual”). Clearly making each <span class="math inline">\(r_i=0\)</span> is not possible, so by taking the average of the loss we are in some sense balancing between them. However, the choice of loss function changes that balancing. With <span class="math inline">\(L_1\)</span>, each point’s contribution is <span class="math inline">\(|r_i|\)</span>, but with squared-error loss, each point contributes <span class="math inline">\(r_i^2\)</span>. Points that are really far away from a candidate <span class="math inline">\((\beta_0,\beta_1)\)</span> combination are going to contribute a larger amount to squared error loss than to <span class="math inline">\(L_1\)</span> loss. So in looking for the best <span class="math inline">\((\beta_0,\beta_1)\)</span>, squared error loss will have higher “motivation” to pull the line toward individual points, even if it adds a small amount more error to other points.</p>
-<p>We can visualize this by graphing the loss as a function of the residual <span class="math inline">\(r\)</span> of a potential point and its prediction</p>
+<p>Notice that our estimate is</p>
 <div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="576"></p>
-<figcaption>Visualization of the two loss functions: squared error and L1.</figcaption>
-</figure>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07</code></pre>
 </div>
 </div>
-</div>
-<p>Because the absolute value function is not differentiable at 0, however, <span class="math inline">\(L_1\)</span> can be difficult to work with. There are other losses that are differentiable that similarly try to better balance the contribution of the points. Here’s a classic example called “Huber’s Loss” that makes a piecewise function to match squared-error loss for small values (and thus is differentiable at 0), but behaves like <span class="math inline">\(L_1\)</span> for large values: <span class="math display">\[l(y_i, \hat{y})=\begin{cases}
-\frac{1}{2}(y_i - \hat{y}_i(\theta))^2 &amp; |y_i - \hat{y}_i(\theta)|\leq \delta\\
-\delta(|y_i - \hat{y}_i(\theta)|-\frac{1}{2}\delta) &amp; otherwise
-\end{cases}
-\]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We will see, when we get to discussing the behavior of estimates and how they perform with large sample sizes that being differentiable at 0 helps prove more theory about their behavior.</p>
-</div>
-</div>
-<p>We can visualize it’s difference to the other two losses:</p>
+<p>so our bootstrap confidence interval is <em>not</em> symmetric around our estimate.</p>
+<p>We can compare to this to a pivotal or reverse percentile CI</p>
 <div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="576"></p>
-<figcaption>Visualization of the three loss functions: squared error, L1, and Huber’s loss.</figcaption>
-</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## basic (pivotal) confidence intervals</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>med_ci_basic_np <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">*</span>med_obs <span class="sc">-</span>med_uq_np, <span class="dv">2</span><span class="sc">*</span>med_obs <span class="sc">-</span>med_lq_np )</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">### </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A 95% pivotal CI for the median:</span><span class="sc">\n</span><span class="st"> "</span>, med_ci_basic_np)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A 95% pivotal CI for the median:
+  0.03 0.09</code></pre>
 </div>
 </div>
-</div>
-<p>Here’s what creating estimates using these three different loss functions looks like on our two datasets:</p>
+<section id="compare-to-asymptotic-normal-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="compare-to-asymptotic-normal-distribution">Compare to asymptotic normal distribution</h3>
+<p>In fact, the distribution of the sample median from a population with a density function <span class="math inline">\(f(x)\)</span> is asymptotically normal with mean that is <span class="math inline">\(\theta\)</span>, the true median of the <span class="math inline">\(f\)</span> distribution, and variance <span class="math inline">\(\frac {1}{4nf(\theta)^{2}}\)</span> and <span class="math display">\[\hat\theta \sim N\left(\theta,\frac {1}{4nf(\theta)^{2}}\right)\]</span> Notice how the asymptotics <em>rely</em> on the sampling distribution of the data. This isn’t different from our MLE, where <span class="math inline">\(I(\theta)\)</span> depends on the distribution of our data.</p>
+<p>Suppose we blindly assumed the data distribution was normal, this would give us <span class="math inline">\(f(\theta)=1/{\sqrt {2\pi \sigma ^{2}}}\)</span> and <span class="math display">\[\hat\theta\sim N(\theta, {\displaystyle ({\pi }/{2})\cdot (\sigma ^{2}/n).}\]</span> This would give us the following estimate of standard error of the median for this data (by plugging in <span class="math inline">\(S^2\)</span> for <span class="math inline">\(\sigma^2\)</span>):</p>
 <div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="1152"></p>
-<figcaption>Plot of regression lines fit to data with squared error, L1, and Huber loss.</figcaption>
-</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>asySe<span class="ot">&lt;-</span><span class="fu">sd</span>(il_rain<span class="sc">$</span>rain_inches)<span class="sc">*</span><span class="fu">sqrt</span>(pi<span class="sc">/</span><span class="dv">2</span><span class="sc">/</span><span class="fu">length</span>(il_rain<span class="sc">$</span>rain_inches))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>asySe</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03043098</code></pre>
 </div>
 </div>
-</div>
-<p>Not surprisingly, Huber’s loss is most similar to <span class="math inline">\(L_1\)</span> loss, especially in terms of how it is affected by the outlier, but is still a slightly different estimate.</p>
-<section id="the-median-as-a-l_1-estimator" class="level3">
-<h3 class="anchored" data-anchor-id="the-median-as-a-l_1-estimator">The Median as a <span class="math inline">\(L_1\)</span> estimator</h3>
-<p>Even on much simpler settings, it’s worth considering our procedures in terms of a loss function. Consider our simpler model, where our data <span class="math inline">\(Y_i\)</span> had the same mean <span class="math inline">\(\mu\)</span>, <span class="math display">\[Y_i\stackrel{i.i.d}{\sim}N(\mu,\sigma^2).\]</span> Another way we could say this is since we assume <span class="math inline">\(Y_i\)</span> have the same mean, our prediction of <span class="math inline">\(Y_i\)</span> is going to be <span class="math inline">\(\hat{Y_i}=\hat\mu\)</span>, i.e.&nbsp;in the absence of other information, we predict each observation the same, and <span class="math inline">\(\hat{\mu}\)</span> will be that prediction.</p>
-<p>Then MLE estimator <span class="math inline">\(\hat{\mu}\)</span> was the <span class="math inline">\(\mu\)</span> that minimized <span class="math display">\[\min_\mu\frac{1}{n}\sum_{i=1}^n(Y_i - \mu)^2\]</span> In our loss notation, we could write this as <span class="math display">\[ \min_\mu \frac{1}{n}\sum_{i=1}^n(Y_i - \hat{Y}(\mu))^2\]</span> Notice that again we are relying on squared error loss. What if we used <span class="math inline">\(L_1\)</span> loss here instead? What would be our estimator of <span class="math inline">\(\mu\)</span>?</p>
-<p>With <span class="math inline">\(L_1\)</span> loss we would be minimizing <span class="math display">\[\min_\mu \frac{1}{n}\sum_{i=1}^n|Y_i - \hat{Y}(\mu)|=\min_\mu \frac{1}{n}\sum_{i=1}^n|Y_i - \mu|\]</span> This is minimized by setting <span class="math inline">\(\hat{\mu}=median(Y_1,\ldots,Y_n)\)</span>.</p>
-</section>
-</section>
-<section id="m-estimators" class="level2">
-<h2 class="anchored" data-anchor-id="m-estimators">M-estimators</h2>
-<p>Generally, when we find our estimator of <span class="math inline">\(\theta\)</span> by minimizing the average of <span class="math inline">\(\rho(y_i,\theta)\)</span>, <span class="math display">\[\min_\theta \frac{1}{n}\sum_{i=1}^n \rho(Y_i,\theta)\]</span> the resulting <span class="math inline">\(\hat{\theta}\)</span> is called a <strong>M-Estimator</strong>.</p>
-<p>If we return to our loss examples, we see that they are a special case of <span class="math inline">\(\rho\)</span>, because we can write loss instead in terms of our unknown <span class="math inline">\(\theta,\)</span> <span class="math display">\[\rho(y_i, \theta)=(y_i - \hat{y}_i(\theta))^{2}=(y_i - \beta_0-\beta_1 x_i)^{2}\]</span></p>
-<section id="example-mle-and-logistic-regression" class="level3">
-<h3 class="anchored" data-anchor-id="example-mle-and-logistic-regression">Example: MLE and Logistic Regression</h3>
-<p>We can also see that MLE estimators are a subset of M-estimators, where we choose <span class="math inline">\(\rho(y_i,\theta)\)</span> to be the <em>negative</em> log-likelihood at the single data point <span class="math inline">\(y_i\)</span>, <span class="math display">\[\rho(y_i,\theta)= -\log f(y_i|\theta)\]</span> Unlike our loss functions, the negative log-likelihood may not be just a comparison of <span class="math inline">\(y_i\)</span> and its predicted value <span class="math inline">\(\hat{y}_i\)</span>.</p>
-<p>We can see this illustrated in the case of logistic regression, <span class="math display">\[\rho(y_i,\theta)= -\log f(y_i)=-y_i\log(p(x_i))-(1-y_i)\log(1-p(x_i))\]</span> that <span class="math inline">\(\rho(y_i,\theta)\)</span> not obviously written in terms of an error or loss in <span class="math inline">\(y_i\)</span> compared to a prediction – at least not via a direct subtraction.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>M-estimators versus Loss Functions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>M-estimators are described as a generalization of the loss function approach because loss functions are traditionally defined based on focused only on comparing our predicted value to the observed value via the residual <span class="math inline">\(r_i=y_i-\hat{y}_i\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\(\theta\)</span> is only involved in the loss function terms of how it creates a prediction <span class="math inline">\(\hat{y}_i\)</span>. M-estimators allow a more generalized measure per observations, that can intermingle the parameter <span class="math inline">\(\theta\)</span> in ways other than just creating a predicted <span class="math inline">\(\hat{y}(\theta)\)</span>.</p>
-<p>However, sometimes people will use the term “loss” for this kind of function too. Indeed, <span class="math inline">\(\rho(y_i,\theta)\)</span> used above for logistic regression is often called <strong>cross-entropy</strong> loss in machine learning/statistical prediction literature.</p>
-<p>You will also see people discuss M-estimates for only the case of <span class="math inline">\(\rho\)</span> being loss functions of residuals, as in the reading suggestions I provide above.</p>
-</div>
-</div>
-</section>
-<section id="example-pca-regression" class="level3">
-<h3 class="anchored" data-anchor-id="example-pca-regression">Example: PCA “Regression”</h3>
-<p>Previously, when we considered fitting a line to our cloud of points, we considered solely how well the line predicted <span class="math inline">\(y_i\)</span> for our loss function. But we might instead ask how close the <em>point</em> <span class="math inline">\((x_i,y_i)\)</span> is to the line. This is not the same!</p>
+<p>Our bootstrap estimate of variance would be just calculating the standard deviation of our <span class="math inline">\(\hat\theta^2\)</span>,</p>
 <div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="1728"></p>
-<figcaption>Illustration of measurement of fit, courtesy of <a href="https://benediktehinger.de/blog/science/scatterplots-regression-lines-and-the-first-principal-component/" class="uri">https://benediktehinger.de/blog/science/scatterplots-regression-lines-and-the-first-principal-component/</a></figcaption>
-</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(boot_np)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0144147</code></pre>
 </div>
 </div>
-</div>
-<p>Instead we could take the squared distance of each point <span class="math inline">\((x_i,y_i)\)</span> to the line <span class="math inline">\(y=\beta_0+\beta_1\)</span>, which is given by the squared-distance to its orthogonal projection to the line, <span class="math display">\[d^2_\perp=\frac{(y_i-(\beta_0+\beta_1x_i))^2}{\beta_1^2+1}\]</span></p>
-<p>We can define this as our <span class="math inline">\(\rho(y_i,\theta)\)</span>, and then find estimators of <span class="math inline">\(\beta_0,\beta_1\)</span> as those which minimizes this quantity, <span class="math display">\[\min_{\beta_0,\beta_1}\frac{1}{n}\sum_{i=1}^n\rho(Y_i,\theta)=\min_{\beta_0,\beta_1}\frac{1}{n}\sum_{i=1}^n\frac{(Y_i-(\beta_0+\beta_1X_i))^2}{\beta_1^2+1}\]</span> This is sometimes called the “PCA line”, because it’s a simple 2-dimensional example of PCA (Principal Components Analysis).</p>
-<p>Here’s an example of the PCA line on our scorecard data</p>
+<p>We see that our bootstrap asymptotic variance is much smaller.</p>
+<p>Our asymptotic confidence interval based on normality would be</p>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="1152"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Unlike regression, the PCA line treats the <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span> data symmetrically in trying to “fit” the data. Furthermore, if I regress <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span> versus if I regress <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span>, I do not get the same line. We are making different choices of how we want to measure a good fit to the line, and the choice of line reflects this.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="1728"></p>
-<figcaption>Illustration of measurement of fit, courtesy of (https://benediktehinger.de/blog/science/scatterplots-regression-lines-and-the-first-principal-component/)</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>We can see in this toy illustration the differences between the resulting lines.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="576"></p>
-<figcaption>Illustration of differences in fitted line, courtesy of (https://benediktehinger.de/blog/science/scatterplots-regression-lines-and-the-first-principal-component/)</figcaption>
-</figure>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ci_norm<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">median</span>(il_rain<span class="sc">$</span>rain_inches)<span class="sc">-</span><span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span>asySe,<span class="fu">median</span>(il_rain<span class="sc">$</span>rain_inches)<span class="sc">+</span><span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span>asySe)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Asy Normal CI:</span><span class="sc">\n</span><span class="st">"</span>,ci_norm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Asy Normal CI:
+ 0.01035638 0.1296436</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
-<p>So by just viewing estimators as the solution to an optimization problem, we are no longer making explicit probabalistic assumptions. Is probability an unnecessary part of estimation?</p>
-<p>The answer to this is both yes and no. We can justify the appropriateness of our loss <span class="math inline">\(l\)</span> or more generally <span class="math inline">\(\rho\)</span> on more heuristic or intuitive grounds without appealing to a specific probability model. We can make it more tailored to the problem we have, perhaps with more complex treatment of certain aspects of the data. On the other hand, we have to come up with <span class="math inline">\(l\)</span> or <span class="math inline">\(\rho\)</span>, and generally the starting place is something like a MLE calculation which is then adapted or modified to improve its performance.</p>
-<p>This brings us to the next question where probabilitistic modeling has a big role – if we have all of these possible estimators, which ones are best? We will see “best” can be defined in different ways, but regardless our estimators are random variables and their probabilisitic behavior is the only way we have to evaluate them. We will also see that even if we do not use a probabilistic model to define our estimators, the estimators will still perform better or worse under different assumptions about the distribution of our data. So by choosing a particular choice of criteria, we are often implicitly making assumptions about our data distribution, just less formalized.</p>
+<section id="what-is-the-bootstrap-doing" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-bootstrap-doing">What is the bootstrap doing?</h2>
+<p>When we talk about confidence intervals that are based on the normal, or the <span class="math inline">\(t\)</span>-distribution, we are relying on the asymptotic distribution of our estimator being approximately normal and/or distributional assumptions about our data to have the sampling distribution of our data.</p>
+<p>Without those assumptions, in theory, to construct the sampling distribution of a sample statistic, we would have to draw all samples from the population, compute the statistic for each sample, and the distribution of these statistics is the <em>sampling</em> distribution.<span class="citation" data-cites="hest2015">(<a href="#ref-hest2015" role="doc-biblioref">Hesterberg 2015</a>)</span></p>
+<p>In practice, though, we have only <em>one</em> sample. This is where the bootstrap comes in. We draw samples from <em>an estimate of</em> the population distribution, and compute the statistic of interest for each sample.</p>
+<p>The bootstrap is based on a principle we have encountered many times so far: if something is unknown, you substitute an <em>estimate</em> for it.</p>
+<p>What do we use as an estimate for the population? Here is a nice diagram of the bootstrap, created by Deborah Nolan. You can view it in context in the notes for <a href="https://stat20.berkeley.edu/fall-2025/3-generalization/09-bootstrapping/notes.html">Stat 20</a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../StaticFigures/triptych-bootstrap.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%" alt="A schematic drawing of the bootstrap procedure."></p>
+</figure>
+</div>
+<p>The most common method is the <em>nonparametric</em> bootstrap in which we draw samples with replacement from the sample. (What we are actually doing is drawing samples from the <em>empirical</em> distribution <span class="math inline">\(\hat{F}_n\)</span>. This distribution places an equal probability of <span class="math inline">\(1/n\)</span> on each data point.)</p>
+<p>The most important point of difference between the sampling and bootstrap distributions is that the bootstrap distribution will be <em>centered at the observed statistic,</em> <strong>not</strong> <em>the population parameter</em>. This means we cannot use the bootstrap distribution to get a better estimate for the population parameter, rather we use it to give us an idea of the <em>accuracy of the original estimate</em>.</p>
+<p>Also, this means that we should be careful about using the quantiles of the bootstrap distribution of <span class="math inline">\(\hat\theta^*\)</span> to estimate the quantiles of the sampling distribution of <span class="math inline">\(\hat\theta\)</span> if our distribution is not symmetric.</p>
 
 
 
 </section>
-
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-agresti1997" class="csl-entry" role="listitem">
-Agresti, Alan, and Barbara Finlay. 1997. <em>Statistical Methods for Social Sciences</em>. Third. Prentice Hall.
+<div id="ref-hest2015" class="csl-entry" role="listitem">
+Hesterberg, Tim. 2015. <span>“What Teachers Should Know about the Bootstrap: Resampling in the Undergraduate Statistics Curriculum.”</span> <em>The American Statistician</em> 69 (4): 371–86. <a href="https://doi.org/10.1080/00031305.2015.1089789">https://doi.org/10.1080/00031305.2015.1089789</a>.
 </div>
-<div id="ref-agresti2021" class="csl-entry" role="listitem">
-Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
+<div id="ref-rice2006" class="csl-entry" role="listitem">
+Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. Duxbury Press.
 </div>
-<div id="ref-faraway2005" class="csl-entry" role="listitem">
-Faraway, Julian J. 2005. <em>Linear Models with <span>R</span></em>. 1st ed. Texts in Statistical Science. Chapman &amp; Hall/CRC. <a href="https://utstat.utoronto.ca/brunner/books/LinearModelsWithR.pdf">https://utstat.utoronto.ca/brunner/books/LinearModelsWithR.pdf</a>.
-</div>
-<div id="ref-fox-weisberg2019robust" class="csl-entry" role="listitem">
-Fox, John, and Sanford Weisberg. 2019. <span>“Robust Regression in <span>R</span>: <span>A</span>n Appendix to an <span>R</span> Companion to Applied Regression, Third Edition.”</span> <a href="https://www.john-fox.ca/Companion/appendices/Appendix-Robust-Regression.pdf">https://www.john-fox.ca/Companion/appendices/Appendix-Robust-Regression.pdf</a>.
-</div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>You will also see these same loss functions used to compare an estimator <span class="math inline">\(\hat\theta\)</span> with <span class="math inline">\(\theta\)</span>. This is often used in <em>decision theory</em> approach to estimation. It’s still usually the same idea that your function compares the two inputs <span class="math inline">\(\hat\theta\)</span> and <span class="math inline">\(\theta\)</span>. See Problem 4.81 in our textbook, <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
