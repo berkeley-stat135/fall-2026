@@ -332,12 +332,17 @@ window.Quarto = {
   <ul>
   <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link active" data-scroll-target="#bootstrap">Bootstrap</a>
   <ul class="collapse">
-  <li><a href="#confidence-intervals-using-the-bootstrap" id="toc-confidence-intervals-using-the-bootstrap" class="nav-link" data-scroll-target="#confidence-intervals-using-the-bootstrap">Confidence intervals using the bootstrap</a></li>
+  <li><a href="#what-is-the-bootstrap-doing" id="toc-what-is-the-bootstrap-doing" class="nav-link" data-scroll-target="#what-is-the-bootstrap-doing">What is the bootstrap doing?</a></li>
+  <li><a href="#confidence-intervals-using-the-bootstrap" id="toc-confidence-intervals-using-the-bootstrap" class="nav-link" data-scroll-target="#confidence-intervals-using-the-bootstrap">Confidence intervals using the bootstrap</a>
+  <ul class="collapse">
+  <li><a href="#bootstrap-percentile-interval" id="toc-bootstrap-percentile-interval" class="nav-link" data-scroll-target="#bootstrap-percentile-interval"><strong>Bootstrap percentile interval</strong></a></li>
+  <li><a href="#bootstrap-basic-pivotal-interval" id="toc-bootstrap-basic-pivotal-interval" class="nav-link" data-scroll-target="#bootstrap-basic-pivotal-interval">Bootstrap basic (pivotal) interval</a></li>
+  <li><a href="#the-normal-or-t-interval" id="toc-the-normal-or-t-interval" class="nav-link" data-scroll-target="#the-normal-or-t-interval">The normal or t interval</a></li>
+  </ul></li>
   <li><a href="#example-of-rainfall-data-rice2006" id="toc-example-of-rainfall-data-rice2006" class="nav-link" data-scroll-target="#example-of-rainfall-data-rice2006">Example of rainfall data <span class="citation" data-cites="rice2006">(Rice 2006)</span></a>
   <ul class="collapse">
   <li><a href="#compare-to-asymptotic-normal-distribution" id="toc-compare-to-asymptotic-normal-distribution" class="nav-link" data-scroll-target="#compare-to-asymptotic-normal-distribution">Compare to asymptotic normal distribution</a></li>
   </ul></li>
-  <li><a href="#what-is-the-bootstrap-doing" id="toc-what-is-the-bootstrap-doing" class="nav-link" data-scroll-target="#what-is-the-bootstrap-doing">What is the bootstrap doing?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -350,6 +355,15 @@ window.Quarto = {
 
 <section id="bootstrap" class="level1">
 <h1>Bootstrap</h1>
+<div class="READING">
+<div class="block-title">
+<p><strong>Corresponding reading</strong></p>
+</div>
+<ul>
+<li>Chapter 4.6 in <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span></li>
+<li>Chapter 8.5, p 284 in <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span></li>
+</ul>
+</div>
 <p>The bootstrap is a <em>resampling</em> method for estimating measures of accuracy for the estimator (such as variance or confidence intervals) when obtaining them analytically is difficult. Resampling methods have become extremely common and absolutely indispensable in statistics due to the widespread availability of computing power. We use the bootstrap to quantify the uncertainty associated with an estimator.</p>
 <p>We can view the sample as the population in two ways, leading to two different kinds of bootstrap.</p>
 <ol type="1">
@@ -376,51 +390,104 @@ Caution
 <ol type="1">
 <li>Compute the observed value of <span class="math inline">\(\hat\theta\)</span> from our data</li>
 <li>Let <span class="math inline">\(B\)</span> be some large number (such as 5000).</li>
-<li>For each <span class="math inline">\(i\)</span>, <span class="math inline">\(i = 1, 2, \ldots, B\)</span>, do the following steps:</li>
+<li>For each <span class="math inline">\(b\)</span>, <span class="math inline">\(b = 1, 2, \ldots, B\)</span>, do the following steps:</li>
 </ol>
 <ol type="i">
 <li>Get a new sample of <strong>the same size, n</strong> by resampling <strong>with replacement</strong> from the original sample.</li>
-<li>Compute the observed value of the estimator for this new sample, and call it <span class="math inline">\(\hat\theta_i^*\)</span>. Repeat steps (i) and (ii) to get <span class="math inline">\(\hat\theta_1^*, \hat\theta_2^*, \ldots, \hat\theta_B^*\)</span>. The <span class="math inline">\(*\)</span> indicates that it is a <strong>bootstrap estimate,</strong> i.e.&nbsp;calculated from our bootstrap sample.</li>
+<li>Compute the observed value of the estimator for this new sample, and call it <span class="math inline">\(\hat\theta_{(b)}^*\)</span>. Repeat steps (i) and (ii) to get <span class="math inline">\(\hat\theta_{(1)}^*, \hat\theta_{(2)}^*, \ldots, \hat\theta_{(B)}^*\)</span>. The <span class="math inline">\(*\)</span> indicates that it is a <strong>bootstrap estimate,</strong> i.e.&nbsp;calculated from our bootstrap sample (the book doesn’t use the <span class="math inline">\(*\)</span> in its notation, but it is a standard way to keep them separated from our <span class="math inline">\(\hat\theta\)</span> estimated from our original data)</li>
 </ol>
 <ol start="4" type="1">
-<li>Estimate quantities from the distribution of <span class="math inline">\(\hat\theta_i^*\)</span></li>
+<li>Estimate quantities from the distribution of <span class="math inline">\(\hat\theta_{(b)}^*\)</span></li>
 </ol>
 <ol type="i">
-<li>the variance as <span class="math inline">\(\displaystyle \dfrac{1}{B} \sum_{i=1}^B \left(\hat\theta_i^*-\overline{\hat\theta^*}\right)^2\)</span>, where <span class="math inline">\(\overline{\hat\theta^*} = \displaystyle \dfrac{1}{B} \sum_{i=1}^B\hat\theta_i^*\)</span> is the mean of <span class="math inline">\(\hat\theta_1^*, \hat\theta_2^*, \ldots, \hat\theta_B^*\)</span>. The <strong>bootstrap SE estimate</strong>, denoted <span class="math inline">\(s_{\mathrm{boot}}\)</span> will be the square root of the bootstrap estimate of the variance.</li>
-<li>The <strong>bootstrap bias estimate</strong> will be <span class="math inline">\(\overline{\hat\theta^*}-\hat\theta\)</span>.</li>
-<li>We will go into confidence intervals in more detail in the next section</li>
+<li><p>The mean of <span class="math inline">\(\hat\theta^*\)</span> <span class="math display">\[\overline{\theta^*}=\frac{1}{B}\sum_{i=1}^B\hat\theta_{(b)}^*\]</span> can be used to estimate the <strong>bootstrap bias estimate</strong>, given by <span class="math display">\[\widehat{bias}(\hat\theta)=\overline{\theta^*}-\hat\theta.\]</span><br>
+</p></li>
+<li><p>calculate the standard deviation of <span class="math inline">\(\hat\theta^*_i\)</span> as <span class="math display">\[\displaystyle \dfrac{1}{B-1} \sum_{i=1}^B \left(\hat\theta_i^*-\overline{\theta^*}\right)^2.\]</span> This is the bootstrap estimate of the variance of <span class="math inline">\(\hat\theta\)</span>, and the square-root of this quantity gives us the <strong>bootstrap estimate of SE</strong>, denoted <span class="math inline">\(SE_{\mathrm{boot}}\)</span>.</p></li>
+<li><p>Quantiles of the distribution of <span class="math inline">\(\hat\theta^*\)</span>, where <span class="math inline">\(q^*_{\alpha}\)</span> is the <span class="math inline">\(\alpha\)</span>th quantile of the bootstrap distribution, defined as <span class="math display">\[q^*_{\alpha}:  \frac{\{\# \hat\theta^* \le q^*_{\alpha}\}}{B}=\alpha\]</span> i.e.&nbsp;the value such that the proportion of the data that is less than <span class="math inline">\(q^*_{\alpha}\)</span> is equal to <span class="math inline">\(\alpha\)</span>. You can think of this like using the histogram as your data as your distribution and you want the area under your histogram to the left of <span class="math inline">\(q^*_{\alpha}\)</span> to be equal to <span class="math inline">\(\alpha\)</span>.</p></li>
 </ol>
+<pre><code>We will use these quantiles to define confidence intervals, which we will get to in the next section.</code></pre>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre><code>In fact, the above definition is not quite accurate -- because of the discreteness of your data you may not have a point $q^*_{\alpha}$ that gets you exactly $\alpha$. Actually there are a set of values that are valid quantiles for discrete distributions, and there are several standard choices for how to choose one (see `?quantile` in R). We are not going to worry about this too much, because $B$ is very large.</code></pre>
+</div>
+</div>
+<section id="what-is-the-bootstrap-doing" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-bootstrap-doing">What is the bootstrap doing?</h2>
+<p>When we talk about confidence intervals that are based on the normal, or the <span class="math inline">\(t\)</span>-distribution, we are relying on the asymptotic distribution of our estimator being approximately normal and/or distributional assumptions about our data to have the sampling distribution of our data.</p>
+<p>Without those assumptions, in theory, to construct the sampling distribution of a sample statistic, we would have to draw all samples from the population, compute the statistic for each sample, and the distribution of these statistics is the <em>sampling</em> distribution.<span class="citation" data-cites="hest2015">(<a href="#ref-hest2015" role="doc-biblioref">Hesterberg 2015</a>)</span></p>
+<p>In practice, though, we have only <em>one</em> sample. This is where the bootstrap comes in. We draw samples from <em>an estimate of</em> the population distribution, and compute the statistic of interest for each sample.</p>
+<p>The bootstrap is based on a principle we have encountered many times so far: if something is unknown, you substitute an <em>estimate</em> for it.</p>
+<p>What do we use as an estimate for the population? Here is a nice diagram of the bootstrap, created by Deborah Nolan. You can view it in context in the notes for <a href="https://stat20.berkeley.edu/fall-2025/3-generalization/09-bootstrapping/notes.html">Stat 20</a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../StaticFigures/triptych-bootstrap.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%" alt="A schematic drawing of the bootstrap procedure."></p>
+</figure>
+</div>
+<p>The most common method (which is the one we are covering) is the <em>nonparametric</em> bootstrap in which we draw samples with replacement from the sample. What we are actually doing is drawing samples from the <em>empirical</em> distribution <span class="math inline">\(\hat{F}_n\)</span>, defined by our sample <span class="math inline">\(X_1,\ldots,X_n\)</span> which gives probability <span class="math inline">\(1/n\)</span> to each observed observation in our sample, <span class="math display">\[P(U=u) = \frac{1}{n}\sum_{i=1}^n I(X_i=u).\]</span></p>
+<p>If we had infinite bootstrap samples the (<span class="math inline">\(B\rightarrow \infty\)</span>) then <span class="math inline">\(\bar{\theta}^*\)</span> and <span class="math inline">\(S_{boot}^2\)</span> will converge to the mean and variance of the empirical CDF. Notice that this convergence is in <span class="math inline">\(B\)</span>, which we control and can make as big as we our computer can handle!</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In fact in principle, we could calculate the mean and variance of <span class="math inline">\(\hat\theta^*\)</span> <em>exactly</em>, since we know the entire probability distribution of <span class="math inline">\(\hat{F}_n\)</span> once we see our data, and the distribution of <span class="math inline">\(\hat\theta^*\)</span> is just a function of a sample from <span class="math inline">\(\hat{F}_n\)</span>, but the computations would generally be too onerous.</p>
+</div>
+</div>
+<p>An important point of difference between the sampling distribution of <span class="math inline">\(\hat\theta\)</span> and the bootstrap distribution of <span class="math inline">\(\hat\theta^*\)</span> is that the bootstrap distribution will be <em>centered at the observed statistic,</em> <strong>not</strong> <em>the population parameter</em>. This means we cannot generally use the bootstrap distribution to get a better estimate for the population parameter <span class="math inline">\(\theta\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Instead, the bootstrap gives us an idea of the <em>accuracy of the original estimate</em>. Specifically, the quantity <span class="math inline">\(\hat\theta-\theta_0\)</span> is well approximated by <span class="math inline">\(\hat\theta^*-\hat\theta\)</span>.</p>
+<p>For example, for bias I want to estimate <span class="math display">\[E(\hat\theta)-\theta_0,\]</span> and so instead I use <span class="math display">\[\frac{1}{B}\sum_{b=1}^B \hat\theta^*_{(b)}-\hat\theta\]</span> Or for variance, I want to estimate <span class="math display">\[E(\hat\theta-\theta_0)^2\]</span> and instead I use <span class="math display">\[ \frac{1}{B-1}\sum_{b=1}^B(\hat\theta^*_{(b)}-\hat\theta)^2\]</span></p>
+<p>However, this means that we should be careful about using the quantiles of the bootstrap distribution of <span class="math inline">\(\hat\theta^*\)</span> to estimate the quantiles of the sampling distribution of <span class="math inline">\(\hat\theta\)</span> if our distribution is not symmetric. For this reason, there is a lot of attention in bootstrap as to how to best create confidence intervals.</p>
+</section>
 <section id="confidence-intervals-using-the-bootstrap" class="level2">
 <h2 class="anchored" data-anchor-id="confidence-intervals-using-the-bootstrap">Confidence intervals using the bootstrap</h2>
 <p>There are a number of ways to using the bootstrap to compute confidence intervals. Here are three ways of finding a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval (<span class="math inline">\(0&lt;\alpha&lt;1\)</span>).</p>
-<ol type="1">
-<li><strong>Bootstrap percentile interval</strong></li>
-</ol>
-<p>The confidence interval is given by <span class="math inline">\((q_{\alpha/2}, q_{1-\alpha/2})\)</span>, where <span class="math inline">\(q_{\alpha/2}\)</span> is the <span class="math inline">\(\alpha/2\)</span>th quantile of the bootstrap distribution and <span class="math inline">\(q_{1-\alpha/2}\)</span> is the <span class="math inline">\((1-\alpha/2)\)</span>th quantile of the bootstrap distribution. Since <span class="math inline">\(P(\hat\theta^* \le q_{\alpha/2}) = \alpha/2\)</span>, and <span class="math inline">\(P(\hat\theta^* \le q_{1-\alpha/2}) = 1-\alpha/2\)</span>, the area captured in the middle is <span class="math inline">\(1-\alpha\)</span>, which is what we need. This method is usually fine unless the distribution is very skewed.</p>
-<ol start="2" type="1">
-<li><strong>Bootstrap basic (pivotal) interval</strong></li>
-</ol>
-<p>This is sometimes called the <em>reverse percentile interval</em> and is the one defined in your textbook. We can use the bootstrap to compute approximate confidence intervals for the true value of <span class="math inline">\(\theta\)</span>. Suppose the true value of the parameter <span class="math inline">\(\theta\)</span> is given by <span class="math inline">\(\theta_0\)</span>.</p>
-<p>Define <span class="math inline">\(\Delta = \hat\theta - \theta_0\)</span>, and suppose we <em>know</em> the distribution of <span class="math inline">\(\Delta\)</span>. This means that we know the quantiles of this distribution, and if we want to capture the middle 95% of the values, we can use the 2.5th percentile and 97.5th percentiles to do this. Denote the 2.5th percentile by <span class="math inline">\(q_{0.025}\)</span> and the 97.5th percentile by <span class="math inline">\(q_{0.975}\)</span>.</p>
-<p>This means that <span class="math inline">\(P(\Delta \le q_{0.025}) = 0.025\)</span> and <span class="math inline">\(P(\Delta \le q_{0.975}) = 0.975\)</span></p>
+<section id="bootstrap-percentile-interval" class="level3">
+<h3 class="anchored" data-anchor-id="bootstrap-percentile-interval"><strong>Bootstrap percentile interval</strong></h3>
+<p>The confidence interval is given by <span class="math display">\[(q^*_{\alpha/2}, q^*_{1-\alpha/2}),\]</span> where <span class="math inline">\(q^*_{\alpha/2}\)</span> is the <span class="math inline">\(\alpha/2\)</span>th quantile of the bootstrap distribution and <span class="math inline">\(q^*_{1-\alpha/2}\)</span> is the <span class="math inline">\((1-\alpha/2)\)</span>th quantile of the bootstrap distribution.</p>
+<p>Since (using our empirical distribution), <span class="math inline">\(P(\hat\theta^* \le q_{\alpha/2}) = \alpha/2\)</span>, and <span class="math inline">\(P(\hat\theta^* \le q_{1-\alpha/2}) = 1-\alpha/2\)</span>, the area captured in the middle is <span class="math inline">\(1-\alpha\)</span>, which is what we need.</p>
+<p>Notice that the confidence intervals are not necessarily symmetric around <span class="math inline">\(\hat\theta\)</span>, depending on if the bootstrap distribution of <span class="math inline">\(\hat\theta^*\)</span> is skewed.</p>
+<p>This method seems intuitive – use the bootstrap distribution directly. However, this strategy seems to violate what we said before, namely that the bootstrap distribution of <span class="math inline">\(\hat\theta^*\)</span> can’t be immediately substituted for the sampling distribution of <span class="math inline">\(\hat\theta\)</span> and instead we should use <span class="math inline">\(\hat\theta^*-\hat\theta\)</span> is a good estimate of <span class="math inline">\(\hat\theta-\theta_0\)</span>. However, the theoretical justification of the percentile method lies on more complex grounds; while the justification of the CI is beyond the scope of what we will cover, it is not based on the (incorrect) substitution of the bootstrap distribution for the sampling distribution.</p>
+<p>The percentile method is far and away the most commonly used technique for building confidence intervals. It is usually fine if the sampling distribution of <span class="math inline">\(\hat\theta\)</span> is not too skewed, which you can get a sense of by looking at the distribution of the <span class="math inline">\(\hat\theta^*\)</span>.</p>
+</section>
+<section id="bootstrap-basic-pivotal-interval" class="level3">
+<h3 class="anchored" data-anchor-id="bootstrap-basic-pivotal-interval">Bootstrap basic (pivotal) interval</h3>
+<p>This is sometimes called the <em>reverse percentile interval</em> and is the one defined in <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span>. It’s rationale looks more like our construction of normal CI and replaces <span class="math inline">\(\hat\theta-\theta_0\)</span> in our probability computations with <span class="math inline">\(\hat\theta^*-\hat\theta\)</span>.</p>
+<p>Define <span class="math inline">\(\delta = \hat\theta - \theta_0\)</span>, and suppose we <em>know</em> the distribution of <span class="math inline">\(\delta\)</span>. This means that we know the quantiles of this distribution, and if we want to capture the middle 95% of the values, we can use the 2.5th percentile and 97.5th percentiles to do this. Denote the 2.5th percentile by <span class="math inline">\(q_{0.025}\)</span> and the 97.5th percentile by <span class="math inline">\(q_{0.975}\)</span>, <span class="math display">\[P(\delta \le q_{0.025}) = 0.025 \quad P(\delta \le q_{0.975}) = 0.975\]</span></p>
 <p>Then we have that: <span class="math display">\[
-P(q_{0.025}\le \Delta \le q_{0.975}) = 0.95 \Rightarrow P(q_{0.025}\le \hat\theta - \theta_0 \le q_{0.975}) = 0.95
-\]</span> We can manipulate the inequalities to isolate <span class="math inline">\(\theta_0\)</span> in the center: <span class="math display">\[
-\begin{align}
+P(q_{0.025}\le \delta \le q_{0.975}) = 0.95 \Rightarrow P(q_{0.025}\le \hat\theta - \theta_0 \le q_{0.975}) = 0.95
+\]</span> We can manipulate the inequalities to isolate <span class="math inline">\(\theta_0\)</span> in the center, just like we did with normal intervals: <span class="math display">\[
+\begin{aligned}
 0.95 &amp;= P(q_{0.025}\le \hat\theta - \theta_0 \le q_{0.975})\\
       &amp;=  P(q_{0.025} -\hat\theta \le  - \theta_0 \le q_{0.975} -\hat\theta)\\
       &amp;= P(- q_{0.025} + \hat\theta \ge   \theta_0 \ge - q_{0.975} + \hat\theta)\\
-      &amp;= P( \hat\theta - q_{0.975}\le \theta_0 \le  \hat\theta -q_{0.025}) \\
-\end{align}
-\]</span> This gives us a 95% confidence interval for <span class="math inline">\(\theta_0\)</span>. There is nothing special about 95%, except that it is commonly used as a confidence level. We could use any confidence level, say <span class="math inline">\(1-\alpha\)</span>. (When we use a 95% CI, <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(0.05\)</span>.)</p>
-<p>Then, to capture <span class="math inline">\(1-\alpha\)</span> in the middle, we need the <span class="math inline">\(\dfrac{\alpha}{2}\)</span> and <span class="math inline">\(1-\dfrac{\alpha}{2}\)</span> quantiles in place of <span class="math inline">\(q_{0.025}\)</span> and <span class="math inline">\(q_{0.975}\)</span> respectively. Denote these quantiles by <span class="math inline">\(q_{\alpha/2}\)</span> and <span class="math inline">\(q_{1-\alpha/2}\)</span> We do the manipulation above and get the following: <span class="math display">\[
+      &amp;= P( \hat\theta - q_{0.975}\le \theta_0 \le  \hat\theta -q_{0.025})
+\end{aligned}
+\]</span> We could of course use any confidence level, <span class="math inline">\(1-\alpha\)</span>, <span class="math display">\[
 P( \hat\theta - q_{1-\alpha/2}\le \theta_0 \le  \hat\theta -q_{\alpha/2}) = 1-\alpha.
-\]</span> The only problem of course is that we <em>don’t</em> know the distribution of <span class="math inline">\(\Delta = \hat\theta - \theta_0\)</span>. This is where we can use the bootstrap. We generate many samples (<span class="math inline">\(B\)</span> samples, as mentioned above, where <span class="math inline">\(B\)</span> is large), and compute <span class="math inline">\(\hat\theta_1^*, \hat\theta_2^*, \ldots, \hat\theta_B^*\)</span> from each sample. Then the distribution of <span class="math inline">\(\hat\theta -\theta_0\)</span> is approximated by the distribution of <span class="math inline">\(\hat\theta^* - \hat\theta\)</span>.</p>
-<p>Note that the quantiles of the approximated <span class="math inline">\(\Delta\)</span> distribution (using <span class="math inline">\(\hat\theta^* -\hat\theta\)</span>) are just the quantiles of the <span class="math inline">\(\hat\theta^*\)</span> distribution less <span class="math inline">\(\hat\theta\)</span>. That is, if we let <span class="math inline">\(q_\alpha\)</span> be the <span class="math inline">\(\alpha\)</span>th quantile of the <span class="math inline">\(\Delta\)</span> distribution, and <span class="math inline">\(q_\alpha^*\)</span> be the <span class="math inline">\(\alpha\)</span>th quantile of the <span class="math inline">\(\hat\theta^*\)</span> distribution, <span class="math inline">\(q_\alpha = q_\alpha^* - \hat\theta\)</span>. Substituting this into our confidence interval above, we get that the basic <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\theta_0\)</span> can be written as <span class="math inline">\((2\hat\theta - q_{1-\alpha/2}^*,2\hat\theta - q_{\alpha/2}^* )\)</span>.</p>
-<ol start="3" type="1">
-<li>The Normal interval</li>
-</ol>
-<p>This is the simplest, and will be fine if the sampling distribution of <span class="math inline">\(\hat\theta\)</span> is approximately normal. It is simply given by <span class="math inline">\(\hat\theta \pm z_{\alpha/2}\times  s_{\mathrm{boot}}\)</span>, where <span class="math inline">\(s_{\mathrm{boot}}\)</span> is the bootstrap estimate of the standard error of <span class="math inline">\(\theta\)</span>.</p>
+\]</span> The only problem, of course, is that we <em>don’t</em> know the distribution of <span class="math inline">\(\delta = \hat\theta - \theta_0\)</span>, so we don’t know the quantiles <span class="math inline">\(q_{\alpha/2}\)</span> and <span class="math inline">\(q_{1-\alpha/2}\)</span>. This is where we can use the bootstrap, to estimate <span class="math inline">\(q_{\alpha/2}\)</span> and <span class="math inline">\(q_{1-\alpha/2}\)</span>. We will approximate the distribution of <span class="math inline">\(\hat\theta -\theta_0\)</span> by the distribution of <span class="math inline">\(\delta^*=\hat\theta^* - \hat\theta\)</span>, giving us estimates <span class="math inline">\(\hat{q}_{\alpha/2},\hat{q}_{1-\alpha/2}\)</span> and a CI <span class="math display">\[(\hat\theta - \hat{q}_{1-\alpha/2}, \hat\theta - \hat{q}_{\alpha/2})\]</span></p>
+<div class="PARAGRAPH">
+<p>Relating Back to <span class="math inline">\(q^*_{\alpha}\)</span></p>
+</div>
+<p>Note that the quantiles of the approximated <span class="math inline">\(\delta\)</span> distribution (using <span class="math inline">\(\delta^*=\hat\theta^* -\hat\theta\)</span>) are just the quantiles of the <span class="math inline">\(\hat\theta^*\)</span> distribution less <span class="math inline">\(\hat\theta\)</span>. That is, if we let <span class="math inline">\(\hat{q}_\alpha\)</span> be the <span class="math inline">\(\alpha\)</span>th quantile of the <span class="math inline">\(\delta^*\)</span> distribution, and <span class="math inline">\(q_\alpha^*\)</span> be the <span class="math inline">\(\alpha\)</span>th quantile of the <span class="math inline">\(\hat\theta^*\)</span> distribution, then <span class="math display">\[\hat{q}_{\alpha} = q_\alpha^* - \hat\theta.\]</span> Substituting this into our confidence interval above, we get that the basic <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\theta_0\)</span> can be written as <span class="math display">\[(2\hat\theta - q_{1-\alpha/2}^*,2\hat\theta - q_{\alpha/2}^* ).\]</span></p>
+<p>Notice that this is a “reverse” of use of the bootstrap quantiles from the percentile, which was: <span class="math display">\[(q_{\alpha/2}, q_{1-\alpha/2}),\]</span> If the sampling distribution of <span class="math inline">\(\hat\theta\)</span> is symmetric, this will not matter, but if you have a skewed distribution, then these will give skewed CI intervals <em>in opposite directions</em>.</p>
+</section>
+<section id="the-normal-or-t-interval" class="level3">
+<h3 class="anchored" data-anchor-id="the-normal-or-t-interval">The normal or t interval</h3>
+<p>This is the simplest, and will be fine if the sampling distribution of <span class="math inline">\(\hat\theta\)</span> is approximately normal. It is simply given by <span class="math inline">\(\hat\theta \pm z_{\alpha/2}\times  SE_{\mathrm{boot}}\)</span>, where <span class="math inline">\(SE_{\mathrm{boot}}\)</span> is the bootstrap estimate of the standard error of <span class="math inline">\(\theta\)</span>.</p>
+<p>You can be more conservative in smaller samples and use <span class="math inline">\(t_{\alpha/2,n-1}\)</span>. This can be beneficial, because bootstrap CI in small samples tend to be <em>narrower</em> than they should be. You can think of the bootstrap distribution as suffering from the same bias problems as the MLE estimate of variance that uses <span class="math inline">\(\frac{1}{n}\)</span> – the bootstrap underestimates the variability in smaller sample sizes. Using the <span class="math inline">\(t\)</span> quantiles, which are larger, can help a bit, but ultimately the bootstrap is not a small-sample method.</p>
+</section>
 </section>
 <section id="example-of-rainfall-data-rice2006" class="level2">
 <h2 class="anchored" data-anchor-id="example-of-rainfall-data-rice2006">Example of rainfall data <span class="citation" data-cites="rice2006">(<a href="#ref-rice2006" role="doc-biblioref">Rice 2006</a>)</span></h2>
@@ -444,16 +511,16 @@ $ year        &lt;fct&gt; 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 
 </div>
 <p>In this next bit of code, we will first compute the 0.025th and 0.975th quantiles of the bootstrap distribution of the median</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Computing the lower and upper quantiles</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>med_lq_np <span class="ot">&lt;-</span> <span class="fu">quantile</span>(boot_np, <span class="at">probs =</span> <span class="fl">0.025</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>med_uq_np <span class="ot">&lt;-</span> <span class="fu">quantile</span>(boot_np, <span class="at">probs =</span> <span class="fl">0.975</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Computing the lower and upper quantiles</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>med_lq_np <span class="ot">&lt;-</span> <span class="fu">quantile</span>(boot_np, <span class="at">probs =</span> <span class="fl">0.025</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>med_uq_np <span class="ot">&lt;-</span> <span class="fu">quantile</span>(boot_np, <span class="at">probs =</span> <span class="fl">0.975</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now we can create percentile confidence intervals:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## percentile confidence intervals</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>med_ci_np <span class="ot">&lt;-</span> <span class="fu">c</span>(med_lq_np, med_uq_np)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A percentile 95% CI for the median:</span><span class="sc">\n</span><span class="st"> "</span>, med_ci_np)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## percentile confidence intervals</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>med_ci_np <span class="ot">&lt;-</span> <span class="fu">c</span>(med_lq_np, med_uq_np)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A percentile 95% CI for the median:</span><span class="sc">\n</span><span class="st"> "</span>, med_ci_np)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A percentile 95% CI for the median:
   0.05 0.11</code></pre>
@@ -468,11 +535,11 @@ $ year        &lt;fct&gt; 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 
 <p>so our bootstrap confidence interval is <em>not</em> symmetric around our estimate.</p>
 <p>We can compare to this to a pivotal or reverse percentile CI</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## basic (pivotal) confidence intervals</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>med_ci_basic_np <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">*</span>med_obs <span class="sc">-</span>med_uq_np, <span class="dv">2</span><span class="sc">*</span>med_obs <span class="sc">-</span>med_lq_np )</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">### </span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A 95% pivotal CI for the median:</span><span class="sc">\n</span><span class="st"> "</span>, med_ci_basic_np)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## basic (pivotal) confidence intervals</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>med_ci_basic_np <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">*</span>med_obs <span class="sc">-</span>med_uq_np, <span class="dv">2</span><span class="sc">*</span>med_obs <span class="sc">-</span>med_lq_np )</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">### </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A 95% pivotal CI for the median:</span><span class="sc">\n</span><span class="st"> "</span>, med_ci_basic_np)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A 95% pivotal CI for the median:
   0.03 0.09</code></pre>
@@ -481,17 +548,17 @@ $ year        &lt;fct&gt; 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 
 <section id="compare-to-asymptotic-normal-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="compare-to-asymptotic-normal-distribution">Compare to asymptotic normal distribution</h3>
 <p>In fact, the distribution of the sample median from a population with a density function <span class="math inline">\(f(x)\)</span> is asymptotically normal with mean that is <span class="math inline">\(\theta\)</span>, the true median of the <span class="math inline">\(f\)</span> distribution, and variance <span class="math inline">\(\frac {1}{4nf(\theta)^{2}}\)</span> and <span class="math display">\[\hat\theta \sim N\left(\theta,\frac {1}{4nf(\theta)^{2}}\right)\]</span> Notice how the asymptotics <em>rely</em> on the sampling distribution of the data. This isn’t different from our MLE, where <span class="math inline">\(I(\theta)\)</span> depends on the distribution of our data.</p>
-<p>Suppose we blindly assumed the data distribution was normal, this would give us <span class="math inline">\(f(\theta)=1/{\sqrt {2\pi \sigma ^{2}}}\)</span> and <span class="math display">\[\hat\theta\sim N(\theta, {\displaystyle ({\pi }/{2})\cdot (\sigma ^{2}/n).}\]</span> This would give us the following estimate of standard error of the median for this data (by plugging in <span class="math inline">\(S^2\)</span> for <span class="math inline">\(\sigma^2\)</span>):</p>
+<p>Suppose we blindly assumed the data distribution was normal, this would give us <span class="math inline">\(f(\theta)=1/{\sqrt {2\pi \sigma ^{2}}}\)</span> and <span class="math display">\[\hat\theta\sim N(\theta, {\displaystyle ({\pi }/{2})\cdot (\sigma ^{2}/n)).}\]</span> This would give us the following estimate of standard error of the median for this data (by plugging in <span class="math inline">\(S^2\)</span> for <span class="math inline">\(\sigma^2\)</span>):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>asySe<span class="ot">&lt;-</span><span class="fu">sd</span>(il_rain<span class="sc">$</span>rain_inches)<span class="sc">*</span><span class="fu">sqrt</span>(pi<span class="sc">/</span><span class="dv">2</span><span class="sc">/</span><span class="fu">length</span>(il_rain<span class="sc">$</span>rain_inches))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>asySe</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>asySe<span class="ot">&lt;-</span><span class="fu">sd</span>(il_rain<span class="sc">$</span>rain_inches)<span class="sc">*</span><span class="fu">sqrt</span>(pi<span class="sc">/</span><span class="dv">2</span><span class="sc">/</span><span class="fu">length</span>(il_rain<span class="sc">$</span>rain_inches))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>asySe</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.03043098</code></pre>
 </div>
 </div>
 <p>Our bootstrap estimate of variance would be just calculating the standard deviation of our <span class="math inline">\(\hat\theta^2\)</span>,</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(boot_np)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(boot_np)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0144147</code></pre>
 </div>
@@ -499,44 +566,37 @@ $ year        &lt;fct&gt; 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 
 <p>We see that our bootstrap asymptotic variance is much smaller.</p>
 <p>Our asymptotic confidence interval based on normality would be</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ci_norm<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">median</span>(il_rain<span class="sc">$</span>rain_inches)<span class="sc">-</span><span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span>asySe,<span class="fu">median</span>(il_rain<span class="sc">$</span>rain_inches)<span class="sc">+</span><span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span>asySe)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Asy Normal CI:</span><span class="sc">\n</span><span class="st">"</span>,ci_norm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ci_norm<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">median</span>(il_rain<span class="sc">$</span>rain_inches)<span class="sc">-</span><span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span>asySe,<span class="fu">median</span>(il_rain<span class="sc">$</span>rain_inches)<span class="sc">+</span><span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span>asySe)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Asy Normal CI:</span><span class="sc">\n</span><span class="st">"</span>,ci_norm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Asy Normal CI:
  0.01035638 0.1296436</code></pre>
 </div>
 </div>
-</section>
-</section>
-<section id="what-is-the-bootstrap-doing" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-the-bootstrap-doing">What is the bootstrap doing?</h2>
-<p>When we talk about confidence intervals that are based on the normal, or the <span class="math inline">\(t\)</span>-distribution, we are relying on the asymptotic distribution of our estimator being approximately normal and/or distributional assumptions about our data to have the sampling distribution of our data.</p>
-<p>Without those assumptions, in theory, to construct the sampling distribution of a sample statistic, we would have to draw all samples from the population, compute the statistic for each sample, and the distribution of these statistics is the <em>sampling</em> distribution.<span class="citation" data-cites="hest2015">(<a href="#ref-hest2015" role="doc-biblioref">Hesterberg 2015</a>)</span></p>
-<p>In practice, though, we have only <em>one</em> sample. This is where the bootstrap comes in. We draw samples from <em>an estimate of</em> the population distribution, and compute the statistic of interest for each sample.</p>
-<p>The bootstrap is based on a principle we have encountered many times so far: if something is unknown, you substitute an <em>estimate</em> for it.</p>
-<p>What do we use as an estimate for the population? Here is a nice diagram of the bootstrap, created by Deborah Nolan. You can view it in context in the notes for <a href="https://stat20.berkeley.edu/fall-2025/3-generalization/09-bootstrapping/notes.html">Stat 20</a>:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../StaticFigures/triptych-bootstrap.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%" alt="A schematic drawing of the bootstrap procedure."></p>
-</figure>
-</div>
-<p>The most common method is the <em>nonparametric</em> bootstrap in which we draw samples with replacement from the sample. (What we are actually doing is drawing samples from the <em>empirical</em> distribution <span class="math inline">\(\hat{F}_n\)</span>. This distribution places an equal probability of <span class="math inline">\(1/n\)</span> on each data point.)</p>
-<p>The most important point of difference between the sampling and bootstrap distributions is that the bootstrap distribution will be <em>centered at the observed statistic,</em> <strong>not</strong> <em>the population parameter</em>. This means we cannot use the bootstrap distribution to get a better estimate for the population parameter, rather we use it to give us an idea of the <em>accuracy of the original estimate</em>.</p>
-<p>Also, this means that we should be careful about using the quantiles of the bootstrap distribution of <span class="math inline">\(\hat\theta^*\)</span> to estimate the quantiles of the sampling distribution of <span class="math inline">\(\hat\theta\)</span> if our distribution is not symmetric.</p>
 
 
 
 </section>
 </section>
+</section>
+
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-agresti2021" class="csl-entry" role="listitem">
+Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
+</div>
 <div id="ref-hest2015" class="csl-entry" role="listitem">
 Hesterberg, Tim. 2015. <span>“What Teachers Should Know about the Bootstrap: Resampling in the Undergraduate Statistics Curriculum.”</span> <em>The American Statistician</em> 69 (4): 371–86. <a href="https://doi.org/10.1080/00031305.2015.1089789">https://doi.org/10.1080/00031305.2015.1089789</a>.
 </div>
 <div id="ref-rice2006" class="csl-entry" role="listitem">
 Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. Duxbury Press.
 </div>
-</div></section></div></main> <!-- /main -->
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>This is not 100% accurate. There is a technique in machine learning, called <em>bagging</em>, that uses the mean of the bootstrap distribution, <span class="math inline">\(\bar{\theta}^*\)</span>, as an improved estimator of <span class="math inline">\(\theta\)</span> for the purpose of prediction in a regression context. This is only effective because of the kinds of estimators <span class="math inline">\(\hat\theta\)</span> to which it is applied.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
