@@ -307,6 +307,12 @@ window.Quarto = {
   <li><a href="#relative-efficiency-of-two-estimators" id="toc-relative-efficiency-of-two-estimators" class="nav-link" data-scroll-target="#relative-efficiency-of-two-estimators">Relative Efficiency of Two Estimators</a></li>
   <li><a href="#role-of-assumptions" id="toc-role-of-assumptions" class="nav-link" data-scroll-target="#role-of-assumptions">Role of Assumptions</a></li>
   </ul></li>
+  <li><a href="#the-cramér-rao-inequality" id="toc-the-cramér-rao-inequality" class="nav-link" data-scroll-target="#the-cramér-rao-inequality">The Cramér-Rao Inequality</a>
+  <ul class="collapse">
+  <li><a href="#mle-estimators-and-asymptotic-efficiency" id="toc-mle-estimators-and-asymptotic-efficiency" class="nav-link" data-scroll-target="#mle-estimators-and-asymptotic-efficiency">MLE estimators and Asymptotic Efficiency</a></li>
+  <li><a href="#robustness-to-assumptions" id="toc-robustness-to-assumptions" class="nav-link" data-scroll-target="#robustness-to-assumptions">Robustness to Assumptions</a></li>
+  <li><a href="#proof-of-the-cramér-rao-inequality" id="toc-proof-of-the-cramér-rao-inequality" class="nav-link" data-scroll-target="#proof-of-the-cramér-rao-inequality">Proof of the Cramér-Rao Inequality</a></li>
+  </ul></li>
   <li><a href="#mean-square-error" id="toc-mean-square-error" class="nav-link" data-scroll-target="#mean-square-error">Mean Square Error</a>
   <ul class="collapse">
   <li><a href="#example-of-mse-of-a-biased-estimator" id="toc-example-of-mse-of-a-biased-estimator" class="nav-link" data-scroll-target="#example-of-mse-of-a-biased-estimator">Example of MSE of a biased estimator</a></li>
@@ -366,7 +372,7 @@ window.Quarto = {
 \hat{\mu} &amp;= \bar{X}_n, \\ \mathbb{E}(\hat{\mu}) &amp;= \mu, \\ \text{Var}(\hat{\mu}) &amp;= \frac{\sigma^2}{n}
 \end{aligned}
 \]</span></p>
-<p><strong>Sample median:</strong> The sample median, <span class="math display">\[\tilde{\mu} &amp;= median(X_1,\ldots,X_n)\]</span> is asymptotically normal, with a variance that depends on the distribution of the <span class="math inline">\(X_i\)</span>. For a normal, we have <span class="math display">\[
+<p><strong>Sample median:</strong> The sample median, <span class="math display">\[\tilde{\mu} = median(X_1,\ldots,X_n)\]</span> is asymptotically normal, with a variance that depends on the distribution of the <span class="math inline">\(X_i\)</span>. For a normal, we have <span class="math display">\[
 \begin{aligned}
 \mathbb{E}(\tilde{\mu}) &amp;= \mu, \\ \text{Var}(\tilde{\mu}) &amp;\approx \frac{\pi\sigma^2}{2n}\;\text{ for large } n.
 \end{aligned}
@@ -396,6 +402,125 @@ window.Quarto = {
 <p>This doesn’t mean efficiency is useless. Using our efficiency analysis of the mean and the mean, we can arrive at an idea of <em>under what circumstances</em> the mean is preferred over the median. Depending on what type of data we have, we can use this information to inform us as to which is the better estimate. In other words, knowing which is the most efficient estimator, under a certain distributional assumption, allows us to then consider which assumptions best match our data.</p>
 </section>
 </section>
+<section id="the-cramér-rao-inequality" class="level2">
+<h2 class="anchored" data-anchor-id="the-cramér-rao-inequality">The Cramér-Rao Inequality</h2>
+<p>We have compared two estimators, but the question that now naturally arises: is some <em>other</em> estimator more efficient than either of the two we are considering? Can we tell if we have reached the <em>most</em> efficient estimator?</p>
+<p>The answer is <strong>Yes!</strong> There is a famous inequality that gives us a lower bound on the variance of any <em>unbiased estimator</em>. If our estimator achieves this lower bound, it cannot be improved.</p>
+<p>Let’s state the inequality for unbiased estimators. This inequality gives us what is called the “Cramér-Rao lower bound for an unbiased estimator”:</p>
+<div id="thm-cramerRaoUnbiased" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1</strong></span> Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be IID random variables with density function <span class="math inline">\(f(x \mid \theta_0)\)</span> (the true parameter value). Suppose <span class="math inline">\(\hat{\theta}\)</span> is an <em>unbiased</em> estimator of <span class="math inline">\(\theta\)</span>. Then, under smoothness assumptions on <span class="math inline">\(f\)</span>, we have that: <span class="math display">\[
+\text{Var}(\hat{\theta}_n) \geq \frac{1}{n I(\theta_0)}
+\]</span></p>
+</div>
+<p><span class="math inline">\(I(\theta_0)\)</span> is called the <em>Fisher Information</em> of the distribution with density <span class="math inline">\(f\)</span>, <span class="math display">\[ I (\theta_0) = -E_{\theta_0} \left[ \frac{\partial^2}{\partial \theta^2} \log f(X;\theta)\right]\]</span></p>
+<div id="def-effEst" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2</strong></span> If <span class="math inline">\(\hat{\theta}\)</span> is an <em>unbiased</em> estimator of <span class="math inline">\(\theta_0\)</span> such that <span class="math inline">\(\text{Var}(\hat{\theta}) = \dfrac{1}{nI(\theta_0)}\)</span>, then we say that <span class="math inline">\(\hat{\theta}\)</span> is an <strong>efficient</strong> estimator.</p>
+</div>
+<p>If we have an efficient estimator, then the variance is minimized, which means the sampling distribution of <span class="math inline">\(\hat{\theta}\)</span> is as concentrated about the true value <span class="math inline">\(\theta_0\)</span> as it can be.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In fact, the Cramér-Rao Lower bound exists for <em>all</em> estimators, even biased ones. Specifically, if <span class="math inline">\(E(\hat\theta)=g(\theta_0)\)</span>, then <span class="math display">\[
+\text{Var}(\hat{\theta}_n) \geq \frac{[g'(\theta_0)]^2}{I_n(\theta_0)}
+\]</span> For unbiased estimators, <span class="math inline">\(g(\theta)=\theta\)</span> so <span class="math inline">\(g'(\theta)=1\)</span>, which gives us the lower bound <span class="math inline">\(1/I_n(\theta_0)\)</span>. But as we will see, we will not generally compare biased estimators based on their variances.</p>
+</div>
+</div>
+<section id="mle-estimators-and-asymptotic-efficiency" class="level3">
+<h3 class="anchored" data-anchor-id="mle-estimators-and-asymptotic-efficiency">MLE estimators and Asymptotic Efficiency</h3>
+<p>If the Cramér-Rao lower bound looks familiar, it should. It’s the asymptotic variance of MLE estimators, <span class="math inline">\(1/I_n(\theta)\)</span>. In general, we may not be able to have a closed-form expression for the MLE or we may not be able to calculate its variance exactly. But we see that the variance of MLEs are <em>asymptotically</em> <span class="math inline">\((I_n(\theta))^{-1}\)</span>. Estimators whose variance is asymptotically <span class="math inline">\((I_n(\theta))^{-1}\)</span> are called <strong>asymptotically efficient</strong>.</p>
+<p>Frequently we limit ourselves to considering only estimators that are asymptotically normally, and define asymptotically</p>
+<p>More generally, we can define <strong>asymptotic relative efficiency</strong> of two estimators as follows:</p>
+<div id="def-are" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3</strong></span> Suppose that our data <span class="math inline">\(X_1,\ldots,X_n\)</span> are i.i.d. with density <span class="math inline">\(f(x|\theta)\)</span> and our estimator <span class="math inline">\(\hat\theta_n\)</span> is asymptotically normal with <span class="math display">\[
+\sqrt{n}(\hat{\theta}_n - \theta_0) \xrightarrow{D} N(0, \nu(\theta)).
+\]</span> and <span class="math inline">\(\nu(\theta)\)</span> is continuous.</p>
+<p>Then with sufficient regularity conditions on <span class="math inline">\(f(x|theta)\)</span>, we have that <span class="math display">\[\nu(\theta) \geq \frac{1}{I(\theta)}.
+\]</span> where <span class="math inline">\(I(\theta)\)</span> is the Fisher information for a <em>single</em> observation.</p>
+<p>An estimator that achieves this lower bound is <strong>asymptotically efficient</strong>.</p>
+</div>
+<p>Ultimately, finite sample efficiency is not a particularly useful property for comparing estimators unless you only consider unbiased estimators, which as we will see is limiting. But asymptotic efficiency is a more relevant notion. This is because while we might allow some small bias in our estimator, we don’t want to have that bias linger asymptotically. If we have infinite amounts of data, we want our estimate to get the right answer!</p>
+<div class="PARAGRAPH">
+<p>Why only asymptotically normal estimators?</p>
+</div>
+<p>The Cramér-Rao bound can hold beyond asymptotically normal estimators, but it gets more complicated to describe that class of estimators. So you will generally see discussions of efficiency restricted to asymptotically normal estimators to avoid these complexities.</p>
+<p>It also gets more complicated to state when it applies for non-i.i.d. data, though it will frequently be true as well.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We could also say the asymptotic normality assumption of the theorem above more informally as <span class="math display">\[\hat\theta \approx N(\theta_0, \frac{\nu(\theta)}{n})\]</span> This is because when we are talking about asymptotics, we can’t have something in the limiting distribution that depends on <span class="math inline">\(n\)</span>. You have to be a bit careful about the formal asymptotic statements here.</p>
+<p>Similarly, I can write for an MLE estimator <span class="math inline">\(\hat\theta_n\)</span> of i.i.d. data it’s approximate large sample distribution as <span class="math display">\[\hat\theta_n\approx N(\theta_0,\frac{1}{nI(\theta)})\]</span> but I <strong>cannot</strong> formally write <span class="math display">\[\hat\theta_n \xrightarrow{D} N(\theta_0,\frac{1}{nI(\theta)}) \quad \text{as }n\rightarrow\infty\]</span> because it doesn’t make sense to have something that depends on <span class="math inline">\(n\)</span> be something we converge to. Instead I could write <span class="math display">\[\frac{\hat\theta_n -\theta_0}{1/\sqrt{nI(\theta)}}\xrightarrow{D} N(0,1)\]</span> or frequently you see this written as <span class="math display">\[\sqrt{n}(\hat\theta_n -\theta_0)\xrightarrow{D} N(0,\frac{1}{I(\theta)}),\]</span> where you leave the <span class="math inline">\(\sqrt{n}\)</span> on the left-hand side and write down what remains on the left-hand side. This is what is done above in the statement of the distribution of asymptotic normality in terms of <span class="math inline">\(\nu(\theta)\)</span>.</p>
+<p>The bound in the statement of the formula is also written in terms of <span class="math inline">\(\nu(\theta)\)</span> and <span class="math inline">\(I(\theta),\)</span> both of which are “for a single sample.” Since we are working with i.i.d. data, the factor of <span class="math inline">\(n\)</span> cancels out anyway in the bound, but we could obviously write <span class="math display">\[\frac{\nu(\theta)}{n} \geq \frac{1}{I_n(\theta)}=\frac{1}{nI(\theta)}
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="robustness-to-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="robustness-to-assumptions">Robustness to Assumptions</h3>
+<p>The Cramér-Rao Inequality is a powerful result, and provides an asymptotic justification for using the MLE. However, it is important to recognize that this result is true only we are correct regarding the distribution of our data is true. As I’ve mentioned before, MLEs will generally be asymptotically normal even if our assumptions about the distribution are incorrect, but most commonly the variance will be different from what is given by the theory.</p>
+</section>
+<section id="proof-of-the-cramér-rao-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="proof-of-the-cramér-rao-inequality">Proof of the Cramér-Rao Inequality</h3>
+<p>As mentioned above, we can actually generalize the Cramér-Rao Inequality for any estimate, even if its not unbiased,</p>
+<div id="thm-cramerRao" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2</strong></span> Let <span class="math inline">\(X_1, \ldots, X_n \sim f(x \mid \theta)\)</span> be an IID random sample, and let <span class="math inline">\(T = t(X_1, \ldots, X_n)\)</span> be an estimator of <span class="math inline">\(\theta\)</span>, such that <span class="math inline">\(\mathbb{E}(T) = \mathbb{E}[t(X_1, \ldots, X_n)] = g(\theta)\)</span>. Then for sufficiently smooth <span class="math inline">\(f\)</span>,</p>
+<p><span class="math display">\[
+\text{Var}(T) \geq \frac{[g'(\theta)]^2}{nI(\theta)}.
+\]</span></p>
+<p>Further, if <span class="math inline">\(\mathbb{E}(T) = g(\theta) = \theta\)</span>, that is, <span class="math inline">\(T\)</span> is an <em>unbiased</em> estimator of <span class="math inline">\(\theta\)</span>, then <span class="math display">\[
+\text{Var}(T) \geq \frac{1}{I_n(\theta)} = \frac{1}{nI(\theta)}
+\]</span></p>
+</div>
+<div id="rem-crlbUnbiased" class="proof remark">
+<p><span class="proof-title"><em>Remark 1</em>. </span>If <span class="math inline">\(g(\theta)\)</span> is the identity function, that is <span class="math inline">\(g(\theta) = \mathbb{E}_\theta(T) = \theta\)</span>, we recover the Cramér-Rao Inequality for unbiased estimators.</p>
+</div>
+<div id="proof">
+<p>We sketch the proof below in the case of a continuous density function:</p>
+<p><span class="math display">\[\begin{align*}
+g(\theta) &amp;= \mathbb{E}_\theta(t(X_1, \ldots, X_n)) \\
+&amp;= \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} t(x_1, \ldots, x_n)\, f(x_1, \ldots, x_n \mid \theta)\, dx_1 \cdots dx_n\\
+&amp;= \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} t(x_1, \ldots, x_n)\, f(x_1 \mid \theta) \cdots f(x_n \mid \theta)\, dx_1 \cdots dx_n
+\end{align*}\]</span> Taking the derivative with respect to <span class="math inline">\(\theta\)</span> and changing the order of differentiation and integration, we get: <span class="math display">\[\begin{align*}
+g'(\theta) &amp;= \frac{\partial}{\partial \theta}\int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} t(x_1, \ldots, x_n)\, f(x_1 \mid \theta) \cdots f(x_n \mid \theta)\, dx_1 \cdots dx_n\\
+   &amp;=\int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} t(x_1, \ldots, x_n) \left[\sum_{i=1}^{n} \frac{\frac{\partial}{\partial\theta} f(x_i \mid \theta)}{f(x_i \mid \theta)}\right] f(x_1 \mid \theta) \cdots f(x_n \mid \theta)\, dx_1 \cdots dx_n
+\end{align*}\]</span> In the last equality, we multiplied and divided by <span class="math inline">\(f(x_i \mid \theta)\)</span>.</p>
+<p>Now let</p>
+<p><span class="math display">\[
+Y = \sum_{i=1}^{n} \frac{\frac{\partial}{\partial\theta} f(x_i \mid \theta)}{f(x_i \mid \theta)} = \sum_{i=1}^{n} \frac{\partial}{\partial\theta} \log f(x_i \mid \theta),
+\]</span></p>
+<p>which tells us that <span class="math inline">\(Y\)</span> is the sum of score functions <span class="math inline">\(\Rightarrow \mathbb{E}_\theta(Y) = 0\)</span>, and <span class="math inline">\(\text{Var}(Y) = I_n(\theta) = nI(\theta)\)</span>.</p>
+<p>Back to <span class="math inline">\(g'(\theta)\)</span>:</p>
+<p><span class="math display">\[
+g'(\theta) = \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} t(x_1, \ldots, x_n) \cdot y(x_1, \ldots, x_n)\, f(x_1 \mid \theta) \cdots f(x_n \mid \theta)\, dx_1 \cdots dx_n
+\]</span></p>
+<p>This means that <span class="math inline">\(g'(\theta) = \mathbb{E}_\theta(TY) = \text{Cov}(T, Y)\)</span> since <span class="math inline">\(\mathbb{E}_\theta(Y) = 0\)</span>.</p>
+<p>Let <span class="math inline">\(\rho_{TY} = \dfrac{\text{Cov}(T,Y)}{\sqrt{\text{Var}(T)}\sqrt{\text{Var}(Y)}}\)</span> denote the correlation of <span class="math inline">\(T, Y\)</span>.</p>
+<p><span class="math display">\[
+\Rightarrow \rho_{TY} = \frac{\mathbb{E}_\theta(TY)}{\sqrt{\text{Var}(T)}\sqrt{\text{Var}(Y)}} = \frac{g'(\theta)}{\sqrt{\text{Var}(T)} \cdot \sqrt{nI(\theta)}}
+\]</span></p>
+<p>We know that <span class="math inline">\(\rho_{TY}^2 \leq 1\)</span>, so:</p>
+<p><span class="math display">\[
+[g'(\theta)]^2 \leq \text{Var}(T) \cdot nI(\theta)
+\]</span></p>
+<p><span class="math display">\[
+\Rightarrow \frac{[g'(\theta)]^2}{nI(\theta)} \leq \text{Var}(T) \qquad \blacksquare
+\]</span></p>
+</div>
+</section>
+</section>
 <section id="mean-square-error" class="level2">
 <h2 class="anchored" data-anchor-id="mean-square-error">Mean Square Error</h2>
 <p>We’ve already discussed how we would like an estimator to be both unbiased and low variance. Recall our archery figure,</p>
@@ -410,7 +535,7 @@ window.Quarto = {
 <p>So how should we compare estimators if they are potentially biased? In this case the variance estimates <span class="math display">\[var(\hat\theta)= E(\hat\theta-E(\hat\theta))^2\]</span> which is not what we are really interested in if <span class="math inline">\(E(\hat\theta)\neq \theta\)</span>.</p>
 <p>We would prefer to estimate the difference between the expected value of the estimator and the <em>true</em> value of the population parameter, <span class="math display">\[ E(\hat\theta-\theta)^2\]</span></p>
 <div id="def-mse" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (Mean Squared Error)</strong></span> The mean squared error is the expected value of the squared difference between the estimator <span class="math inline">\(\hat{\theta}\)</span> and the true value of the population parameter <span class="math inline">\(\theta\)</span>. We denote it by <span class="math inline">\(MSE\)</span>: <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 4 (Mean Squared Error)</strong></span> The mean squared error is the expected value of the squared difference between the estimator <span class="math inline">\(\hat{\theta}\)</span> and the true value of the population parameter <span class="math inline">\(\theta\)</span>. We denote it by <span class="math inline">\(MSE\)</span>: <span class="math display">\[
 MSE = E\left[\left(\hat{\theta} - \theta \right)^2\right]
 \]</span></p>
 </div>
@@ -447,7 +572,8 @@ Check your work
 \begin{gathered}
 bias(\hat\pi_2)=\frac{1-2\pi}{n+2} \neq 0\\
 var(\hat\pi_2)=\frac{n}{(n+2)^2}\pi(1-\pi)\\ MSE(\hat\pi_2)=\frac{1+(n-4)\pi-(n-4)\pi^2}{(n+2)^2}
-\end{gathered}\]</span></p>
+\end{gathered}\]</span> Notice that the variance of <span class="math inline">\(\hat\pi_2\)</span> is <em>always</em> lower than our MLE <span class="math inline">\(\hat\pi_1\)</span>. This is despite the fact that the Cramer-Rao inequality tells us that <span class="math inline">\(\hat\pi_1\)</span> acheives the lowest variance <em>amongst unbiased estimators</em>. <span class="math inline">\(\hat\pi_2\)</span> is biased, so it’s not included in the set of unbiased estimators.</p>
+<p>So to compare these estimators, we want to compare their MSE, which will balance the contribution of bias and variance.</p>
 <p>Compare what the MSE looks like for different values of the true <span class="math inline">\(\pi\)</span>,</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -458,7 +584,7 @@ var(\hat\pi_2)=\frac{n}{(n+2)^2}\pi(1-\pi)\\ MSE(\hat\pi_2)=\frac{1+(n-4)\pi-(n-
 </div>
 </div>
 </div>
-<p>We see that if <span class="math inline">\(\pi\)</span> on the boundary, that we have better MSE with <span class="math inline">\(\hat\pi_2\)</span>, even though it’s slightly biased, while for <span class="math inline">\(\pi\)</span> in the interior, our standard MLE will perform better. The improvement is more striking for smaller sample sizes; for larger <span class="math inline">\(n\)</span> the difference between the two is much smaller, though still remains. This makes sense, because for large <span class="math inline">\(n\)</span>, adding a single count or two to <span class="math inline">\(\sum X_i\)</span> or <span class="math inline">\(n\)</span> is not going to change them much, so <span class="math inline">\(|\hat\pi_2-\hat\pi_1|\rightarrow 0\)</span>.</p>
+<p>We see that except when <span class="math inline">\(\pi\)</span> is on the boundary, we have better MSE with <span class="math inline">\(\hat\pi_2\)</span>, even though it’s slightly biased. The improvement is more striking for smaller sample sizes; for larger <span class="math inline">\(n\)</span> the difference between the two is much smaller, though still remains. This makes sense, because for large <span class="math inline">\(n\)</span>, adding a single count or two to <span class="math inline">\(\sum X_i\)</span> or <span class="math inline">\(n\)</span> is not going to change them much, so <span class="math inline">\(|\hat\pi_2-\hat\pi_1|\rightarrow 0\)</span>.</p>
 <div class="QUESTION">
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
