@@ -783,7 +783,7 @@
     "href": "Modules/14-Consistency.html",
     "title": "Consistency",
     "section": "",
-    "text": "Corresponding reading\n\n\nChapter 4.1.1 in Agresti and Kateri (2021)\nChapter 8.4 in Rice (2006)\nWe have discussed properties of our estimators based on their exact sampling distribution. But for many of our estimators, we can’t calculate their moments exactly, and some of our estimators we can’t write down an equation for the estimator, like in logistic regression.\nWe’ve seen that MLE estimators are asymptotically normal. We are now going to talk about additional properties similar to bias, efficiency, and MSE, but it will all be asymptotic, i.e. the behavior for large sample sizes.",
+    "text": "Corresponding reading\n\n\nChapter 4.1.1, 4.9 in Agresti and Kateri (2021)\nChapter 8.4 in Rice (2006)\nWe have discussed properties of our estimators based on their exact sampling distribution. But for many of our estimators, we can’t calculate their moments exactly, and some of our estimators we can’t write down an equation for the estimator, like in logistic regression.\nWe’ve seen that MLE estimators are asymptotically normal. We are now going to talk about additional properties similar to bias, efficiency, and MSE, but it will all be asymptotic, i.e. the behavior for large sample sizes.",
     "crumbs": [
       "Modules",
       "Consistency"
@@ -904,7 +904,7 @@
     "href": "Modules/13-FiniteProperties.html",
     "title": "Efficiency and Mean Squared Error",
     "section": "",
-    "text": "Corresponding reading\n\n\nChapter 4.1.1-4.1.2 of Agresti and Kateri (2021).\nChapter 8.7 of Rice (2006)\nWe’ve discussed already some important sampling distribution properties of estimators, such as bias and variance of an estimator. We’re going to be turning now to consider in detail ideas about how we can evaluate different possible estimators, to consider how we can compare estimators.",
+    "text": "Corresponding reading\n\n\nChapter 4.1.1-4.1.2, 4.9 of Agresti and Kateri (2021).\nChapter 8.7 of Rice (2006)\nWe’ve discussed already some important sampling distribution properties of estimators, such as bias and variance of an estimator. We’re going to be turning now to consider in detail ideas about how we can evaluate different possible estimators, to consider how we can compare estimators.",
     "crumbs": [
       "Modules",
       "Efficiency and Mean Squared Error"
