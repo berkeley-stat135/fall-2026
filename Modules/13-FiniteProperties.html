@@ -283,6 +283,12 @@ window.Quarto = {
  <span class="menu-text">Efficiency and Mean Squared Error</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/14-Consistency.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consistency</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -438,8 +444,7 @@ Note
 <p>Frequently we limit ourselves to considering only estimators that are asymptotically normally, and define asymptotically</p>
 <p>More generally, we can define <strong>asymptotic relative efficiency</strong> of two estimators as follows:</p>
 <div id="def-are" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3</strong></span> Suppose that our data <span class="math inline">\(X_1,\ldots,X_n\)</span> are i.i.d. with density <span class="math inline">\(f(x|\theta)\)</span> and our estimator <span class="math inline">\(\hat\theta_n\)</span> is asymptotically normal with <span class="math display">\[
-\sqrt{n}(\hat{\theta}_n - \theta_0) \xrightarrow{D} N(0, \nu(\theta)).
+<p><span class="theorem-title"><strong>Definition 3</strong></span> Suppose that our data <span class="math inline">\(X_1,\ldots,X_n\)</span> are i.i.d. with density <span class="math inline">\(f(x|\theta)\)</span> and our estimator <span class="math inline">\(\hat\theta_n\)</span> is asymptotically normal with <span class="math display">\[\frac{\hat{\theta}_n - \theta_0}{\sqrt{\nu(\theta)/n}} \xrightarrow{D} N(0, 1).
 \]</span> and <span class="math inline">\(\nu(\theta)\)</span> is continuous.</p>
 <p>Then with sufficient regularity conditions on <span class="math inline">\(f(x|theta)\)</span>, we have that <span class="math display">\[\nu(\theta) \geq \frac{1}{I(\theta)}.
 \]</span> where <span class="math inline">\(I(\theta)\)</span> is the Fisher information for a <em>single</em> observation.</p>
@@ -461,8 +466,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We could also say the asymptotic normality assumption of the theorem above more informally as <span class="math display">\[\hat\theta \approx N(\theta_0, \frac{\nu(\theta)}{n})\]</span> This is because when we are talking about asymptotics, we can’t have something in the limiting distribution that depends on <span class="math inline">\(n\)</span>. You have to be a bit careful about the formal asymptotic statements here.</p>
-<p>Similarly, I can write for an MLE estimator <span class="math inline">\(\hat\theta_n\)</span> of i.i.d. data it’s approximate large sample distribution as <span class="math display">\[\hat\theta_n\approx N(\theta_0,\frac{1}{nI(\theta)})\]</span> but I <strong>cannot</strong> formally write <span class="math display">\[\hat\theta_n \xrightarrow{D} N(\theta_0,\frac{1}{nI(\theta)}) \quad \text{as }n\rightarrow\infty\]</span> because it doesn’t make sense to have something that depends on <span class="math inline">\(n\)</span> be something we converge to. Instead I could write <span class="math display">\[\frac{\hat\theta_n -\theta_0}{1/\sqrt{nI(\theta)}}\xrightarrow{D} N(0,1)\]</span> or frequently you see this written as <span class="math display">\[\sqrt{n}(\hat\theta_n -\theta_0)\xrightarrow{D} N(0,\frac{1}{I(\theta)}),\]</span> where you leave the <span class="math inline">\(\sqrt{n}\)</span> on the left-hand side and write down what remains on the left-hand side. This is what is done above in the statement of the distribution of asymptotic normality in terms of <span class="math inline">\(\nu(\theta)\)</span>.</p>
+<p>We could also say the asymptotic normality assumption of the theorem above more informally as <span class="math display">\[\hat\theta \approx N(\theta_0, \frac{\nu(\theta)}{n})\]</span></p>
 <p>The bound in the statement of the formula is also written in terms of <span class="math inline">\(\nu(\theta)\)</span> and <span class="math inline">\(I(\theta),\)</span> both of which are “for a single sample.” Since we are working with i.i.d. data, the factor of <span class="math inline">\(n\)</span> cancels out anyway in the bound, but we could obviously write <span class="math display">\[\frac{\nu(\theta)}{n} \geq \frac{1}{I_n(\theta)}=\frac{1}{nI(\theta)}
 \]</span></p>
 </div>
