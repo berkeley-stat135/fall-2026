@@ -310,7 +310,7 @@ window.Quarto = {
   <li><a href="#least-squares-regression" id="toc-least-squares-regression" class="nav-link active" data-scroll-target="#least-squares-regression">Least Squares Regression</a></li>
   <li><a href="#loss-functions" id="toc-loss-functions" class="nav-link" data-scroll-target="#loss-functions">Loss Functions</a>
   <ul class="collapse">
-  <li><a href="#the-median-as-a-l_1-estimator" id="toc-the-median-as-a-l_1-estimator" class="nav-link" data-scroll-target="#the-median-as-a-l_1-estimator">The Median as a <span class="math inline">\(L_1\)</span> estimator</a></li>
+  <li><a href="#the-median-as-an-l_1-estimator" id="toc-the-median-as-an-l_1-estimator" class="nav-link" data-scroll-target="#the-median-as-an-l_1-estimator">The Median as an <span class="math inline">\(L_1\)</span> estimator</a></li>
   </ul></li>
   <li><a href="#m-estimators" id="toc-m-estimators" class="nav-link" data-scroll-target="#m-estimators">M-estimators</a>
   <ul class="collapse">
@@ -347,15 +347,15 @@ window.Quarto = {
 <div class="block-title">
 <p><strong>Corresponding reading</strong></p>
 </div>
-<p>This topic is not covered in our text book. The following references discuss loss functions</p>
+<p>This topic is not covered in our textbook. The following references discuss loss functions</p>
 <ul>
 <li><span class="citation" data-cites="fox-weisberg2019robust">Fox and Weisberg (<a href="#ref-fox-weisberg2019robust" role="doc-biblioref">2019</a>)</span> (<a href="https://www.john-fox.ca/Companion/appendices/Appendix-Robust-Regression.pdf">pdf</a>)</li>
 <li><span class="citation" data-cites="faraway2005">Faraway (<a href="#ref-faraway2005" role="doc-biblioref">2005</a>)</span>, Section 6.4.1 (<a href="https://utstat.utoronto.ca/brunner/books/LinearModelsWithR.pdf">pdf</a>)</li>
 </ul>
 <p>These do not cover the material in exactly the same way as I do, and may refer to topics outside the scope of this class. But you may find them to be a useful outside reference, so try to focus on the parts that link back to what is discussed here.</p>
 </div>
-<p>The MLE procedure gives us standard way to find the best estimator if we make assumptions about the parametric model of the data. The MLE uses knowledge of the parametric model to calculate the likelihood and define an optimization goal. The estimator is the result of solving that optimization.</p>
-<p>When we step back, we can see that the role of the parametric model was to define the quantity to optimization. We will now consider other alternatives for defining an optimization goal (and justifications for why they might be better in some situations). Much of modern statistics now takes this optimization perspective in defining and improving estimators, though MLE is still a natural starting point.</p>
+<p>The MLE procedure gives us a standard way to find the best estimator if we make assumptions about the parametric model of the data. The MLE uses knowledge of the parametric model to calculate the likelihood and define an optimization goal. The estimator is the result of solving that optimization.</p>
+<p>When we step back, we can see that the role of the parametric model was to define the quantity to optimize. We will now consider other alternatives for defining an optimization goal (and justifications for why they might be better in some situations). Much of modern statistics now takes this optimization perspective in defining and improving estimators, though MLE is still a natural starting point.</p>
 <div class="GOALS">
 <div class="block-title">
 <p><strong>Questions/Goals for this Module</strong></p>
@@ -371,8 +371,8 @@ window.Quarto = {
 </div>
 <section id="least-squares-regression" class="level2">
 <h2 class="anchored" data-anchor-id="least-squares-regression">Least Squares Regression</h2>
-<p>Let’s return to our MLE for simple regression. In the end, we made the modeling assumption that <span class="math inline">\(E(Y|X)\)</span> could be well described by a line, so that we’re interested in estimating the parameters that define that line. Our MLE estimates, based on a normality assumption, where found as the values that maximized <span class="math display">\[\max_{\beta_0,\beta_1} \left(- \sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2\right) \]</span> (Recall <span class="math inline">\(\sigma^2\)</span> didn’t wind up coming into the problem for finding <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>)</p>
-<p>Equivalently, we could get rid of that negative and write this as a minimization problem, <span class="math display">\[\min_{\beta_0,\beta_1} \sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2 \]</span> Looking at just this end result, we can see that we have an observed value <span class="math inline">\(y_i\)</span> and a prediction of what it’s mean value would be if we knew <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. Then we could also describe our estimators as the result of finding the <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that minimize the difference or the error in that prediction. Stated this way, we are still making the assumption that we want to fit a line to describe <span class="math inline">\(E(Y|X)\)</span>, but we are not explicitly making assumptions about the distribution of the data.</p>
+<p>Let’s return to our MLE for simple regression. In the end, we made the modeling assumption that <span class="math inline">\(E(Y|X)\)</span> could be well described by a line, so that we’re interested in estimating the parameters that define that line. Our MLE estimates, based on a normality assumption, were found as the values that maximized <span class="math display">\[\max_{\beta_0,\beta_1} \left(- \sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2\right) \]</span> (Recall <span class="math inline">\(\sigma^2\)</span> didn’t wind up coming into the problem for finding <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>)</p>
+<p>Equivalently, we could get rid of that negative and write this as a minimization problem, <span class="math display">\[\min_{\beta_0,\beta_1} \sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2 \]</span> Looking at just this end result, we can see that we have an observed value <span class="math inline">\(y_i\)</span> and a prediction of what its mean value would be if we knew <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. Then we could also describe our estimators as the result of finding the <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that minimize the difference or the error in that prediction. Stated this way, we are still making the assumption that we want to fit a line to describe <span class="math inline">\(E(Y|X)\)</span>, but we are not explicitly making assumptions about the distribution of the data.</p>
 <p>Formulating the goal of our problem directly as a minimization problem is often called <strong>least squares regression</strong>, and it gives the exact same estimators as our MLE approach.</p>
 </section>
 <section id="loss-functions" class="level2">
@@ -389,7 +389,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Notice I added a <span class="math inline">\(\frac{1}{n}\)</span> into our formulation. Obviously the <span class="math inline">\(\frac{1}{n}\)</span> plays no role in the optimization since it’s just a fixed constant. But it allows us to talk about minimimizing the average loss observed on our data, and in general allows us to think of this quantity clearly an estimate of the unknown expectation of the <em>population loss</em>, i.e.&nbsp;the expectation of this loss with a random draw from the population distribution.</p>
+<p>Notice I added a <span class="math inline">\(\frac{1}{n}\)</span> into our formulation. Obviously the <span class="math inline">\(\frac{1}{n}\)</span> plays no role in the optimization since it’s just a fixed constant. But it allows us to talk about minimizing the average loss observed on our data, and in general allows us to think of this quantity clearly as an estimate of the unknown expectation of the <em>population loss</em>, i.e.&nbsp;the expectation of this loss with a random draw from the population distribution.</p>
 </div>
 </div>
 <p>Why choose squared-error? Well, it fell out of the normal assumption naturally, but that is just an assumption, as we’ve discussed. It also has the (historical) attraction that we can analytically find the solution, which means we can calculate an explicit equation for the solution to the optimization. But we’ve already seen interesting solutions from the MLE often require using a computer to find the estimate.</p>
@@ -416,7 +416,7 @@ Note
 </div>
 </div>
 </div>
-<p>The two ways of creating estimators of the parameters of the line start to look more distinct with this dataset. In particular, the <span class="math inline">\(L_1\)</span> regression line is less “pulled” toward what looks to be an potential outlier. This is the effect of using a different loss function.</p>
+<p>The two ways of creating estimators of the parameters of the line start to look more distinct with this dataset. In particular, the squared error regression line is “pulled” toward what looks to be a potential outlier, while the <span class="math inline">\(L_1\)</span> line is less so. This is the effect of using a different loss function.</p>
 <p>If we look at the equations that we optimize, we can think that the loss assigns to each point how much it “contributes” to the overall loss based on how different <span class="math inline">\(y_i\)</span> is from <span class="math inline">\(\hat{y}_i\)</span>. Let’s call that difference <span class="math inline">\(r_i\)</span> (“r” for “residual”). Clearly making each <span class="math inline">\(r_i=0\)</span> is not possible, so by taking the average of the loss we are in some sense balancing between them. However, the choice of loss function changes that balancing. With <span class="math inline">\(L_1\)</span>, each point’s contribution is <span class="math inline">\(|r_i|\)</span>, but with squared-error loss, each point contributes <span class="math inline">\(r_i^2\)</span>. Points that are really far away from a candidate <span class="math inline">\((\beta_0,\beta_1)\)</span> combination are going to contribute a larger amount to squared error loss than to <span class="math inline">\(L_1\)</span> loss. So in looking for the best <span class="math inline">\((\beta_0,\beta_1)\)</span>, squared error loss will have higher “motivation” to pull the line toward individual points, even if it adds a small amount more error to other points.</p>
 <p>We can visualize this by graphing the loss as a function of the residual <span class="math inline">\(r\)</span> of a potential point and its prediction</p>
 <div class="cell">
@@ -429,7 +429,8 @@ Note
 </div>
 </div>
 </div>
-<p>Because the absolute value function is not differentiable at 0, however, <span class="math inline">\(L_1\)</span> can be difficult to work with. There are other losses that are differentiable that similarly try to better balance the contribution of the points. Here’s a classic example called “Huber’s Loss” that makes a piecewise function to match squared-error loss for small values (and thus is differentiable at 0), but behaves like <span class="math inline">\(L_1\)</span> for large values: <span class="math display">\[l(y_i, \hat{y})=\begin{cases}
+<p>Because the absolute value function is not differentiable at 0, however, <span class="math inline">\(L_1\)</span> can be difficult to work with. Also, it’s squared-error’s loss near zero is not so bad – you might want a “flatter” loss when you are close to zero so small errors are treated more similarly to each other, even if one is slightly larger.</p>
+<p>There are other losses that are differentiable that similarly try to better balance the contribution of the points. Here’s a classic example called “Huber’s Loss” that makes a piecewise function to match squared-error loss for small values (and thus is differentiable at 0), but behaves like <span class="math inline">\(L_1\)</span> for large values: <span class="math display">\[l(y_i, \hat{y})=\begin{cases}
 \frac{1}{2}(y_i - \hat{y}_i(\theta))^2 &amp; |y_i - \hat{y}_i(\theta)|\leq \delta\\
 \delta(|y_i - \hat{y}_i(\theta)|-\frac{1}{2}\delta) &amp; otherwise
 \end{cases}
@@ -447,13 +448,13 @@ Note
 <p>We will see, when we get to discussing the behavior of estimates and how they perform with large sample sizes that being differentiable at 0 helps prove more theory about their behavior.</p>
 </div>
 </div>
-<p>We can visualize it’s difference to the other two losses:</p>
+<p>We can visualize its difference to the other two losses:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="05-LossMEstimators_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="576"></p>
-<figcaption>Visualization of the three loss functions: squared error, L1, and Huber’s loss.</figcaption>
+<figcaption>Visualization of the three loss functions: squared error, L1, and Huber’s loss with delta=1.</figcaption>
 </figure>
 </div>
 </div>
@@ -470,21 +471,21 @@ Note
 </div>
 </div>
 <p>Not surprisingly, Huber’s loss is most similar to <span class="math inline">\(L_1\)</span> loss, especially in terms of how it is affected by the outlier, but is still a slightly different estimate.</p>
-<section id="the-median-as-a-l_1-estimator" class="level3">
-<h3 class="anchored" data-anchor-id="the-median-as-a-l_1-estimator">The Median as a <span class="math inline">\(L_1\)</span> estimator</h3>
-<p>Even on much simpler settings, it’s worth considering our procedures in terms of a loss function. Consider our simpler model, where our data <span class="math inline">\(Y_i\)</span> had the same mean <span class="math inline">\(\mu\)</span>, <span class="math display">\[Y_i\stackrel{i.i.d}{\sim}N(\mu,\sigma^2).\]</span> Another way we could say this is since we assume <span class="math inline">\(Y_i\)</span> have the same mean, our prediction of <span class="math inline">\(Y_i\)</span> is going to be <span class="math inline">\(\hat{Y_i}=\hat\mu\)</span>, i.e.&nbsp;in the absence of other information, we predict each observation the same, and <span class="math inline">\(\hat{\mu}\)</span> will be that prediction.</p>
-<p>Then MLE estimator <span class="math inline">\(\hat{\mu}\)</span> was the <span class="math inline">\(\mu\)</span> that minimized <span class="math display">\[\min_\mu\frac{1}{n}\sum_{i=1}^n(Y_i - \mu)^2\]</span> In our loss notation, we could write this as <span class="math display">\[ \min_\mu \frac{1}{n}\sum_{i=1}^n(Y_i - \hat{Y}(\mu))^2\]</span> Notice that again we are relying on squared error loss. What if we used <span class="math inline">\(L_1\)</span> loss here instead? What would be our estimator of <span class="math inline">\(\mu\)</span>?</p>
+<section id="the-median-as-an-l_1-estimator" class="level3">
+<h3 class="anchored" data-anchor-id="the-median-as-an-l_1-estimator">The Median as an <span class="math inline">\(L_1\)</span> estimator</h3>
+<p>Even in much simpler settings, it’s worth considering our procedures in terms of a loss function. Consider our simpler model, where our data <span class="math inline">\(Y_i\)</span> had the same mean <span class="math inline">\(\mu\)</span>, <span class="math display">\[Y_i\stackrel{i.i.d}{\sim}N(\mu,\sigma^2).\]</span> Another way we could say this is since we assume <span class="math inline">\(Y_i\)</span> have the same mean, our prediction of <span class="math inline">\(Y_i\)</span> is going to be <span class="math inline">\(\hat{Y_i}=\hat\mu\)</span>, i.e.&nbsp;in the absence of other information, we predict each observation the same, and <span class="math inline">\(\hat{\mu}\)</span> will be that prediction.</p>
+<p>Then the MLE estimator <span class="math inline">\(\hat{\mu}\)</span> was the <span class="math inline">\(\mu\)</span> that minimized <span class="math display">\[\min_\mu\frac{1}{n}\sum_{i=1}^n(Y_i - \mu)^2\]</span> In our loss notation, we could write this as <span class="math display">\[ \min_\mu \frac{1}{n}\sum_{i=1}^n(Y_i - \hat{Y}(\mu))^2\]</span> Notice that again we are relying on squared error loss. What if we used <span class="math inline">\(L_1\)</span> loss here instead? What would be our estimator of <span class="math inline">\(\mu\)</span>?</p>
 <p>With <span class="math inline">\(L_1\)</span> loss we would be minimizing <span class="math display">\[\min_\mu \frac{1}{n}\sum_{i=1}^n|Y_i - \hat{Y}(\mu)|=\min_\mu \frac{1}{n}\sum_{i=1}^n|Y_i - \mu|\]</span> This is minimized by setting <span class="math inline">\(\hat{\mu}=median(Y_1,\ldots,Y_n)\)</span>.</p>
 </section>
 </section>
 <section id="m-estimators" class="level2">
 <h2 class="anchored" data-anchor-id="m-estimators">M-estimators</h2>
-<p>Generally, when we find our estimator of <span class="math inline">\(\theta\)</span> by minimizing the average of <span class="math inline">\(\rho(y_i,\theta)\)</span>, <span class="math display">\[\min_\theta \frac{1}{n}\sum_{i=1}^n \rho(Y_i,\theta)\]</span> the resulting <span class="math inline">\(\hat{\theta}\)</span> is called a <strong>M-Estimator</strong>.</p>
+<p>Generally, when we find our estimator of <span class="math inline">\(\theta\)</span> by minimizing the average of <span class="math inline">\(\rho(y_i,\theta)\)</span>, <span class="math display">\[\min_\theta \frac{1}{n}\sum_{i=1}^n \rho(Y_i,\theta)\]</span> the resulting <span class="math inline">\(\hat{\theta}\)</span> is called an <strong>M-Estimator</strong>.</p>
 <p>If we return to our loss examples, we see that they are a special case of <span class="math inline">\(\rho\)</span>, because we can write loss instead in terms of our unknown <span class="math inline">\(\theta,\)</span> <span class="math display">\[\rho(y_i, \theta)=(y_i - \hat{y}_i(\theta))^{2}=(y_i - \beta_0-\beta_1 x_i)^{2}\]</span></p>
 <section id="example-mle-and-logistic-regression" class="level3">
 <h3 class="anchored" data-anchor-id="example-mle-and-logistic-regression">Example: MLE and Logistic Regression</h3>
 <p>We can also see that MLE estimators are a subset of M-estimators, where we choose <span class="math inline">\(\rho(y_i,\theta)\)</span> to be the <em>negative</em> log-likelihood at the single data point <span class="math inline">\(y_i\)</span>, <span class="math display">\[\rho(y_i,\theta)= -\log f(y_i|\theta)\]</span> Unlike our loss functions, the negative log-likelihood may not be just a comparison of <span class="math inline">\(y_i\)</span> and its predicted value <span class="math inline">\(\hat{y}_i\)</span>.</p>
-<p>We can see this illustrated in the case of logistic regression, <span class="math display">\[\rho(y_i,\theta)= -\log f(y_i)=-y_i\log(p(x_i))-(1-y_i)\log(1-p(x_i))\]</span> that <span class="math inline">\(\rho(y_i,\theta)\)</span> not obviously written in terms of an error or loss in <span class="math inline">\(y_i\)</span> compared to a prediction – at least not via a direct subtraction.</p>
+<p>We can see this illustrated in the case of logistic regression, <span class="math display">\[\rho(y_i,\theta)= -\log f(y_i)=-y_i\log(p(x_i))-(1-y_i)\log(1-p(x_i))\]</span> that <span class="math inline">\(\rho(y_i,\theta)\)</span> is not obviously written in terms of an error or loss in <span class="math inline">\(y_i\)</span> compared to a prediction – at least not via a direct subtraction.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -495,7 +496,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>M-estimators are described as a generalization of the loss function approach because loss functions are traditionally defined based on focused only on comparing our predicted value to the observed value via the residual <span class="math inline">\(r_i=y_i-\hat{y}_i\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\(\theta\)</span> is only involved in the loss function terms of how it creates a prediction <span class="math inline">\(\hat{y}_i\)</span>. M-estimators allow a more generalized measure per observations, that can intermingle the parameter <span class="math inline">\(\theta\)</span> in ways other than just creating a predicted <span class="math inline">\(\hat{y}(\theta)\)</span>.</p>
+<p>M-estimators are described as a generalization of the loss function approach because loss functions are traditionally defined based on focused only on comparing our predicted value to the observed value via the residual <span class="math inline">\(r_i=y_i-\hat{y}_i\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\(\theta\)</span> is only involved in the loss function in terms of how it creates a prediction <span class="math inline">\(\hat{y}_i\)</span>. M-estimators allow a more generalized measure per observation, that can intermingle the parameter <span class="math inline">\(\theta\)</span> in ways other than just creating a predicted <span class="math inline">\(\hat{y}(\theta)\)</span>.</p>
 <p>However, sometimes people will use the term “loss” for this kind of function too. Indeed, <span class="math inline">\(\rho(y_i,\theta)\)</span> used above for logistic regression is often called <strong>cross-entropy</strong> loss in machine learning/statistical prediction literature.</p>
 <p>You will also see people discuss M-estimates for only the case of <span class="math inline">\(\rho\)</span> being loss functions of residuals, as in the reading suggestions I provide above.</p>
 </div>
@@ -514,8 +515,8 @@ Note
 </div>
 </div>
 </div>
-<p>Instead we could take the squared distance of each point <span class="math inline">\((x_i,y_i)\)</span> to the line <span class="math inline">\(y=\beta_0+\beta_1\)</span>, which is given by the squared-distance to its orthogonal projection to the line, <span class="math display">\[d^2_\perp=\frac{(y_i-(\beta_0+\beta_1x_i))^2}{\beta_1^2+1}\]</span></p>
-<p>We can define this as our <span class="math inline">\(\rho(y_i,\theta)\)</span>, and then find estimators of <span class="math inline">\(\beta_0,\beta_1\)</span> as those which minimizes this quantity, <span class="math display">\[\min_{\beta_0,\beta_1}\frac{1}{n}\sum_{i=1}^n\rho(Y_i,\theta)=\min_{\beta_0,\beta_1}\frac{1}{n}\sum_{i=1}^n\frac{(Y_i-(\beta_0+\beta_1X_i))^2}{\beta_1^2+1}\]</span> This is sometimes called the “PCA line”, because it’s a simple 2-dimensional example of PCA (Principal Components Analysis).</p>
+<p>Instead we could take the squared distance of each point <span class="math inline">\((x_i,y_i)\)</span> to the line <span class="math inline">\(y=\beta_0+\beta_1 x\)</span>, which is given by the squared-distance to its orthogonal projection to the line, <span class="math display">\[d^2_\perp=\frac{(y_i-(\beta_0+\beta_1x_i))^2}{\beta_1^2+1}\]</span></p>
+<p>We can define this as our <span class="math inline">\(\rho(y_i,\theta)\)</span>, and then find estimators of <span class="math inline">\(\beta_0,\beta_1\)</span> as those which minimize this quantity, <span class="math display">\[\min_{\beta_0,\beta_1}\frac{1}{n}\sum_{i=1}^n\rho(Y_i,\theta)=\min_{\beta_0,\beta_1}\frac{1}{n}\sum_{i=1}^n\frac{(Y_i-(\beta_0+\beta_1X_i))^2}{\beta_1^2+1}\]</span> This is sometimes called the “PCA line”, because it’s a simple 2-dimensional example of PCA (Principal Components Analysis).</p>
 <p>Here’s an example of the PCA line on our scorecard data</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -552,9 +553,9 @@ Note
 </section>
 <section id="assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="assumptions">Assumptions</h2>
-<p>So by just viewing estimators as the solution to an optimization problem, we are no longer making explicit probabalistic assumptions. Is probability an unnecessary part of estimation?</p>
+<p>So by just viewing estimators as the solution to an optimization problem, we are no longer making explicit probabilistic assumptions. Is probability an unnecessary part of estimation?</p>
 <p>The answer to this is both yes and no. We can justify the appropriateness of our loss <span class="math inline">\(l\)</span> or more generally <span class="math inline">\(\rho\)</span> on more heuristic or intuitive grounds without appealing to a specific probability model. We can make it more tailored to the problem we have, perhaps with more complex treatment of certain aspects of the data. On the other hand, we have to come up with <span class="math inline">\(l\)</span> or <span class="math inline">\(\rho\)</span>, and generally the starting place is something like a MLE calculation which is then adapted or modified to improve its performance.</p>
-<p>This brings us to the next question where probabilitistic modeling has a big role – if we have all of these possible estimators, which ones are best? We will see “best” can be defined in different ways, but regardless our estimators are random variables and their probabilisitic behavior is the only way we have to evaluate them. We will also see that even if we do not use a probabilistic model to define our estimators, the estimators will still perform better or worse under different assumptions about the distribution of our data. So by choosing a particular choice of criteria, we are often implicitly making assumptions about our data distribution, just less formalized.</p>
+<p>This brings us to the next question where probabilistic modeling has a big role – if we have all of these possible estimators, which ones are best? We will see “best” can be defined in different ways, but regardless our estimators are random variables and their probabilistic behavior is the only way we have to evaluate them. We will also see that even if we do not use a probabilistic model to define our estimators, the estimators will still perform better or worse under different assumptions about the distribution of our data. So by choosing a particular choice of criteria, we are often implicitly making assumptions about our data distribution, just less formalized.</p>
 
 
 

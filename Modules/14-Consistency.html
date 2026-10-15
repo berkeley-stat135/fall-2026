@@ -379,16 +379,16 @@ window.Quarto = {
 </ol>
 <p>You can see that the first type is the weakest, and the last is the strongest. <span class="math display">\[
 \left(U_n \overset{a.s.}{\rightarrow} U\right) \Rightarrow \left(U_n \overset{P}{\rightarrow} U\right) \Rightarrow \left(U_n \overset{D}{\rightarrow} U\right)
-\]</span> In the above statement the <span class="math inline">\(\Rightarrow\)</span> mean that convergence of the type on the left implies convergence of the type on the right. This is what we mean when we say a type of convergence on the left of an arrow is stronger than any of the types of convergences on its right.</p>
+\]</span> In the above statement the <span class="math inline">\(\Rightarrow\)</span> means that convergence of the type on the left implies convergence of the type on the right. This is what we mean when we say a type of convergence on the left of an arrow is stronger than any of the types of convergences on its right.</p>
 <div class="PARAGRAPH">
 <p>The converse is not true</p>
 </div>
-<p>The above arrows do not work in the other direction. We generally see this by constructing counter examples, where we have convergence of a weaker type and show that it doesn’t imply convergence of the stronger type. Here’s an example from <span class="citation" data-cites="grimmett-stirzaker2001">Grimmett and Stirzaker (<a href="#ref-grimmett-stirzaker2001" role="doc-biblioref">2001</a>)</span> where convergence in distribution does not imply convergence in probability.</p>
-<p>Suppose <span class="math inline">\(U\sim Bernoulli(1/2)\)</span>, and the sequence of random variables <span class="math inline">\(U_1, U_2, \ldots\)</span> consist of identical random variables, with each <span class="math inline">\(U_n = U\)</span> for all <span class="math inline">\(n\)</span>. Now the <span class="math inline">\(U_n\)</span> are not independent (since they are all equal to each other), but <span class="math inline">\(U_n \overset{D}{\rightarrow}U\)</span>. If <span class="math inline">\(V = 1-U\)</span>, then <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> have the same distribution, which means that <span class="math inline">\(U_n \overset{D}{\rightarrow} V\)</span>. But <span class="math inline">\(U_n\)</span> cannot converge to <span class="math inline">\(Y\)</span> in any other sense because <span class="math inline">\(\lvert U_n - Y\rvert = 1\)</span> always.</p>
+<p>The above arrows do not work in the other direction. We generally see this by constructing counterexamples, where we have convergence of a weaker type and show that it doesn’t imply convergence of the stronger type. Here’s an example from <span class="citation" data-cites="grimmett-stirzaker2001">Grimmett and Stirzaker (<a href="#ref-grimmett-stirzaker2001" role="doc-biblioref">2001</a>)</span> where convergence in distribution does not imply convergence in probability.</p>
+<p>Suppose <span class="math inline">\(U\sim Bernoulli(1/2)\)</span>, and the sequence of random variables <span class="math inline">\(U_1, U_2, \ldots\)</span> consists of identical random variables, with each <span class="math inline">\(U_n = U\)</span> for all <span class="math inline">\(n\)</span>. Now the <span class="math inline">\(U_n\)</span> are not independent (since they are all equal to each other), but <span class="math inline">\(U_n \overset{D}{\rightarrow}U\)</span>. If <span class="math inline">\(V = 1-U\)</span>, then <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> have the same distribution, which means that <span class="math inline">\(U_n \overset{D}{\rightarrow} V\)</span>. But <span class="math inline">\(U_n\)</span> cannot converge to <span class="math inline">\(V\)</span> in any other sense because <span class="math inline">\(\lvert U_n - V\rvert = 1\)</span> always.</p>
 </section>
 <section id="convergence-of-barx" class="level3">
 <h3 class="anchored" data-anchor-id="convergence-of-barx">Convergence of <span class="math inline">\(\bar{X}\)</span></h3>
-<p>We will now revisit two famous limit theorems for the sample mean <span class="math inline">\(\bar{X}\)</span> that you know from probability, each of which demonstrate these different kinds of convergence. In these theorems, the convergence of interest is for <span class="math inline">\(U_n=\bar{X}\)</span>.</p>
+<p>We will now revisit two famous limit theorems for the sample mean <span class="math inline">\(\bar{X}\)</span> that you know from probability, each of which demonstrates these different kinds of convergence. In these theorems, the convergence of interest is for <span class="math inline">\(U_n=\bar{X}\)</span>.</p>
 <section id="the-central-limit-theorem" class="level4">
 <h4 class="anchored" data-anchor-id="the-central-limit-theorem">The Central Limit Theorem</h4>
 <p>The CLT states that for large <span class="math inline">\(n\)</span>, the sample mean, suitably standardized, will have a CDF that approaches the CDF of the standard Normal. That is, the standardized sample mean <strong>converges in distribution</strong> to the standard Normal.</p>
@@ -400,13 +400,13 @@ window.Quarto = {
 <p>A Note on Notation</p>
 </div>
 <p>You have to be a bit careful about how you write formal asymptotic statements here. We might write <span class="math display">\[\bar{X}\approx N(\mu,\frac{\sigma^2}{n})\quad\text{for large }n.\]</span> But we <strong>cannot</strong> write <span class="math display">\[\bar{X} \xrightarrow{D} N(\mu,\frac{\sigma^2}{n}) \quad \text{as }n\rightarrow\infty,\]</span> because it doesn’t make sense to have something that depends on <span class="math inline">\(n\)</span> be something to which we converge! This is generically true, but particularly comes up when we are looking at convergence in distribution to normality, where the variance term will generally depend on <span class="math inline">\(n\)</span>.</p>
-<p>Instead I could write <span class="math display">\[\frac{\bar{X} -\mu}{\sigma/\sqrt{n}}\xrightarrow{D} N(0,1)\]</span> or frequently you see this written as <span class="math display">\[\sqrt{n}(\bar{X} -\mu)\xrightarrow{D} N(0,\sigma^2),\]</span> where you leave the <span class="math inline">\(\sqrt{n}\)</span> on the left-hand side and write down what of the variance term doesn’t depend on <span class="math inline">\(n\)</span> on the left-hand side.</p>
-<p>Similarly, you cannot have anything that depends on the data in the distribution you converge to (the right hand side), so if we replace <span class="math inline">\(\sigma^2\)</span> with an estimate of <span class="math inline">\(\sigma^2\)</span>, like <span class="math inline">\(S^2\)</span>, then <span class="math inline">\(S^2\)</span> will always be on the left-hand side of the convergence statement, as part of the random sequence (note that <span class="math inline">\(S^2=S_n^2\)</span> depends on <span class="math inline">\(n\)</span>, as will any function of the data, so this is really a special case of the general rule)</p>
+<p>Instead I could write <span class="math display">\[\frac{\bar{X} -\mu}{\sigma/\sqrt{n}}\xrightarrow{D} N(0,1)\]</span> or frequently you see this written as <span class="math display">\[\sqrt{n}(\bar{X} -\mu)\xrightarrow{D} N(0,\sigma^2),\]</span> where you leave the <span class="math inline">\(\sqrt{n}\)</span> on the left-hand side and write down what of the variance term doesn’t depend on <span class="math inline">\(n\)</span> on the right-hand side.</p>
+<p>Similarly, you cannot have anything that depends on the data in the distribution you converge to (the right-hand side), so if we replace <span class="math inline">\(\sigma^2\)</span> with an estimate of <span class="math inline">\(\sigma^2\)</span>, like <span class="math inline">\(S^2\)</span>, then <span class="math inline">\(S^2\)</span> will always be on the left-hand side of the convergence statement, as part of the random sequence (note that <span class="math inline">\(S^2=S_n^2\)</span> depends on <span class="math inline">\(n\)</span>, as will any function of the data, so this is really a special case of the general rule)</p>
 </section>
 <section id="the-weak-law-of-large-numbers" class="level4">
 <h4 class="anchored" data-anchor-id="the-weak-law-of-large-numbers">The Weak Law of Large Numbers</h4>
-<p>Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a sequence of iid random variables with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, then if <span class="math inline">\(\overline{X}_n \left(= \dfrac{1}{n} \displaystyle\sum_{i=1}^{n}X_i \right)\)</span> is the sample mean,then for every <span class="math inline">\(\varepsilon &gt; 0\)</span>, we have that <span class="math inline">\(\lim_{n \rightarrow \infty} P(\lvert \overline{X}_n - \mu \rvert &gt; \varepsilon )=0\)</span>.</p>
-<p>That is, the sample mean converges in <strong>probability</strong> to the true mean. Notice that in this case, the “random variable” <span class="math inline">\(U\)</span> to which our sequence converges to is the constant <span class="math inline">\(\mu\)</span>.</p>
+<p>Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a sequence of iid random variables with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, then if <span class="math inline">\(\overline{X}_n \left(= \dfrac{1}{n} \displaystyle\sum_{i=1}^{n}X_i \right)\)</span> is the sample mean, then for every <span class="math inline">\(\varepsilon &gt; 0\)</span>, we have that <span class="math inline">\(\lim_{n \rightarrow \infty} P(\lvert \overline{X}_n - \mu \rvert &gt; \varepsilon )=0\)</span>.</p>
+<p>That is, the sample mean converges in <strong>probability</strong> to the true mean. Notice that in this case, the “random variable” <span class="math inline">\(U\)</span> to which our sequence converges is the constant <span class="math inline">\(\mu\)</span>.</p>
 </section>
 </section>
 <section id="properties-of-convergence" class="level3">
@@ -470,7 +470,7 @@ P(\lvert X-\mu\rvert&gt; c)\le \dfrac{\sigma^2}{c^2}.
 <p><span class="theorem-title"><strong>Definition 1 (Consistency)</strong></span> Let <span class="math inline">\(\hat{\theta}_n\)</span> be an estimator of a parameter <span class="math inline">\(\theta\)</span>, based on a sample of size <span class="math inline">\(n\)</span>. We say that <span class="math inline">\(\hat{\theta}_n\)</span> is a <em>consistent estimator</em> of <span class="math inline">\(\theta\)</span> if <span class="math inline">\(\hat\theta\)</span> converges in probability to <span class="math inline">\(\theta\)</span> for all values of <span class="math inline">\(\theta\)</span>, <span class="math display">\[\hat{\theta}_n \overset{P}{\rightarrow} \theta, \forall \theta.\]</span> That is, for any <span class="math inline">\(\varepsilon &gt; 0\)</span>, we have that <span class="math inline">\(\displaystyle \lim_{n \rightarrow \infty} P\left(\lvert \hat{\theta}_n -\theta \rvert &gt; \varepsilon \right)=0\)</span>.</p>
 </div>
 <p>This is saying that for <em>any</em> acceptable amount of error epsilon, the probability of an error in our estimation that is greater than epsilon goes to 0. This means that the error might be large on events of very low probability, and these probabilities get lower as <span class="math inline">\(n\)</span> gets larger. If the sample is large enough, therefore, the estimator is very likely to be close to its target.</p>
-<p>Moreover, the continuous mapping theorm tells us that if <span class="math inline">\(\hat\theta\)</span> is a consistent estimator of <span class="math inline">\(\theta\)</span>, then <span class="math inline">\(g(\hat\theta)\)</span> is a consistent estimator of <span class="math inline">\(g(\theta)\)</span> if <span class="math inline">\(g\)</span> is a continuous function.</p>
+<p>Moreover, the continuous mapping theorem tells us that if <span class="math inline">\(\hat\theta\)</span> is a consistent estimator of <span class="math inline">\(\theta\)</span>, then <span class="math inline">\(g(\hat\theta)\)</span> is a consistent estimator of <span class="math inline">\(g(\theta)\)</span> if <span class="math inline">\(g\)</span> is a continuous function.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -512,7 +512,7 @@ Note
 <section id="consistency-of-sample-moments" class="level3">
 <h3 class="anchored" data-anchor-id="consistency-of-sample-moments">Consistency of Sample moments</h3>
 <p>An important consequence of the WLLN concerns the sample moments. Recall the <span class="math inline">\(k\)</span>th moment of a distribution is given by <span class="math display">\[E(X^k)=\mu_k.\]</span> The sample moment of data is given by <span class="math display">\[\frac{1}{n}\sum_{i=1}^n X^k.\]</span> Then the WLLN tells us that the sample moments converge in probability to the population moments <span class="math inline">\(\mu_k\)</span>, and thus are consistent estimators.</p>
-<p>The WLLN has vary minimal assumptions, like the CLT, so the consistency of the sample moments requires very minimal knowledge about the distribution of the data. Some important implications of the consistency of sample moments are:</p>
+<p>The WLLN has very minimal assumptions, like the CLT, so the consistency of the sample moments requires very minimal knowledge about the distribution of the data. Some important implications of the consistency of sample moments are:</p>
 <ul>
 <li>the sample mean (<span class="math inline">\(\overline{X}_n\)</span>) is a consistent estimator of the mean <span class="math inline">\(\mu=\mu_1\)</span>, which is just the first moment.</li>
 <li>the sample variance is a consistent estimator of the variance.</li>
@@ -535,7 +535,7 @@ Note
 <section id="relationship-of-consistency-to-mse" class="level2">
 <h2 class="anchored" data-anchor-id="relationship-of-consistency-to-mse">Relationship of Consistency to MSE</h2>
 <div id="thm-MSEConsistency" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1</strong></span> Let <span class="math inline">\(\hat\theta_n\)</span> be an estimator of <span class="math inline">\(\theta\)</span>. If MSE of an estimator <span class="math inline">\(\hat\theta_n\)</span> goes to 0, the estimator must be consistent estimator of <span class="math inline">\(\theta\)</span>.</p>
+<p><span class="theorem-title"><strong>Theorem 1</strong></span> Let <span class="math inline">\(\hat\theta_n\)</span> be an estimator of <span class="math inline">\(\theta\)</span>. If the MSE of an estimator <span class="math inline">\(\hat\theta_n\)</span> goes to 0, the estimator must be a consistent estimator of <span class="math inline">\(\theta\)</span>.</p>
 </div>
 <p>This is often easier to show than computing the probability that we need, and that is why the theorem is so useful.</p>
 <p>Moreover, if we can show that, as <span class="math inline">\(n \to \infty\)</span>:</p>
@@ -561,7 +561,7 @@ $$\Rightarrow P(|X - \mu| > c) \leq \frac{\text{Var}(X)}{c^2}$$-->
 <p><span class="math display">\[P(Y &gt; c^2) = P\!\left((X-a)^2 &gt; c^2\right) = P(|X-a| &gt; c) \leq \frac{E\!\left[(X-a)^2\right]}{c^2} \]</span></p>
 <p>Now let <span class="math inline">\(X = \hat{\theta}_n\)</span>, <span class="math inline">\(a = \theta\)</span>, <span class="math inline">\(c = \varepsilon &gt; 0\)</span>. We get:</p>
 <p><span class="math display">\[P(|\hat{\theta}_n - \theta| &gt; \varepsilon) \leq \frac{E\left[(\hat{\theta}_n - \theta)^2\right]}{\varepsilon^2} = \frac{\text{MSE}(\hat{\theta}_n)}{\varepsilon^2}\]</span></p>
-<p>Since the MSE of <span class="math inline">\(\hat\theta_n\)</span> goes <span class="math inline">\(0\)</span> as <span class="math inline">\(n \to \infty\)</span>, this implies that <span class="math display">\[
+<p>Since the MSE of <span class="math inline">\(\hat\theta_n\)</span> goes to <span class="math inline">\(0\)</span> as <span class="math inline">\(n \to \infty\)</span>, this implies that <span class="math display">\[
 \lim_{n\to\infty} P(|\hat{\theta}_n - \theta| &gt; \varepsilon) = 0 \Rightarrow \hat{\theta}_n \xrightarrow{P} \theta.
 \]</span> We have shown that if <span class="math inline">\(MSE(\hat\theta_n) \to 0\)</span>, then <span class="math inline">\(\hat\theta_n\)</span> must be a consistent estimator for <span class="math inline">\(\theta\)</span>.</p>
 <p><span class="math inline">\(\blacksquare\)</span></p>
@@ -601,14 +601,14 @@ $$\Rightarrow P(|X - \mu| > c) \leq \frac{\text{Var}(X)}{c^2}$$-->
 <div class="PARAGRAPH">
 <p>Summary of the Consistency Argument for i.i.d. data</p>
 </div>
-<p>We let <span class="math inline">\(U_i=\log f(X_i|\theta)\)</span> and <span class="math inline">\(U=U(\theta)=\log f(X|\theta)\)</span>,for a generic single <span class="math inline">\(X\)</span> from the same distribution.</p>
+<p>We let <span class="math inline">\(U_i=\log f(X_i|\theta)\)</span> and <span class="math inline">\(U=U(\theta)=\log f(X|\theta)\)</span>, for a generic single <span class="math inline">\(X\)</span> from the same distribution.</p>
 <ol type="1">
 <li><span class="math inline">\(\hat{\theta}_n\)</span> maximizes <span class="math inline">\(L(\theta)= \sum_{i=1}^n U_i.\)</span></li>
 <li><span class="math inline">\(\theta_0\)</span> maximizes <span class="math inline">\(E[U] \equiv E[U(\theta)]= E\left[\log f(X\mid \theta)\right]\)</span></li>
 <li>By WLLN <span class="math display">\[
 \frac{1}{n}L(\theta)=\frac{1}{n} \sum_{i=1}^n U_i \xrightarrow{P} E[U] \forall \theta.
 \]</span></li>
-<li>Apply the continuous mapping theorem to give that the maximizers <span class="math inline">\(\hat{\theta}_n\)</span> of the left hand side will converge to the maximizer <span class="math inline">\(\theta_0\)</span> of the right hand side.</li>
+<li>Apply the continuous mapping theorem to give that the maximizers <span class="math inline">\(\hat{\theta}_n\)</span> of the left-hand side will converge to the maximizer <span class="math inline">\(\theta_0\)</span> of the right-hand side.</li>
 </ol>
 <section id="proof-of-consistency" class="level3">
 <h3 class="anchored" data-anchor-id="proof-of-consistency">Proof of Consistency</h3>
@@ -639,7 +639,7 @@ E[U]
 = E[\log f(X \mid \theta)]
 = \int \log f(x \mid \theta) \cdot f(x \mid \theta_0)\, dx
 \]</span> where <span class="math inline">\(f(x \mid \theta_0)\)</span> is the true PDF from which the sample <span class="math inline">\(X_1, \dots, X_n\)</span> was generated.</p>
-<p>By the WLLN, for large <span class="math inline">\(n\)</span>, with high probability,<span class="math inline">\(\dfrac{1}{n} \sum_{i=1}^n U_i\)</span> and <span class="math inline">\(E[U]\)</span> will be close, which means that <span class="math inline">\(\dfrac{1}{n} L(\theta)\)</span> and <span class="math inline">\(E[U]\)</span> will be close.</p>
+<p>By the WLLN, for large <span class="math inline">\(n\)</span>, with high probability, <span class="math inline">\(\dfrac{1}{n} \sum_{i=1}^n U_i\)</span> and <span class="math inline">\(E[U]\)</span> will be close, which means that <span class="math inline">\(\dfrac{1}{n} L(\theta)\)</span> and <span class="math inline">\(E[U]\)</span> will be close.</p>
 <p>The maximizer of <span class="math inline">\(L(\theta)\)</span> is <span class="math inline">\(\hat{\theta}_n\)</span>, and by the above, this should be close to the maximizer of <span class="math inline">\(\displaystyle \int \log f(x \mid \theta) \cdot f(x \mid \theta_0)\, dx\)</span>.</p>
 <p>Let’s maximize <span class="math inline">\(E[U]\)</span> (note that <span class="math inline">\(E \equiv E_{\theta_0}\)</span>): <span class="math display">\[\begin{align*}
 E[U] &amp;= E[\log f(X \mid \theta)] \\
@@ -653,7 +653,7 @@ E[U] &amp;= E[\log f(X \mid \theta)] \\
 {f(x \mid \theta)}
 \cdot f(x \mid \theta_0)\, dx
 \end{align*}\]</span></p>
-<p>Now we will show that <span class="math inline">\(\theta_0\)</span> maximizes <span class="math inline">\(E[U]=E[\log f(X \mid \theta)\)</span>, by plugging <span class="math inline">\(\theta_0\)</span> into the right hand side above to get:</p>
+<p>Now we will show that <span class="math inline">\(\theta_0\)</span> maximizes <span class="math inline">\(E[U]=E[\log f(X \mid \theta)]\)</span>, by plugging <span class="math inline">\(\theta_0\)</span> into the right-hand side above to get:</p>
 <p><span class="math display">\[
 \int
 \frac{\frac{\partial}{\partial \theta}f(x \mid \theta_0) }
@@ -683,14 +683,13 @@ E[\log f(X \mid \theta)] - E[\log f(X \mid \theta_0)] &amp;\leq \int \left[\frac
 E[\log f(X \mid \theta)] - E[\log f(X \mid \theta_0)] \leq 0 \quad \text{for all } \theta
 \]</span></p>
 <p>Which means that <span class="math inline">\(\theta_0 \text{ maximizes } E_{\theta_0} \log f(X \mid \cdot)\)</span>.</p>
-<p>So by the Weak Law of large Numbers:</p>
+<p>So by the Weak Law of Large Numbers:</p>
 <p><span class="math display">\[\frac{1}{n} \sum_{i=1}^{n} \log f(X_i \mid \theta) \xrightarrow{\quad} E_{\theta_0} [ \log f(X \mid \theta)]\]</span></p>
 <ul>
 <li>The <strong>left side</strong> is <span class="math inline">\(\dfrac{1}{n}L(\theta)\)</span>, maximized by <span class="math inline">\(\hat{\theta}_n\)</span> (the MLE).</li>
 <li>The <strong>right side</strong> is <span class="math inline">\(E[U(\theta)]\)</span>, maximized by <span class="math inline">\(\theta_0\)</span> (the true parameter).</li>
 </ul>
 </div>
-<p>̂</p>
 
 
 

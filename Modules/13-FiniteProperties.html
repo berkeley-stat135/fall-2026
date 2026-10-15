@@ -362,7 +362,7 @@ window.Quarto = {
 <p><strong>Questions/Goals for this Module</strong></p>
 </div>
 <ul>
-<li>What properties of the sampling distribution makes a good estimator?</li>
+<li>What properties of the sampling distribution make a good estimator?</li>
 <li>Understand the role of bias and variance in evaluating an estimator</li>
 </ul>
 </div>
@@ -405,7 +405,7 @@ window.Quarto = {
 <p>For example, consider the Laplace distribution with density <span class="math display">\[f(x)=\frac{1}{2b}\exp{-\frac{|x-\mu|}{b}}.\]</span> The Laplace distribution is symmetric, like the normal, but is very heavy tailed compared to the normal.</p>
 <p>For data that are i.i.d. Laplacian with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2=2b^2\)</span>, we have that both <span class="math inline">\(\hat{\mu}\)</span> and <span class="math inline">\(\tilde{\mu}\)</span> are still unbiased estimates of the mean, but the asymptotic variance of <span class="math inline">\(\tilde{\mu}\)</span> is <span class="math display">\[var(\tilde{\mu})\approx \frac{\sigma^2}{2n},\]</span> i.e.&nbsp;about half that of the mean, which is still <span class="math display">\[var(\hat{\mu})= \frac{\sigma^2}{n},\]</span> making the <em>median</em> the estimator with lower variance. Specifically, we have <span class="math display">\[\text{eff}( \hat{\mu}_n,\tilde{\mu}_n)=\frac{\sigma^2/n}{\sigma^2/2n}=2&gt;1\]</span> so <span class="math inline">\(\tilde{\mu}\)</span> is now more efficient than <span class="math inline">\(\hat\mu\)</span>. This will be generally true for heavy tailed distributions. Ultimately, when there is high probability of the large deviations from the mean, the median will be less variable than the mean.</p>
 <p>This discrepancy in which estimator is more efficient is not unusual. Evaluations of the efficiency of estimators will frequently be sensitive to the assumptions of the distribution of the data.</p>
-<p>This doesn’t mean efficiency is useless. Using our efficiency analysis of the mean and the mean, we can arrive at an idea of <em>under what circumstances</em> the mean is preferred over the median. Depending on what type of data we have, we can use this information to inform us as to which is the better estimate. In other words, knowing which is the most efficient estimator, under a certain distributional assumption, allows us to then consider which assumptions best match our data.</p>
+<p>This doesn’t mean efficiency is useless. Using our efficiency analysis of the mean and the median, we can arrive at an idea of <em>under what circumstances</em> the mean is preferred over the median. Depending on what type of data we have, we can use this information to inform us as to which is the better estimate. In other words, knowing which is the most efficient estimator, under a certain distributional assumption, allows us to then consider which assumptions best match our data.</p>
 </section>
 </section>
 <section id="the-cramér-rao-inequality" class="level2">
@@ -440,13 +440,13 @@ Note
 </div>
 <section id="mle-estimators-and-asymptotic-efficiency" class="level3">
 <h3 class="anchored" data-anchor-id="mle-estimators-and-asymptotic-efficiency">MLE estimators and Asymptotic Efficiency</h3>
-<p>If the Cramér-Rao lower bound looks familiar, it should. It’s the asymptotic variance of MLE estimators, <span class="math inline">\(1/I_n(\theta)\)</span>. In general, we may not be able to have a closed-form expression for the MLE or we may not be able to calculate its variance exactly. But we see that the variance of MLEs are <em>asymptotically</em> <span class="math inline">\((I_n(\theta))^{-1}\)</span>. Estimators whose variance is asymptotically <span class="math inline">\((I_n(\theta))^{-1}\)</span> are called <strong>asymptotically efficient</strong>.</p>
-<p>Frequently we limit ourselves to considering only estimators that are asymptotically normally, and define asymptotically</p>
+<p>If the Cramér-Rao lower bound looks familiar, it should. It’s the asymptotic variance of MLE estimators, <span class="math inline">\(1/I_n(\theta)\)</span>. In general, we may not be able to have a closed-form expression for the MLE or we may not be able to calculate its variance exactly. But we see that the variance of MLEs is <em>asymptotically</em> <span class="math inline">\((I_n(\theta))^{-1}\)</span>. Estimators whose variance is asymptotically <span class="math inline">\((I_n(\theta))^{-1}\)</span> are called <strong>asymptotically efficient</strong>.</p>
+<p>Frequently we limit ourselves to considering only estimators that are asymptotically normal, and define asymptotically</p>
 <p>More generally, we can define <strong>asymptotic relative efficiency</strong> of two estimators as follows:</p>
 <div id="def-are" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 3</strong></span> Suppose that our data <span class="math inline">\(X_1,\ldots,X_n\)</span> are i.i.d. with density <span class="math inline">\(f(x|\theta)\)</span> and our estimator <span class="math inline">\(\hat\theta_n\)</span> is asymptotically normal with <span class="math display">\[\frac{\hat{\theta}_n - \theta_0}{\sqrt{\nu(\theta)/n}} \xrightarrow{D} N(0, 1).
 \]</span> and <span class="math inline">\(\nu(\theta)\)</span> is continuous.</p>
-<p>Then with sufficient regularity conditions on <span class="math inline">\(f(x|theta)\)</span>, we have that <span class="math display">\[\nu(\theta) \geq \frac{1}{I(\theta)}.
+<p>Then with sufficient regularity conditions on <span class="math inline">\(f(x|\theta)\)</span>, we have that <span class="math display">\[\nu(\theta) \geq \frac{1}{I(\theta)}.
 \]</span> where <span class="math inline">\(I(\theta)\)</span> is the Fisher information for a <em>single</em> observation.</p>
 <p>An estimator that achieves this lower bound is <strong>asymptotically efficient</strong>.</p>
 </div>
@@ -478,7 +478,7 @@ Note
 </section>
 <section id="proof-of-the-cramér-rao-inequality" class="level3">
 <h3 class="anchored" data-anchor-id="proof-of-the-cramér-rao-inequality">Proof of the Cramér-Rao Inequality</h3>
-<p>As mentioned above, we can actually generalize the Cramér-Rao Inequality for any estimate, even if its not unbiased,</p>
+<p>As mentioned above, we can actually generalize the Cramér-Rao Inequality for any estimate, even if it’s not unbiased,</p>
 <div id="thm-cramerRao" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2</strong></span> Let <span class="math inline">\(X_1, \ldots, X_n \sim f(x \mid \theta)\)</span> be an IID random sample, and let <span class="math inline">\(T = t(X_1, \ldots, X_n)\)</span> be an estimator of <span class="math inline">\(\theta\)</span>, such that <span class="math inline">\(\mathbb{E}(T) = \mathbb{E}[t(X_1, \ldots, X_n)] = g(\theta)\)</span>. Then for sufficiently smooth <span class="math inline">\(f\)</span>,</p>
 <p><span class="math display">\[
@@ -491,8 +491,8 @@ Note
 <div id="rem-crlbUnbiased" class="proof remark">
 <p><span class="proof-title"><em>Remark 1</em>. </span>If <span class="math inline">\(g(\theta)\)</span> is the identity function, that is <span class="math inline">\(g(\theta) = \mathbb{E}_\theta(T) = \theta\)</span>, we recover the Cramér-Rao Inequality for unbiased estimators.</p>
 </div>
-<div id="proof">
-<p>We sketch the proof below in the case of a continuous density function:</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We sketch the proof below in the case of a continuous density function:</p>
 <p><span class="math display">\[\begin{align*}
 g(\theta) &amp;= \mathbb{E}_\theta(t(X_1, \ldots, X_n)) \\
 &amp;= \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} t(x_1, \ldots, x_n)\, f(x_1, \ldots, x_n \mid \theta)\, dx_1 \cdots dx_n\\
@@ -576,7 +576,7 @@ Check your work
 \begin{gathered}
 bias(\hat\pi_2)=\frac{1-2\pi}{n+2} \neq 0\\
 var(\hat\pi_2)=\frac{n}{(n+2)^2}\pi(1-\pi)\\ MSE(\hat\pi_2)=\frac{1+(n-4)\pi-(n-4)\pi^2}{(n+2)^2}
-\end{gathered}\]</span> Notice that the variance of <span class="math inline">\(\hat\pi_2\)</span> is <em>always</em> lower than our MLE <span class="math inline">\(\hat\pi_1\)</span>. This is despite the fact that the Cramer-Rao inequality tells us that <span class="math inline">\(\hat\pi_1\)</span> acheives the lowest variance <em>amongst unbiased estimators</em>. <span class="math inline">\(\hat\pi_2\)</span> is biased, so it’s not included in the set of unbiased estimators.</p>
+\end{gathered}\]</span> Notice that the variance of <span class="math inline">\(\hat\pi_2\)</span> is <em>always</em> lower than our MLE <span class="math inline">\(\hat\pi_1\)</span>. This is despite the fact that the Cramer-Rao inequality tells us that <span class="math inline">\(\hat\pi_1\)</span> achieves the lowest variance <em>amongst unbiased estimators</em>. <span class="math inline">\(\hat\pi_2\)</span> is biased, so it’s not included in the set of unbiased estimators.</p>
 <p>So to compare these estimators, we want to compare their MSE, which will balance the contribution of bias and variance.</p>
 <p>Compare what the MSE looks like for different values of the true <span class="math inline">\(\pi\)</span>,</p>
 <div class="cell">

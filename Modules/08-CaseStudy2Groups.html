@@ -396,8 +396,8 @@ window.Quarto = {
 <p>So far we have only considered creating confidence intervals for the mean of a single population. Now we are going to consider what if we have two different populations.</p>
 <p>Consider the following examples:</p>
 <ol type="1">
-<li>We are interested in the difference in wages between men and women. We collect a random sample of men and women to and ask them their annual income.</li>
-<li>We are interested the effect of rewards on behavior. We randomly select laboratory mice, with a treatment group getting rewards for successfully accomplishing a task and the control group receiving nothing.</li>
+<li>We are interested in the difference in wages between men and women. We collect a random sample of men and women and ask them their annual income.</li>
+<li>We are interested in the effect of rewards on behavior. We randomly select laboratory mice, with a treatment group getting rewards for successfully accomplishing a task and the control group receiving nothing.</li>
 <li>We are interested in the effect of a weight loss drug. We collect the weight of subjects before and after they use the drug.</li>
 <li>We want to compare political opinions between generations. We randomly recruit families and recruit two members to answer a survey, one of age 18-30 and the other of age 45-60.</li>
 </ol>
@@ -442,12 +442,12 @@ Y_i \overset{i.i.d}{\sim}Be(\pi_Y).\]</span></p>
 </ol>
 <section id="relationship-of-these-models-to-regression" class="level3">
 <h3 class="anchored" data-anchor-id="relationship-of-these-models-to-regression">Relationship of these models to Regression</h3>
-<p>We have already discussed the example of two groups implicitly, when we looked at regression for the case of where our predictor <span class="math inline">\(X\)</span> was binary. We had, <span class="math display">\[E(Y |X)= \begin{cases}
+<p>We have already discussed the example of two groups implicitly, when we looked at regression for the case where our predictor <span class="math inline">\(X\)</span> was binary. We had, <span class="math display">\[E(Y |X)= \begin{cases}
 \alpha_1, &amp; X=1\\
 \alpha_0, &amp; X=0
 \end{cases}
-\]</span> So in this chapter, we’ve changed the notation (<span class="math inline">\(X\)</span> means something different in the regression frame work), but it is ultimately describing the same setting.</p>
-<p>We also previously introduced a parametric for independent <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span> categorical, <span class="math display">\[Y |X \sim \begin{cases}
+\]</span> So in this chapter, we’ve changed the notation (<span class="math inline">\(X\)</span> means something different in the regression framework), but it is ultimately describing the same setting.</p>
+<p>We also previously introduced a parametric model for independent <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span> categorical, <span class="math display">\[Y |X \sim \begin{cases}
 N(\alpha_1,\sigma_1^2), &amp; X=1\\
 N(\alpha_0,\sigma_0^2), &amp; X=0
 \end{cases}
@@ -478,7 +478,7 @@ S^2_Y=\frac{1}{n_Y-1}\sum_{i=1}^{n_Y} (Y_i-\bar{Y})^2\]</span></p>
 <p>What about <span class="math inline">\(\Delta\)</span>? The obvious estimator for their difference is<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>: <span class="math display">\[\hat\Delta=\hat\mu_X-\hat\mu_Y\]</span></p>
 <p>What is the distribution of <span class="math inline">\(\hat\Delta\)</span>? We’ve already seen that linear combinations of normal variables are normal. That is also true for asymptotic distributions:</p>
 <div id="thm-asymLinearComb" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1</strong></span> If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> both converge asymptotically to a normal distribution, then <span class="math inline">\(aX+bY\)</span> will also converge to asymptotically to a normal distribution.</p>
+<p><span class="theorem-title"><strong>Theorem 1</strong></span> If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> both converge asymptotically to a normal distribution, then <span class="math inline">\(aX+bY\)</span> will also converge asymptotically to a normal distribution.</p>
 </div>
 <p>So depending on what assumptions we want to make, we have either</p>
 <ol type="1">
@@ -508,39 +508,39 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Technically <span class="math inline">\(T\)</span> does not follow the <span class="math inline">\(t\)</span> distribution exactly, even if the data are exactly normaly distributed. Rather, the use of of <span class="math inline">\(t_\nu\)</span> gives an approximation to the distribution of <span class="math inline">\(T\)</span>, called the <strong>Welch’s t-interval</strong>.</p>
+<p>Technically <span class="math inline">\(T\)</span> does not follow the <span class="math inline">\(t\)</span> distribution exactly, even if the data are exactly normally distributed. Rather, the use of <span class="math inline">\(t_\nu\)</span> gives an approximation to the distribution of <span class="math inline">\(T\)</span>, called the <strong>Welch’s t-interval</strong>.</p>
 </div>
 </div>
 </section>
 <section id="example" class="level3">
 <h3 class="anchored" data-anchor-id="example">Example</h3>
-<p>A drug company has developed a new drug to reduce hypertension. A sample of 15 patients are chosen to test the drug. Their systolic BP is reduced by 28.3 mmHg with a sample SD of 12 mmHg. The control group of 20 patients takes the standard drug and the average BP is reduced by 17.1 mmHg with the sample SD of 11.84 mmHg. Find a 95% CI for the difference in mean reduction of systolic BP, and conduct a two sided hypothesis test for the treatment making no difference.</p>
+<p>A drug company has developed a new drug to reduce hypertension. A sample of 15 patients is chosen to test the drug. Their systolic BP is reduced by 28.3 mmHg with a sample SD of 12 mmHg. The control group of 20 patients takes the standard drug and the average BP is reduced by 17.1 mmHg with the sample SD of 11.84 mmHg. Find a 95% CI for the difference in mean reduction of systolic BP, and conduct a two-sided hypothesis test for the treatment making no difference.</p>
 <p>The samples are small enough that to get a confidence interval, we are going to need to assume that <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span> are normal and rely on the <span class="math inline">\(t\)</span>-distribution.</p>
-<p>We’ll let the treatment group be the <span class="math inline">\(Y\)</span>, so we have <span class="math inline">\(n_Y = 15\)</span>, and the control group be <span class="math inline">\(X\)</span>, <span class="math inline">\(n_X = 20\)</span>.</p>
+<p>We’ll let the treatment group be the <span class="math inline">\(X\)</span>, so we have <span class="math inline">\(n_X = 15\)</span>, and the control group be <span class="math inline">\(Y\)</span>, <span class="math inline">\(n_Y = 20\)</span>.</p>
 <ul>
 <li>Average systolic BP for the treatment group reduced by <span class="math inline">\(\bar{x} = 28.3\)</span> mmHg, <span class="math inline">\(S_x = 12\)</span> mmHg.</li>
 <li>Average systolic BP for the control group reduced by <span class="math inline">\(\bar{y} = 17.1\)</span> mmHg, <span class="math inline">\(S_y = 11.84\)</span> mmHg.</li>
 </ul>
-<p><span class="math display">\[\hat{\Delta}=28.3-17.1=11.2\]</span> <span class="math display">\[S_{\hat\Delta} = \sqrt{\frac{S_X^2}{n_X}+\frac{S_Y^2}{n_Y}}=\sqrt{(12)^2/20+(11.84)^2/15}\approx 4.06\]</span> If we want to do our 95% confidence interval by hand, we get <span class="math inline">\(df=min(15-1,20-1)=14\)</span> which gives us</p>
+<p><span class="math display">\[\hat{\Delta}=28.3-17.1=11.2\]</span> <span class="math display">\[S_{\hat\Delta} = \sqrt{\frac{S_X^2}{n_X}+\frac{S_Y^2}{n_Y}}=\sqrt{(12)^2/15+(11.84)^2/20}\approx 4.08\]</span> If we want to do our 95% confidence interval by hand, we get <span class="math inline">\(df=min(15-1,20-1)=14\)</span> which gives us</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="dv">1</span><span class="fl">-0.05</span><span class="sc">/</span><span class="dv">2</span>,<span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.144787</code></pre>
 </div>
 </div>
-<p>and our confidence interval as <span class="math display">\[\hat{\Delta}\pm t_{\alpha/2,\nu} S_{\hat{\Delta}}=11.2\pm 2.14 \cdot 4.06=11.2\pm 8.71\]</span> The more careful calculation of <span class="math inline">\(\nu\)</span>, our degrees of freedom gives</p>
+<p>and our confidence interval as <span class="math display">\[\hat{\Delta}\pm t_{\alpha/2,\nu} S_{\hat{\Delta}}=11.2\pm 2.14 \cdot 4.08=11.2\pm 8.74\]</span> The more careful calculation of <span class="math inline">\(\nu\)</span>, our degrees of freedom gives</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 30.42119</code></pre>
+<pre><code>[1] 30.08821</code></pre>
 </div>
 </div>
 <p>which gives</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.041091</code></pre>
+<pre><code>[1] 2.042016</code></pre>
 </div>
 </div>
-<p><span class="math display">\[\hat{\Delta}\pm t_{\alpha/2,\nu} S_{\hat{\Delta}}=11.2\pm 2.04 \cdot 4.06=11.2\pm 8.28\]</span> So, as expected, using our “by hand” version of <span class="math inline">\(min(n_X-1,n_Y-1)\)</span> is more conservative, meaning the CI are a bit wider than the more complicated approximation would give.</p>
+<p><span class="math display">\[\hat{\Delta}\pm t_{\alpha/2,\nu} S_{\hat{\Delta}}=11.2\pm 2.04 \cdot 4.08=11.2\pm 8.32\]</span> So, as expected, using our “by hand” version of <span class="math inline">\(min(n_X-1,n_Y-1)\)</span> is more conservative, meaning the CIs are a bit wider than the more complicated approximation would give.</p>
 </section>
 <section id="assuming-equal-variance" class="level3">
 <h3 class="anchored" data-anchor-id="assuming-equal-variance">Assuming Equal Variance</h3>
@@ -554,9 +554,9 @@ S^2_{pooled}&amp;=\frac{n_X-1}{(n_X-1)+(n_Y-1)}S_X^2+\frac{n_Y-1}{(n_X-1)+(n_Y-1
 <p>Using this estimate, gives us a <span class="math inline">\(T\)</span> statistic with a <span class="math inline">\(t\)</span> distribution.</p>
 <p><span class="math display">\[
 T_{\Delta,pooled} = \frac{\hat\Delta-\Delta}{\hat\sigma_{\hat\Delta,pooled}}=\frac{(\bar{X}-\bar{Y}) - (\mu_X - \mu_Y)}{S_{pooled}\sqrt{\tfrac{1}{n_X}+\tfrac{1}{n_Y}}} \sim t_{n_X+n_Y-2}
-\]</span> It’s distribution is clear from our previous theorems in the one-sample case (and unlike the unequal variance case, is exact if we assume normality of our data).</p>
+\]</span> Its distribution is clear from our previous theorems in the one-sample case (and unlike the unequal variance case, is exact if we assume normality of our data).</p>
 <div id="thm-two-sample-t" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2</strong></span> If we have two independent samples <span class="math inline">\(X_1, \ldots, X_{n_X} \overset{i.i.d.}{\sim} N(\mu_X, \sigma_X^2)\)</span>, <span class="math inline">\(Y_1, \ldots, Y_m \overset{i.i.d.}{\sim} N(\mu_Y, \sigma_Y^2)\)</span>, and <span class="math inline">\(\sigma_X^2 = \sigma_Y^2\)</span>, , then <span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 2</strong></span> If we have two independent samples <span class="math inline">\(X_1, \ldots, X_{n_X} \overset{i.i.d.}{\sim} N(\mu_X, \sigma_X^2)\)</span>, <span class="math inline">\(Y_1, \ldots, Y_m \overset{i.i.d.}{\sim} N(\mu_Y, \sigma_Y^2)\)</span>, and <span class="math inline">\(\sigma_X^2 = \sigma_Y^2\)</span>, then <span class="math display">\[
 T_{\Delta,pooled}  = \frac{(\bar{X}-\bar{Y}) - (\mu_X - \mu_Y)}{S_{pooled}\sqrt{\tfrac{1}{n_X}+\tfrac{1}{n_Y}}} \sim t_{n_X+n_Y-2}
 \]</span></p>
 </div>
@@ -565,8 +565,8 @@ T_{\Delta,pooled}  = \frac{(\bar{X}-\bar{Y}) - (\mu_X - \mu_Y)}{S_{pooled}\sqrt{
 <div class="PARAGRAPH">
 <p>When assume equal variances?</p>
 </div>
-<p>Both of the books only present the case when the variances are equal. It does make the mathematics of the <span class="math inline">\(t\)</span> distribution better, in the sense that the distribution of <span class="math inline">\(T_{\Delta,pooled}\)</span> is exactly <span class="math inline">\(t\)</span> distributed with degrees of freedom that we can easily write down and work with. The distribution of our <span class="math inline">\(T\)</span> random variable is messy when we don’t assume equal variance, and we have to approximate it’s distribution with a <span class="math inline">\(t\)</span>. Moreover, in all realistic settings, you are measuring the same <em>type</em> of feature on both groups, so they should be on the same scale, and so it is not completely implausible that the variances are equal.</p>
-<p>However, it is also the case that the that the same thing that divides them into two groups (men vs women; treatment vs control; etc) also means that may have a more variable response in one group than another. So the short answer is that there’s rarely any good reason to assume the variances are equal, and we have standard strategies that we don’t have to make that assumptions. In practice, it is rare that practitioners assume equal variance.</p>
+<p>Both of the books only present the case when the variances are equal. It does make the mathematics of the <span class="math inline">\(t\)</span> distribution better, in the sense that the distribution of <span class="math inline">\(T_{\Delta,pooled}\)</span> is exactly <span class="math inline">\(t\)</span> distributed with degrees of freedom that we can easily write down and work with. The distribution of our <span class="math inline">\(T\)</span> random variable is messy when we don’t assume equal variance, and we have to approximate its distribution with a <span class="math inline">\(t\)</span>. Moreover, in all realistic settings, you are measuring the same <em>type</em> of feature on both groups, so they should be on the same scale, and so it is not completely implausible that the variances are equal.</p>
+<p>However, it is also the case that the same thing that divides them into two groups (men vs women; treatment vs control; etc) also means that may have a more variable response in one group than another. So the short answer is that there’s rarely any good reason to assume the variances are equal, and we have standard strategies that we don’t have to make that assumption. In practice, it is rare that practitioners assume equal variance.</p>
 <p>On the other hand, if we had more than one group we were comparing, the standard analysis (ANOVA) routinely assumes the same variance, just like we do in regression. And the pooled estimate of variance is what is used in this case. So it is useful to be familiar with the concept of pooled variance, in particular.</p>
 <div class="QUESTION">
 <div class="block-title">
@@ -578,8 +578,8 @@ T_{\Delta,pooled}  = \frac{(\bar{X}-\bar{Y}) - (\mu_X - \mu_Y)}{S_{pooled}\sqrt{
 <section id="example-redo" class="level3">
 <h3 class="anchored" data-anchor-id="example-redo">Example Redo</h3>
 <p>Let’s go back to our example, and consider what we would have if we assumed the same variance.</p>
-<p>We need to calculated the pooled estimate of standard deviation, <span class="math display">\[S_{pooled}^2 = \frac{(n-1)S_x^2 + (m-1)S_y^2}{m+n-2} = \frac{(14)(12^2) + (19)(11.84)^2}{15+20-2} \approx 141.80 \;\Rightarrow\; S_p \approx 11.91\]</span> This is compared to the individual estimate in each group, <span class="math inline">\(S_X=12\)</span> and <span class="math inline">\(S_y=11.84\)</span>. As expected, it is between these two estimates.</p>
-<p>This gives us the estimate of standard error of <span class="math inline">\(\hat\Delta\)</span> as <span class="math display">\[S_{\hat\Delta,pooled}=S_{pooled}\sqrt{\tfrac{1}{n_X}+\tfrac{1}{n_Y}}=11.91*\sqrt{1/20+1/15}=11.91*0.34=4.07\]</span> When we allowed for different variances we got <span class="math inline">\(S_{\hat\Delta}=4.06\)</span>, so quite similar. This isn’t surprising, since the estimates of standard deviation in each group are quite close.</p>
+<p>We need to calculate the pooled estimate of standard deviation, <span class="math display">\[S_{pooled}^2 = \frac{(n-1)S_x^2 + (m-1)S_y^2}{m+n-2} = \frac{(14)(12^2) + (19)(11.84)^2}{15+20-2} \approx 141.80 \;\Rightarrow\; S_p \approx 11.91\]</span> This is compared to the individual estimate in each group, <span class="math inline">\(S_X=12\)</span> and <span class="math inline">\(S_y=11.84\)</span>. As expected, it is between these two estimates.</p>
+<p>This gives us the estimate of standard error of <span class="math inline">\(\hat\Delta\)</span> as <span class="math display">\[S_{\hat\Delta,pooled}=S_{pooled}\sqrt{\tfrac{1}{n_X}+\tfrac{1}{n_Y}}=11.91*\sqrt{1/20+1/15}=11.91*0.34=4.07\]</span> When we allowed for different variances we got <span class="math inline">\(S_{\hat\Delta}=4.08\)</span>, so quite similar. This isn’t surprising, since the estimates of standard deviation in each group are quite close.</p>
 <p>Our degrees of freedom is <span class="math inline">\(n_X+n_Y-2=33\)</span>, again, close to <span class="math inline">\(\nu\)</span> above.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="dv">1</span><span class="fl">-0.05</span><span class="sc">/</span><span class="dv">2</span>,<span class="dv">33</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -603,7 +603,7 @@ E(D_i)&amp;=\mu_X-\mu_Y\\
 <section id="estimation-1" class="level3">
 <h3 class="anchored" data-anchor-id="estimation-1">Estimation</h3>
 <p>We still want to estimate <span class="math inline">\(\Delta=\mu_X-\mu_Y\)</span>. How does our estimate of <span class="math inline">\(\Delta\)</span> change if we have paired data?</p>
-<p>First we note that <span class="math display">\[\bar{X}-\bar{Y}=\frac{1}{n}\sum_{i=1}^n(X_i-Y_i)=\bar{D}\]</span> So in fact our previous estimator <span class="math inline">\(\hat{\Delta}=\bar{X}-\bar{Y}=\bar{D}\)</span> will <em>also</em> be the average of their pair-wise differences.</p>
+<p>First we note that <span class="math display">\[\bar{X}-\bar{Y}=\frac{1}{n}\sum_{i=1}^n(X_i-Y_i)=\bar{D}\]</span> So in fact our previous estimator <span class="math inline">\(\hat{\Delta}=\bar{X}-\bar{Y}=\bar{D}\)</span> will <em>also</em> be the average of their pairwise differences.</p>
 <p>Similarly, <span class="math display">\[E(\hat{\Delta})=E(\bar{D})=E(\bar{X})-E(\bar{Y})=\mu_X-\mu_Y\]</span> So we are clearly still using the same estimator and it is still an unbiased estimator of <span class="math inline">\(\Delta\)</span>.</p>
 <p>However, the variance changes. For paired data <span class="math display">\[\sigma^2_{\bar{D}}=var(\bar{D})=var(\bar{X}-\bar{Y})=\frac{1}{n}(\sigma^2_X+\sigma^2_Y-2\rho \sigma_X\sigma_Y)\]</span> If we had instead collected the data on independent groups of units (assuming the same size <span class="math inline">\(n\)</span> in each group) we have, <span class="math display">\[var(\hat\Delta)=var(\bar{X}-\bar{Y})=\frac{1}{n}(\sigma_X^2+\sigma^2_Y)\]</span></p>
 <p>So you can see that if there is a strong correlation between the <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span> the variance of your estimator will be quite different. In fact, if there is a strong <em>positive</em> correlation, then the variance of <span class="math inline">\(\hat\Delta\)</span> will be much smaller, and thus you will have a more accurate estimate of <span class="math inline">\(\mu_X-\mu_Y\)</span>.</p>
@@ -642,7 +642,7 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Indeed, since the MLE of a function of parameter is just that function of the MLE, <span class="math inline">\(\hat\Delta\)</span> is indeed the MLE of <span class="math inline">\(\Delta\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Indeed, since the MLE of a function of a parameter is just that function of the MLE, <span class="math inline">\(\hat\Delta\)</span> is indeed the MLE of <span class="math inline">\(\Delta\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p><span class="math inline">\(\nu = \frac{\left(\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}\right)^2}{\frac{(s_X^2 / n_X)^2}{n_X - 1} + \frac{(s_Y^2 / n_Y)^2}{n_Y - 1}}\)</span> and is bounded between <span class="math inline">\(\min(n_X-1, n_Y-1)\)</span> and <span class="math inline">\((n_X + n_Y - 2)\)</span>. <a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->

@@ -318,7 +318,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#estimating-the-variance-of-our-estimators" id="toc-estimating-the-variance-of-our-estimators" class="nav-link" data-scroll-target="#estimating-the-variance-of-our-estimators">Estimating the Variance of Our Estimators</a>
   <ul class="collapse">
-  <li><a href="#s2-is-a-unbiased-estimate-of-individual-variance" id="toc-s2-is-a-unbiased-estimate-of-individual-variance" class="nav-link" data-scroll-target="#s2-is-a-unbiased-estimate-of-individual-variance"><span class="math inline">\(S^2\)</span> is a unbiased estimate of <em>individual</em> variance</a></li>
+  <li><a href="#s2-is-an-unbiased-estimate-of-individual-variance" id="toc-s2-is-an-unbiased-estimate-of-individual-variance" class="nav-link" data-scroll-target="#s2-is-an-unbiased-estimate-of-individual-variance"><span class="math inline">\(S^2\)</span> is an unbiased estimate of <em>individual</em> variance</a></li>
   <li><a href="#variance-of-our-estimators" id="toc-variance-of-our-estimators" class="nav-link" data-scroll-target="#variance-of-our-estimators">Variance of our estimators</a></li>
   <li><a href="#using-a-parametric-model-to-estimate-the-variance-of-the-data" id="toc-using-a-parametric-model-to-estimate-the-variance-of-the-data" class="nav-link" data-scroll-target="#using-a-parametric-model-to-estimate-the-variance-of-the-data">Using a Parametric Model to estimate the variance of the data</a></li>
   </ul></li>
@@ -370,15 +370,15 @@ window.Quarto = {
 </figure>
 </div>
 <p>We can use this distribution to ask questions about how <span class="math inline">\(\hat{\mu}\)</span> behaves.</p>
-<p>Two important aspect of the distribution we will consider to begin with:</p>
+<p>Two important aspects of the distribution we will consider to begin with:</p>
 <ol type="1">
 <li><strong>Expectation of <span class="math inline">\(\hat{\mu}\)</span></strong>: <span class="math display">\[E(\hat{\mu})=\mu.\]</span> We are interested in this quantity to understand whether on average is <span class="math inline">\(\hat{\mu}\)</span> equal to <span class="math inline">\(\mu\)</span>?</li>
 </ol>
-<div id="def-sterror" class="theorem definition">
+<div id="def-unbiased" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (Unbiased)</strong></span> When an estimator <span class="math inline">\(\hat\theta\)</span> has <span class="math inline">\(E(\hat\theta)=\theta\)</span> we call an estimator <strong>unbiased</strong>. It says that, over repeated realizations of our data, the average value of <span class="math inline">\(\hat\theta\)</span> is <span class="math inline">\(\theta\)</span>.</p>
 </div>
 <ol start="2" type="1">
-<li><strong>Standard deviation of <span class="math inline">\(\hat{\mu}\)</span></strong> We can consider the standard deviation of our estimator, <span class="math display">\[\sqrt{var(\hat{\mu})}=\sqrt{E[\hat{\mu}-E(\hat{\mu})]^2}.\]</span> This allows us to ask, how much does the estimate vary from its mean from sample to sample? If our estimator is equal to the population parameter on average, then our estimator’s sampling distribution spreads about the mean. The Smaller the standard deviation, then the tighter the spread of <span class="math inline">\(\hat{\mu}\)</span> over repeated samples, and thus the more accurate the estimator. The below illustration from a text of Lohr, illustrate the different variations of the expectation and variance by analogy to an archer shooting at a target.</li>
+<li><strong>Standard deviation of <span class="math inline">\(\hat{\mu}\)</span></strong> We can consider the standard deviation of our estimator, <span class="math display">\[\sqrt{var(\hat{\mu})}=\sqrt{E[\hat{\mu}-E(\hat{\mu})]^2}.\]</span> This allows us to ask, how much does the estimate vary from its mean from sample to sample? If our estimator is equal to the population parameter on average, then our estimator’s sampling distribution spreads about the mean. The smaller the standard deviation, then the tighter the spread of <span class="math inline">\(\hat{\mu}\)</span> over repeated samples, and thus the more accurate the estimator. The below illustration from a text of Lohr, illustrates the different variations of the expectation and variance by analogy to an archer shooting at a target.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -401,13 +401,13 @@ Caution
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Do not confuse the sampling distribution of <span class="math inline">\(\hat{\theta}\)</span> with the distribution of an individual data points <span class="math inline">\(X_i\)</span>. The individual <span class="math inline">\(X_i\)</span> are random and have a expectation and variance as well, and these will <em>not</em> necessarily be the same as those of <span class="math inline">\(\hat{\theta}\)</span>, depending on our estimator and the parameter we are estimating.</p>
+<p>Do not confuse the sampling distribution of <span class="math inline">\(\hat{\theta}\)</span> with the distribution of an individual data point <span class="math inline">\(X_i\)</span>. The individual <span class="math inline">\(X_i\)</span> are random and have an expectation and variance as well, and these will <em>not</em> necessarily be the same as those of <span class="math inline">\(\hat{\theta}\)</span>, depending on our estimator and the parameter we are estimating.</p>
 </div>
 </div>
 </section>
 <section id="direct-calculation-of-mean-and-variance-of-estimator" class="level2">
 <h2 class="anchored" data-anchor-id="direct-calculation-of-mean-and-variance-of-estimator">Direct calculation of Mean and Variance of Estimator</h2>
-<p>When we can write down an equation for our an estimator as a function of the data, we can try to calculate these quantities directly.</p>
+<p>When we can write down an equation for an estimator as a function of the data, we can try to calculate these quantities directly.</p>
 <section id="example-estimating-the-mean" class="level3">
 <h3 class="anchored" data-anchor-id="example-estimating-the-mean">Example: Estimating the Mean</h3>
 <p>If we assume that our data all share the same mean <span class="math inline">\(\mu\)</span> and we are estimating <span class="math inline">\(\mu\)</span> with <span class="math display">\[\hat{\mu}=\frac{1}{n}\sum_i X_i,\]</span> we can immediately write down the mean and variance of our estimator <span class="math inline">\(\hat{\mu}\)</span>. <span class="math display">\[E(\hat{\mu})=\frac{1}{n}\sum_i E(X_i)=\frac{1}{n}\sum_i \mu=\mu\]</span></p>
@@ -422,8 +422,8 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>The last step used the <em>assumption</em> that all our data shared the same mean, <span class="math inline">\(E(X_i)=\mu\)</span>. Notice we have used that same assumption twice – once to determine that we wanted <span class="math inline">\(\hat{\mu}\)</span> to be our estimator and once to determine the expected value of the sampling distribution of <span class="math inline">\(\hat{\mu}\)</span>. This is an internally consistent choice of assumptions, and that gets us to the above result.</p>
-<p>But it is often useful to keep in mind you don’t have to be internally consistent, i.e.&nbsp;you could use different assumptions for choosing your estimator and for evaluating the behavior of your estimator. In fact it can be useful <em>not</em> to have the same assumptions! It’s very reasonable question to ask the question: given that I’ve chosen <span class="math inline">\(\hat{\mu}=\frac{1}{n}\sum_i X_i\)</span> to be my estimator, how might it behave if my initial assumptions were wrong? For example, what if 10% of my data were contaminated and had a different mean? Then the <span class="math inline">\(E(\hat\mu)\)</span> might not be the same as what we derived above.</p>
-<p>Asking these kinds of questions, where you purposefully look what happens when the assumptions you used for creating your estimator are not true, often fall under the evaluation of the estimator’s <em>robustness</em> to assumptions.</p>
+<p>But it is often useful to keep in mind you don’t have to be internally consistent, i.e.&nbsp;you could use different assumptions for choosing your estimator and for evaluating the behavior of your estimator. In fact it can be useful <em>not</em> to have the same assumptions! It’s a very reasonable question to ask the question: given that I’ve chosen <span class="math inline">\(\hat{\mu}=\frac{1}{n}\sum_i X_i\)</span> to be my estimator, how might it behave if my initial assumptions were wrong? For example, what if 10% of my data were contaminated and had a different mean? Then the <span class="math inline">\(E(\hat\mu)\)</span> might not be the same as what we derived above.</p>
+<p>Asking these kinds of questions, where you purposefully look at what happens when the assumptions you used for creating your estimator are not true, often falls under the evaluation of the estimator’s <em>robustness</em> to assumptions.</p>
 </div>
 </div>
 <p>Similarly, we can use the <em>assumption</em> of independence to get the variance of our estimator, <span class="math display">\[var(\hat{\mu})=\sigma^2_{\bar{X}}=\frac{1}{n^2}\sum_i var(X_i)\]</span> We can again add <em>yet another assumption</em> – that all of the <span class="math inline">\(X_i\)</span> have the same variance, <span class="math inline">\(var(X_i)=\sigma^2\)</span> – and get <span class="math display">\[var(\hat{\mu})=\frac{1}{n^2}\sum_i var(X_i)=\frac{1}{n^2}\sum_i \sigma^2=\frac{\sigma^2}{n}\]</span> This gives us the <strong>standard error</strong> for our estimate <span class="math inline">\(\hat{\mu}\)</span> as <span class="math inline">\(\sigma/\sqrt{n}\)</span>.</p>
@@ -437,14 +437,14 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>It is very important property that we like to see of our statistical estimators: that with more data, the variance of the estimator gets Smaller, so more and more tightly focused around the parameter <span class="math inline">\(\theta\)</span> that we want to estimate.</p>
+<p>It is a very important property that we like to see of our statistical estimators: that with more data, the variance of the estimator gets smaller, so more and more tightly focused around the parameter <span class="math inline">\(\theta\)</span> that we want to estimate.</p>
 </div>
 </div>
 <div class="QUESTION">
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
 </div>
-<p>What if our data was <em>not</em> independent, what would would be the variance of our estimator <span class="math inline">\(\hat{\mu}\)</span>?</p>
+<p>What if our data was <em>not</em> independent, what would be the variance of our estimator <span class="math inline">\(\hat{\mu}\)</span>?</p>
 </div>
 </section>
 <section id="example-proportion" class="level3">
@@ -452,7 +452,7 @@ Note
 <p>Let’s continue our mean example above, but suppose our data <span class="math inline">\(X_1,\ldots,X_n\)</span> are binary, taking on values <span class="math inline">\(0,1\)</span>. Then all of the above calculations still hold true, but there is a lot of important simplification.</p>
 <p>For binary data, we’ve seen that <span class="math display">\[E(X_i)=P(X_i=1).\]</span> If I continue my assumption that <span class="math inline">\(X_1,\ldots,X_n\)</span> all have the same mean, this means we are trying to estimate <span class="math display">\[\pi=P(X_i=1)\]</span> Our estimator remains the same, <span class="math display">\[\hat{\pi}=\frac{1}{n}\sum_{i=1}^n X_i.\]</span> but as we’ve already noted, the average of the <span class="math inline">\(X_i\)</span> will be the <em>proportion</em> of the sample with <span class="math inline">\(X_i=1\)</span>.</p>
 <p>Then our above result holds, <span class="math display">\[E(\hat{\pi})=\pi\]</span></p>
-<p>But when we look at the variance of our estimator, in our previous example, we let <span class="math inline">\(\sigma^2=var(X_i)\)</span>. But in the case of Bernouilli <span class="math inline">\(X_i\)</span>, we know <span class="math display">\[var(X_i)=\pi(1-\pi).\]</span> So I don’t need to define a new parameter for the variance – if I know the mean, I also know the variance.</p>
+<p>But when we look at the variance of our estimator, in our previous example, we let <span class="math inline">\(\sigma^2=var(X_i)\)</span>. But in the case of Bernoulli <span class="math inline">\(X_i\)</span>, we know <span class="math display">\[var(X_i)=\pi(1-\pi).\]</span> So I don’t need to define a new parameter for the variance – if I know the mean, I also know the variance.</p>
 <p>Therefore, the above results for the variance of our estimator <span class="math inline">\(\hat{\pi}\)</span> can be simplified, <span class="math display">\[var(\hat{\pi})=\sigma^2_{\hat{\pi}}=\frac{1}{n^2}\sum_i var(X_i)=\frac{\pi(1-\pi)}{n}\]</span></p>
 </section>
 <section id="example-simple-regression" class="level3">
@@ -465,7 +465,7 @@ Note
 <p>Expectation of <span class="math inline">\(\hat{\beta}_1\)</span></p>
 </div>
 <p>I’m going to use the middle expression for finding the conditional expectation of <span class="math inline">\(\beta_1\)</span> (it works either way, but is slightly shorter like this). We have <span class="math display">\[
-E(\hat{\beta}_1|X_1=x_1,\ldots,X_n=x_n)=\frac{1}{\sum_{i=1}^n(x_i-\bar{x})^2}\sum_{i=1}^n (x_i-\bar{x})E (Y_i-\bar{Y})|X_1=x_1,\ldots,X_n=x_n)
+E(\hat{\beta}_1|X_1=x_1,\ldots,X_n=x_n)=\frac{1}{\sum_{i=1}^n(x_i-\bar{x})^2}\sum_{i=1}^n (x_i-\bar{x})E (Y_i-\bar{Y}|X_1=x_1,\ldots,X_n=x_n)
 \]</span></p>
 <p>If we use the assumption of our linear model, we have that <span class="math display">\[E(Y_i|X_1=x_1,\ldots,X_n=x_n)=\beta_0+\beta_1 x_i\]</span> which gives us that <span class="math display">\[
 \begin{aligned}
@@ -497,10 +497,10 @@ E(\hat{\beta}_1|X_1=x_1,\ldots,X_n=x_n)&amp;=\frac{1}{\sum_{i=1}^n(x_i-\bar{x})^
 \]</span> I have reworked this equation to emphasize that we still have the variance of our estimator <span class="math inline">\(\hat{\beta}_1\)</span> is decreasing with more data, and in fact looks similar to the variance of the regular mean, except for the factor <span class="math inline">\(1/\hat{\sigma}_{x}^{2}\)</span>. Again, since we consider the <span class="math inline">\(X\)</span> values fixed, this is a fixed constant.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>In what follows I will drop the explicit conditioning on <span class="math inline">\(X_1,\ldots,X_n\)</span>, so if I write <span class="math inline">\(var(Y)\)</span> it means <span class="math inline">\(var(Y|X_1=x_1,\ldots,X_n=x_n)\)</span></p>
-<p>I will also use the last version of <span class="math inline">\(\beta_1\)</span> as it makes the calculations much simpler, <span class="math display">\[\hat\beta_1=\frac{\sum_{i=1}^n(X_i-\bar{X})Y_i}{\sum_{i=1}(X_i-\bar{X})^2}?\]</span></p>
+<p>I will also use the last version of <span class="math inline">\(\beta_1\)</span> as it makes the calculations much simpler, <span class="math display">\[\hat\beta_1=\frac{\sum_{i=1}^n(X_i-\bar{X})Y_i}{\sum_{i=1}(X_i-\bar{X})^2}\]</span></p>
 <p><span class="math display">\[
 \begin{aligned}
-var(\hat\beta_1)&amp;=var\left(\frac{\sum_{i=1}^n (x_i-\bar{x})(Y_i-\bar{Y})}{\sum_{i=1}^n(x_i-\bar{x})^2}\right)\\
+var(\hat\beta_1)&amp;=var\left(\frac{\sum_{i=1}^n (x_i-\bar{x})Y_i}{\sum_{i=1}^n(x_i-\bar{x})^2}\right)\\
 &amp;=\frac{1}{\left(\sum_{i=1}^n(x_i-\bar{x})^2\right)^2}var\left(\sum_{i=1}^n (x_i-\bar{x})Y_i \right)\\
 &amp;=\frac{1}{\left(\sum_{i=1}^n(x_i-\bar{x})^2\right)^2}\left(\sum_{i=1}^n (x_i-\bar{x})^2var(Y_i) \right)
 \end{aligned}
@@ -535,11 +535,11 @@ E(\hat{\beta}_0|X_1\ldots,X_n)= \beta_0\\
 <section id="estimating-the-variance-of-our-estimators" class="level2">
 <h2 class="anchored" data-anchor-id="estimating-the-variance-of-our-estimators">Estimating the Variance of Our Estimators</h2>
 <p>It’s very important to notice that the expectation and variance of our estimators involve our unknown parameters. This is to be expected. These are theoretical properties of our estimators, and they <em>should</em> vary based on the true distribution of the data.</p>
-<p>For example, in our above examples, the expected value of <span class="math inline">\(\hat\theta\)</span>, <span class="math inline">\(E(\hat\theta)=\theta,\)</span> so it depends on the unknown <span class="math inline">\(\theta\)</span>. That’s good! It means they are unbiased – <span class="math inline">\(\hat\theta\)</span> itself is a good quantitative estimate of <span class="math inline">\(\theta\)</span>. So for the expectation, its not a problem that it depends on the unknown parameter, since our goal is to check that the <span class="math inline">\(E(\hat\theta)\)</span> is equal to <span class="math inline">\(\theta\)</span> (or close).</p>
-<p>However, for the variance of our estimator, we’d really like to have a quantitative idea what the variance is, since the variance gives us an idea of the <em>size</em> of the variations of <span class="math inline">\(\hat\theta\)</span> from it’s mean. Knowing the variance of <span class="math inline">\(\bar{X}\)</span> is <span class="math inline">\(\sigma^2/n\)</span> doesn’t tell anything about the size of these variations, because we don’t know <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>For example, in our above examples, the expected value of <span class="math inline">\(\hat\theta\)</span>, <span class="math inline">\(E(\hat\theta)=\theta,\)</span> so it depends on the unknown <span class="math inline">\(\theta\)</span>. That’s good! It means they are unbiased – <span class="math inline">\(\hat\theta\)</span> itself is a good quantitative estimate of <span class="math inline">\(\theta\)</span>. So for the expectation, it’s not a problem that it depends on the unknown parameter, since our goal is to check that the <span class="math inline">\(E(\hat\theta)\)</span> is equal to <span class="math inline">\(\theta\)</span> (or close).</p>
+<p>However, for the variance of our estimator, we’d really like to have a quantitative idea what the variance is, since the variance gives us an idea of the <em>size</em> of the variations of <span class="math inline">\(\hat\theta\)</span> from its mean. Knowing the variance of <span class="math inline">\(\bar{X}\)</span> is <span class="math inline">\(\sigma^2/n\)</span> doesn’t tell us anything about the size of these variations, because we don’t know <span class="math inline">\(\sigma^2\)</span>.</p>
 <p>However, having computed that expression for the variance means we could try to estimate the variance of the estimator. And in fact for all of these examples we can do exactly this by plugging in our estimators of the unknown parameters.</p>
-<section id="s2-is-a-unbiased-estimate-of-individual-variance" class="level3">
-<h3 class="anchored" data-anchor-id="s2-is-a-unbiased-estimate-of-individual-variance"><span class="math inline">\(S^2\)</span> is a unbiased estimate of <em>individual</em> variance</h3>
+<section id="s2-is-an-unbiased-estimate-of-individual-variance" class="level3">
+<h3 class="anchored" data-anchor-id="s2-is-an-unbiased-estimate-of-individual-variance"><span class="math inline">\(S^2\)</span> is an unbiased estimate of <em>individual</em> variance</h3>
 <p>Before we look at estimating the variance of our estimators, let’s first remind ourselves of how we estimate the variance of our data <em>when we assume the data all are independent and have the same mean and variance (i.i.d)</em>.</p>
 <p>The first thing to notice is that under this assumption we only see <strong>one</strong> realization of our estimator, but <em>many</em> realizations of the distribution of our individual data. Each <span class="math inline">\(X_i\)</span> is a realization from whatever distribution is creating our data. So we can use the data to estimate the variance of our data distribution.</p>
 <p>We’ve seen that when we assume our data is normal, the MLE estimate of <span class="math inline">\(\sigma^2\)</span> is <span class="math inline">\(\hat{\sigma}^2\)</span>, <span class="math display">\[\begin{align*}
@@ -560,7 +560,7 @@ E(\hat{\sigma}^2) &amp;= (\sigma^2 + \mu^2) - \dfrac{\sigma^2}{n} - \mu^2\\
 \]</span> This means that <span class="math inline">\(E(\hat{\sigma}^2) \ne \sigma^2\)</span>, and also that <span class="math inline">\(\hat{\sigma}^2\)</span> <strong>underestimates</strong> <span class="math inline">\(\sigma^2\)</span> on average. Notice that this holds true for binary data as well; we didn’t make any assumptions on the distribution of our data.</p>
 <p>To get an <strong>unbiased</strong> estimator of the variance of the sample mean, we need to multiply <span class="math inline">\(\hat{\sigma}^2\)</span> by the appropriate factor, namely <span class="math inline">\(n/(n-1)\)</span>, <span class="math display">\[S^2=\left(\frac{n}{n-1}\right) \hat{\sigma}^2=\frac{1}{n-1}\sum_{i=1}^n (X_i -\overline{X})^2
 \]</span> and so <span class="math inline">\(E\left[S^2\right] = \sigma^2\)</span></p>
-<p>We discussed before that we use <span class="math inline">\(S^2\)</span> generally, where we divide by <span class="math inline">\(n-1\)</span>, rather than the MLE estimator. This is because <span class="math inline">\(S^2\)</span> is an <strong>unbiased</strong> estimator of <span class="math inline">\(\sigma^2\)</span>. However, the bias of the MLE estimator is <span class="math display">\[bias(\hat{\sigma}^2)=E(\sigma^2)-\sigma^2=\frac{1}{n}\sigma^2\]</span> so the bias of the MLE estimator is converging to 0 as <span class="math inline">\(n\rightarrow \infty\)</span>. So the difference between <span class="math inline">\(S^2\)</span> and <span class="math inline">\(\hat\sigma^2\)</span> is not particularly meaningful with large sample sizes.</p>
+<p>We discussed before that we use <span class="math inline">\(S^2\)</span> generally, where we divide by <span class="math inline">\(n-1\)</span>, rather than the MLE estimator. This is because <span class="math inline">\(S^2\)</span> is an <strong>unbiased</strong> estimator of <span class="math inline">\(\sigma^2\)</span>. However, the bias of the MLE estimator is <span class="math display">\[bias(\hat{\sigma}^2)=E(\hat{\sigma}^2)-\sigma^2=-\frac{1}{n}\sigma^2\]</span> so the bias of the MLE estimator is converging to 0 as <span class="math inline">\(n\rightarrow \infty\)</span>. So the difference between <span class="math inline">\(S^2\)</span> and <span class="math inline">\(\hat\sigma^2\)</span> is not particularly meaningful with large sample sizes.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -617,10 +617,10 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Note that it would <strong>not</strong> be appropriate to use our just our standard estimator of the variance of <span class="math inline">\(Y_i\)</span>, <span class="math display">\[\frac{1}{n-1}\sum_{i=1}^n (Y_i-\bar{Y})^2,\]</span> since that is only appropriate when we assume the data have the same mean. We are assuming exactly the opposite – that each <span class="math inline">\(Y_i\)</span> has a different mean depending on it’s corresponding <span class="math inline">\(X_i\)</span>.</p>
+<p>Note that it would <strong>not</strong> be appropriate to use just our standard estimator of the variance of <span class="math inline">\(Y_i\)</span>, <span class="math display">\[\frac{1}{n-1}\sum_{i=1}^n (Y_i-\bar{Y})^2,\]</span> since that is only appropriate when we assume the data have the same mean. We are assuming exactly the opposite – that each <span class="math inline">\(Y_i\)</span> has a different mean depending on its corresponding <span class="math inline">\(X_i\)</span>.</p>
 </div>
 </div>
-<p>However, just like the for estimating the mean, the standard estimator of <span class="math inline">\(\sigma^2\)</span> used in regression is slightly different than what our MLE would imply. We are again going to adjust the MLE estimate and use as our standard estimate, <span class="math display">\[\hat\sigma^2=\frac{1}{n-2}\sum_{i=1}^n(Y_i-(\hat\beta_0+\hat \beta_1 X_i))^2\]</span> Again, this is an <strong>unbiased</strong> estimate of <span class="math inline">\(\sigma^2\)</span> for the linear model.</p>
+<p>However, just like for estimating the mean, the standard estimator of <span class="math inline">\(\sigma^2\)</span> used in regression is slightly different than what our MLE would imply. We are again going to adjust the MLE estimate and use as our standard estimate, <span class="math display">\[\hat\sigma^2=\frac{1}{n-2}\sum_{i=1}^n(Y_i-(\hat\beta_0+\hat \beta_1 X_i))^2\]</span> Again, this is an <strong>unbiased</strong> estimate of <span class="math inline">\(\sigma^2\)</span> for the linear model.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -639,7 +639,7 @@ Note
 <section id="using-a-parametric-model-to-estimate-the-variance-of-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="using-a-parametric-model-to-estimate-the-variance-of-the-data">Using a Parametric Model to estimate the variance of the data</h3>
 <p>We already mentioned that for estimating the variance of binary data, we often use <span class="math inline">\(\hat\pi(1-\hat\pi)\)</span> rather than <span class="math inline">\(S^2\)</span>. We have “plugged in” the estimate of <span class="math inline">\(\pi\)</span> into our parametric assumption of the variance, <span class="math display">\[var(X_i)=\pi(1-\pi).\]</span> Similarly, if we have count data and decide to model them as i.i.d. <span class="math inline">\(Poisson(\lambda)\)</span>, we already know that the natural estimate of <span class="math inline">\(\lambda\)</span> is <span class="math display">\[\hat\lambda=\bar{X}.\]</span> This is both the MLE, and just the natural way to estimate the expectation. The standard error of the estimator <span class="math inline">\(\hat{\lambda}= \overline{X}\)</span> is given by <span class="math display">\[\displaystyle \sqrt{\frac{var(X)}{n}},\]</span> just like any mean.</p>
-<p>So how do we estimate the standard error? Well, again the question is how do we estimate <span class="math inline">\(var(X)\)</span>? We can use <span class="math inline">\(S^2\)</span>, which is an unbiased estimate of <span class="math inline">\(var(X)\)</span>, regardless of any assumptions on the parametric distribution of the data. But if we use the parametric distribution, then we know for Poisson data we have, <span class="math display">\[E(X_i)=var(X_i)=\lambda\]</span> Again, like the Bernoulli, this leads us to two different estimates of variance, but now they are quite different (<span class="math inline">\(\bar{X}\)</span> versus <span class="math inline">\(S^2\)</span>)! This can often be the case – using the generic estimate versus the one implied by the parametric model leads to different choices of estimators. And more over, under our Poisson model, both are unbiased, so that doesn’t distinguish these estimators.</p>
+<p>So how do we estimate the standard error? Well, again the question is how do we estimate <span class="math inline">\(var(X)\)</span>? We can use <span class="math inline">\(S^2\)</span>, which is an unbiased estimate of <span class="math inline">\(var(X)\)</span>, regardless of any assumptions on the parametric distribution of the data. But if we use the parametric distribution, then we know for Poisson data we have, <span class="math display">\[E(X_i)=var(X_i)=\lambda\]</span> Again, like the Bernoulli, this leads us to two different estimates of variance, but now they are quite different (<span class="math inline">\(\bar{X}\)</span> versus <span class="math inline">\(S^2\)</span>)! This can often be the case – using the generic estimate versus the one implied by the parametric model leads to different choices of estimators. And moreover, under our Poisson model, both are unbiased, so that doesn’t distinguish these estimators.</p>
 <p>We will talk more about comparing estimators, but we will point out that there are differences in the amount of assumptions we are making (less for <span class="math inline">\(S^2\)</span>). On the other hand, if we believe the Poisson is a good model for our count data, we will do better with <span class="math inline">\(\bar{X}\)</span> than <span class="math inline">\(S^2\)</span>.</p>
 </section>
 </section>
@@ -652,13 +652,13 @@ Note
 <p>Normal Assumption</p>
 </div>
 <p>One model we’ve seen where our MLE estimate of <span class="math inline">\(E(X)\)</span> is <span class="math inline">\(\hat{\mu}=\bar{X}\)</span> is if we assume <span class="math inline">\(X_1,\ldots,X_n\)</span> are each distributed <span class="math inline">\(N(\mu,\sigma^2)\)</span>.</p>
-<p>With this assumption, then we use that fact that any (deterministic) linear combination of <span class="math inline">\(Z_1,\ldots,Z_n\)</span> normal variables is normal, <span class="math display">\[a^TZ=\sum_{i=1}^n a_i Z_i\sim N\left(\eta, \tau^2\right) \]</span> with <span class="math display">\[\eta=\sum_{i=1}^n a_i EZ_i, \hspace{3ex}\tau^2=\sum_{i=1}^n\sum_{j=1}^n a_ia_j cov(Z_i,Z_j).\]</span> Note that this does not require the <span class="math inline">\(Z_i\)</span> to be i.i.d.</p>
+<p>With this assumption, then we use the fact that any (deterministic) linear combination of <span class="math inline">\(Z_1,\ldots,Z_n\)</span> normal variables is normal, <span class="math display">\[a^TZ=\sum_{i=1}^n a_i Z_i\sim N\left(\eta, \tau^2\right) \]</span> with <span class="math display">\[\eta=\sum_{i=1}^n a_i EZ_i, \hspace{3ex}\tau^2=\sum_{i=1}^n\sum_{j=1}^n a_ia_j cov(Z_i,Z_j).\]</span> Note that this does not require the <span class="math inline">\(Z_i\)</span> to be i.i.d.</p>
 <p>Therefore, <span class="math display">\[\bar{X}=\sum_{i=1}^n \frac{1}{n}X_i \sim N(\mu, \sigma^2/n)\]</span></p>
 <div class="PARAGRAPH">
 <p>Poisson Assumption</p>
 </div>
 <p>If we instead assume <span class="math inline">\(X_i\)</span> are i.i.d. <span class="math inline">\(Poisson(\lambda)\)</span>, then <span class="math inline">\(\bar{X}\)</span> is again our MLE estimate of <span class="math inline">\(\lambda=E(X_i)\)</span>.</p>
-<p>Now we can use the fact that the sum of independent Poisson random variables <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span> are Poisson, <span class="math display">\[Y+Z\sim Poisson(\lambda_Y+\lambda_Z).\]</span> This gives us that <span class="math display">\[\sum_{i=1}^n X_i \sim Poisson(n\lambda)\]</span> Therefore, <span class="math display">\[\hat{\lambda}=\bar{X}\sim \frac{1}{n} Poisson(n\lambda),\]</span> i.e.&nbsp;distributed like <span class="math inline">\(1/n\)</span> times a random variable with a <span class="math inline">\(Poisson(n\lambda)\)</span> distribution. More formally <span class="math display">\[P(\bar{X}=x)=P(\sum_{i=1}X_i = nx)=\frac{(n\lambda)^{nx} e^{-n\lambda}}{(nx)!},\]</span> for any <span class="math inline">\(x\)</span> such that <span class="math inline">\(nx\)</span> is an integer.</p>
+<p>Now we can use the fact that the sum of independent Poisson random variables <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span> is Poisson, <span class="math display">\[Y+Z\sim Poisson(\lambda_Y+\lambda_Z).\]</span> This gives us that <span class="math display">\[\sum_{i=1}^n X_i \sim Poisson(n\lambda)\]</span> Therefore, <span class="math display">\[\hat{\lambda}=\bar{X}\sim \frac{1}{n} Poisson(n\lambda),\]</span> i.e.&nbsp;distributed like <span class="math inline">\(1/n\)</span> times a random variable with a <span class="math inline">\(Poisson(n\lambda)\)</span> distribution. More formally <span class="math display">\[P(\bar{X}=x)=P(\sum_{i=1}X_i = nx)=\frac{(n\lambda)^{nx} e^{-n\lambda}}{(nx)!},\]</span> for any <span class="math inline">\(x\)</span> such that <span class="math inline">\(nx\)</span> is an integer.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -673,7 +673,7 @@ Note
 </div>
 </div>
 <div class="PARAGRAPH">
-<p>Bernouilli Assumption</p>
+<p>Bernoulli Assumption</p>
 </div>
 <p>Finally, if we assume <span class="math inline">\(X_i\)</span> are i.i.d. <span class="math inline">\(Bernoulli(\pi)\)</span>, then <span class="math inline">\(\bar{X}\)</span> is again our MLE estimate of <span class="math inline">\(\pi=E(X_i)\)</span>. Then we have <span class="math display">\[\sum_{i=1}^n X_i \sim Bin(n,\pi),\]</span> so again, <span class="math display">\[\hat{\pi}=\bar{X}\sim \frac{1}{n}Bin(n,\pi)\]</span> i.e. <span class="math display">\[P(\bar{X}=x)=P(\sum_{i=1}X_i = nx)={n \choose nx}\pi^{nx}(1-\pi)^{n-nx},\]</span> for any <span class="math inline">\(x\)</span> such that <span class="math inline">\(nx\)</span> is an integer between <span class="math inline">\(0\)</span> and <span class="math inline">\(n\)</span>.</p>
 </section>
@@ -702,7 +702,7 @@ Note
 </section>
 <section id="central-limit-theorem-for-mean" class="level2">
 <h2 class="anchored" data-anchor-id="central-limit-theorem-for-mean">Central Limit Theorem for Mean</h2>
-<p>Notice that, depending on the distributional assumption that we make about our data <span class="math inline">\(X_i\)</span>, that we have a different sampling distribution for <em>the same estimator</em> <span class="math inline">\(\bar{X}\)</span>. This pattern is generally true – I can make statements about the expectation or variance of an estimator which are mostly agnostic to the underlying distribution of the data.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> But, to get the exact sampling distribution of my estimator, it will depend on the parametric assumptions.</p>
+<p>Notice that, depending on the distributional assumption that we make about our data <span class="math inline">\(X_i\)</span>, we have a different sampling distribution for <em>the same estimator</em> <span class="math inline">\(\bar{X}\)</span>. This pattern is generally true – I can make statements about the expectation or variance of an estimator which are mostly agnostic to the underlying distribution of the data.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> But, to get the exact sampling distribution of my estimator, it will depend on the parametric assumptions.</p>
 <p>However, if I look at the sampling distribution of the mean for different distributions, I see that with larger sample sizes, the sampling distributions of <span class="math inline">\(\bar{X}\)</span> are starting to look much more similar, despite the differences in the underlying distribution of the individual <span class="math inline">\(X_i\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -723,7 +723,7 @@ Note
 <div id="def-convDist" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 3 (Convergence in Distribution)</strong></span> Specifically, convergence in distribution of <span class="math inline">\(Z_n\)</span> to another random variable <span class="math inline">\(Z\)</span>, <span class="math display">\[Z_n \overset{D}{\rightarrow} Z\]</span> means that the CDF <span class="math inline">\(F_n(z)\)</span> of <span class="math inline">\(Z_n\)</span> converges to the CDF <span class="math inline">\(F(z)\)</span> of <span class="math inline">\(Z\)</span> at every point for which <span class="math inline">\(F\)</span> is continuous.</p>
 </div>
-<p>For some estimators, we will have exactly knowledge of the sampling distribution (for a particular set of parametric assumptions), but for many estimators, even with parametric assumptions, we will not be able to analytically express the sampling distribution of the estimator.</p>
+<p>For some estimators, we will have exact knowledge of the sampling distribution (for a particular set of parametric assumptions), but for many estimators, even with parametric assumptions, we will not be able to analytically express the sampling distribution of the estimator.</p>
 <p>In interpreting the CLT, it is important to keep the distinction between the distribution of <span class="math inline">\(X_i\)</span> versus <span class="math inline">\(\bar{X}\)</span> – this goes back to the difference between the data distribution of individual observations and the sampling distribution of the estimator.</p>
 <p>Here are examples of the histograms of the mean simulated for several distributions for different sample sizes. Notice that even though the distribution of the individual <span class="math inline">\(X_i\)</span> is very non-normal for the Beta and Exponential Distribution, you start to see the central limit theorem kicking in, with a tighter and more normal distribution as <span class="math inline">\(n\)</span> gets larger. The last distribution (Cauchy), does not behave however. This is because the Cauchy distribution doesn’t have a finite variance, which is a requirement of the CLT, so the CLT doesn’t apply. The mean of Cauchy data continues to get very large values of the mean regardless of sample size (and indeed, I had to cut off the bounds of the histograms – otherwise it would go into the hundreds)</p>
 <div class="cell">
@@ -753,7 +753,7 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Notice even if we considered <span class="math inline">\(X\)</span> random, <span class="math inline">\(\hat{\sigma}_{x}^2\)</span> is an estimate of the estimate of the shared variance of a <em>single</em> <span class="math inline">\(X\)</span>, and so is not necessarily getting Smaller with <span class="math inline">\(n\)</span> – though it might be getting closer to the true variance <span class="math inline">\(\sigma^2_X\)</span>, whatever that is.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Notice even if we considered <span class="math inline">\(X\)</span> random, <span class="math inline">\(\hat{\sigma}_{x}^2\)</span> is an estimate of the shared variance of a <em>single</em> <span class="math inline">\(X\)</span>, and so is not necessarily getting smaller with <span class="math inline">\(n\)</span> – though it might be getting closer to the true variance <span class="math inline">\(\sigma^2_X\)</span>, whatever that is.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>I have to have <em>some</em> assumptions, like that the distribution has enough moments, which rules out some distributions. But I’m not required to specify a specific distribution.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
