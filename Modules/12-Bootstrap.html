@@ -355,6 +355,10 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#compare-to-asymptotic-normal-distribution" id="toc-compare-to-asymptotic-normal-distribution" class="nav-link" data-scroll-target="#compare-to-asymptotic-normal-distribution">Compare to asymptotic normal distribution</a></li>
   </ul></li>
+  <li><a href="#assumptions-of-the-bootstrap" id="toc-assumptions-of-the-bootstrap" class="nav-link" data-scroll-target="#assumptions-of-the-bootstrap">Assumptions of the Bootstrap</a>
+  <ul class="collapse">
+  <li><a href="#example-problem-statistic-the-maximum" id="toc-example-problem-statistic-the-maximum" class="nav-link" data-scroll-target="#example-problem-statistic-the-maximum">Example problem statistic: the Maximum</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -585,6 +589,65 @@ $ year        &lt;fct&gt; 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 
  0.01035638 0.1296436</code></pre>
 </div>
 </div>
+</section>
+</section>
+<section id="assumptions-of-the-bootstrap" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-of-the-bootstrap">Assumptions of the Bootstrap</h2>
+<p>The bootstrap doesn’t rely on specific distributional assumption, so in this respect can be considered robust to those assumptions, compared to asymptotic normal confidence intervals.</p>
+<p>But the bootstrap does have assumptions:</p>
+<ol type="1">
+<li><p><strong>i.i.d. data</strong> Our resampling scheme is replicating the data generation process, and thus assumes the data is i.i.d. In some limited situation, there are alternative resampling strategy for dependent data, but they are context dependent.</p></li>
+<li><p><strong>Sufficiently large sample size</strong> We are assuming that our data sample is large enough so that its empirical distribution is a good estimate for the true underlying distribution of the data. If there are few too samples, this will not be true.</p></li>
+<li><p><strong>Sufficiently smooth estimator/statistic <span class="math inline">\(\hat\theta\)</span></strong> This requires a more complicated notion of smoothness than for our asymptotic results, where we were looking at smoothness of our density function <span class="math inline">\(f(x|\theta)\)</span>. Basically, we need that if we change the distribution of our data a small amount, that the distribution of our statistic also only changes by a small amount.</p>
+<p>This is because we are estimating the true distribution <span class="math inline">\(F\)</span> with our sample empirical distribution <span class="math inline">\(\hat{F}\)</span>. If we have a large enough sample size, we know that <span class="math inline">\(\hat{F}\)</span> is close to <span class="math inline">\(F\)</span>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> But <span class="math inline">\(F\)</span> is <em>not</em> the distribution of <span class="math inline">\(\hat\theta\)</span>, but rather of our data <span class="math inline">\(X_i\)</span>. So we need to know that the closeness of <span class="math inline">\(\hat{F}\)</span> to <span class="math inline">\(F\)</span> will imply the closeness of the distribution of <span class="math inline">\(\hat\theta^*-\hat\theta\)</span> to <span class="math inline">\(\hat\theta-\theta_0\)</span>. Hence our requirement that the statistics be “smooth” to small changes in the data distribution.</p></li>
+</ol>
+<section id="example-problem-statistic-the-maximum" class="level3">
+<h3 class="anchored" data-anchor-id="example-problem-statistic-the-maximum">Example problem statistic: the Maximum</h3>
+<p>A common example of a statistic that is not smooth is when our estimator is the maximum of our data, <span class="math display">\[\hat\theta_n=max(X_1,\ldots,X_n).\]</span> This is, for example, the MLE if we model our data as <span class="math inline">\(U(0,\theta)\)</span>. This is an estimator where the bootstrap fails even for arbitrarily large sample sizes.</p>
+<p>Consider the following simulation of uniform data and look at the bootstrap distribution.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12-Bootstrap_files/figure-html/parameters-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These might by eye look vaguely similar in shape, but notice the discreteness of the distribution of <span class="math inline">\(\hat\theta^*\)</span>. Consider how many times we get the observed max, for example,</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of times bootstrap estimate is observed estimate:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.638</code></pre>
+</div>
+</div>
+<p>This is because any sample that contains the observed max, <span class="math inline">\(\hat\theta^*\)</span> will equal the observed max of the original sample. We can actually calculate the probability of our sample containing the max value: <span class="math display">\[1-(1-1/n)^n \to 1-e^{-1} \approx 0.632\]</span> For our data, this probability is calculates to</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6358303</code></pre>
+</div>
+</div>
+<p>which is very similar to the limit already for <span class="math inline">\(n=50\)</span>.</p>
+<p>So even for very large <span class="math inline">\(n\)</span>, the bootstrap distribution will have a point mass at <span class="math inline">\(\hat\theta\)</span>. This is independent of what the true distribution of <span class="math inline">\(\hat\theta\)</span> is. For example, the true distribution of <span class="math inline">\(\hat\theta-\theta\)</span> might be continuous, but <span class="math inline">\(\hat\theta^*-\hat\theta\)</span> will always have a non-zero point mass at <span class="math inline">\(0\)</span>, <em>no matter how large your sample size</em>.</p>
+<p>And in fact we can use the fact that if the data are actually uniform, we know the sampling distribution of <span class="math inline">\(X_{(n)}\)</span> from your homework: <span class="math inline">\(\hat\theta/\theta\)</span> is distributed Beta(<span class="math inline">\(n\)</span>,1). So in this setting, we know that the distribution of <span class="math inline">\(\hat\theta\)</span> should be continuous, yet the bootstrap distribution <em>never</em> will be.</p>
+<p>Knowing the exact sampling distribution of <span class="math inline">\(\hat\theta\)</span> also allows us to construct an exact confidence intervals using the quantiles of the <span class="math inline">\(Beta(n,1)\)</span> distribution,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span class="math display">\[\begin{gathered}
+P\left((\alpha/2)^{1/n} \le \hat\theta/\theta \le (1-\alpha/2)^{1/n}\right) = 1-\alpha\\\Rightarrow\text{Confidence Interval: } \left(\hat\theta/(1-\alpha/2)^{1/n},\ \hat\theta/(\alpha/2)^{1/n}\right).
+\end{gathered}\]</span> Of course, this is only exact under the assumption that our data are truly <span class="math inline">\(U(0,\theta)\)</span> but since we are simulating our data, then we really do know this.</p>
+<p>So we can compare these exact confidence intervals to our different bootstrap confidence interval. We evaluate the performance of CI by calculating how often the CI covers the truth in our simulations, since that is the definition of a valid confidence interval:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>percentile    pivotal     normal      exact 
+     0.000      0.864      0.768      0.946 </code></pre>
+</div>
+</div>
+<p>Conclusions:</p>
+<ul>
+<li><p><strong>The percentile interval <em>never</em> covers <span class="math inline">\(\theta\)</span>.</strong> Since <span class="math inline">\(\hat\theta^* \le \hat\theta\)</span> for every resample, the upper endpoint satisfies <span class="math inline">\(q^*_{1-\alpha/2} \le \hat\theta &lt; \theta\)</span>. The whole interval lies below the truth, so its coverage is exactly 0, for every <span class="math inline">\(n\)</span>.</p></li>
+<li><p><strong>The Pivotal method undercovers.</strong> The pivotal method does at least have the possibility of covering <span class="math inline">\(\theta\)</span>, and does so 85% of the time; but that is much lower than the expected 95%, so it is not giving a valid confidence interval either.</p></li>
+<li><p><strong>The Normal method undercovers.</strong> The normal also covers <span class="math inline">\(\theta\)</span> sometimes, but again, not enough. Indeed, we don’t even any theory to tell us that the asymptotic distribution of <span class="math inline">\(\hat\theta\)</span> is normal – recall the MLE assumptions aren’t satisfied – and indeed it is not! So we have really no justification to use the normal interval no matter how we estimate the variance.</p></li>
+</ul>
 
 
 
@@ -607,6 +670,8 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
 
 <ol>
 <li id="fn1"><p>This is not 100% accurate. There is a technique in machine learning, called <em>bagging</em>, that uses the mean of the bootstrap distribution, <span class="math inline">\(\bar{\theta}^*\)</span>, as an improved estimator of <span class="math inline">\(\theta\)</span> for the purpose of prediction in a regression context. This is only effective because of the kinds of estimators <span class="math inline">\(\hat\theta\)</span> to which it is applied.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>There are very strong theorems, such as the Glivenko-Cantelli Theorem, that tell us that the empirical cdf, <span class="math inline">\(\hat{F}\)</span>, will converge to the true cdf of the data, <span class="math inline">\(F\)</span>, so this is a valid assumption for large sample sizes.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><span class="math inline">\(\hat\theta/\theta\)</span> is a <em>pivotal quantity</em> because it’s distribution doesn’t depend on <span class="math inline">\(\theta\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
