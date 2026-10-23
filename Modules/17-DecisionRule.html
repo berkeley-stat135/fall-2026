@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Testing: Decision Perspective</title>
+<title>Hypothesis Testing: Decision Perspective</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -134,7 +134,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/17-DecisionRule.html">Testing: Decision Perspective</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/17-DecisionRule.html">Hypothesis Testing: Decision Perspective</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -304,7 +304,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Modules/17-DecisionRule.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Testing: Decision Perspective</span></a>
+ <span class="menu-text">Hypothesis Testing: Decision Perspective</span></a>
   </div>
 </li>
       </ul>
@@ -341,9 +341,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/17-DecisionRule.html">Testing: Decision Perspective</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/17-DecisionRule.html">Hypothesis Testing: Decision Perspective</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Testing: Decision Perspective</h1>
+<h1 class="title">Hypothesis Testing: Decision Perspective</h1>
 </div>
 
 
@@ -420,12 +420,27 @@ Note
 </tr>
 </tbody>
 </table>
-<p>While there are 4 possible combinations, we only care about errors, which simplifies to three possible outcomes from our decision rule, <span class="math display">\[(\text{CORRECT}, \text{Type I Error}, \text{Type II Error})\]</span> Which outcome we get is a random event, so we can calculate the probability of these outcomes.</p>
+<p>While there are 4 possible combinations, we only care about errors, which simplifies to three possible outcomes from our decision rule, <span class="math display">\[(\text{CORRECT}, \text{Type I Error}, \text{Type II Error})\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sometimes Type I errors are called <strong>false positives</strong> and Type II errors are called <strong>false negatives</strong>.</p>
+<p>This language comes from the fact that null is associated with the default; if we feel the null is compatible with having created the data that would be a negative result, i.e.&nbsp;a lack of a result. Thus rejecting the null is associated with a positive result, where positive is in terms of advancing or changing our understanding of an issue. This terminology isn’t a judgment or moral position on the specific conclusions, however. Rejecting the null might mean that a study has revealed a deleterious effect or the existence of a unfortunate societal behavior.</p>
+</div>
+</div>
+<p>Which outcome we get is a random event, so we can calculate the probability of these outcomes.</p>
 <p>This leads to important terminology to describe the probability of a test to make these types of errors.</p>
 <div id="def-sig-level" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2 (Significance Level)</strong></span> The <em>significance level</em> (<span class="math inline">\(\alpha\)</span>) of a test is the probability of the test committing a Type I error, <span class="math display">\[P_{H_0}(\text{Reject } H_0)=P_{H_0}(T&gt;c)\]</span></p>
 </div>
-<p>If we run a test that has significance <span class="math inline">\(\alpha\)</span>, then we will often say that we “reject the null hypothesis at level <span class="math inline">\(\alpha\)</span>” or that the result “is significant at level <span class="math inline">\(\alpha\)</span>”.</p>
+<p>If we run a test that has significance <span class="math inline">\(\alpha\)</span> and reject our null hypothesis, then we will often say that we “reject the null hypothesis at level <span class="math inline">\(\alpha\)</span>” or that the result “is significant at level <span class="math inline">\(\alpha\)</span>”.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

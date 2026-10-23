@@ -304,7 +304,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Modules/17-DecisionRule.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Testing: Decision Perspective</span></a>
+ <span class="menu-text">Hypothesis Testing: Decision Perspective</span></a>
   </div>
 </li>
       </ul>
@@ -543,8 +543,8 @@ Note
 <p>Why <span class="math inline">\(T\)</span> needs to be “standardized”</p>
 </div>
 <p>In our above examples we created a statistic <span class="math inline">\(T\)</span>, and we understand that it tells us the strength of evidence against the null, but we don’t have a sense of how common such a value is.</p>
-<p>For example, in the coin flip example, we saw that the chance we get <span class="math inline">\(T=0.3\)</span> is equivalent to either <span class="math inline">\(X=2\)</span> or <span class="math inline">\(X=8\)</span>, so a probability <span class="math display">\[P(T_n=0.3  | \pi=0.5)=0.0878\]</span> That’s not a large probability, but it’s certainly far from impossible.</p>
-<p>What if we saw <span class="math inline">\(T=0.3\)</span> with n=100 flips? We would have seen either 20 or 80 heads. The probability of that happening under the null is <span class="math display">\[P(T_n=0.3 | \pi=0.5)=8.456e-10\]</span> so it’s very unlikely.</p>
+<p>For example, in the coin flip example, we saw that the chance we get <span class="math inline">\(T=0.3\)</span> is equivalent to either <span class="math inline">\(X=2\)</span> or <span class="math inline">\(X=8\)</span>, so a probability <span class="math display">\[P_{\pi=0.5}(T_n=0.3 )=0.0878\]</span> That’s not a large probability, but it’s certainly far from impossible.</p>
+<p>What if we saw <span class="math inline">\(T=0.3\)</span> with n=100 flips? We would have seen either 20 or 80 heads. The probability of that happening under the null is <span class="math display">\[P_{\pi=0.5}(T_n=0.3 )=8.456e-10\]</span> so it’s very unlikely.</p>
 <p>So we need to grapple with the distribution of <span class="math inline">\(T_n\)</span> under the null to ascertain whether <span class="math inline">\(T_n\)</span> is unusually large and that <span class="math inline">\(T_n\)</span> is pretty dependent on <span class="math inline">\(n\)</span>.</p>
 <p>We see that instead of thinking about the value of <span class="math inline">\(T\)</span>, what is easy to compare and make sense of is its <em>probability under the null</em>. We are transforming from the scale of <span class="math inline">\(T\)</span> to the scale of probability, which we can make sense of and interpret much more easily.</p>
 <div class="PARAGRAPH">
@@ -554,12 +554,12 @@ Note
 <p>This leads us to the definition of the null distribution of a test statistic</p>
 <div id="def-nulldist" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (Null distribution)</strong></span> Assume we have a test statistic <span class="math inline">\(T\)</span>. Then the sampling distribution of <span class="math inline">\(T\)</span> when we assume the null distribution is true is called its <strong>null distribution.</strong></p>
-<p>We often write probabilities involving the null distribution with the following notation <span class="math display">\[P_{H_0}(T&gt;u)\]</span></p>
+<p>We often write probabilities involving the null distribution with the following notation <span class="math display">\[P_{H_0}(\cdot)\]</span></p>
 </div>
 <p>So above in our coin flip example, we calculated that for <span class="math inline">\(n=10\)</span>, <span class="math display">\[P_{H_0}(T_n=0.3)=0.0878\]</span> and for <span class="math inline">\(n=100\)</span> <span class="math display">\[P_{H_0}(T_n=0.3)=8.45e-10\]</span></p>
 <p>Then we will define the p-value as the following:</p>
 <div id="def-pvalue" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (P-value)</strong></span> Assume we observe the value of our test statistic, <span class="math inline">\(T_{obs}\)</span>. We define the <strong>p-value</strong> as <span class="math display">\[\text{p-value}=P(T \geq T_{obs} | H_0\text{ is true})=P_{H_0}(T \geq T_{obs})\]</span> In other words, we calculate the probability of seeing a value as extreme as <span class="math inline">\(T_{obs}\)</span> <em>or more extreme</em> under the null distribution of <span class="math inline">\(T\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 2 (P-value)</strong></span> Assume we observe the value of our test statistic, <span class="math inline">\(T_{obs}\)</span>. We define the <strong>p-value</strong> as <span class="math display">\[\text{p-value}=P_{H_0}(T \geq T_{obs})\]</span> In other words, we calculate the probability of seeing a value as extreme as <span class="math inline">\(T_{obs}\)</span> <em>or more extreme</em> under the null distribution of <span class="math inline">\(T\)</span>.</p>
 </div>
 <section id="examples" class="level3">
 <h3 class="anchored" data-anchor-id="examples">Examples</h3>
@@ -567,7 +567,11 @@ Note
 <p>Coin Flip</p>
 </div>
 <p>Suppose we observe, as we discussed above, 8 heads out of 10.</p>
-<p>Then we’ve already seen that our observed test statistic <span class="math inline">\(T_{obs}=0.3\)</span>. Then our p-value is <span class="math display">\[\text{p-value}=P_{H_0}(T\geq 0.3)=P_{H_0}(X\geq 8, X\leq 2)=2*\mathtt{pbinom(2,prob=0.5,size=10)}=0.109\]</span> Notice this <em>isn’t</em> what we calculated before when we explored the idea – we are not just calculating the probability <span class="math inline">\(X\in\{2,8\}\)</span> but the probability <span class="math inline">\(X\in\{0,1,2,8,9,10\}\)</span>. This is because a p-value is calculated as the probability of getting <em>as extreme as <span class="math inline">\(T_{obs}\)</span> or more extreme</em>. So we include other more extreme events that we didn’t actually see.</p>
+<p>Then we’ve already seen that our observed test statistic <span class="math inline">\(T_{obs}=0.3\)</span>. Then our p-value is <span class="math display">\[\begin{aligned}
+\text{p-value}&amp;=P_{H_0}(T\geq 0.3)\\
+&amp;=P_{H_0}(X\geq 8, X\leq 2)\\
+&amp;=2*\mathtt{pbinom(2,prob=0.5,size=10)}=0.109
+\end{aligned}\]</span> Notice this <em>isn’t</em> what we calculated before when we explored the idea – we are not just calculating the probability <span class="math inline">\(X=8\)</span> but the probability <span class="math inline">\(X\in\{0,1,2,8,9,10\}\)</span>. This is because a p-value is calculated as the probability of getting <em>as extreme as <span class="math inline">\(T_{obs}\)</span> or more extreme</em>. So we include other more extreme events that we didn’t actually see.</p>
 <p>We can see what p-values we would get with possible different data:</p>
 <table class="caption-top table">
 <thead>
@@ -712,7 +716,7 @@ Note
 <li>there are more bad outcomes under one nurse: null would be that all the nurses have the same chance of a bad outcome</li>
 <li>an employee was given bad projects due to bias: the null would be that having bad projects assigned was due to random chance.</li>
 </ul>
-<p>Since <span class="math inline">\(H_0\)</span> usually represents a “default” or “random chance” hypothesis, the scientifically conservative strategy accepted throughout research is to first assure ourselves that the chance this hypothesis created the data is small (e.g.&nbsp;p-values less than 0.05 or 0.01). Which is why it is important to be clear that if we have larger p-values, then we conclude simply that the data is <em>compatible</em> with having created the data, not that it is “true”.</p>
+<p>Since <span class="math inline">\(H_0\)</span> usually represents a “default” or “random chance” hypothesis, the scientifically conservative strategy accepted throughout research is to first assure ourselves that the chance that this hypothesis created the data is small (e.g.&nbsp;p-values less than 0.05 or 0.01). Which is why it is important to be clear that if we have larger p-values, then we conclude simply that the data is <em>compatible</em> with having created the data, not that it is “true”.</p>
 <div class="QUESTION">
 <div class="block-title">
 <p><strong>Exercise/Question</strong></p>
