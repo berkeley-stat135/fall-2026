@@ -559,7 +559,7 @@ Note
 <p>So above in our coin flip example, we calculated that for <span class="math inline">\(n=10\)</span>, <span class="math display">\[P_{H_0}(T_n=0.3)=0.0878\]</span> and for <span class="math inline">\(n=100\)</span> <span class="math display">\[P_{H_0}(T_n=0.3)=8.45e-10\]</span></p>
 <p>Then we will define the p-value as the following:</p>
 <div id="def-pvalue" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (P-value)</strong></span> Assume we observe the value of our test statistic, <span class="math inline">\(T_{obs}\)</span>. We define the <strong>p-value</strong> as <span class="math display">\[\text{p-value}=P_{H_0}(T \geq T_{obs})\]</span> In other words, we calculate the probability of seeing a value as extreme as <span class="math inline">\(T_{obs}\)</span> <em>or more extreme</em> under the null distribution of <span class="math inline">\(T\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 2 (P-value)</strong></span> Assume we observe our realizations of the data, <span class="math inline">\(x_1,\ldots,x_n\)</span>, and calculate the value of our test statistic, <span class="math inline">\(t_{obs}\)</span>. We define the <strong>p-value</strong> as <span class="math display">\[\text{p-value}=P_{H_0}(T \geq t_{obs})\]</span> In other words, we calculate the probability of seeing a value as extreme as <span class="math inline">\(t_{obs}\)</span> <em>or more extreme</em> under the null distribution of <span class="math inline">\(T\)</span>.</p>
 </div>
 <section id="examples" class="level3">
 <h3 class="anchored" data-anchor-id="examples">Examples</h3>
@@ -567,11 +567,11 @@ Note
 <p>Coin Flip</p>
 </div>
 <p>Suppose we observe, as we discussed above, 8 heads out of 10.</p>
-<p>Then we’ve already seen that our observed test statistic <span class="math inline">\(T_{obs}=0.3\)</span>. Then our p-value is <span class="math display">\[\begin{aligned}
+<p>Then we’ve already seen that our observed test statistic <span class="math inline">\(t_{obs}=0.3\)</span>. Then our p-value is <span class="math display">\[\begin{aligned}
 \text{p-value}&amp;=P_{H_0}(T\geq 0.3)\\
 &amp;=P_{H_0}(X\geq 8, X\leq 2)\\
 &amp;=2*\mathtt{pbinom(2,prob=0.5,size=10)}=0.109
-\end{aligned}\]</span> Notice this <em>isn’t</em> what we calculated before when we explored the idea – we are not just calculating the probability <span class="math inline">\(X=8\)</span> but the probability <span class="math inline">\(X\in\{0,1,2,8,9,10\}\)</span>. This is because a p-value is calculated as the probability of getting <em>as extreme as <span class="math inline">\(T_{obs}\)</span> or more extreme</em>. So we include other more extreme events that we didn’t actually see.</p>
+\end{aligned}\]</span> Notice this <em>isn’t</em> what we calculated before when we explored the idea – we are not just calculating the probability <span class="math inline">\(X=8\)</span> but the probability <span class="math inline">\(X\in\{0,1,2,8,9,10\}\)</span>. This is because a p-value is calculated as the probability of getting <em>as extreme as <span class="math inline">\(t_{obs}\)</span> or more extreme</em>. So we include other more extreme events that we didn’t actually see.</p>
 <p>We can see what p-values we would get with possible different data:</p>
 <table class="caption-top table">
 <thead>
@@ -654,7 +654,7 @@ Note
 <div class="PARAGRAPH">
 <p>Comparing Two Populations</p>
 </div>
-<p>Consider our other hypothesis about two populations, <span class="math display">\[H_0: \mu_X=\mu_Y\]</span> with test statistic <span class="math display">\[T_n=|\bar{X}-\bar{Y}|\]</span> We know that asymptotically, <span class="math display">\[\frac{(\bar{X}-\bar{Y})-(\mu_X-\mu_Y)}{\hat{SE}(\bar{X}-\bar{Y})}\overset{D}{\rightarrow} N(0,1)\]</span> Then if we observe <span class="math inline">\(T_{obs}\)</span> as our absolute difference in the means, our p-value is <span class="math display">\[\text{p-value}=P_{H_0}(|\bar{X}-\bar{Y}| \geq T_{obs})=P_{H_0}\left(\frac{|\bar{X}-\bar{Y}|-(0)}{\hat{SE}(\bar{X}-\bar{Y})} \geq \frac{T_{obs}}{\hat{SE}(\bar{X}-\bar{Y})}\right)\]</span> If we define <span class="math display">\[U=\frac{T_{obs}}{\hat{SE}(\bar{X}-\bar{Y})},\]</span> then our p-value is (for large <span class="math inline">\(n\)</span>) <span class="math display">\[\text{p-value}\approx P(N(0,1)\geq U)+P(N(0,1)\leq - U)=2*(1-pnorm(U))\]</span> Notice how it’s important for continuous distributions that my p-value is defined in terms of <span class="math inline">\(\geq\)</span> – it wouldn’t have any meaning to find the exact probability of the observed value I saw.</p>
+<p>Consider our other hypothesis about two populations, <span class="math display">\[H_0: \mu_X=\mu_Y\]</span> with test statistic <span class="math display">\[T_n=|\bar{X}-\bar{Y}|\]</span> We know that asymptotically, <span class="math display">\[\frac{(\bar{X}-\bar{Y})-(\mu_X-\mu_Y)}{\hat{SE}(\bar{X}-\bar{Y})}\overset{D}{\rightarrow} N(0,1)\]</span> Then if we observe <span class="math inline">\(t_{obs}\)</span> as our absolute difference in the means, our p-value is <span class="math display">\[\text{p-value}=P_{H_0}(|\bar{X}-\bar{Y}| \geq t_{obs})=P_{H_0}\left(\frac{|\bar{X}-\bar{Y}|-(0)}{\hat{SE}(\bar{X}-\bar{Y})} \geq \frac{t_{obs}}{\hat{SE}(\bar{X}-\bar{Y})}\right)\]</span> If we define <span class="math display">\[U=\frac{t_{obs}}{\hat{SE}(\bar{X}-\bar{Y})},\]</span> then our p-value is (for large <span class="math inline">\(n\)</span>) <span class="math display">\[\text{p-value}\approx P(N(0,1)\geq U)+P(N(0,1)\leq - U)=2*(1-pnorm(U))\]</span> Notice how it’s important for continuous distributions that my p-value is defined in terms of <span class="math inline">\(\geq\)</span> – it wouldn’t have any meaning to find the exact probability of the observed value I saw.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -691,7 +691,7 @@ Note
 <h3 class="anchored" data-anchor-id="interpreting-p-values">Interpreting P-values</h3>
 <p>Notice a few things about the p-value</p>
 <ul>
-<li><p>As we noted above, the p-value is not the probability of observing <span class="math inline">\(T_{obs}\)</span>. Instead we are also including the probability of more extreme results (which we did not actually see).</p></li>
+<li><p>As we noted above, the p-value is not the probability of observing <span class="math inline">\(t_{obs}\)</span>. Instead we are also including the probability of more extreme results (which we did not actually see).</p></li>
 <li><p>A p-value is <em>not</em> the probability that the null hypothesis is true! The unknown parameter (or more generally the unknown data generation <span class="math inline">\(F\)</span>) is a fixed quantity. Thus <span class="math inline">\(H_0\)</span> is either true or not, and there is no randomness about this; we just don’t know whether it’s true or not. This is a common mistaken interpretation of p-values (similar to those we discussed for confidence intervals)</p></li>
 <li><p>If we see a small p-value it tells only that the data we saw is unlikely to have been created under the null distribution. It tells us <em>nothing</em> about if the data is better described by an alternative hypothesis.</p>
 <p>Indeed with our coin flip data, we can see that quite different outcomes (0 heads and 10 heads) have the same p-value but clearly if we don’t believe the coin is fair, then we would have very different likely alternatives for these two different results.</p></li>
