@@ -549,7 +549,7 @@ Note
 <p>Why <span class="math inline">\(T\)</span> needs to be “standardized”</p>
 </div>
 <p>In our above examples we created a statistic <span class="math inline">\(T\)</span>, and we understand that it tells us the strength of evidence against the null, but we don’t have a sense of how common such a value is.</p>
-<p>For example, in the coin flip example, we saw that the chance we get <span class="math inline">\(T=0.3\)</span> is equivalent to either <span class="math inline">\(X=2\)</span> or <span class="math inline">\(X=8\)</span>, so a probability <span class="math display">\[P_{\pi=0.5}(T_n=0.3 )=0.0878\]</span> That’s not a large probability, but it’s certainly far from impossible.</p>
+<p>For example, in the coin flip example, we saw that the chance we get <span class="math inline">\(T=0.3\)</span> is equivalent to either <span class="math inline">\(X=2\)</span> or <span class="math inline">\(X=8\)</span>, so a probability <span class="math display">\[P_{\pi=0.5}(T_n=0.3 )=0.0879\]</span> That’s not a large probability, but it’s certainly far from impossible.</p>
 <p>What if we saw <span class="math inline">\(T=0.3\)</span> with n=100 flips? We would have seen either 20 or 80 heads. The probability of that happening under the null is <span class="math display">\[P_{\pi=0.5}(T_n=0.3 )=8.456e-10\]</span> so it’s very unlikely.</p>
 <p>So we need to grapple with the distribution of <span class="math inline">\(T_n\)</span> under the null to ascertain whether <span class="math inline">\(T_n\)</span> is unusually large and that <span class="math inline">\(T_n\)</span> is pretty dependent on <span class="math inline">\(n\)</span>.</p>
 <p>We see that instead of thinking about the value of <span class="math inline">\(T\)</span>, what is easy to compare and make sense of is its <em>probability under the null</em>. We are transforming from the scale of <span class="math inline">\(T\)</span> to the scale of probability, which we can make sense of and interpret much more easily.</p>
@@ -562,7 +562,7 @@ Note
 <p><span class="theorem-title"><strong>Definition 1 (Null distribution)</strong></span> Assume we have a test statistic <span class="math inline">\(T\)</span>. Then the sampling distribution of <span class="math inline">\(T\)</span> when we assume the null distribution is true is called its <strong>null distribution.</strong></p>
 <p>We often write probabilities involving the null distribution with the following notation <span class="math display">\[P_{H_0}(\cdot)\]</span></p>
 </div>
-<p>So above in our coin flip example, we calculated that for <span class="math inline">\(n=10\)</span>, <span class="math display">\[P_{H_0}(T_n=0.3)=0.0878\]</span> and for <span class="math inline">\(n=100\)</span> <span class="math display">\[P_{H_0}(T_n=0.3)=8.45e-10\]</span></p>
+<p>So above in our coin flip example, we calculated that for <span class="math inline">\(n=10\)</span>, <span class="math display">\[P_{H_0}(T_n=0.3)=0.0879\]</span> and for <span class="math inline">\(n=100\)</span> <span class="math display">\[P_{H_0}(T_n=0.3)=8.46e-10\]</span></p>
 <p>Then we will define the p-value as the following:</p>
 <div id="def-pvalue" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2 (P-value)</strong></span> Assume we observe our realizations of the data, <span class="math inline">\(x_1,\ldots,x_n\)</span>, and calculate the value of our test statistic, <span class="math inline">\(t_{obs}\)</span>. We define the <strong>p-value</strong> as <span class="math display">\[\text{p-value}=P_{H_0}(T \geq t_{obs})\]</span> In other words, we calculate the probability of seeing a value as extreme as <span class="math inline">\(t_{obs}\)</span> <em>or more extreme</em> under the null distribution of <span class="math inline">\(T\)</span>.</p>
@@ -575,7 +575,7 @@ Note
 <p>Suppose we observe, as we discussed above, 8 heads out of 10.</p>
 <p>Then we’ve already seen that our observed test statistic <span class="math inline">\(t_{obs}=0.3\)</span>. Then our p-value is <span class="math display">\[\begin{aligned}
 \text{p-value}&amp;=P_{H_0}(T\geq 0.3)\\
-&amp;=P_{H_0}(X\geq 8, X\leq 2)\\
+&amp;=P_{H_0}(X\geq 8 \text{ or } X\leq 2)\\
 &amp;=2*\mathtt{pbinom(2,prob=0.5,size=10)}=0.109
 \end{aligned}\]</span> Notice this <em>isn’t</em> what we calculated before when we explored the idea – we are not just calculating the probability <span class="math inline">\(X=8\)</span> but the probability <span class="math inline">\(X\in\{0,1,2,8,9,10\}\)</span>. This is because a p-value is calculated as the probability of getting <em>as extreme as <span class="math inline">\(t_{obs}\)</span> or more extreme</em>. So we include other more extreme events that we didn’t actually see.</p>
 <p>We can see what p-values we would get with possible different data:</p>
@@ -610,13 +610,13 @@ Note
 <tr class="even">
 <td style="text-align: center;">3</td>
 <td style="text-align: center;">0.2</td>
-<td style="text-align: center;">0.343</td>
+<td style="text-align: center;">0.344</td>
 <td style="text-align: center;">Compatible with <span class="math inline">\(H_0\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">4</td>
 <td style="text-align: center;">0.1</td>
-<td style="text-align: center;">0.753</td>
+<td style="text-align: center;">0.754</td>
 <td style="text-align: center;">Compatible with <span class="math inline">\(H_0\)</span></td>
 </tr>
 <tr class="even">
@@ -628,13 +628,13 @@ Note
 <tr class="odd">
 <td style="text-align: center;">6</td>
 <td style="text-align: center;">0.1</td>
-<td style="text-align: center;">0.753</td>
+<td style="text-align: center;">0.754</td>
 <td style="text-align: center;">Compatible with <span class="math inline">\(H_0\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">7</td>
 <td style="text-align: center;">0.2</td>
-<td style="text-align: center;">0.343</td>
+<td style="text-align: center;">0.344</td>
 <td style="text-align: center;">Compatible with <span class="math inline">\(H_0\)</span></td>
 </tr>
 <tr class="odd">
@@ -701,7 +701,7 @@ Note
 <li><p>A p-value is <em>not</em> the probability that the null hypothesis is true! The unknown parameter (or more generally the unknown data generation <span class="math inline">\(F\)</span>) is a fixed quantity. Thus <span class="math inline">\(H_0\)</span> is either true or not, and there is no randomness about this; we just don’t know whether it’s true or not. This is a common mistaken interpretation of p-values (similar to those we discussed for confidence intervals)</p></li>
 <li><p>If we see a small p-value it tells only that the data we saw is unlikely to have been created under the null distribution. It tells us <em>nothing</em> about if the data is better described by an alternative hypothesis.</p>
 <p>Indeed with our coin flip data, we can see that quite different outcomes (0 heads and 10 heads) have the same p-value but clearly if we don’t believe the coin is fair, then we would have very different likely alternatives for these two different results.</p></li>
-<li><p>Similarly if we see a larger p-value, it doesn’t tell us that the null distribution is actually what created the data. It just says that the data is compatible with having been created under null hypothesis setup. Indeed, if I see <span class="math inline">\(X=3\)</span> heads, we have a p-value of 0.343, which is not evidence that the null is not true because this is not an unlikely event if the true success probability is <span class="math inline">\(\pi=0.5\)</span>. But at the same time, it’s also clearly a likely outcome for <span class="math inline">\(\pi=0.3\)</span>, <span class="math inline">\(\pi=0.4\)</span>, etc.</p></li>
+<li><p>Similarly if we see a larger p-value, it doesn’t tell us that the null distribution is actually what created the data. It just says that the data is compatible with having been created under null hypothesis setup. Indeed, if I see <span class="math inline">\(X=3\)</span> heads, we have a p-value of 0.344, which is not evidence that the null is not true because this is not an unlikely event if the true success probability is <span class="math inline">\(\pi=0.5\)</span>. But at the same time, it’s also clearly a likely outcome for <span class="math inline">\(\pi=0.3\)</span>, <span class="math inline">\(\pi=0.4\)</span>, etc.</p></li>
 </ul>
 <div class="PARAGRAPH">
 <p>P-values are Random Variables</p>
