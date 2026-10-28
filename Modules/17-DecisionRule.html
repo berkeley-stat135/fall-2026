@@ -61,7 +61,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1b1e7e8ee10296b6f6820b1334157194.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-44952193eeadea267d9e4506e1456eea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -307,6 +307,12 @@ window.Quarto = {
  <span class="menu-text">Hypothesis Testing: Decision Perspective</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/18-WaldAndOtherTests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tests of a parameter and Relationship to Confidence Intervals</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -335,6 +341,7 @@ window.Quarto = {
   <li><a href="#examples-of-choosing-c." id="toc-examples-of-choosing-c." class="nav-link" data-scroll-target="#examples-of-choosing-c.">Examples of choosing <span class="math inline">\(c\)</span>.</a></li>
   </ul></li>
   <li><a href="#relationship-to-p-values" id="toc-relationship-to-p-values" class="nav-link" data-scroll-target="#relationship-to-p-values">Relationship to P-values</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -380,11 +387,11 @@ window.Quarto = {
 \text{Do not reject }H_0 &amp; \text{if }T\leq c
 \end{cases}
 \]</span></p>
-<p>Notice <span class="math inline">\(c\)</span> is a cutoff we choose before ever seeing any data, so it is not random.</p>
+<p>Notice <span class="math inline">\(c\)</span> is a cutoff we choose before ever seeing any data, so it is not random, and is called the <strong>critical value</strong> of the test.</p>
 <div id="def-rejectReg" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (Rejection Region)</strong></span> The set of values of the data that leads to the <em>rejection</em> of the null hypothesis is called the <em>rejection region</em> of the test. If our data <span class="math inline">\(X\)</span> lies in the rejection region, we will reject our null, otherwise we will not.</p>
 </div>
-<p>The rejection region is in terms of our actual data, rather than our test statistic, but it will of course depend on our cutoff <span class="math inline">\(c\)</span>. Like <span class="math inline">\(c\)</span> it is not random.</p>
+<p>The rejection region is in terms of our actual data, rather than our test statistic, but it will of course depend on our critical value <span class="math inline">\(c\)</span>. Like <span class="math inline">\(c\)</span> it is not random.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -609,7 +616,7 @@ Note
 </section>
 <section id="neyman-pearson-paradigm-for-choosing-the-rejection-region" class="level2">
 <h2 class="anchored" data-anchor-id="neyman-pearson-paradigm-for-choosing-the-rejection-region">Neyman-Pearson Paradigm for Choosing the Rejection Region</h2>
-<p>A quantitative strategy for choosing our cutoff <span class="math inline">\(c\)</span> (equivalently our rejection region) is to select it to maximize the probability of being correct and minimize the probability of being wrong. However, we have seen that we can’t uniformly make both types of error small.</p>
+<p>A quantitative strategy for choosing our critical value <span class="math inline">\(c\)</span> (equivalently our rejection region) is to select it to maximize the probability of being correct and minimize the probability of being wrong. However, we have seen that we can’t uniformly make both types of error small.</p>
 <p>The framework introduced by Neyman and Pearson and adopted by all of statistics, called the Neyman-Pearson paradigm, is to <em>fix</em> a significance level <span class="math inline">\(\alpha\in(0,1)\)</span> that is the maximum level of type I error we are willing to allow (usually 0.05 or 0.01). Then we choose <span class="math inline">\(c\)</span> so that we guarantee that the probability of our type I error is <span class="math inline">\(\leq \alpha\)</span>. We call it an <span class="math inline">\(\alpha\)</span>-level test, and a proposed <span class="math inline">\(\alpha\)</span>-level test is only considered valid if it controls the type I error at the stated level of <span class="math inline">\(\alpha\)</span>.</p>
 <p>Technically, we could satisfy this criterion by many possible <span class="math inline">\(c\)</span> values so long as they have type I error less than <span class="math inline">\(\alpha\)</span>. But since we’ve seen that our power will increase as we increase our significance level, we will pick the <span class="math inline">\(c\)</span> to get the largest possible significance level that still satisfies <span class="math inline">\(\leq \alpha\)</span>.</p>
 <section id="examples-of-choosing-c." class="level3">
@@ -687,7 +694,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Notice that since we are choosing <span class="math inline">\(c\)</span> to guarantee our Type-I error is less than <span class="math inline">\(\alpha\)</span>, our cutoff value <span class="math inline">\(c\)</span> will always depend on our choice of <span class="math inline">\(\alpha\)</span> as well as our sample size <span class="math inline">\(n\)</span>.</p>
+<p>Notice that since we are choosing <span class="math inline">\(c\)</span> to guarantee our Type-I error is less than <span class="math inline">\(\alpha\)</span>, our critical value <span class="math inline">\(c\)</span> will always depend on our choice of <span class="math inline">\(\alpha\)</span> as well as our sample size <span class="math inline">\(n\)</span>.</p>
 </div>
 </div>
 </section>
@@ -702,7 +709,7 @@ Note
 \text{Do not reject }H_0 &amp; \text{if }\text{p-value}\geq \alpha
 \end{cases}
 \]</span> This test has significance level <span class="math inline">\(\alpha\)</span> and is a valid <span class="math inline">\(\alpha\)</span>-level test.</p>
-<p>Furthermore, suppose we develop a test from scratch based on the same test statistic <span class="math inline">\(T\)</span>, i.e.&nbsp;pick a cutoff value <span class="math inline">\(c'\)</span> that gives us significance level <span class="math inline">\(\alpha\)</span>, <span class="math display">\[P_{H_0}(T&gt;c')=\alpha.\]</span> But the p-value is a negative monotone transformation of <span class="math inline">\(T\)</span>, meaning that p-value=<span class="math inline">\(f(T)\)</span> for an <span class="math inline">\(f\)</span> defined in our p-value section. So we have that <span class="math display">\[P_{H_0}(T&gt;c')=P_{H_0}(\text{p-value}&lt;f(c'))=\alpha\]</span> We know from above, this means <span class="math inline">\(f(c')=\alpha\)</span>, so <span class="math inline">\(c'=f^{-1}(\alpha)\)</span>. Meaning we can go back and forth between a test based on <span class="math inline">\(T\)</span> and a test based on our p-value, and they will be <em>equivalent</em>, i.e.&nbsp;a test based on <span class="math inline">\(T\)</span> will make the exact same rejections as a test based on the p-value.</p>
+<p>Furthermore, suppose we develop a test from scratch based on the same test statistic <span class="math inline">\(T\)</span>, i.e.&nbsp;pick a critical value <span class="math inline">\(c'\)</span> that gives us significance level <span class="math inline">\(\alpha\)</span>, <span class="math display">\[P_{H_0}(T&gt;c')=\alpha.\]</span> But the p-value is a negative monotone transformation of <span class="math inline">\(T\)</span>, meaning that p-value=<span class="math inline">\(f(T)\)</span> for an <span class="math inline">\(f\)</span> defined in our p-value section. So we have that <span class="math display">\[P_{H_0}(T&gt;c')=P_{H_0}(\text{p-value}&lt;f(c'))=\alpha\]</span> We know from above, this means <span class="math inline">\(f(c')=\alpha\)</span>, so <span class="math inline">\(c'=f^{-1}(\alpha)\)</span>. Meaning we can go back and forth between a test based on <span class="math inline">\(T\)</span> and a test based on our p-value, and they will be <em>equivalent</em>, i.e.&nbsp;a test based on <span class="math inline">\(T\)</span> will make the exact same rejections as a test based on the p-value.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -719,6 +726,20 @@ Note
 </div>
 <p>So in this way, we see that any test based on <span class="math inline">\(T\)</span> can be equivalently stated as a test on the corresponding p-value. This is how most people work with testing. They find a p-value based on a test statistic <span class="math inline">\(T\)</span>, and then they report the p-values, but also make decisions based on the p-value.</p>
 <p>For example, there is a tradition of setting the <span class="math inline">\(\alpha\)</span> level to 0.01 or 0.05, and calling a result significant if its p-value is less than one of these two values. You will often see statements like “this result is significant at level 0.05 (p-value 0.03).” So it is common to <em>both</em> assess whether the result meets standard levels of significance from a decision rule perspective <em>and</em> report the precise p-value obtained.</p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Now that we’ve laid out the framework of hypothesis testing, let’s review what is needed to make a hypothesis test.</p>
+<ol type="1">
+<li><p>A null hypothesis <span class="math inline">\(H_0\)</span> that we want to test</p></li>
+<li><p>A test statistic <span class="math inline">\(T=T(X_1,\ldots,X_n)\)</span> that quantifies the evidence for/against the null.</p></li>
+<li><p>The null distribution of <span class="math inline">\(T\)</span></p></li>
+<li><p>Once we have those pieces in hand, we can construct our test either by</p>
+<ol type="a">
+<li>calculating the p-value of the <span class="math inline">\(T\)</span></li>
+<li>determining the <span class="math inline">\(c(\alpha)\)</span> that is our cutoff or critical value.</li>
+</ol></li>
+</ol>
 
 
 

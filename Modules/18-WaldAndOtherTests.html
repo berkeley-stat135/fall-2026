@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Tests of a parameter and Relationship to Confidence Intervals</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-44952193eeadea267d9e4506e1456eea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="”https://siteimproveanalytics.com/js/siteanalyze_6294756.js”"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/18-WaldAndOtherTests.html">Tests of a parameter and Relationship to Confidence Intervals</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/stat_bear.png" alt="UC Berkeley Statistics logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../assets/stat_bear.png" alt="UC Berkeley Statistics logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Stat 135</a> 
+        <div class="sidebar-tools-main">
+    <a href="{{< var site-url >}}" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home / Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../staff.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Staff</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calendar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calendar</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modules</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/00-OverviewIntro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/01-ThinkProb.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Thinking probabilistically about data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/02-EstimationBasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/03-CaseStudyRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Case Study: Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/04-CreatingEstimators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating Estimators with MLE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/05-LossMEstimators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estimating with Loss Functions and M-Estimators</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/06-SamplingDist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling distribution of the Mean</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/07-CIMean.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Confidence Intervals for the Population Mean</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/08-CaseStudy2Groups.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Case Study: Comparing Two Groups</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/09-CIregression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Confidence intervals for linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/10-MLEAsyNormal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Large Sample Theory for the Maximum Likelihood Estimator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/11-DeltaMethod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functions of Estimators and the Delta Method</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/12-Bootstrap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bootstrap</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/13-FiniteProperties.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Efficiency and Mean Squared Error</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/14-Consistency.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consistency</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/15-Robustness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Robustness properties</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/16-NullAndPvalues.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis Testing: Null hypotheses and P-values</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/17-DecisionRule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis Testing: Decision Perspective</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/18-WaldAndOtherTests.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Tests of a parameter and Relationship to Confidence Intervals</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../license.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">License</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#wald-test-statistics" id="toc-wald-test-statistics" class="nav-link active" data-scroll-target="#wald-test-statistics">Wald Test Statistics</a></li>
+  <li><a href="#examples-of-using-the-exact-sampling-distribution" id="toc-examples-of-using-the-exact-sampling-distribution" class="nav-link" data-scroll-target="#examples-of-using-the-exact-sampling-distribution">Examples of using the Exact Sampling Distribution</a>
+  <ul class="collapse">
+  <li><a href="#t-statistics-and-tests" id="toc-t-statistics-and-tests" class="nav-link" data-scroll-target="#t-statistics-and-tests">T statistics and tests</a></li>
+  </ul></li>
+  <li><a href="#estimating-sehattheta-and-the-score-test" id="toc-estimating-sehattheta-and-the-score-test" class="nav-link" data-scroll-target="#estimating-sehattheta-and-the-score-test">Estimating <span class="math inline">\(SE(\hat\theta)\)</span> and the Score Test</a>
+  <ul class="collapse">
+  <li><a href="#example-binomial-score-test" id="toc-example-binomial-score-test" class="nav-link" data-scroll-target="#example-binomial-score-test">Example – Binomial Score Test</a></li>
+  <li><a href="#the-score-statistic" id="toc-the-score-statistic" class="nav-link" data-scroll-target="#the-score-statistic">The Score Statistic</a></li>
+  </ul></li>
+  <li><a href="#relationship-to-ci" id="toc-relationship-to-ci" class="nav-link" data-scroll-target="#relationship-to-ci">Relationship to CI</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/18-WaldAndOtherTests.html">Tests of a parameter and Relationship to Confidence Intervals</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Tests of a parameter and Relationship to Confidence Intervals</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="READING">
+<div class="block-title">
+<p><strong>Corresponding reading</strong></p>
+</div>
+<p>Chapter 5 in <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span> covers hypothesis testing, and I would recommend just reading the chapter through, in order, because we will be covering all the material in that chapter. The specific material discussed in this lecture is found</p>
+<ul>
+<li>5.2.4 for test of mean</li>
+<li>5.3.1 for test of difference of two means</li>
+<li>5.6 for duality of CI and significance tests.</li>
+<li>6.4.3 for regression</li>
+</ul>
+<p>For duality of CI, the treatment in <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span> in Chapter 9.3 is more comprehensive.</p>
+</div>
+<p>In the following, we are going to work through the steps of calculating a p-value and a critical value of test statistics using the results we developed for normal-based confidence intervals.</p>
+<section id="wald-test-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="wald-test-statistics">Wald Test Statistics</h2>
+<p>In our example of comparing the mean of two populations, we’ve seen that we can use our distributional results that we developed for normal confidence intervals to get the null distribution of our data.</p>
+<p>In particular, suppose we have an estimate <span class="math inline">\(\hat\theta\)</span> of <span class="math inline">\(\theta\)</span>, and we know the distribution (either exact or asymptotically) of <span class="math display">\[T(\theta)=\frac{\hat\theta -\theta}{\hat{SE}(\hat\theta)}\]</span> where <span class="math inline">\(\hat{SE}(\hat\theta)=\sqrt{1/I_n(\hat\theta)}\)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Then if we want to test the null hypothesis <span class="math display">\[H_0: \theta=\theta_0\]</span> then we define our test statistic as <span class="math inline">\(T_0=|T(\theta_0)|\)</span>, i.e. <span class="math display">\[T_0=\frac{|\hat\theta -\theta_0|}{\hat{SE}(\hat\theta)}\]</span> Again, notice that <span class="math inline">\(\theta_0\)</span> is the null hypothesis value we have chosen; it’s no longer an unknown parameter. So <span class="math inline">\(T_0\)</span> is a well-defined statistic.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We define the test statistic as the absolute value, because we want to account for evidence in <em>either</em> direction that is away from our null value <span class="math inline">\(\theta_0\)</span>. However, since we know the distribution of <span class="math inline">\(T(\theta_0)\)</span> if <span class="math inline">\(\theta=\theta_0\)</span>, we can work out the distribution of <span class="math inline">\(|T(\theta_0)|\)</span>.</p>
+<p>Notice that unlike my original example when I introduced p-values, where I just used the numerator <span class="math inline">\(|\bar{X}-\bar{Y}|\)</span>, I will usually <em>standardize</em> the statistic by dividing by <span class="math inline">\(\hat{SE}(\hat\theta)\)</span> in my definition of <span class="math inline">\(T\)</span>. It doesn’t actually matter for our conclusions (remember what we said about monotone transformations), but it does put our test statistics all on the same <span class="math inline">\(N(0,1)\)</span> scale, so their values are more interpretable.</p>
+</div>
+</div>
+<div class="PARAGRAPH">
+<p>P-values</p>
+</div>
+<p>Then if we observe <span class="math inline">\(t_{obs}=T_0(x_1,\ldots,x_n)\)</span> as our observed value of <span class="math inline">\(T_0\)</span>, our p-value is calculated as <span class="math display">\[
+\begin{aligned}
+\text{p-value}&amp;=P_{H_0}(T_0 \geq t_{obs})\\
+&amp;\approx P\left( Z \geq t_{obs})+P\left( Z \leq - t_{obs}) \quad\text{where }Z\sim N(0,1)\\
+\\
+&amp;=1-\Phi(t_{obs)+\Phi(-t_{obs)=2(1-\Phi(t_{obs}))\]</span> where <span class="math inline">\(\Phi(\cdot)\)</span> is the CDF of the <span class="math inline">\(N(0,1)\)</span>.</p>
+<div class="PARAGRAPH">
+<p>Cutoff value <span class="math inline">\(c\)</span></p>
+</div>
+<p>We want to find the <span class="math inline">\(c\)</span> so that <span class="math display">\[P_{H_0}(T_0&gt;c)=\alpha\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\alpha=P_{H_0}(T_0&gt;c)&amp;\approx P(Z \geq c)+ P(Z\leq -c)\\
+&amp;= 1-\Phi(c)+\Phi(-c)=2(1-\Phi(c))\\
+\Rightarrow c&amp;=\Phi^{-1}(1-\alpha/2)=z_{\alpha_2}\\
+\end{aligned}
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice how standardizing my test statistic makes the calculations simple functions of the standard normal. But if you look back at our original treatment of the difference of the two populations, you will see that we get the same answers either way.</p>
+</div>
+</div>
+</section>
+<section id="examples-of-using-the-exact-sampling-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="examples-of-using-the-exact-sampling-distribution">Examples of using the Exact Sampling Distribution</h2>
+<p>We can also get exact p-value when we know the exact sampling distribution of our test statistic.</p>
+<section id="t-statistics-and-tests" class="level3">
+<h3 class="anchored" data-anchor-id="t-statistics-and-tests">T statistics and tests</h3>
+<p>For example, <em>if we assume our data is normally distributed</em>, we know that in the following settings we have an exact <span class="math inline">\(t\)</span> distribution for our <span class="math inline">\(T\)</span> random variable for confidence intervals, and can use them to define test statistics like with the Wald Statistics. These test statistics are called <strong>t-statistics</strong> and the tests that goes with them are called <strong>t-tests</strong>. Again when we’re talking about both the random variable and the test statistic, we’ll use <span class="math inline">\(T_0\)</span> for the test statistic just to distinguish them.</p>
+<ol type="1">
+<li><p><strong>Population Mean</strong> Assume <span class="math inline">\(X_i\)</span> i.i.d. <span class="math inline">\(N(\mu,\sigma^2)\)</span>, then <span class="math display">\[T=\frac{\bar{X}-\mu}{S^2/n}\sim t_{n-1}\]</span> So we can define a test statistic for the null hypothesis <span class="math inline">\(H_0:\mu=\mu_0\)</span> as <span class="math display">\[T_0=\frac{|\bar{X}-\mu_0|}{S^2/n}\]</span></p></li>
+<li><p><strong>Regression</strong> Again, if our normal model is true <span class="math display">\[Y_i|X_i=x_i\sim N(\beta_0+\beta_1x_i,\sigma^2)\]</span> then we have <span class="math display">\[T=\frac{\hat\beta_1-\beta_1}{\hat{SE}(\hat\beta_1)}\sim t_{n-2}\]</span></p></li>
+</ol>
+<p>In principle, we can test for an arbitrary <span class="math inline">\(H_0:\beta_1=\beta_{10}\)</span> <span class="math display">\[T_0=\frac{|\hat\beta_1-\beta_{1(0)}|}{\hat{SE}(\hat\beta_1)}.\]</span></p>
+<p>But in practice, we always test <span class="math inline">\(H_0:\beta_1=0\)</span>, which means there is no slope; this means <span class="math inline">\(X_i\)</span> is not relevant for predicting the expected value of <span class="math inline">\(Y_i\)</span>.</p>
+<ol start="3" type="1">
+<li><strong>Comparing two population means</strong> If our normal model is true, <span class="math inline">\(X_i\sim N(\mu_X,\sigma_X^2)\)</span> and <span class="math inline">\(Y_i\sim N(\mu_Y,\sigma_Y^2)\)</span>, then we have <span class="math display">\[T=\frac{\hat\Delta-\Delta}{S_{\hat{\Delta}}}=\frac{(\bar{X}-\bar{Y})-(\mu_X-\mu_Y)}{\hat{SE}(\Delta)}\sim t_{\nu}\]</span> If our null hypothesis is true, <span class="math inline">\(H_0: \mu_X=\mu_Y\)</span>, then <span class="math display">\[T_0=\frac{|\bar{X}-\bar{Y}|}{\hat{SE}(\Delta)}\sim t_{\nu}\]</span></li>
+</ol>
+<div class="PARAGRAPH">
+<p>P-values</p>
+</div>
+<p>The calculation of p-values is exactly as above, only with the appropriate <span class="math inline">\(t\)</span> distribution. Let <span class="math inline">\(t_{obs}=T_0(x_1,\ldots,x_n)\)</span> be our observed value of <span class="math inline">\(T_0\)</span>, our p-value is calculated as <span class="math display">\[
+\begin{aligned}
+\text{p-value}&amp;=P_{H_0}(T_0 \geq t_{obs})\\
+&amp;= P\left( T \geq t_{obs})+P\left( T \leq - t_{obs}) \quad\text{where }T\sim t_{\nu}\\
+\\
+&amp;=1-F(t_{obs)+F(-t_{obs)=2(1-F(t_{obs}))\]</span> where <span class="math inline">\(F(\cdot)\)</span> is the CDF of the <span class="math inline">\(t_{\nu}\)</span>, i.e.&nbsp;with the right degrees of freedom for the particular problem context.</p>
+<div class="PARAGRAPH">
+<p>Cutoff value <span class="math inline">\(c\)</span></p>
+</div>
+<p>We want to find the <span class="math inline">\(c\)</span> so that <span class="math display">\[P_{H_0}(T_0&gt;c)=\alpha\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\alpha=P_{H_0}(T_0&gt;c)&amp;=P(T_0 \geq c)+ P(T_0\leq -c)\\
+&amp;= 1-F(c)+F(-c)=2(1-F(c))\\
+\Rightarrow c&amp;=F^{-1}(1-\alpha/2)=z_{\alpha_2}\\
+\end{aligned}
+\]</span></p>
+</section>
+</section>
+<section id="estimating-sehattheta-and-the-score-test" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-sehattheta-and-the-score-test">Estimating <span class="math inline">\(SE(\hat\theta)\)</span> and the Score Test</h2>
+<p>In our Wald Test, we estimated the <span class="math inline">\(SE(\theta)\)</span> with our standard estimate in our confidence intervals, <span class="math display">\[\hat{SE}(\hat\theta)=\sqrt{1/I_n(\hat\theta)}\]</span></p>
+<p>However, since we are calculating probabilities when the null hypothesis is true, <span class="math inline">\(H_0:\theta=\theta_0\)</span>, then we could instead insert <span class="math inline">\(\theta_0\)</span> into <span class="math inline">\(SE(\theta)\)</span> to get the actual variance of <span class="math inline">\(\hat\theta\)</span> under the null, giving us a test-statistic <span class="math display">\[ T_0=\frac{|\hat\theta-\theta_0|}{SE(\theta_0)}\]</span> When the null hypothesis is true, then <span class="math display">\[\frac{\hat\theta -\theta_0|}{\hat{SE}(\theta_0)}\overset{D}{\rightarrow}N(0,1).\]</span> So we can use all of the above calculations, only with <span class="math inline">\(SE(\theta_0)\)</span></p>
+<section id="example-binomial-score-test" class="level3">
+<h3 class="anchored" data-anchor-id="example-binomial-score-test">Example – Binomial Score Test</h3>
+<p>A common example, given in the book (5.2.1), is testing for a proportion, like our coin flip example, <span class="math display">\[H_0: \pi=\pi_0\]</span> The under the Wald Test, you would use the test statistic <span class="math display">\[T_{Wald}=\frac{\hat\pi-\pi_0}{\sqrt{\frac{\hat\pi(1-\hat\pi)}{n}}},\]</span> while <span class="math display">\[T_{Score}=\frac{\hat\pi-\pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}\]</span></p>
+</section>
+<section id="the-score-statistic" class="level3">
+<h3 class="anchored" data-anchor-id="the-score-statistic">The Score Statistic</h3>
+<p>The <em>score test</em> is an alternative to the Wald test statistic that is based on the <em>score statistic</em>. We encountered this in our discussion of the asymptotic normality of the MLE and Fisher’s info, but didn’t spend much time on it (you can look back at the lecture notes). The score statistic for i.i.d. data is <span class="math display">\[U(X;\theta)=\frac{\partial L(\theta)}{\partial \theta}= \sum_{i=1}^n \frac{\partial \log f(X_i;\theta)}{\partial \theta}\]</span></p>
+<p>We showed there that <span class="math inline">\(E(U(X;\theta))=0\)</span>. Further, it is asymptotically normally distributed with asymptotic variance <span class="math inline">\(1/I_n(\theta)\)</span>, like the MLE.</p>
+<p>Then the score test for testing <span class="math inline">\(H_0: \theta=\theta_0\)</span> uses the test statistic <span class="math display">\[T_0=\frac{U(X;\theta)}{\sqrt{1/I_n(\theta)}}\]</span> which is asymptotically distributed <span class="math inline">\(N(0,1)\)</span> under <span class="math inline">\(H_0\)</span>.</p>
+<p>How is this related to how we choose <span class="math inline">\(SE(\theta)\)</span> in our test statistic? Under many examples (the Binomial, Normal, Poisson,…) the Score Test simplifies to be the same as the Wald Test, but using <span class="math inline">\(SE(\theta_0)\)</span> instead of using our estimate <span class="math inline">\(SE(\hat\theta)\)</span>. We will compare these test statistic more when we look at the likelihood ratio test.</p>
+</section>
+</section>
+<section id="relationship-to-ci" class="level2">
+<h2 class="anchored" data-anchor-id="relationship-to-ci">Relationship to CI</h2>
+<p>We’ve seen that we’ve used the distributional theory from CI to develop tests. But in fact, there is a more general relationship between CI and significance testing that goes beyond these normality-based tests. It applies <em>when we are testing the value of a specific parameter <span class="math inline">\(\theta\)</span>,</em> and says that any CI of <span class="math inline">\(\theta\)</span> corresponds to a hypothesis test and that every hypothesis test of <span class="math inline">\(\theta=\theta_0\)</span> corresponds to a CI.</p>
+<div id="thm-ciduality" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Constructing a <span class="math inline">\(100(1-\alpha)\)</span> CI from a test)</strong></span> Suppose for every value <span class="math inline">\(\theta_0\in \Theta\)</span> (the parameter space), there is a test at level <span class="math inline">\(\alpha\)</span> of <span class="math inline">\(H_0:\theta=\theta_0\)</span>. Let <span class="math inline">\(A(\theta_0)\)</span> be the values of <span class="math inline">\(X\)</span> for which you do not reject the null (the “acceptance” region).</p>
+<p>Then <span class="math inline">\(C(X)={\theta: X\in A(\theta)}\)</span> is a <span class="math inline">\(100(1-\alpha)\)</span> for <span class="math inline">\(\theta\)</span></p>
+</div>
+<p>Interpretation: You can create a confidence interval for <span class="math inline">\(\theta\)</span> as the collection of all the values of <span class="math inline">\(\theta_0\)</span> for which you <strong>would not</strong> reject the null of <span class="math inline">\(H_0:\theta=\theta_0\)</span>.</p>
+<div id="thm-ciduality" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Constructing a test from a CI)</strong></span> Suppose that <span class="math inline">\(C(X)\)</span> is a <span class="math inline">\(100(1-\alpha)\)</span>% confidence region for <span class="math inline">\(\theta\)</span>, i.e.&nbsp;for every <span class="math inline">\(\theta_0\)</span>, <span class="math display">\[P_{\theta_0}(\theta_0 \in C(X))=1-\alpha.\]</span></p>
+<p>Then an acceptance region for a test at level <span class="math inline">\(\alpha\)</span> of the hypothesis <span class="math inline">\(H_0:\theta=\theta_0\)</span> is <span class="math display">\[A(\theta_0)=\{X: \theta_0\in C(X)\}\]</span></p>
+</div>
+<p>Interpretation: You can create a test of <span class="math inline">\(H_0: \theta=\theta_0\)</span> based on <span class="math display">\[\begin{cases}\text{Reject }H_0 &amp; \theta_0 \notin C(X)\\
+\text{Don't reject } H_0&amp; \theta_0\in C(X)
+\end{cases}
+\]</span> This is quite similar to creating a test from p-values. We can see that the inferential ideas of confidence intervals, p-values, and hypothesis tests all fit together in a reasonably coherent way.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note, however, that there are some tests that are not a test of whether a parameter is a specific value. In that case, there is no confidence interval option</p>
+</div>
+</div>
+<div class="PARAGRAPH">
+<p>Which to use?</p>
+</div>
+<p>How do we use them in practice? If you are working with a specific parameter of interest, it is always preferable to report a confidence interval. It provides more information than a p-value. We see from the above that a confidence interval tells us all the values for which we would reject a null based on that value. That’s much more informative. This can be summarized in terms of preference of what we report as: <span class="math display">\[\text{Confidence interval} &gt; \text{p-value} &gt; \text{Decision Reject/Not}\]</span> While this is the best practice, you will often still see in practice a p-value reported instead of a confidence interval.</p>
+<p>Despite this, the interpretation that p-values and hypothesis testing brings to confidence intervals in terms of control of error, and decision making enriches the meaning and understanding of confidence intervals.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that this duality is not specific to Wald Tests, but any test of <span class="math inline">\(H_0:\theta=\theta_0\)</span>.</p>
+</div>
+</div>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-agresti2021" class="csl-entry" role="listitem">
+Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-rice2006" class="csl-entry" role="listitem">
+Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. Duxbury Press.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>One could also use the <em>observed</em> Fisher’s information here for ease of computation and it would still be a Wald Test<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/spring-2026");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
