@@ -388,6 +388,20 @@ window.Quarto = {
 \end{cases}
 \]</span></p>
 <p>Notice <span class="math inline">\(c\)</span> is a cutoff we choose before ever seeing any data, so it is not random, and is called the <strong>critical value</strong> of the test.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We have defined our rule as reject if <span class="math inline">\(T&gt;c\)</span> rather than <span class="math inline">\(T\geq c\)</span>. If <span class="math inline">\(T\)</span> is a continuous random variable, then both are equivalent. If <span class="math inline">\(T\)</span> is discrete, then either would work as long as you are consistent (and careful!) when you calculate what you want your <span class="math inline">\(c\)</span> to be and how you make decisions.</p>
+<p>P-values, on the other hand, are always defined with a <span class="math inline">\(\geq\)</span> <span class="math display">\[p-value= P_{H_0}(T\geq t_{obs}),\]</span> which is important for discrete random variables because it means you include the value you saw in the calculation!</p>
+</div>
+</div>
 <div id="def-rejectReg" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (Rejection Region)</strong></span> The set of values of the data that leads to the <em>rejection</em> of the null hypothesis is called the <em>rejection region</em> of the test. If our data <span class="math inline">\(X\)</span> lies in the rejection region, we will reject our null, otherwise we will not.</p>
 </div>
@@ -570,10 +584,10 @@ Note
 <section id="power" class="level3">
 <h3 class="anchored" data-anchor-id="power">Power</h3>
 <p>What about the probability of Type II error? This is the probability of <em>not rejecting</em> when <em>the null is not true</em>. This leads us to the notion of an <strong>alternative hypothesis</strong></p>
-<p>Sometimes we will have a specific alternative hypothesis. Suppose, for example, in our coin example, we know there are two types of coins, some that have probability of heads <span class="math inline">\(\pi=0.5\)</span>, and others with <span class="math inline">\(\pi=0.7\)</span>. I want to decide whether the coin I have is one of the fair coins. In this case we have a clear alternative hypothesis <span class="math display">\[H_1: \pi=0.7\]</span> This is often called a <em>simple</em> alternative.</p>
+<p>Sometimes we will have a specific alternative hypothesis. Suppose, for example, in our coin example, we know there are two types of coins, some that have probability of heads <span class="math inline">\(\pi=0.5\)</span>, and others with <span class="math inline">\(\pi=0.7\)</span>. I want to decide whether the coin I have is one of the fair coins. In this case we have a clear alternative hypothesis <span class="math display">\[H_a: \pi=0.7\]</span> This is often called a <em>simple</em> alternative.</p>
 <p>This leads us to a definition of <strong>power</strong> to describe our probability of <em>success</em> if the alternative is true:</p>
 <div id="def-power" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (Power)</strong></span> Let <span class="math inline">\(\beta\)</span> refer to the probability of Type II error of a test, <span class="math display">\[\beta=P(\text{Type II error} \mid \text{not } H_0)\]</span> The <em>power</em> of a test is the probability that the null hypothesis is <em>correctly</em> rejected when it is false, and is therefore given by <span class="math display">\[P_{H_1}(\text{Reject } H_0 )=1-P_{H_1}(\text{Type II error})\]</span></p>
+<p><span class="theorem-title"><strong>Definition 3 (Power)</strong></span> Let <span class="math inline">\(\beta\)</span> refer to the probability of Type II error of a test, <span class="math display">\[\beta=P(\text{Type II error})=P_{H_a}(T\leq c)\]</span> The <em>power</em> of a test is the probability that the null hypothesis is <em>correctly</em> rejected when it is false, and is therefore given by <span class="math display">\[P_{H_a}(\text{Reject } H_0 )=P_{H_a}(T&gt; c)=1-P(\text{Type II error})\]</span></p>
 </div>
 <div class="PARAGRAPH">
 <p>Coin Example with Specific alternative</p>
@@ -583,9 +597,9 @@ Note
 <div class="PARAGRAPH">
 <p>Composite Alternatives and Power Curves</p>
 </div>
-<p>However, many times we will not have a specific alternative. If I don’t know there’s a specific alternative coin, then I just have that <span class="math display">\[H_1: \pi\neq 0.5\]</span> or for our two population comparison, <span class="math display">\[H_1: \mu_X\neq \mu_Y\]</span> We often call these <em>composite alternatives</em>.</p>
+<p>However, many times we will not have a specific alternative. If I don’t know there’s a specific alternative coin, then I just have that <span class="math display">\[H_a: \pi\neq 0.5\]</span> or for our two population comparison, <span class="math display">\[H_a: \mu_X\neq \mu_Y\]</span> We often call these <em>composite alternatives</em>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>The alternative space is just the space if all possible parameters that are not the null value, and you can’t calculate a probability for the entire alternative space – probabilities depend on the specific value of the parameter.</p>
-<p>What we can do is pick a specific choice <span class="math inline">\(\pi\in H_1\)</span> for our alternative, and calculate the probability of that.</p>
+<p>What we can do is pick a specific choice <span class="math inline">\(\pi\in H_a\)</span> for our alternative, and calculate the probability of that.</p>
 <p>In fact we can express this as a curve of all possible values of <span class="math inline">\(\pi\)</span>, <span class="math display">\[power(\pi)=P_\pi(T &gt; 0.35)\]</span></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -673,9 +687,9 @@ Note
 <p>Since our test statistic <span class="math inline">\(T\)</span> in this setting has a continuous distribution, we know that we can get exactly <span class="math inline">\(\alpha\)</span>. So we want to find the <span class="math inline">\(c\)</span> so that <span class="math display">\[P_{H_0}(T&gt;c)=\alpha\]</span></p>
 <p><span class="math display">\[
 \begin{aligned}
-P_{H_0}(T&gt;c)&amp;=P_{H_0}(|\bar{X}-\bar{Y}| \geq c)\\
-&amp;=P_{H_0}\left(\frac{|\bar{X}-\bar{Y}|-(0)}{\hat{SE}(\bar{X}-\bar{Y})} \geq \frac{c}{\hat{SE}(\bar{X}-\bar{Y})}\right)\\
-&amp;\approx 2 P_{H_0}\left(Z \geq \frac{c}{\hat{SE}(\bar{X}-\bar{Y})}\right)
+P_{H_0}(T&gt;c)&amp;=P_{H_0}(|\bar{X}-\bar{Y}| &gt; c)\\
+&amp;=P_{H_0}\left(\frac{|\bar{X}-\bar{Y}|-(0)}{\hat{SE}(\bar{X}-\bar{Y})} &gt; \frac{c}{\hat{SE}(\bar{X}-\bar{Y})}\right)\\
+&amp;\approx 2 P_{H_0}\left(Z &gt; \frac{c}{\hat{SE}(\bar{X}-\bar{Y})}\right)
 \quad\text{where }Z\sim N(0,1)\\
 &amp;=\alpha\\
 \end{aligned}
@@ -709,7 +723,7 @@ Note
 \text{Do not reject }H_0 &amp; \text{if }\text{p-value}\geq \alpha
 \end{cases}
 \]</span> This test has significance level <span class="math inline">\(\alpha\)</span> and is a valid <span class="math inline">\(\alpha\)</span>-level test.</p>
-<p>Furthermore, suppose we develop a test from scratch based on the same test statistic <span class="math inline">\(T\)</span>, i.e.&nbsp;pick a critical value <span class="math inline">\(c'\)</span> that gives us significance level <span class="math inline">\(\alpha\)</span>, <span class="math display">\[P_{H_0}(T&gt;c')=\alpha.\]</span> But the p-value is a negative monotone transformation of <span class="math inline">\(T\)</span>, meaning that p-value=<span class="math inline">\(f(T)\)</span> for an <span class="math inline">\(f\)</span> defined in our p-value section. So we have that <span class="math display">\[P_{H_0}(T&gt;c')=P_{H_0}(\text{p-value}&lt;f(c'))=\alpha\]</span> We know from above, this means <span class="math inline">\(f(c')=\alpha\)</span>, so <span class="math inline">\(c'=f^{-1}(\alpha)\)</span>. Meaning we can go back and forth between a test based on <span class="math inline">\(T\)</span> and a test based on our p-value, and they will be <em>equivalent</em>, i.e.&nbsp;a test based on <span class="math inline">\(T\)</span> will make the exact same rejections as a test based on the p-value.</p>
+<p>Furthermore, suppose we develop a test from scratch based on the same test statistic <span class="math inline">\(T\)</span>, i.e.&nbsp;pick a critical value <span class="math inline">\(c'\)</span> that gives us significance level <span class="math inline">\(\alpha\)</span>, <span class="math display">\[P_{H_0}(T&gt;c')=\alpha.\]</span> But the p-value is a negative monotone transformation of <span class="math inline">\(T\)</span>, meaning that p-value=<span class="math inline">\(f(T)\)</span> for an <span class="math inline">\(f\)</span> defined in our p-value section. So we have that <span class="math display">\[P_{H_0}(T&gt;c')=P_{H_0}(\text{p-value}&lt;f(c'))=\alpha\]</span> We know from above, this means <span class="math inline">\(f(c')=\alpha\)</span>, so <span class="math inline">\(c'=f^{-1}(\alpha)\)</span>. Meaning we can go back and forth between a test based on <span class="math inline">\(T\)</span> and a test based on our p-value, and they will be <em>equivalent</em>, i.e.&nbsp;a test based on <span class="math inline">\(T\)</span> will make the exact same rejections as a test based on the p-value.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -720,8 +734,8 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Note this is generally true – if we switch from <span class="math inline">\(T\)</span> to another statistic that is a monotone transformation of <span class="math inline">\(T\)</span>, then we will clearly need a new <span class="math inline">\(c\)</span> cutoff value, but the resulting tests will give exactly equivalent decisions and p-values.</p>
-<p>Furthermore, we said that by convention we define our test statistics so that larger values of <span class="math inline">\(T\)</span> imply evidence against our null. But that is clearly not the case with the p-value! But this is just a convention; it is not <em>wrong</em> to have a test statistic go in the opposite direction.</p>
+<p>Note we always have this behavior if we switch between two statistics that have a monotone relationships: if we switch from <span class="math inline">\(T\)</span> to another statistic that is a monotone transformation of <span class="math inline">\(T\)</span>, then we will clearly need a new <span class="math inline">\(c\)</span> cutoff value, but the resulting tests will give exactly equivalent decisions and p-values.</p>
+<p>Furthermore, we said that by convention we define our test statistics so that larger values of <span class="math inline">\(T\)</span> imply evidence against our null. But that is clearly not the case with the p-value! But having larger <span class="math inline">\(T\)</span> be more evidence against the null is just a convention; it is not <em>wrong</em> to have a test statistic go in the opposite direction.</p>
 </div>
 </div>
 <p>So in this way, we see that any test based on <span class="math inline">\(T\)</span> can be equivalently stated as a test on the corresponding p-value. This is how most people work with testing. They find a p-value based on a test statistic <span class="math inline">\(T\)</span>, and then they report the p-values, but also make decisions based on the p-value.</p>
@@ -734,16 +748,17 @@ Note
 <li><p>A null hypothesis <span class="math inline">\(H_0\)</span> that we want to test</p></li>
 <li><p>A test statistic <span class="math inline">\(T=T(X_1,\ldots,X_n)\)</span> that quantifies the evidence for/against the null.</p></li>
 <li><p>The null distribution of <span class="math inline">\(T\)</span></p></li>
-<li><p>Once we have those pieces in hand, we can construct our test either by</p>
+<li><p>Once we have those pieces in hand, we can run our test either by</p>
 <ol type="a">
-<li>calculating the p-value of the <span class="math inline">\(T\)</span></li>
-<li>determining the <span class="math inline">\(c(\alpha)\)</span> that is our cutoff or critical value.</li>
+<li>calculating the p-value of the <span class="math inline">\(T\)</span> and rejecting for <span class="math inline">\(\text{p-value}&lt;\alpha\)</span></li>
+<li>determining the <span class="math inline">\(c(\alpha)\)</span> that is our cutoff or critical value and rejecting for <span class="math inline">\(T&gt;c(\alpha)\)</span>.</li>
 </ol></li>
 </ol>
 
 
 
 </section>
+
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-agresti2021" class="csl-entry" role="listitem">
@@ -752,7 +767,13 @@ Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Sc
 <div id="ref-rice2006" class="csl-entry" role="listitem">
 Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. Duxbury Press.
 </div>
-</div></section></div></main> <!-- /main -->
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>We can also have composite nulls. This is most common with <em>one-sided</em> tests, e.g.&nbsp;<span class="math inline">\(H_0: \mu\leq 0\)</span>, which I will not spend much time on, but the book discusses.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>In fact, you can <em>define</em> the p-value (based on a test statistic <span class="math inline">\(T\)</span>) as the smallest level <span class="math inline">\(\alpha\)</span> for which we would reject the null hypothesis based on this data. While not originally the definition of Fisher, this is now considered the formal definition of a p-value. <a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -406,18 +406,20 @@ Note
 <p>Then if we observe <span class="math inline">\(t_{obs}=T_0(x_1,\ldots,x_n)\)</span> as our observed value of <span class="math inline">\(T_0\)</span>, our p-value is calculated as <span class="math display">\[
 \begin{aligned}
 \text{p-value}&amp;=P_{H_0}(T_0 \geq t_{obs})\\
-&amp;\approx P\left( Z \geq t_{obs})+P\left( Z \leq - t_{obs}) \quad\text{where }Z\sim N(0,1)\\
+&amp;\approx P( Z \geq t_{obs})+P( Z \leq - t_{obs}) \quad\text{where }Z\sim N(0,1)\\
 \\
-&amp;=1-\Phi(t_{obs)+\Phi(-t_{obs)=2(1-\Phi(t_{obs}))\]</span> where <span class="math inline">\(\Phi(\cdot)\)</span> is the CDF of the <span class="math inline">\(N(0,1)\)</span>.</p>
+&amp;=1-\Phi(t_{obs})+\Phi(-t_{obs})=2(1-\Phi(t_{obs}))
+\end{aligned}
+\]</span> where <span class="math inline">\(\Phi(\cdot)\)</span> is the CDF of the <span class="math inline">\(N(0,1)\)</span>.</p>
 <div class="PARAGRAPH">
 <p>Cutoff value <span class="math inline">\(c\)</span></p>
 </div>
 <p>We want to find the <span class="math inline">\(c\)</span> so that <span class="math display">\[P_{H_0}(T_0&gt;c)=\alpha\]</span></p>
 <p><span class="math display">\[
 \begin{aligned}
-\alpha=P_{H_0}(T_0&gt;c)&amp;\approx P(Z \geq c)+ P(Z\leq -c)\\
+\alpha=P_{H_0}(T_0&gt;c)&amp;\approx P(Z &gt; c)+ P(Z&lt; -c)\\
 &amp;= 1-\Phi(c)+\Phi(-c)=2(1-\Phi(c))\\
-\Rightarrow c&amp;=\Phi^{-1}(1-\alpha/2)=z_{\alpha_2}\\
+\Rightarrow c&amp;=\Phi^{-1}(1-\alpha/2)=z_{\alpha/2}\\
 \end{aligned}
 \]</span></p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -455,18 +457,20 @@ Note
 <p>The calculation of p-values is exactly as above, only with the appropriate <span class="math inline">\(t\)</span> distribution. Let <span class="math inline">\(t_{obs}=T_0(x_1,\ldots,x_n)\)</span> be our observed value of <span class="math inline">\(T_0\)</span>, our p-value is calculated as <span class="math display">\[
 \begin{aligned}
 \text{p-value}&amp;=P_{H_0}(T_0 \geq t_{obs})\\
-&amp;= P\left( T \geq t_{obs})+P\left( T \leq - t_{obs}) \quad\text{where }T\sim t_{\nu}\\
+&amp;= P( T \geq t_{obs})+P( T \leq - t_{obs}) \quad\text{where }T\sim t_{\nu}\\
 \\
-&amp;=1-F(t_{obs)+F(-t_{obs)=2(1-F(t_{obs}))\]</span> where <span class="math inline">\(F(\cdot)\)</span> is the CDF of the <span class="math inline">\(t_{\nu}\)</span>, i.e.&nbsp;with the right degrees of freedom for the particular problem context.</p>
+&amp;=1-F(t_{obs})+F(-t_{obs})=2(1-F(t_{obs}))
+\end{aligned}
+\]</span> where <span class="math inline">\(F(\cdot)\)</span> is the CDF of the <span class="math inline">\(t_{\nu}\)</span>, i.e.&nbsp;with the right degrees of freedom for the particular problem context.</p>
 <div class="PARAGRAPH">
 <p>Cutoff value <span class="math inline">\(c\)</span></p>
 </div>
 <p>We want to find the <span class="math inline">\(c\)</span> so that <span class="math display">\[P_{H_0}(T_0&gt;c)=\alpha\]</span></p>
 <p><span class="math display">\[
 \begin{aligned}
-\alpha=P_{H_0}(T_0&gt;c)&amp;=P(T_0 \geq c)+ P(T_0\leq -c)\\
+\alpha=P_{H_0}(T_0&gt;c)&amp;=P(T &gt; c)+ P(T&lt; -c) \quad\text{where }T\sim t_{\nu}\\
 &amp;= 1-F(c)+F(-c)=2(1-F(c))\\
-\Rightarrow c&amp;=F^{-1}(1-\alpha/2)=z_{\alpha_2}\\
+\Rightarrow c&amp;=F^{-1}(1-\alpha/2)=t_{\alpha/2,\nu}\\
 \end{aligned}
 \]</span></p>
 </section>
