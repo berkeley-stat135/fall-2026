@@ -707,9 +707,23 @@ Note
 <p>P-values are Random Variables</p>
 </div>
 <ul>
-<li>The p-value is a function of our observed value of <span class="math inline">\(T\)</span>, and thus a function of our data. So it is a <em>random variable</em> and has a distribution. You may get a p-value of 0.04 on one realization of the data, and on another realization of the data get a p-value of 0.15.</li>
-<li><em>If the null is true</em> then the distribution of the p-value is <span class="math inline">\(U(0,1)\)</span> (assuming you have the correct null distribution of <span class="math inline">\(T\)</span>). So we can see that if the null is true, and you repeatedly draw samples, 0.05 proportion of those samples will get a p-value <span class="math inline">\(\leq 0.05\)</span>. More generally, <span class="math display">\[P_{H_0}(\text{p-value} \leq \alpha)=\alpha\]</span> So we have a clear understanding of how likely it is to get certain p-values.</li>
+<li><p>The p-value is a function of our observed value of <span class="math inline">\(T\)</span>, and thus a function of our data. So it is a <em>random variable</em> and has a distribution. You may get a p-value of 0.04 on one realization of the data, and on another realization of the data get a p-value of 0.15.</p></li>
+<li><p><em>If the null is true</em> then the distribution of the p-value is <span class="math inline">\(U(0,1)\)</span> for a continuous statistic <span class="math inline">\(T\)</span> (assuming you have the correct null distribution of <span class="math inline">\(T\)</span>). So we can see that if the null is true, and you repeatedly draw samples, 0.05 proportion of those samples will get a p-value <span class="math inline">\(\leq 0.05\)</span>. More generally, <span class="math display">\[P_{H_0}(\text{p-value} \leq \alpha)=\alpha\]</span> So we have a clear understanding of how likely it is to get certain p-values.</p>
+<p>Of course, if you have a discrete test statistic, your p-value will also have a discrete distribution and cannot have a <span class="math inline">\(U(0,1)\)</span> distribution. So, we will say that a p-value is <em>valid</em> if <span class="math display">\[P_{H_0}(p-value \leq \alpha) \leq \alpha\]</span> for all <span class="math inline">\(0\leq\alpha\leq 1\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p></li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>More formally, this property can be considered the most basic definition of a p-value, i.e.&nbsp;any test statistic <span class="math inline">\(p(X)\)</span> bounded to lie in <span class="math inline">\([0,1]\)</span> that satisfies this requirement is a valid p-value; in which case, the definition we gave above could be considered a method to <em>construct</em> a p-value.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+</div>
+</div>
 </section>
 <section id="the-role-of-the-null-hypothesis" class="level3">
 <h3 class="anchored" data-anchor-id="the-role-of-the-null-hypothesis">The Role of the Null Hypothesis</h3>
@@ -735,9 +749,13 @@ Note
 </section>
 </section>
 
+
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-agresti2021" class="csl-entry" role="listitem">
 Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-casella-berger2002" class="csl-entry" role="listitem">
+Casella, George, and Roger L. Berger. 2002. <em>Statistical Inference</em>. 2nd ed. Duxbury.
 </div>
 <div id="ref-lehmann1992" class="csl-entry" role="listitem">
 Lehmann, E. L. 1992. <em>The Fisher, Neyman-Pearson Theories of Testing Hypotheses: One Theory or Two?</em> No. 333. Department of Statistics, University of California.
@@ -745,7 +763,13 @@ Lehmann, E. L. 1992. <em>The Fisher, Neyman-Pearson Theories of Testing Hypothes
 <div id="ref-rice2006" class="csl-entry" role="listitem">
 Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. Duxbury Press.
 </div>
-</div></section></div></main> <!-- /main -->
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>If we have a composite null hypothesis, we require this to be true for all <span class="math inline">\(\theta_0\)</span> in the null hypothesis.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>See for example, Section 8.3.4 of <span class="citation" data-cites="casella-berger2002">Casella and Berger (<a href="#ref-casella-berger2002" role="doc-biblioref">2002</a>)</span><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
