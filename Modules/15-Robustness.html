@@ -408,7 +408,7 @@ window.Quarto = {
 </div>
 </div>
 <p>We see that one point has a much larger effect on the mean than all of the other points, though since the mean is 25.075, the difference in the change of the mean is still ultimately not that large. Notice that this approach allows you to potentially identify unusual points in your dataset.</p>
-<p>However, if we look at the median, we see there exactly zero change. Which makes sense, since the median will not care about where the extreme points in the distribution are.</p>
+<p>However, if we look at the median, we see there no changes. Which makes sense, since the median will not care about where the extreme points in the distribution are.</p>
 <div class="PARAGRAPH">
 <p>Regression example</p>
 </div>
@@ -438,12 +438,12 @@ window.Quarto = {
 </section>
 <section id="sensitivity-curve" class="level2">
 <h2 class="anchored" data-anchor-id="sensitivity-curve">Sensitivity curve</h2>
-<p>In the above analysis, we are hyper-focused on the specific dataset and what are the effects of individual data points in datasets. We saw that when we compared our regression estimators on the university data, there was very little difference between the estimators, while on the crime data, there was a point that made a big difference and showed some of the estimators were far more sensitive to that point than others.</p>
-<p>What if we want to say something about estimators in general? We’d like to “force” there to be an outlier, regardless of whether it occurred naturally in our data. For this, we can a similar idea about how sensitive the estimator is to a data point, but instead of being limited to data we have, we allow ourselves to force the dataset to have an outlying data point and let it be as big as we want.</p>
+<p>In the above analysis, we are hyper-focused on the specific dataset and what are the effects of individual data points in <em>those</em> datasets. We saw that when we compared our regression estimators on the university data, there was very little difference between the estimators, while on the crime data, there was a point that made a big difference and showed some of the estimators were far more sensitive to that point than others.</p>
+<p>What if we want to say something about estimators in general? We’d like to “force” there to be an outlier, regardless of whether it occurred naturally in our data. For this, we can use a similar idea about how sensitive the estimator is to a data point, but instead of being limited to data we have, we allow ourselves to force the dataset to have an outlying data point and let it be as big as we want.</p>
 <p>Specifically, we ask what would happen if we added a <span class="math inline">\((n+1)\)</span>th value <span class="math inline">\(x_0\)</span> to our observed data <span class="math inline">\(x_1,\ldots,x_n\)</span>?</p>
-<p>Consider, for example, the mean <span class="math inline">\(\hat\mu(x_1,\ldots,x_n)=\bar{x}_n\)</span>. If we add <span class="math inline">\(x_0\)</span> we get <span class="math display">\[\hat\mu(x_1,\ldots,x_n,x_0)=\frac{1}{n+1}(\sum_{i=1}^nx_i +x_0)=\frac{n}{n+1}\bar{x}_n+\frac{x_0}{n+1}.\]</span> So if we look at the difference, <span class="math display">\[\hat\mu(x_1,\ldots,x_n,x_0)-\hat\mu(x_1,\ldots,x_n)=\frac{n}{n+1}\bar{x}_n+\frac{x_0}{n+1} - \bar{x}_n=\frac{1}{n+1}\bar{x}_n +\frac{x_0}{n+1}\]</span> Notice that regardless of our specific observed data <span class="math inline">\(x_1,\ldots,x_n\)</span>, the change is going to be linear in <span class="math inline">\(x_0\)</span>.</p>
-<p>We generally define the sensitivity curve as the difference divided by <span class="math inline">\(1/(n+1)\)</span> (this is way of “normalizing” the result across different sized datasets): <span class="math display">\[SC(x_0)=\frac{\hat\mu(x_1,\ldots,x_n,x_0)-\hat\mu(x_1,\ldots,x_n)=\frac{1}{n+1}\bar{x}_n +\frac{x_0}{n+1})}{1/n+1}\]</span> For the mean, <span class="math inline">\(SC(x_0)=\bar{x}+x_0\)</span>.</p>
-<p>Consider instead some another measures of location: the median and the “trimmed mean”. The trimmed mean is where we remove a certain proportion <span class="math inline">\(\eta\)</span> from either end of our ordered data, and take the mean of what’s left. Both of these are estimates of the “center” of our data, and are considered robust estimates of the center. We would note that the median is an extreme example of the trimmed mean, with <span class="math inline">\(\eta=0.5\)</span>, i.e.&nbsp;removing all the data except the middle point.</p>
+<p>Consider, for example, the mean <span class="math inline">\(\hat\mu(x_1,\ldots,x_n)=\bar{x}_n\)</span>. If we add <span class="math inline">\(x_0\)</span> we get <span class="math display">\[\hat\mu(x_1,\ldots,x_n,x_0)=\frac{1}{n+1}(\sum_{i=1}^nx_i +x_0)=\frac{n}{n+1}\bar{x}_n+\frac{x_0}{n+1}.\]</span> So if we look at the difference, <span class="math display">\[\hat\mu(x_1,\ldots,x_n,x_0)-\hat\mu(x_1,\ldots,x_n)=\frac{n}{n+1}\bar{x}_n+\frac{x_0}{n+1} - \bar{x}_n=\frac{x_0-\bar{x}_n}{n+1}\]</span> Notice that regardless of our specific observed data <span class="math inline">\(x_1,\ldots,x_n\)</span>, the change is going to be linear in <span class="math inline">\(x_0\)</span>.</p>
+<p>We generally define the sensitivity curve as the difference divided by <span class="math inline">\(1/(n+1)\)</span> (this is way of “normalizing” the result across different sized datasets): <span class="math display">\[SC(x_0)=\frac{\hat\mu(x_1,\ldots,x_n,x_0)-\hat\mu(x_1,\ldots,x_n)}{1/(n+1)}\]</span> For the mean, this gives <span class="math inline">\(SC(x_0)=x_0-\bar{x}_n\)</span>.</p>
+<p>Consider instead two other measures of the center of the data: the median and the “trimmed mean”. The trimmed mean is where we remove a certain proportion <span class="math inline">\(\eta\)</span> from either end of our ordered data, and take the mean of what’s left. Both of these are estimates of the “center” of our data, and are considered robust estimates of the center. We would note that the median is an extreme example of the trimmed mean, with <span class="math inline">\(\eta=0.5\)</span>, i.e.&nbsp;removing all the data except the middle point.</p>
 <p>We can plot the sensitivity curves for all three of these estimators:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -472,20 +472,22 @@ Note
 <div class="PARAGRAPH">
 <p>Calculating the <span class="math inline">\(SC(\hat\mu)\)</span> explicitly for the trimmed mean</p>
 </div>
-<p>In our above plots, I had the computer calculated <span class="math inline">\(SC(x_0)\)</span> for a sequence of <span class="math inline">\(x_0\)</span>, based on using my highway mileage data. But in fact, I can calculate an analytical expression for <span class="math inline">\(SC(x_0)\)</span> for the trimmed mean just like I did for the mean, <span class="math display">\[SC(x_0)=\begin{cases}
-\bar{x}_n +x_{(g)} &amp; x_0 \le x_{(g)}\\
-\bar{x}_n +x_0 &amp; x_{(g)} &lt; x_0 &lt; x_{(n-g+1)}\\
-\bar{x}_n +x_{(n-g+2)} &amp; x_0 \ge x_{(n-g+1)}
-\end{cases}
-\]</span> where we have ordered our original data <span class="math inline">\(x_{(1)}&lt;\ldots&lt;x_{(n)}\)</span>. So we see that regardless of the dataset, we get the piecewise function we saw above: one that plateaus out at exactly <span class="math inline">\(\bar{x}_n +x_{(g)}\)</span> and <span class="math inline">\(\bar{x}_n +x_{(n-g+1)}\)</span> on each end.</p>
-<p>So while the vertical position of our <span class="math inline">\(SC(x_0)\)</span> curve depends on our data (through <span class="math inline">\(\bar{x}_n\)</span>) and the specific points where we plateau, the basic shape of the curve is independent of our data and particularly whether it is bounded. So it makes sense to talk about <span class="math inline">\(SC(x_0)\)</span> as a <em>property of the estimator</em> and not specific to the particular dataset.</p>
+<p>In our above plots, I had the computer calculate <span class="math inline">\(SC(x_0)\)</span> for a sequence of <span class="math inline">\(x_0\)</span> for my simulated data. But in fact, I can calculate an analytical expression for <span class="math inline">\(SC(x_0)\)</span> for the trimmed mean just like I did for the mean. It gets a bit messier, and I need a bit more notation. Suppose we have ordered our original data and call the ordered data <span class="math inline">\(x_{(1)}&lt;\ldots&lt;x_{(n)}\)</span> and let <span class="math inline">\(\bar{x}_{trim}\)</span> be the trimmed mean of the original data. Without loss of generality, we will assume our trimmed mean removes <span class="math inline">\(g\)</span> points from the top and bottom, and thus <span class="math inline">\(\bar{x}_{trim}\)</span> is the mean of <span class="math inline">\(x_{(g+1)},\ldots,x_{(n-g)}\)</span>. Then we can derive <span class="math inline">\(SC(x_0)\)</span> as the following piecewise function: <span class="math display">\[SC(x_0)=\frac{n+1}{n+1-2g} \times \begin{cases}
+x_{(g)}-\bar{x}_{trim} &amp; x_0 \le x_{(g)}\\
+x_0-\bar{x}_{trim} &amp; x_{(g)} &lt; x_0 &lt; x_{(n-g+1)}\\
+x_{(n-g+1)}-\bar{x}_{trim} &amp; x_0 \ge x_{(n-g+1)}
+\end{cases}.
+\]</span> We will prove this below, but looking at this equation, we note that the <span class="math inline">\(x_{(g)}\)</span> and <span class="math inline">\(x_{(n-g+1)}\)</span> are fixed values from the original data – they are not changing with <span class="math inline">\(x_0\)</span>. So we see for the extreme values of <span class="math inline">\(x_0\)</span> we are getting the plateau we saw in the curve.</p>
+<p>We also see that regardless of the starting dataset, we get the piecewise function we saw plotted above: a curve that plateaus out on each end. Doing this calculation tells us exactly where the plateau will be – <span class="math inline">\(\frac{n+1}{n+1-2g}(x_{(g)}-\bar{x}_{trim})\)</span> and <span class="math inline">\(\frac{n+1}{n+1-2g}(x_{(n-g+1)}-\bar{x}_{trim})\)</span> – but regardless of what data we started with, we <em>will get</em> a plateau.</p>
+<p>So while the specific vertical position of our <span class="math inline">\(SC(x_0)\)</span> curve and the specific points where we plateau depend on our starting data, the basic shape of the curve is independent of our data and particularly whether it is bounded. So it makes sense to talk about <span class="math inline">\(SC(x_0)\)</span> as a <em>property of the estimator</em> and not specific to the particular dataset.</p>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Consider what happens if we have the trimmed mean with <span class="math inline">\(\eta\)</span> proportion removed from each end. Let’s assume we order our data: <span class="math inline">\(x_{(1)}&lt;\ldots&lt;x_{(n)}\)</span>, and we’ll assume that removing <span class="math inline">\(\eta\)</span> proportion corresponds to <span class="math inline">\(g\)</span> points being removed from each end. So our trimmed mean is the mean of the points: <span class="math display">\[x_{(g+1)},\ldots,x_{(n-g)}\]</span></p>
-<p>When we add <span class="math inline">\(x_0\)</span>, we will assume that <span class="math inline">\(\eta\)</span> proportion still results in <span class="math inline">\(g\)</span> points being removed from each end<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, so we will be taking the mean of one additional point compared to our original data. Let’s say our additional point we add to this core interior set is <span class="math inline">\(x^*\)</span>. We know from above, that the difference of the mean with and without that point is <span class="math display">\[\frac{1}{n+1}\bar{x}_n +\frac{x^*}{n+1}\]</span> so the main question is what will <span class="math inline">\(x^*\)</span> be for different values of <span class="math inline">\(x_0\)</span>?</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Consider what happens if we have the trimmed mean with <span class="math inline">\(\eta\)</span> proportion removed from each end. Let’s assume we order our data: <span class="math inline">\(x_{(1)}&lt;\ldots&lt;x_{(n)}\)</span>, and we’ll assume that removing <span class="math inline">\(\eta\)</span> proportion corresponds to <span class="math inline">\(g\)</span> points being removed from each end. So our trimmed mean <span class="math inline">\(\bar{x}_{trim}\)</span> is the mean of the points: <span class="math display">\[x_{(g+1)},\ldots,x_{(n-g)}\]</span></p>
+<p>When we add <span class="math inline">\(x_0\)</span>, we will assume that <span class="math inline">\(\eta\)</span> proportion still results in <span class="math inline">\(g\)</span> points being removed from each end<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, so our new trimmed mean will be the mean of one additional point compared to our original data. So let’s say our additional point we add to this core interior set is <span class="math inline">\(x^*\)</span>. <span class="math inline">\(x^*\)</span> won’t necessarily be <span class="math inline">\(x_0\)</span> – if <span class="math inline">\(x_0\)</span> is a value that is at the extreme tails of our data, it will be trimmed away, but it will push a <em>new</em> data point from our original data into the core interior.</p>
+<p>The original trimmed mean averaged <span class="math inline">\(n-2g\)</span> points, so the new trimmed mean will average <span class="math inline">\(n-2g+1\)</span> points, and is given by <span class="math display">\[\frac{(n-2g)\bar{x}_{trim}+x^*}{n-2g+1}.\]</span> This is based on the same calculation as above for the regular mean. The difference with and without <span class="math inline">\(x^*\)</span> is therefore <span class="math display">\[\frac{x^*-\bar{x}_{trim}}{n+1-2g},\]</span> and dividing by <span class="math inline">\(1/(n+1)\)</span> gives <span class="math display">\[SC(x_0)=\frac{n+1}{n+1-2g}(x^*-\bar{x}_{trim}).\]</span> So the main issue for writing down <span class="math inline">\(SC(x_0)\)</span> explicitly is getting an expression for <span class="math inline">\(x^*\)</span> based on different values of <span class="math inline">\(x_0\)</span>. This is where the piecewise nature of <span class="math inline">\(SC(x_0)\)</span> comes from – there are different behaviors depending on whether the value of <span class="math inline">\(x_0\)</span> puts <span class="math inline">\(x_0\)</span> in the interior set of points or one of the tails. There are three possibilities:</p>
 <ol type="1">
-<li><p><span class="math inline">\(x_{(g)} &lt; x_0 &lt; x_{(n-g+1)},\)</span> so <span class="math inline">\(x^*=x_0\)</span> is part of the new core set of points, <span class="math display">\[$x_0, x_{(g+1)}, \dots, x_{(n-g)},\]</span> i.e.&nbsp;<span class="math inline">\(x_0\)</span> is added. Then we know that the mean will change linearly with the value of <span class="math inline">\(x_0\)</span> and <span class="math display">\[SC(x_0)=\bar{x}_n +x_0\]</span></p></li>
-<li><p><span class="math inline">\(x_0 \le x_{(g)}\)</span>. That means <span class="math inline">\(x_0\)</span> is now part of the bottom portion of the data we remove, and the previous boundary point <span class="math inline">\(x_{(g)}\)</span> gets kicked into core set of data points, meaning we take the mean of <span class="math display">\[x_{(g)}, x_{(g+1)}, \dots, x_{(n-g)},\]</span> so we have <span class="math display">\[SC(x_0)=\bar{x}_n +x_{(g)}.\]</span></p></li>
-<li><p><span class="math inline">\(x_0 \ge x_{(n-g+1)}\)</span> That means <span class="math inline">\(x_0\)</span> is now part of the upper portion of the data we remove, and the previous boundary point <span class="math inline">\(x_{(n-g+1)}\)</span> gets kicked into core set of data points, meaning we take the mean of <span class="math display">\[x_{(g+1)}, \dots, x_{(n-g)}, x_{(n-g+1)}\]</span> and we have <span class="math display">\[SC(x_0)=\bar{x}_n +x_{(n-g+2)}.\]</span> <span class="math inline">\(\blacksquare\)</span></p></li>
+<li><span class="math inline">\(x_{(g)} &lt; x_0 &lt; x_{(n-g+1)},\)</span> so <span class="math inline">\(x^*=x_0\)</span> is part of the new core set of points, <span class="math display">\[x_0, x_{(g+1)}, \dots, x_{(n-g)}\]</span> i.e.&nbsp;<span class="math inline">\(x_0\)</span> is added. Then <span class="math inline">\(x^*-\bar{x}_{trim}=x_0-\bar{x}_{trim}\)</span>, and <span class="math display">\[SC(x_0)=\frac{n+1}{n+1-2g}(x_0-\bar{x}_{trim}).\]</span> So in this case the sensitivity curve is linear in <span class="math inline">\(x_0\)</span>.</li>
+<li><span class="math inline">\(x_0 \le x_{(g)}\)</span>. That means <span class="math inline">\(x_0\)</span> is now part of the bottom portion of the data we remove, and the previous boundary point <span class="math inline">\(x_{(g)}\)</span> gets kicked into core set of data points, <span class="math inline">\(x^*=x_{(g)}\)</span>, meaning that our trimmed mean is the mean of <span class="math display">\[x_{(g)}, x_{(g+1)}, \dots, x_{(n-g)},\]</span> so we have <span class="math display">\[SC(x_0)=\frac{n+1}{n+1-2g}(x_{(g)}-\bar{x}_{trim}).\]</span> This is true for <em>all</em> <span class="math inline">\(x_0 \le x_{(g)}\)</span>, yet <span class="math inline">\(x_{(g)}\)</span> doesn’t change – hence the plateau.</li>
+<li><span class="math inline">\(x_0 \ge x_{(n-g+1)}\)</span>. That means <span class="math inline">\(x_0\)</span> is now part of the upper portion of the data we remove, and the previous boundary point <span class="math inline">\(x_{(n-g+1)}\)</span> gets kicked into core set of data points, <span class="math inline">\(x^*=x_{(n-g+1)}\)</span>, meaning the trimmed mean will now be the mean of <span class="math display">\[x_{(g+1)}, \dots, x_{(n-g)}, x_{(n-g+1)}\]</span> and we have <span class="math display">\[SC(x_0)=\frac{n+1}{n+1-2g}(x_{(n-g+1)}-\bar{x}_{trim}).\]</span> Again, this is true for <em>all</em> <span class="math inline">\(x_0 \ge x_{(n-g+1)}\)</span> and so this is the plateau. <span class="math inline">\(\blacksquare\)</span></li>
 </ol>
 </div>
 </section>
@@ -621,11 +623,13 @@ Note
 </table>
 </div>
 </div>
+<p>We can plot these values to see how they perform</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="15-Robustness_files/figure-html/coveragePlot-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="15-Robustness_files/figure-html/coveragePlot-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Coverage of simulated confidence intervals for when the data are exponential (left) and Uniform (right)</figcaption>
 </figure>
 </div>
 </div>
@@ -662,9 +666,10 @@ Note
 <p>Here is the example of qqplots for data simulated for four different distributions (Normal, Beta, <span class="math inline">\(t\)</span>, and exponential):</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="15-Robustness_files/figure-html/histQQ-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Normal QQ-plots of simulated data from different distributions</figcaption>
 </figure>
 </div>
 </div>
@@ -701,19 +706,24 @@ Note
 <p>Returning to the point regarding variability, it can be helpful to see what random variability looks like by plotting simulated normal data – i.e.&nbsp;where we <em>know</em> the data is actually normally distributed:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="15-Robustness_files/figure-html/normalVariability-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>QQplots of simulated normal data</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<div class="PARAGRAPH">
+<p>Highway Data Example</p>
+</div>
 <p>Let’s look at some real data, our highway mileage data:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="15-Robustness_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="15-Robustness_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Histogram of mileage data (left) and qqplot of mileage data (right)</figcaption>
 </figure>
 </div>
 </div>
@@ -727,9 +737,10 @@ Note
 <p>Instead, we look at the <em>residuals</em> <span class="math display">\[Y_i-\hat{Y}_i= Y_i-(\hat\beta_0+\hat\beta_1 X_i)\]</span> In this way, we have subtracted out our <em>estimate</em> of the mean for each point; we hope that the residuals, unlike the <span class="math inline">\(Y_i\)</span> should be normally distributed.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="15-Robustness_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="15-Robustness_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Scatter plot of university data (left) and qqplot of standardized residuals (right)</figcaption>
 </figure>
 </div>
 </div>
@@ -737,14 +748,15 @@ Note
 <p>When we do this, we see the outlier in our crime data showing up. But we also see that the residuals from the university data does not look particularly normal – the residuals have much heavier tails than expected for a normal distribution. This is likely do to the fact that that we noted earlier – the variance of this data does not look the same for different values of <span class="math inline">\(x_i\)</span>. This means a large chunks of the data (those with large <span class="math inline">\(x_i\)</span> and large “fitted” values) have much smaller residuals than the other half of the data; this likely results in much higher spread of our residuals than we would expect, hence the heavy tails.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="15-Robustness_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="15-Robustness_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Scatter plot of university data (left) and scatter plot of residuals versus fitted values (right)</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Notice how we started out wanting to assess normality of our data, and we’ve ended up diagnosing specific aspects of the data: non-constant variance and the presence of outliers. These are reasons for why the data does not look i.i.d. normal that are perhaps not what we intuitively think of when think about why our data isn’t normal, but are common sources of non-normality.</p>
+<p>Notice how we started out wanting to assess normality of our data, and we’ve ended up diagnosing specific aspects of the data: non-constant variance and the presence of outliers. These are common sources of non-normality.</p>
 
 
 
