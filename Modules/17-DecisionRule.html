@@ -310,7 +310,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Modules/18-WaldAndOtherTests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tests of a parameter and Relationship to Confidence Intervals</span></a>
+ <span class="menu-text">Wald/T-tests and Relationship to Confidence Intervals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/19-LikelihoodNPLemma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Likelihood Ratio Test and Neyman-Pearson Lemma</span></a>
   </div>
 </li>
       </ul>
@@ -597,8 +603,21 @@ Note
 <div class="PARAGRAPH">
 <p>Composite Alternatives and Power Curves</p>
 </div>
-<p>However, many times we will not have a specific alternative. If I don’t know there’s a specific alternative coin, then I just have that <span class="math display">\[H_a: \pi\neq 0.5\]</span> or for our two population comparison, <span class="math display">\[H_a: \mu_X\neq \mu_Y\]</span> We often call these <em>composite alternatives</em>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>However, many times we will not have a specific alternative. If I don’t know there’s a specific alternative coin, then I just have that <span class="math display">\[H_a: \pi\neq 0.5\]</span> or for our two population comparison, <span class="math display">\[H_a: \mu_X\neq \mu_Y\]</span> We often call these <em>composite alternatives</em>.</p>
 <p>The alternative space is just the space if all possible parameters that are not the null value, and you can’t calculate a probability for the entire alternative space – probabilities depend on the specific value of the parameter.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We can also have composite nulls. This is most common with <em>one-sided</em> tests, e.g.&nbsp;<span class="math inline">\(H_0: \mu\leq 0\)</span>, which I will not spend much time on, but the book discusses. But even consider our null <span class="math display">\[H_0:\mu_x\neq \mu_y\]</span> In terms of our parameters <span class="math inline">\((\mu_x,\mu_y)\)</span>, there are a lot of values that satisfy the null. We have just been able to avoid this issue by picking a test statistic whose distribution only depends <em>only</em> on <span class="math inline">\(\Delta=\mu_x-\mu_y\)</span>. We have basically reparameterized the problem into a simple null hypothesis by making it a problem that about a single parameter <span class="math inline">\(\Delta\)</span>.</p>
+</div>
+</div>
 <p>What we can do is pick a specific choice <span class="math inline">\(\pi\in H_a\)</span> for our alternative, and calculate the probability of that.</p>
 <p>In fact we can express this as a curve of all possible values of <span class="math inline">\(\pi\)</span>, <span class="math display">\[power(\pi)=P_\pi(T &gt; 0.35)\]</span></p>
 <div class="cell">
@@ -723,7 +742,7 @@ Note
 \text{Do not reject }H_0 &amp; \text{if }\text{p-value}\geq \alpha
 \end{cases}
 \]</span> This test has significance level <span class="math inline">\(\alpha\)</span> and is a valid <span class="math inline">\(\alpha\)</span>-level test.</p>
-<p>Furthermore, suppose we develop a test from scratch based on the same test statistic <span class="math inline">\(T\)</span>, i.e.&nbsp;pick a critical value <span class="math inline">\(c'\)</span> that gives us significance level <span class="math inline">\(\alpha\)</span>, <span class="math display">\[P_{H_0}(T&gt;c')=\alpha.\]</span> But the p-value is a negative monotone transformation of <span class="math inline">\(T\)</span>, meaning that p-value=<span class="math inline">\(f(T)\)</span> for an <span class="math inline">\(f\)</span> defined in our p-value section. So we have that <span class="math display">\[P_{H_0}(T&gt;c')=P_{H_0}(\text{p-value}&lt;f(c'))=\alpha\]</span> We know from above, this means <span class="math inline">\(f(c')=\alpha\)</span>, so <span class="math inline">\(c'=f^{-1}(\alpha)\)</span>. Meaning we can go back and forth between a test based on <span class="math inline">\(T\)</span> and a test based on our p-value, and they will be <em>equivalent</em>, i.e.&nbsp;a test based on <span class="math inline">\(T\)</span> will make the exact same rejections as a test based on the p-value.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Furthermore, suppose we develop a test from scratch based on the same test statistic <span class="math inline">\(T\)</span>, i.e.&nbsp;pick a critical value <span class="math inline">\(c'\)</span> that gives us significance level <span class="math inline">\(\alpha\)</span>, <span class="math display">\[P_{H_0}(T&gt;c')=\alpha.\]</span> But the p-value is a negative monotone transformation of <span class="math inline">\(T\)</span>, meaning that p-value=<span class="math inline">\(f(T)\)</span> for an <span class="math inline">\(f\)</span> defined in our p-value section. So we have that <span class="math display">\[P_{H_0}(T&gt;c')=P_{H_0}(\text{p-value}&lt;f(c'))=\alpha\]</span> We know from above, this means <span class="math inline">\(f(c')=\alpha\)</span>, so <span class="math inline">\(c'=f^{-1}(\alpha)\)</span>. Meaning we can go back and forth between a test based on <span class="math inline">\(T\)</span> and a test based on our p-value, and they will be <em>equivalent</em>, i.e.&nbsp;a test based on <span class="math inline">\(T\)</span> will make the exact same rejections as a test based on the p-value.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -770,8 +789,7 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>We can also have composite nulls. This is most common with <em>one-sided</em> tests, e.g.&nbsp;<span class="math inline">\(H_0: \mu\leq 0\)</span>, which I will not spend much time on, but the book discusses.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>In fact, you can <em>define</em> the p-value (based on a test statistic <span class="math inline">\(T\)</span>) as the smallest level <span class="math inline">\(\alpha\)</span> for which we would reject the null hypothesis based on this data. While not originally the definition of Fisher, this is now considered the formal definition of a p-value. <a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>In fact, you can <em>define</em> the p-value (based on a test statistic <span class="math inline">\(T\)</span>) as the smallest level <span class="math inline">\(\alpha\)</span> for which we would reject the null hypothesis based on this data. While not originally the definition of Fisher, this is now considered the formal definition of a p-value. <a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

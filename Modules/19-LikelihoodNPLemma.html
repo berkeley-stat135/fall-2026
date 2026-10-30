@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Likelihood Ratio Test and Neyman-Pearson Lemma</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-44952193eeadea267d9e4506e1456eea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="”https://siteimproveanalytics.com/js/siteanalyze_6294756.js”"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/19-LikelihoodNPLemma.html">Likelihood Ratio Test and Neyman-Pearson Lemma</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/stat_bear.png" alt="UC Berkeley Statistics logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../assets/stat_bear.png" alt="UC Berkeley Statistics logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Stat 135</a> 
+        <div class="sidebar-tools-main">
+    <a href="{{< var site-url >}}" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home / Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../staff.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Staff</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calendar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calendar</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modules</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/00-OverviewIntro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/01-ThinkProb.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Thinking probabilistically about data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/02-EstimationBasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/03-CaseStudyRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Case Study: Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/04-CreatingEstimators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating Estimators with MLE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/05-LossMEstimators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estimating with Loss Functions and M-Estimators</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/06-SamplingDist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling distribution of the Mean</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/07-CIMean.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Confidence Intervals for the Population Mean</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/08-CaseStudy2Groups.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Case Study: Comparing Two Groups</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/09-CIregression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Confidence intervals for linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/10-MLEAsyNormal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Large Sample Theory for the Maximum Likelihood Estimator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/11-DeltaMethod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functions of Estimators and the Delta Method</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/12-Bootstrap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bootstrap</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/13-FiniteProperties.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Efficiency and Mean Squared Error</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/14-Consistency.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consistency</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/15-Robustness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Robustness properties</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/16-NullAndPvalues.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis Testing: Null hypotheses and P-values</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/17-DecisionRule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis Testing: Decision Perspective</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/18-WaldAndOtherTests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wald/T-tests and Relationship to Confidence Intervals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/19-LikelihoodNPLemma.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Likelihood Ratio Test and Neyman-Pearson Lemma</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../license.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">License</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#simple-alternative-hypothesis" id="toc-simple-alternative-hypothesis" class="nav-link active" data-scroll-target="#simple-alternative-hypothesis">Simple alternative hypothesis</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-the-likelihood-ratio" id="toc-introduction-to-the-likelihood-ratio" class="nav-link" data-scroll-target="#introduction-to-the-likelihood-ratio">Introduction to the likelihood ratio</a></li>
+  <li><a href="#likelihood-ratio-for-continuous-distributions" id="toc-likelihood-ratio-for-continuous-distributions" class="nav-link" data-scroll-target="#likelihood-ratio-for-continuous-distributions">Likelihood Ratio for Continuous Distributions</a></li>
+  <li><a href="#optimality-of-the-likelihood-ratio" id="toc-optimality-of-the-likelihood-ratio" class="nav-link" data-scroll-target="#optimality-of-the-likelihood-ratio">Optimality of the likelihood ratio</a></li>
+  </ul></li>
+  <li><a href="#likelihood-ratio-test-lrt" id="toc-likelihood-ratio-test-lrt" class="nav-link" data-scroll-target="#likelihood-ratio-test-lrt">Likelihood Ratio Test (LRT)</a>
+  <ul class="collapse">
+  <li><a href="#relationship-to-mle" id="toc-relationship-to-mle" class="nav-link" data-scroll-target="#relationship-to-mle">Relationship to MLE</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  <li><a href="#connection-to-np-lemma" id="toc-connection-to-np-lemma" class="nav-link" data-scroll-target="#connection-to-np-lemma">Connection to NP Lemma</a></li>
+  </ul></li>
+  <li><a href="#lrt-determining-the-critical-value" id="toc-lrt-determining-the-critical-value" class="nav-link" data-scroll-target="#lrt-determining-the-critical-value">LRT &amp; Determining the critical value</a>
+  <ul class="collapse">
+  <li><a href="#example-of-exact-sampling-distribution-of-lambda" id="toc-example-of-exact-sampling-distribution-of-lambda" class="nav-link" data-scroll-target="#example-of-exact-sampling-distribution-of-lambda">Example of exact sampling distribution of <span class="math inline">\(\Lambda\)</span></a></li>
+  <li><a href="#asymptotic-lrt-and-chi2_k-distribution" id="toc-asymptotic-lrt-and-chi2_k-distribution" class="nav-link" data-scroll-target="#asymptotic-lrt-and-chi2_k-distribution">Asymptotic LRT and <span class="math inline">\(\chi^2_k\)</span> Distribution</a></li>
+  <li><a href="#examples-1" id="toc-examples-1" class="nav-link" data-scroll-target="#examples-1">Examples</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/19-LikelihoodNPLemma.html">Likelihood Ratio Test and Neyman-Pearson Lemma</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Likelihood Ratio Test and Neyman-Pearson Lemma</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>We have gone through many examples of <em>how</em> to construct a hypothesis test from a given test statistic <span class="math inline">\(T\)</span>. We’re now going to discuss how to choose <span class="math inline">\(T\)</span>. What makes for a good test statistic?</p>
+<section id="simple-alternative-hypothesis" class="level2">
+<h2 class="anchored" data-anchor-id="simple-alternative-hypothesis">Simple alternative hypothesis</h2>
+<section id="introduction-to-the-likelihood-ratio" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-to-the-likelihood-ratio">Introduction to the likelihood ratio</h3>
+<p>Suppose, I have two types of coins, some that have probability of heads <span class="math inline">\(\pi=0.5\)</span>, and others with <span class="math inline">\(\pi=0.7\)</span>. I am given one of the two coins. How can I decide if it is one of the fair coins or not? In terms of hypotheses, we can write this as <span class="math display">\[
+H_0: \pi = 0.5 \text{ vs }H_a: \pi=0.7
+\]</span> In this particular setting of comparing between two alternatives, how might I define a test statistic? Well, I might take advantage of the fact that I have a specific alternative I am considering, and define my test statistic accordingly.</p>
+<p>Suppose I toss the coin <strong>ten</strong> times and count the number of heads <span class="math inline">\(X\)</span>. The following table gives the probabilities of each outcome:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"># Heads</th>
+<th style="text-align: left;">0</th>
+<th style="text-align: left;">1</th>
+<th style="text-align: left;">2</th>
+<th style="text-align: left;">3</th>
+<th style="text-align: left;">4</th>
+<th style="text-align: left;">5</th>
+<th style="text-align: left;">6</th>
+<th style="text-align: left;">7</th>
+<th style="text-align: left;">8</th>
+<th style="text-align: left;">9</th>
+<th style="text-align: left;">10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong><span class="math inline">\(\pi=0.5\)</span></strong></td>
+<td style="text-align: left;">0.0010</td>
+<td style="text-align: left;">0.0098</td>
+<td style="text-align: left;">0.0439</td>
+<td style="text-align: left;">0.1172</td>
+<td style="text-align: left;">0.2051</td>
+<td style="text-align: left;">0.2461</td>
+<td style="text-align: left;">0.2051</td>
+<td style="text-align: left;">0.1172</td>
+<td style="text-align: left;">0.0439</td>
+<td style="text-align: left;">0.0098</td>
+<td style="text-align: left;">0.0010</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><span class="math inline">\(\pi=0.7\)</span></strong></td>
+<td style="text-align: left;">0.0000</td>
+<td style="text-align: left;">0.0001</td>
+<td style="text-align: left;">0.0014</td>
+<td style="text-align: left;">0.0090</td>
+<td style="text-align: left;">0.0368</td>
+<td style="text-align: left;">0.1029</td>
+<td style="text-align: left;">0.2001</td>
+<td style="text-align: left;">0.2668</td>
+<td style="text-align: left;">0.2335</td>
+<td style="text-align: left;">0.1211</td>
+<td style="text-align: left;">0.0282</td>
+</tr>
+</tbody>
+</table>
+<p>What would you do if <span class="math inline">\(X=3\)</span>? <span class="math inline">\(X=6\)</span>? <span class="math inline">\(X=8\)</span>? We could explicitly compare the two hypotheses using the <strong>(Simple) Likelihood Ratio</strong>, which is <span class="math display">\[
+T=\frac{P_{H_a}(X=x)}{P_{H_0}(X=x)}
+\]</span> This ratio compares how likely the observed data is under the null hypothesis (<span class="math inline">\(\pi=0.5\)</span>) versus the alternative hypothesis (<span class="math inline">\(\pi=0.7\)</span>). Let’s look at this ratio for the three values of <span class="math inline">\(X\)</span> listed above:</p>
+<p><strong>For <span class="math inline">\(X = 3\)</span>:</strong> <span class="math display">\[
+\frac{P_{H_a}(X=3)}{P_{H_0}(X=3)}  = \frac{0.0090}{0.1172} \approx 0.077
+\]</span> We see that the data seems to be approximately 13 times more likely under the null than the alternative. This provides strong evidence in favor of <span class="math inline">\(H_0\)</span>.</p>
+<p><strong>For <span class="math inline">\(X = 6\)</span>:</strong> <span class="math display">\[
+    \frac{P_{H_a}(X=6)}{P_{H_0}(X=6)} = \frac{0.2001}{0.2051} \approx 0.98
+\]</span> In this case, the likelihoods are nearly identical. In this case it is hard to distinguish between a fair coin and this specific biased coin, so we might, given the asymmetry of the role of the null and the alternative, decide that the coin is fair.</p>
+<p><strong>For <span class="math inline">\(X = 8\)</span>:</strong> <span class="math display">\[
+\frac{P_{H_a}(X=8)}{P_{H_0}(X=8)} = \frac{0.2335}{0.0439} \approx 5.31
+\]</span> In this case, we see that the ratio is quite large, meaning the data is much more likely under the alternative hypothesis.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice how this is different from our earlier coin example. Now I am comparing against a specific alternative, and so only <em>large</em> values of <span class="math inline">\(X\)</span> are evidence against my null. So there is a 1-1 relationship between the <strong>likelihood ratio</strong> and <strong>number of heads</strong>, so I can make my probability calculations using either.</p>
+</div>
+</div>
+<div class="PARAGRAPH">
+<p>Likelihood ratio is a test statistic</p>
+</div>
+<p>It’s important to note that the likelihood ratio, despite calculating probabilities under the null and the alternative, is a <em>statistic</em> of the data, i.e.&nbsp;it is random and depends on the data. Thus it will have a sampling distribution. Even though a likelihood ratio of <span class="math inline">\(5.31\)</span> tells us that this data is more likely under the alternative, it’s not an impossible result even if the null was true. It just requires that we get 8 head flips out of 10, which we’ve already seen that even with a fair coin has a probability of <span class="math inline">\(P(X=8)=0.0439.\)</span> That’s not a large probability, but it’s certainly far from impossible.</p>
+<p>In particular, we can calculate the probability of different values of the likelihood ratio <em>if the null is true</em>. It can be a test statistic for a hypothesis test, and I can find p-values for it, <span class="math display">\[\text{p-value}=P_{H_0}(T\geq t_{obs})=P_{H_0}(X\geq x_{obs})=1-P_{H_0}(X\leq x_{obs}-1)\]</span> (because of discreteness of <span class="math inline">\(X\)</span>). For example, if we observe <span class="math inline">\(x_{obs}=10\)</span>, this is <span class="math inline">\(\mathtt{1-pbinom(9,size=10,prob=0.5)}=0.001\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Number of Heads (<span class="math inline">\(x\)</span>)</th>
+<th style="text-align: center;">Likelihood Ratio <span class="math inline">\(\frac{P_{H_a}(x)}{P_{H_0}(x)}\)</span></th>
+<th style="text-align: center;">p-value</th>
+<th style="text-align: center;">Evidence Direction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.006</td>
+<td style="text-align: center;">1.000</td>
+<td style="text-align: center;">Strongly favors <span class="math inline">\(H_0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.014</td>
+<td style="text-align: center;">0.999</td>
+<td style="text-align: center;">Strongly favors <span class="math inline">\(H_0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.033</td>
+<td style="text-align: center;">0.989</td>
+<td style="text-align: center;">Favors <span class="math inline">\(H_0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.077</td>
+<td style="text-align: center;">0.945</td>
+<td style="text-align: center;">Favors <span class="math inline">\(H_0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">0.179</td>
+<td style="text-align: center;">0.828</td>
+<td style="text-align: center;">Weakly favors <span class="math inline">\(H_0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.418</td>
+<td style="text-align: center;">0.623</td>
+<td style="text-align: center;">Weakly favors <span class="math inline">\(H_0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">0.976</td>
+<td style="text-align: center;">0.377</td>
+<td style="text-align: center;">Nearly neutral (<span class="math inline">\(H_0 \approx H_a\)</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">2.277</td>
+<td style="text-align: center;">0.172</td>
+<td style="text-align: center;">Weakly favors <span class="math inline">\(H_a\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">5.313</td>
+<td style="text-align: center;">0.055</td>
+<td style="text-align: center;">Favors <span class="math inline">\(H_a\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">12.397</td>
+<td style="text-align: center;">0.011</td>
+<td style="text-align: center;">Strongly favors <span class="math inline">\(H_a\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">28.925</td>
+<td style="text-align: center;">0.001</td>
+<td style="text-align: center;">Strongly favors <span class="math inline">\(H_a\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This can feel very strange – I’ve already calculated probabilities of the data under the two hypotheses, and now I’m going to calculate the distribution under the null? But again, we are just using information about the null and our possible alternative to define a reasonable test statistic. It’s still based on our data and random and therefore has a probability distribution.</p>
+</div>
+</div>
+</section>
+<section id="likelihood-ratio-for-continuous-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="likelihood-ratio-for-continuous-distributions">Likelihood Ratio for Continuous Distributions</h3>
+<p>The above calculation uses the probability of events because we were dealing with discrete random variables. But more generally, we can use the ratio of the <em>likelihood</em> of our data, just like with MLE. <span class="math display">\[T(X) = \frac{\ell(\theta_1)}{\ell(\theta_0)} = \frac{f(X_1,...,X_n; \theta_1)}{f(X_1,...,X_n; \theta_0)}=\frac{f_a(X_1,...,X_n)}{f_0(X_1,\ldots,X_n)}\]</span> where <span class="math inline">\(f_0\)</span> and <span class="math inline">\(f_a\)</span> are the densities of the data under the null and alternative, respectively.</p>
+<div class="PARAGRAPH">
+<p>Test of a Normal mean</p>
+</div>
+<p>So for example, suppose we assume our data is normally distributed, with a <em>known</em> variance <span class="math inline">\(\sigma^2\)</span> (this is a toy example, since this never happens in practice, but an unknown variance becomes more complicated). Then we could have the following hypotheses: <span class="math display">\[H_0:\mu=\mu_0=1 \text{ versus }H_a: \mu=\mu_1=4,\]</span> Since we are assuming our data is i.i.d. normal <span class="math inline">\(N(\mu, \sigma^2)\)</span>, we would have <span class="math display">\[T(X) = \frac{\ell(4)}{\ell(1)} = \frac{f_a(X_1,\ldots,X_n)}{f_0(X_1,\ldots,X_n)}\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+    T(X)&amp;= \frac{\prod_i \exp\{-(X_i-\mu_1)^2/2\sigma^2\}}{\prod_i \exp\{-(X_i-\mu_0)^2/2\sigma^2\}}\\
+    &amp; =  \exp\left\{\frac{1}{2\sigma^2}\sum_i \left[(X_i-\mu_0)^2-(X_i-\mu_1)^2\right]\right\}\\
+    &amp;= \exp\left\{ \frac{1}{2\sigma^2}\sum_i \left[2X_i(\mu_1-\mu_0) -(\mu_1^2-\mu_0^2)\right]\right\}\\
+    &amp;= \exp\left\{\frac{n(\mu_1-\mu_0)}{2\sigma^2}\left[2\bar{X}-(\mu_0+\mu_1)\right]\right\}\\
+    &amp;= \exp\left\{\frac{3n}{2\sigma^2}\left[2\bar{X}-5\right]\right\}\\
+    &amp;= h(\bar{X})
+\end{aligned}
+\]</span> where <span class="math inline">\(h(y)=\exp\left\{\frac{n(\mu_1-\mu_0)}{2\sigma^2}\left[2y-(\mu_0+\mu_1)\right]\right\}\)</span>.</p>
+<p>We can calculate p-values for this test statistic as, <span class="math display">\[P_{\mu=1}(T(X)\geq t_{obs})=P_{\mu=1}\left(\exp\left\{\frac{3n}{2\sigma^2}\left[2\bar{X}-5\right]\right\}\geq t_{obs}\right)\]</span> And since <span class="math inline">\(\mu_1&gt;\mu_0\)</span>, <span class="math inline">\(h\)</span> is an increasing, invertible function, <span class="math display">\[h^{-1}(u)=\frac{\mu_0+\mu_1}{2}+\frac{\sigma^2\log(u)}{n (\mu_1-\mu_0)},\]</span> So we have <span class="math display">\[P_{\mu=1}(\bar{X}\geq h^{-1}(t_{obs}))=P_{\mu=1}\left(\bar{X}\geq
+\frac{\mu_0+\mu_1}{2}+\frac{\sigma^2\log(t_{obs})}{n (\mu_1-\mu_0)}\right)\]</span> We can use the fact that if <span class="math inline">\(X_i\)</span> are normal then under the null <span class="math inline">\(\mu=\mu_0=1\)</span>, we have <span class="math display">\[\frac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}\sim N(0,1)\]</span> to get <span class="math display">\[\text{p-value}=P\left(Z\geq
+\frac{h^{-1}(t_{obs})-\mu_0}{\sigma/\sqrt{n}}\right)=1-\Phi\left(\frac{h^{-1}(t_{obs})-\mu_0}{\sigma/\sqrt{n}}\right),\]</span> where <span class="math inline">\(Z\sim N(0,1)\)</span> and <span class="math inline">\(\Phi\)</span> is the CDF of the <span class="math inline">\(N(0,1)\)</span>.</p>
+<div class="PARAGRAPH">
+<p>Monotone Transformations</p>
+</div>
+<p>Notice how again we can work with monotone transformations – we basically found our values for a test statistic <span class="math display">\[\tilde{T}(X)=\bar{X}&gt;\tilde{c},\]</span> and then used the fact that <span class="math inline">\(\bar{X}=h^{-1}(T(X))\)</span> to find values <span class="math inline">\(c\)</span> for our original <span class="math inline">\(T(X)\)</span>. Because of this, these two tests (one based on <span class="math inline">\(\bar{X}\)</span> versus one based on <span class="math inline">\(T(X)\)</span>) are actually equivalent, in the sense that we would <em>always</em> make the same decision between the two tests (where <span class="math inline">\(c=h(\tilde{c})\)</span>): <span class="math display">\[\begin{gathered}
+  \{T(X)&gt;c\} \\
+  \Leftrightarrow \\
+\{h(\bar{X}) &gt; h(\mu_0+z_{\alpha}\sigma/\sqrt{n})\}\\
+  \Leftrightarrow \\
+     \{\bar{X}&gt;\mu_0+z_{\alpha}\sigma/\sqrt{n}\}
+\end{gathered}\]</span> Monotone invertible transformations of our test statistic <span class="math inline">\(T(X)\)</span> therefore give equivalent tests (with properly adjusted cutoff values).</p>
+<p>We will see with likelihood ratio tests, we often find they are equivalent to working with an (easier) test-statistic.</p>
+</section>
+<section id="optimality-of-the-likelihood-ratio" class="level3">
+<h3 class="anchored" data-anchor-id="optimality-of-the-likelihood-ratio">Optimality of the likelihood ratio</h3>
+<div id="thm-nplemma" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Neyman-Pearson Theorem)</strong></span> Suppose we test <span class="math inline">\(H_0: \theta = \theta_0\)</span> vs <span class="math inline">\(H_a: \theta = \theta_1\)</span>.</p>
+<p>Let <span class="math display">\[T(X) = \frac{\ell(\theta_1)}{\ell(\theta_0)} = \frac{f_a(X)}{f_0(X)}.\]</span> Suppose we reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(T&gt;c&gt;0\)</span>, i.e. <span class="math display">\[\begin{cases} \text{Reject }H_0 &amp; \text{if } \frac{f_a(X)}{f_0(X)}&gt;c\\
+\text{Do not reject }H_0 &amp; \text{if } \frac{f_a(X)}{f_0(X)}\leq c
+\end{cases}
+\]</span></p>
+<p>If we choose <span class="math inline">\(c\)</span> so that <span class="math inline">\(P_{H_0}(T&gt;c) = \alpha\)</span>, then this test is the <strong>most powerful</strong>, size <span class="math inline">\(\alpha\)</span> test. That is, among all tests with size <span class="math inline">\(\alpha\)</span>, this test maximizes the power, <span class="math inline">\(P_{H_a}(\text{Reject }H_0)\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math display">\[D(X)=\begin{cases} 1 &amp; \text{if }\text{Reject }H_0\\
+0 &amp;\text{Do not reject }H_0
+\end{cases}=\begin{cases} 1 &amp; \text{if } f_a(X)&gt;cf_0(X)\\
+0 &amp;f_a(X)\leq cf_0(X)
+\end{cases}
+\]</span> This is a Bernoulli random variable and the significance level of the test is <span class="math display">\[\alpha=P_{H_0}(D(X)=1)=E_{H_0}(D(X))\]</span> while the power is <span class="math display">\[P_{H_a}(D(X)=1)=E_{H_a}(D(X))\]</span></p>
+<p>Suppose there was another <span class="math inline">\(\alpha\)</span>-level significance test <span class="math inline">\(D^*(X)\)</span>. This would mean that <span class="math display">\[P_{H_0}(D^*(X)=1)\leq P_{H_0}(D(X)=1)=\alpha.\]</span> Then we want to show that then this will mean that <span class="math display">\[P_{H_a}(D^*(X)=1)\leq P_{H_a}(D(X)=1),\]</span> which is equivalent to showing that <span class="math display">\[E_{H_a}(D^*(X))\leq E_{H_a}(D(X))\]</span></p>
+<p>Note that by the definition of our decision rule <span class="math inline">\(D(X)\)</span>, we have <span class="math display">\[
+\begin{cases}
+f_a(X)-cf_0(X)&gt;0 &amp;\text{if }D(X)=1\\
+f_a(X)-cf_0(X)\leq 0 &amp;\text{if }D(X)=0
+\end{cases}
+\]</span> This means that for any <span class="math inline">\(x\)</span> <span class="math display">\[\begin{equation}
+D^*(x)[f_a(x)-cf_0(x)]\leq D(x)[f_a(x)-cf_0(x)]
+\end{equation}\]</span> Why? If <span class="math inline">\(D^*(x)=D(x)\)</span>, then clearly we get “=”. If <span class="math inline">\(D^*(x)=0\)</span>, but <span class="math inline">\(D(x)=1\)</span>, then we have <span class="math inline">\(f_a(x)-cf_0(x)&gt;0\)</span>, so we get <span class="math inline">\(&lt;\)</span>, and if <span class="math inline">\(D^*(x)=1\)</span>, but <span class="math inline">\(D(x)=0\)</span>, then we get that the left hand side is non-positive (and the right hand side is <span class="math inline">\(0\)</span>), so again <span class="math inline">\(\leq\)</span>.</p>
+<p>This identity is key, because we can integrate both sides with respect to <span class="math inline">\(x\)</span> and because of the presence of the densities, these integrations will turn into expectations, <span class="math display">\[
+\begin{gathered}
+\int D^*(x)f_a(x)dx - c\int D^*(x)f_0(x)dx \leq \int D(x)f_a(x)dx - c\int D(x)f_0(x)dx\\
+\Rightarrow E_{H_a}(D^*(X)) - cE_{H_0}(D^*(X)) \leq E_{H_a}(D(X)) - cE_{H_0}(D(X))\\
+\Rightarrow 0 \leq c\left[E_{H_0}(D(X)) - E_{H_0}(D^*(X))\right]\leq  E_{H_a}(D(X)) -E_{H_a}(D^*(X))
+\end{gathered}
+\]</span> where the first inequality holds because <span class="math inline">\(c&gt;0\)</span> and <span class="math inline">\(E_{H_0}(D^*(X))\leq \alpha=E_{H_0}(D(X))\)</span>, and the second inequality comes from rearranging the line above.</p>
+<p>Therefore <span class="math display">\[E_{H_a}(D^*(X))\leq E_{H_a}(D(X)).\]</span> so the power of <span class="math inline">\(D\)</span> is at least as large as that of <span class="math inline">\(D^*\)</span>.</p>
+<p>Notice, this still works if the densities are pmf and you replace the integral with summation.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</div>
+</section>
+</section>
+<section id="likelihood-ratio-test-lrt" class="level2">
+<h2 class="anchored" data-anchor-id="likelihood-ratio-test-lrt">Likelihood Ratio Test (LRT)</h2>
+<div class="PARAGRAPH">
+<p>Setup: composite nulls</p>
+</div>
+<p>The above was based on a simple versus simple hypothesis. The full likelihood ratio test expands this idea to deal with a composite alternative <em>and</em> a composite null. We let the space of possible null values of the parameter <span class="math inline">\(\theta\)</span> be the set <span class="math inline">\(\omega_0\)</span> and the space of possible alternative values of the parameter <span class="math inline">\(\theta\)</span> be <span class="math inline">\(\omega_a\)</span>. And let <span class="math display">\[\Omega=\omega_0 \cup \omega_a\]</span> be the union, i.e.&nbsp;the entire hypothesis space. Then we can write our hypotheses as <span class="math display">\[H_0: \theta\in \omega_0 \text{ vs } H_a:\theta\in\omega_a.\]</span> For example, we could have <span class="math display">\[\omega_0=\{\theta: \theta=\theta_0\}
+\text{ versus }\omega_a=\{\theta: \theta\neq\theta_0\},\]</span> and this would then be equivalent to <span class="math display">\[H_0: \theta=\theta_0, H_a: \theta\neq \theta_0\]</span></p>
+<p>Or, in a two-sample problem with <span class="math inline">\(\theta=(\mu_X,\mu_Y)\)</span>, <span class="math display">\[\omega_0=\{(\mu_X,\mu_Y):\mu_X=\mu_Y\} \text{ versus }
+\omega_a=\{(\mu_X,\mu_Y):\mu_X\neq\mu_Y\},
+\]</span> which is equivalent to <span class="math display">\[H_0: \mu_X=\mu_Y, H_a: \mu_X\neq\mu_Y\]</span></p>
+<div class="PARAGRAPH">
+<p>Defining the Likelihood Ratio Statistic</p>
+</div>
+<p>The Likelihood Ratio Test is based on a direct extension of the (simple) likelihood-ratio statistic in the NP Lemma to account for a composite alternative hypothesis. This results in the likelihood ratio statistic and the likelihood ratio test (LRT).</p>
+<div id="def-LRT" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Likelihood Ratio Statistic)</strong></span> Let <span class="math display">\[\Lambda(X) = 2\log\frac{\sup_{\theta \in \Omega}\ell(\theta)}{\sup_{\theta \in \omega_0}\ell(\theta)}=2[\sup_{\theta \in \Omega}L(\theta) - \sup_{\theta \in \omega_0}L(\theta)]\]</span> where <span class="math inline">\(\ell(\theta)\)</span> is the likelihood and <span class="math inline">\(L(\theta)\)</span> is the log-likelihood.</p>
+<p><span class="math inline">\(\Lambda(X)\)</span> is the <strong>likelihood ratio statistic.</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+</div>
+<section id="relationship-to-mle" class="level3">
+<h3 class="anchored" data-anchor-id="relationship-to-mle">Relationship to MLE</h3>
+<p>Calculating <span class="math inline">\(\Lambda\)</span> has direct connections to finding the MLE. If <span class="math inline">\(\hat\theta\)</span> is the MLE then it maximizes <span class="math inline">\(L(\theta)\)</span> and <span class="math inline">\(\sup_{\theta \in \Omega}L(\theta)=L(\hat\theta)\)</span>, <span class="math display">\[ \Lambda(X) = 2\log\frac{\ell(\hat\theta)}{\sup_{\theta \in \omega_0}\ell(\theta)} \]</span> So we then just need to find the value that maximizes <span class="math inline">\(\ell(\theta)\)</span> when <span class="math inline">\(\theta\)</span> is restricted to <span class="math inline">\(\omega_0\)</span>, call it <span class="math inline">\(\hat\theta_{0}\)</span>. Then we have</p>
+<p><span class="math display">\[ \Lambda(X) = 2\log\frac{\ell(\hat\theta)}{\ell(\hat\theta_{0})}=2 (L(\hat\theta)-L(\hat\theta_0)) \]</span> Thus calculating <span class="math inline">\(\Lambda(X)\)</span> generally has the following steps:</p>
+<ol type="1">
+<li>Find the MLE <span class="math inline">\(\hat{\theta}\)</span> that maximizes <span class="math inline">\(L(\theta)\)</span></li>
+<li>Find the value <span class="math inline">\(\hat\theta_{0}\)</span> that maximizes <span class="math inline">\(L(\theta)\)</span> when <span class="math inline">\(\theta\)</span> is restricted to <span class="math inline">\(\omega_0\)</span>.</li>
+<li>Return the value <span class="math inline">\(\Lambda(X) = 2 [L(\hat\theta)-L(\hat\theta_0)]\)</span></li>
+</ol>
+</section>
+<section id="examples" class="level3">
+<h3 class="anchored" data-anchor-id="examples">Examples</h3>
+<div class="PARAGRAPH">
+<p>Poisson</p>
+</div>
+<p>Suppose we have count data <span class="math inline">\(X_1,\ldots,X_n\)</span> that we assume are i.i.d. <span class="math inline">\(Poisson(\theta)\)</span>. For testing <span class="math inline">\(H_0: \theta = \theta_0\)</span> versus <span class="math inline">\(H_a:\theta \neq \theta_0\)</span>, we have the MLE for <span class="math inline">\(\theta\)</span> is <span class="math display">\[\hat\theta = \sum_{i=1}^n X_i / n=\bar{X}\]</span> And under the null, we just have one value <span class="math inline">\(\theta_0\)</span>. So we have,</p>
+<p><span class="math display">\[\begin{aligned}
+\Lambda(X) &amp;= 2 \log \frac{\ell(\hat\theta)}{\ell(\theta_0)}\\
+&amp;= 2 \log \frac{e^{-n\hat\theta}\hat\theta^{\sum x_i}}{e^{-n\theta_0}\theta_0^{\sum x_i}}\\
+&amp;= 2n[(\theta_0-\hat\theta) - \hat\theta \log (\theta_0/\hat\theta)]
+\end{aligned}\]</span></p>
+<div class="PARAGRAPH">
+<p>Normal with known <span class="math inline">\(\sigma^2\)</span></p>
+</div>
+<p>Suppose we assume <span class="math inline">\(X_1,\ldots,X_n \stackrel{iid}{\sim} N(\theta, 1)\)</span>, i.e.&nbsp;we know the variance <span class="math inline">\(\sigma^2=1\)</span>. Consider testing <span class="math inline">\(H_0: \theta = \theta_0\)</span> versus <span class="math inline">\(H_a: \theta \neq \theta_0\)</span>. The likelihood is <span class="math display">\[\ell(\theta)=c_n \exp\{\sum_i -\frac{1}{2}(X_i-\theta)^2\}\]</span> Then we know that the MLE is <span class="math inline">\(\hat\theta=\bar{X}\)</span>, and the MLE restricted to <span class="math inline">\(\omega_0=\{\theta_0\}\)</span> is just <span class="math inline">\(\hat\theta_{0}=\theta_0\)</span> because there’s only one possible value in the null hypothesis space.</p>
+<p>Then <span class="math display">\[
+\begin{aligned}
+\Lambda(X)&amp;=2\log\frac{\exp\{\sum_i -\frac{1}{2}(X_i-\bar{X})^2\}}{\exp\{\sum_i -\frac{1}{2}(X_i-\theta_0)^2\}}\\&amp;=\sum_i \left[(X_i-\theta_0)^2-(X_i-\bar{X})^2\right]\\
+&amp;=n (\bar{X}-\theta_0)^2
+\end{aligned}\]</span></p>
+<div class="PARAGRAPH">
+<p>Normal with unknown <span class="math inline">\(\sigma^2\)</span></p>
+</div>
+<p>What if we’re more realistic and while we still assume <span class="math inline">\(X_i\)</span> i.i.d. <span class="math inline">\(N(\mu,\sigma^2)\)</span>, we <em>don’t</em> assume we know <span class="math inline">\(\sigma^2\)</span>. We again consider testing <span class="math inline">\(H_0: \mu=\mu_0\)</span>. <span class="math display">\[L(\theta)= -\frac{n}{2}\log(2\pi)-\frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_i(X_i-\mu)^2\]</span></p>
+<p>Now we have to consider our full set of parameters, <span class="math inline">\(\theta=(\mu,\sigma^2)\)</span>, even though we are only testing something about the <span class="math inline">\(\mu\)</span>.</p>
+<p>We have the MLEs <span class="math display">\[\hat\mu=\bar{X}, \hat\sigma^2=\frac{1}{n}\sum_i (X_i-\bar{X})^2\]</span> so plugging those into <span class="math inline">\(L(\theta)\)</span> above will give us <span class="math inline">\(L(\hat\theta)\)</span>, the maximum value of <span class="math inline">\(L(\theta)\)</span>.</p>
+<p>What about maximizing <span class="math inline">\(L(\theta)\)</span> over the null? We are only constraining <span class="math inline">\(\mu=\mu_0\)</span>, but <span class="math inline">\(\sigma^2\)</span> can be anything. So we have to find the maximum value of the likelihood over all <span class="math inline">\(\sigma^2\)</span> values, even though there’s only one value of <span class="math inline">\(\mu\)</span>. So we have <span class="math display">\[L(\theta)=-\frac{n}{2}\log(2\pi)-\frac{n}{2}\log(\sigma^2)
+-\frac{1}{2\sigma^2}\sum_i (X_i-\mu_0)^2\]</span> Maximizing with respect to <span class="math inline">\(\sigma^2\)</span> we have <span class="math display">\[\hat\sigma_0^2=\frac{1}{n}\sum_i (X_i-\mu_0)^2\]</span> This makes sense: if I know the mean of the data is <span class="math inline">\(\mu_0\)</span> I will use that value to estimate the variance.</p>
+<p>Putting these together gets me the (log)-likelihood ratio statistic, <span class="math display">\[\begin{align*}
+  \Lambda(X)&amp;=2[L(\hat\theta)-L(\hat\theta_{0})]\\
+  &amp;=n\log\left(\frac{\hat\sigma_{0}^2}{\hat\sigma^2}\right)
+  +\frac{1}{\hat\sigma_{0}^2}\sum_i(X_i-\mu_0)^2
+  -\frac{1}{\hat\sigma^2}\sum_i(X_i-\bar{X})^2\\
+  &amp;= n\log\left(\frac{\hat\sigma_{0}^2}{\hat\sigma^2}\right)\\
+  &amp;=n(\log(\sum_i (X_i-\mu_0)^2 )-\log(\sum_i (X_i-\bar{X})^2))
+  \end{align*}\]</span></p>
+</section>
+<section id="connection-to-np-lemma" class="level3">
+<h3 class="anchored" data-anchor-id="connection-to-np-lemma">Connection to NP Lemma</h3>
+<p>For the NP Lemma, we had simple <span class="math inline">\(\omega_a=\{\theta_1\}\)</span> and <span class="math inline">\(\omega_0=\{\theta_0\}\)</span>. We could rewrite the statistic from the NP Lemma in a similar form as <span class="math inline">\(\Lambda(X)\)</span> <span class="math display">\[T(X)= \frac{\ell(\theta_1)}{\ell(\theta_0)}= \frac{\sup_{\theta \in \omega_a}\ell(\theta)}{\sup_{\theta \in \omega_0}\ell(\theta)}\]</span> As we’ve noted, taking the <span class="math inline">\(\log\)</span> and multiplying by <span class="math inline">\(2\)</span> result in equivalent tests since these are monotone transformations, so that is not a meaningful distinction between <span class="math inline">\(T(X)\)</span> and <span class="math inline">\(\Lambda(X)\)</span>.</p>
+<p>But what has changed is that the numerator of the LRT <span class="math inline">\(\Lambda(X)\)</span> is over <span class="math inline">\(\Omega\)</span>, the <em>entire parameter space</em> (the union of <span class="math inline">\(\omega_a\)</span> and <span class="math inline">\(\omega_0\)</span>) <span class="math display">\[\Lambda(X) = 2\log\frac{\sup_{\theta \in \Omega}\ell(\theta)}{\sup_{\theta \in \omega_0}\ell(\theta)}\]</span> So we are not exactly expanding the original test statistic <span class="math inline">\(T(X)\)</span> of the NP lemma – we have changed it. But notice, <span class="math display">\[\begin{aligned}
+\Lambda(X)&amp;=\begin{cases}2\log (1)=0 &amp; \text{if }\sup_{\theta \in \Omega}\ell(\theta)=\sup_{\theta \in \omega_0}\ell(\theta)\\
+2\log \frac{\sup_{\theta \in \omega_a}\ell(\theta)}{\sup_{\theta \in \omega_0}\ell(\theta)}=2\log[T(X)] &amp; \text{otherwise}
+\end{cases}\\
+&amp;=\begin{cases}0 &amp; \text{if }T(X)\leq 1\\
+2\log[T(X)] &amp; \text{if }T(X)&gt; 1
+\end{cases}
+\end{aligned}
+\]</span> So the main difference is that <span class="math inline">\(\Lambda(X)\)</span> is ignoring the value of the ratio of the likelihood in cases where there is <em>less likelihood of the data in <span class="math inline">\(\omega_a\)</span> than in <span class="math inline">\(\omega_0\)</span></em>. It’s basically not interested in how much more likely the null is than the alternative, once it’s clear the data prefers the null.</p>
+<p>Note this also shows that <span class="math inline">\(\Lambda(X)\geq 0\)</span>.</p>
+<p>Finally, notice that unlike <span class="math inline">\(T(X)\)</span>, we only have to do one constrained likelihood (for <span class="math inline">\(\theta\in\omega_0\)</span>); constrained optimization is harder than unconstrained optimization in general. And furthermore, if <span class="math inline">\(\omega_0=\{\theta_0\}\)</span> is a simple hypothesis, we have no optimization in the denominator, and only need to find the standard MLE, which we will probably have done anyway.</p>
+</section>
+</section>
+<section id="lrt-determining-the-critical-value" class="level2">
+<h2 class="anchored" data-anchor-id="lrt-determining-the-critical-value">LRT &amp; Determining the critical value</h2>
+<div id="def-LRTtest" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Likelihood Ratio Test (LRT))</strong></span> A <strong>likelihood ratio test</strong> is a test for which <span class="math display">\[ R = \{x: \Lambda(x) &gt; c\}\]</span> where <span class="math inline">\(c\)</span> is found so that the level of the test is <span class="math inline">\(\alpha\)</span></p>
+</div>
+<p>To define a test based on <span class="math inline">\(\Lambda(X)\)</span> requires finding the critical value <span class="math inline">\(c\)</span> for our cutoff.</p>
+<p>Sometimes we can calculate the power function for the LRT exactly to find <span class="math inline">\(c\)</span>; or equivalently, we can find a simplified expression for the form of the rejection region, i.e.&nbsp;another formulation of <span class="math inline">\(\Lambda(X)\)</span> that is more tractable.</p>
+<section id="example-of-exact-sampling-distribution-of-lambda" class="level3">
+<h3 class="anchored" data-anchor-id="example-of-exact-sampling-distribution-of-lambda">Example of exact sampling distribution of <span class="math inline">\(\Lambda\)</span></h3>
+<p>Let’s return to our example where we assumed our data is <span class="math inline">\(X_i\stackrel{iid}{\sim} N(\theta,1)\)</span>. We found <span class="math inline">\(\Lambda(X)= n(\bar{X}-\theta_0)^2\)</span>. We can determine the exact value of <span class="math inline">\(c\)</span> for a particular <span class="math inline">\(\alpha\)</span> based on knowing the distribution of <span class="math inline">\(\bar{X}\)</span>: <span class="math display">\[\begin{gathered}
+    n(\bar{X}-\theta_0)^2 &gt; c\\
+    \Leftrightarrow\\
+    |\bar{X}-\theta_0| &gt;  \underbrace{\sqrt{\frac{c}{n}}}_{d}
+\end{gathered}\]</span> So an equivalent test is to reject for <span class="math inline">\(|\bar{X}-\theta_0|&gt; d=d(c)\)</span>. We’ve done this type of calculation already!</p>
+<p>To find the cutoff we find <span class="math inline">\(d\)</span> so that, under the null, the probability of rejecting is <span class="math inline">\(\alpha\)</span>, <span class="math display">\[
+\begin{aligned}
+  \alpha=P_{\theta_0}(\text{Reject }H_0)&amp;=P_{\theta_0}(|\bar{X} -\theta_0|&gt; d)\\
+  &amp;=1-P_{\theta_0}(- d\leq\bar{X} -\theta_0 \leq  d)\\
+  &amp;=1-P_{\theta_0}\left(- \frac{d}{1/\sqrt{n}}\leq\frac{\bar{X} -\theta_0}{1/\sqrt{n}} \leq  \frac{d}{1/\sqrt{n}}\right)
+\end{aligned}
+\]</span> Under the null, <span class="math inline">\(\frac{\bar{X} -\theta_0}{1/\sqrt{n}}\sim N(0,1)\)</span>, so <span class="math inline">\(\sqrt{n}d\)</span> must be the <span class="math inline">\(1-\alpha/2\)</span> quantile of the <span class="math inline">\(N(0,1)\)</span>.</p>
+<p>This gives a cutoff for <span class="math inline">\(|\bar{X}-\theta_0|\)</span> of <span class="math inline">\(d=z_{\alpha/2}/\sqrt{n}\)</span>.</p>
+<p>Or in terms of <span class="math inline">\(\Lambda(X)\)</span>, we reject when <span class="math inline">\(\Lambda(X)=n(\bar{X}-\theta_0)^2&gt; nd^2=z_{\alpha/2}^2\)</span>.</p>
+</section>
+<section id="asymptotic-lrt-and-chi2_k-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="asymptotic-lrt-and-chi2_k-distribution">Asymptotic LRT and <span class="math inline">\(\chi^2_k\)</span> Distribution</h3>
+<p>Often we cannot find the exact distribution of <span class="math inline">\(\Lambda(X)\)</span>. In this case, if we had the asymptotic distribution of <span class="math inline">\(\Lambda(X)\)</span>, then we’ve seen that we can use this to find <span class="math inline">\(c\)</span> and define an asymptotic test.</p>
+<p>In fact, for <em>certain hypothesis tests</em>, <span class="math inline">\(\Lambda(X)\)</span> follows what is known as the <span class="math inline">\(\chi^2_k\)</span> Distribution.</p>
+<div id="def-chisq" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (<span class="math inline">\(\chi^2_k\)</span> Distribution)</strong></span> The <span class="math inline">\(\chi^2_k\)</span> distribution (read “chi squared with <span class="math inline">\(k\)</span> degrees of freedom”) is the distribution of the sum of squares of <span class="math inline">\(k\)</span> independent standard normal random variables.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> That is, if <span class="math inline">\(Z_1,\ldots,Z_k \stackrel{iid}{\sim} N(0, 1)\)</span>, then <span class="math display">\[ Y = \sum_{i=1}^k Z_i^2 \sim \chi^2_k \]</span></p>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="19-LikelihoodNPLemma_files/figure-html/chisqDist-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="thm-wilks" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2</strong></span> Under smoothness conditions on the probability densities, we have that under <span class="math inline">\(H_0\)</span>, the limiting distribution <span class="math display">\[ \Lambda(X) \stackrel{D}{\rightarrow} \chi^2_{r} \]</span> where <span class="math display">\[r=dim(\Omega)-dim(\omega_0)\]</span></p>
+</div>
+<p>We can use this approximation to find an appropriate critical value <span class="math inline">\(c\)</span> for <span class="math inline">\(\Lambda(X)\)</span>. Since for large <span class="math inline">\(n\)</span>, <span class="math inline">\(\Lambda(X) \stackrel{D}{\approx} \chi^2_{r}\)</span>, to construct an approximate size <span class="math inline">\(\alpha\)</span> LRT, we find <span class="math inline">\(c_{\alpha}\)</span> s.t. <span class="math display">\[P_{H_0}(\Lambda(X) &gt; c_{\alpha}) = \alpha,\]</span> or equivalently <span class="math display">\[P_{H_0}(\Lambda(X) \leq c_{\alpha}) = 1-\alpha.\]</span> This means we want <span class="math inline">\(c_{\alpha}\)</span> to be the <span class="math inline">\(1-\alpha\)</span> quantile of the <span class="math inline">\(\chi^2_{r}\)</span> distribution.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What does it mean “the dimension of <span class="math inline">\(\omega_0\)</span>”? This is the dimension of subspace that <span class="math inline">\(\theta\)</span> lies on, <em>after the constraints of the null hypothesis are satisfied.</em></p>
+</div>
+</div>
+</section>
+<section id="examples-1" class="level3">
+<h3 class="anchored" data-anchor-id="examples-1">Examples</h3>
+<p>Let’s go back to our previous examples and consider the limiting distribution of <span class="math inline">\(\Lambda\)</span></p>
+<div class="PARAGRAPH">
+<p>Example (Poisson):</p>
+</div>
+<p>We had that</p>
+<p><span class="math display">\[\begin{aligned}
+\Lambda(X) &amp;=  2n[(\theta_0-\hat\theta) - \hat\theta \log (\theta_0/\hat\theta)]
+\end{aligned}\]</span></p>
+<p>Our theorem tells us this will be asymptotically <span class="math inline">\(\chi^2_r\)</span>, and we just need to figure out the degrees of freedom <span class="math inline">\(r\)</span>. In this case, the unrestricted parameter <span class="math inline">\(\theta\)</span> lies in <span class="math inline">\(\mathbb{R}\)</span>, so <span class="math inline">\(dim(\Omega)=1\)</span>. The restricted parameter <span class="math inline">\(\theta\)</span> is just a point, so it lies in a space of dimension <span class="math inline">\(dim(\omega_0)=0\)</span>. So <span class="math inline">\(r=1\)</span>.</p>
+<p>Then to find <span class="math inline">\(c_{\alpha}\)</span>, we need <span class="math inline">\(c_{\alpha}\)</span> to satisfy <span class="math display">\[P(\chi^2_{1} \leq c_{\alpha}) = 1-\alpha,\]</span> i.e.&nbsp;the <span class="math inline">\(1-\alpha\)</span> quantile of the <span class="math inline">\(\chi^2_{1}\)</span> distribution. For <span class="math inline">\(\alpha=0.05\)</span>,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(.<span class="dv">95</span>,<span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.841459</code></pre>
+</div>
+</div>
+<p>Alternatively, we could calculate a p-value based on the <span class="math inline">\(\chi^2_1\)</span> distribution, <span class="math display">\[\text{p-value}\approx P(\chi^2_1 \geq \Lambda_{obs})=\mathtt{1-pchisq(lobs,df=1)}\]</span></p>
+<div class="PARAGRAPH">
+<p>Example: Normal, variance unknown</p>
+</div>
+<p>We found above that <span class="math display">\[\begin{aligned}
+  \Lambda(X)&amp;=n\left(\log\left(\sum_i (X_i-\mu_0)^2 \right)-\log\left(\sum_i (X_i-\bar{X})^2\right)\right)
+  \end{aligned}.\]</span></p>
+<p>Here <span class="math inline">\(\theta=(\theta_1,\theta_2)=(\mu,\sigma^2)\in \mathbb{R}\times(0,\infty)=\Omega\)</span>, so we have <span class="math inline">\(dim(\Omega)=2\)</span>.</p>
+<p>Then for our null hypothesis space <span class="math inline">\(\mu\)</span> can’t vary – it’s only <span class="math inline">\(\mu_0\)</span>; only <span class="math inline">\(\sigma^2\)</span> so <span class="math inline">\(\omega_0\)</span> is a subspace of <span class="math inline">\(\mathbb{R}^2\)</span> that is a line, so <span class="math inline">\(dim(\omega_0)=1\)</span>. So <span class="math inline">\(r=1\)</span> again, and <span class="math inline">\(\Lambda(X)\)</span> is approximately <span class="math inline">\(\chi^2_1\)</span> under the null and has the same critical values and p-value calculations as the Poisson (but obviously a different <span class="math inline">\(\Lambda(X)\)</span> equation).</p>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Suppose that a fast food company has developed a new, more expensive hamburger recipe. They recruit <span class="math inline">\(n\)</span> people to test the new and old hamburgers. For each person <span class="math inline">\(i\)</span>, let <span class="math inline">\(X_i = 1\)</span> if he/she prefers the new hamburger and 0 otherwise. Let <span class="math inline">\(p\)</span> denote the proportion of people in the target population (hamburger eaters) who prefer the new recipe.</p>
+<ul>
+<li>Find the form of the LRT for <span class="math inline">\(H_0: p=1/2\)</span>.</li>
+<li>Use the limiting <span class="math inline">\(\chi^2\)</span> distribution of <span class="math inline">\(\Lambda\)</span> to find the size 0.05 LRT.</li>
+<li>Suppose <span class="math inline">\(n = 30\)</span> and <span class="math inline">\(\sum_i X_i = 22\)</span>. What do you conclude?</li>
+</ul>
+</div>
+<div class="QUESTION">
+<div class="block-title">
+<p><strong>Exercise/Question</strong></p>
+</div>
+<p>Show that the LRT given above for testing <span class="math inline">\(H_0: \mu=\mu_0\)</span> from <span class="math inline">\(X_i\)</span> i.i.d. <span class="math inline">\(N(\mu,\sigma^2)\)</span>, with <span class="math inline">\(\sigma^2\)</span> unknown is equivalent to using the test statistic <span class="math display">\[T(X)=\frac{|\bar{X}-\mu_0|}{s/\sqrt{n}}\]</span> where <span class="math inline">\(s\)</span> is the sample standard deviation, with <span class="math display">\[s^2=\frac{1}{n-1}\sum_i (X_i-\bar{X})^2\]</span></p>
+<p>Hint: First show that <span class="math inline">\(\sum_i (X_i-\mu_0)^2=\sum_i (X_i-\bar{X})^2+n(\bar{X}-\mu_0)^2\)</span></p>
+</div>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>However, getting an exactly <span class="math inline">\(\alpha\)</span> level test will not be possible for all values of <span class="math inline">\(\alpha\)</span> for a discrete random variable.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Be careful: sometimes the likelihood ratio statistic will be defined with the reciprocal of this ratio, and with a <span class="math inline">\(-2\)</span> instead. Which means they are in fact exactly equivalent equations, but it can be confusing.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The <span class="math inline">\(\chi^2_k\)</span> distribution is a special case of the Gamma distribution, <span class="math inline">\(Gamma(\frac{k}{2},2)\)</span>, using the shape-scale definition of the Gamma (as in Wasserman) with density <span class="math inline">\(\frac{x^{k/2-1} e^{-x/2}}{2^{k/2}\Gamma(k/2)}\)</span> for <span class="math inline">\(x&gt;0\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/spring-2026");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
