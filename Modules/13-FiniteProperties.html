@@ -550,7 +550,7 @@ g'(\theta) = \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} t(x_1, \ldot
 [g'(\theta)]^2 \leq \text{Var}(T) \cdot nI(\theta)
 \]</span></p>
 <p><span class="math display">\[
-\Rightarrow \frac{[g'(\theta)]^2}{nI(\theta)} \leq \text{Var}(T) \qquad \blacksquare
+\Rightarrow \frac{[g'(\theta)]^2}{nI(\theta)} \leq \text{Var}(T)
 \]</span></p>
 </div>
 </section>
@@ -715,7 +715,7 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/spring-2026");
+        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/fall-2026");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

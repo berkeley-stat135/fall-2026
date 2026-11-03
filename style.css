@@ -57,3 +57,56 @@ pre code {
 .GOALS > .block-title {
   background-color: rgb(235.8, 247.7, 231.9);
 }
+
+/* Theorem-like environments (thm, lem, cor, prp, cnj, def, exm, exr).
+   Quarto gives all of them class "theorem", plus a second class for the
+   type (lemma, corollary, proposition, conjecture, definition, example,
+   exercise). Like the PDF: statements are italic, definitions are upright. */
+.theorem {
+  border-left: 5px solid #6f42c1;
+  border-radius: .25rem;
+  background-color: rgba(111, 66, 193, .05);
+  margin: 1.25rem 0;
+  padding: .5em 1em;
+  font-style: italic;
+}
+.theorem.definition, .theorem.example {
+  border-left-color: #6c757d;
+  background-color: rgba(108, 117, 125, .06);
+  font-style: normal;
+}
+/* Exercises (the former QUESTION blocks): red box with a tinted title bar */
+.theorem.exercise {
+  border-left-color: #dc3545;
+  background-color: transparent;
+  padding-top: 0;
+  font-style: normal;
+}
+.theorem.exercise .theorem-title {
+  display: block;
+  margin: 0 -1em .5em -1em;
+  padding: .4em 1em;
+  background-color: rgb(252, 237, 237);
+  border-top-right-radius: .25rem;
+  font-weight: 600;
+}
+.theorem-title {
+  font-style: normal;
+}
+/* Proofs, remarks and solutions are unnumbered and not boxed */
+.proof, .remark, .solution {
+  margin: 1rem 0;
+}
+/* Solutions (the former ANSWER blocks): red and indented */
+.solution {
+  color: red;
+  margin-left: 2em;
+}
+/* End-of-proof symbol, always on its own line at the right margin.
+   (HTML adds none by default; the PDF adds its own.) */
+.proof:not(.remark):not(.solution)::after {
+  content: "\25A0";
+  display: block;
+  text-align: right;
+  font-size: .8em;
+}

@@ -493,7 +493,7 @@ x_{(n-g+1)}-\bar{x}_{trim} &amp; x_0 \ge x_{(n-g+1)}
 <ol type="1">
 <li><span class="math inline">\(x_{(g)} &lt; x_0 &lt; x_{(n-g+1)},\)</span> so <span class="math inline">\(x^*=x_0\)</span> is part of the new core set of points, <span class="math display">\[x_0, x_{(g+1)}, \dots, x_{(n-g)}\]</span> i.e.&nbsp;<span class="math inline">\(x_0\)</span> is added. Then <span class="math inline">\(x^*-\bar{x}_{trim}=x_0-\bar{x}_{trim}\)</span>, and <span class="math display">\[SC(x_0)=\frac{n+1}{n+1-2g}(x_0-\bar{x}_{trim}).\]</span> So in this case the sensitivity curve is linear in <span class="math inline">\(x_0\)</span>.</li>
 <li><span class="math inline">\(x_0 \le x_{(g)}\)</span>. That means <span class="math inline">\(x_0\)</span> is now part of the bottom portion of the data we remove, and the previous boundary point <span class="math inline">\(x_{(g)}\)</span> gets kicked into core set of data points, <span class="math inline">\(x^*=x_{(g)}\)</span>, meaning that our trimmed mean is the mean of <span class="math display">\[x_{(g)}, x_{(g+1)}, \dots, x_{(n-g)},\]</span> so we have <span class="math display">\[SC(x_0)=\frac{n+1}{n+1-2g}(x_{(g)}-\bar{x}_{trim}).\]</span> This is true for <em>all</em> <span class="math inline">\(x_0 \le x_{(g)}\)</span>, yet <span class="math inline">\(x_{(g)}\)</span> doesn’t change – hence the plateau.</li>
-<li><span class="math inline">\(x_0 \ge x_{(n-g+1)}\)</span>. That means <span class="math inline">\(x_0\)</span> is now part of the upper portion of the data we remove, and the previous boundary point <span class="math inline">\(x_{(n-g+1)}\)</span> gets kicked into core set of data points, <span class="math inline">\(x^*=x_{(n-g+1)}\)</span>, meaning the trimmed mean will now be the mean of <span class="math display">\[x_{(g+1)}, \dots, x_{(n-g)}, x_{(n-g+1)}\]</span> and we have <span class="math display">\[SC(x_0)=\frac{n+1}{n+1-2g}(x_{(n-g+1)}-\bar{x}_{trim}).\]</span> Again, this is true for <em>all</em> <span class="math inline">\(x_0 \ge x_{(n-g+1)}\)</span> and so this is the plateau. <span class="math inline">\(\blacksquare\)</span></li>
+<li><span class="math inline">\(x_0 \ge x_{(n-g+1)}\)</span>. That means <span class="math inline">\(x_0\)</span> is now part of the upper portion of the data we remove, and the previous boundary point <span class="math inline">\(x_{(n-g+1)}\)</span> gets kicked into core set of data points, <span class="math inline">\(x^*=x_{(n-g+1)}\)</span>, meaning the trimmed mean will now be the mean of <span class="math display">\[x_{(g+1)}, \dots, x_{(n-g)}, x_{(n-g+1)}\]</span> and we have <span class="math display">\[SC(x_0)=\frac{n+1}{n+1-2g}(x_{(n-g+1)}-\bar{x}_{trim}).\]</span> Again, this is true for <em>all</em> <span class="math inline">\(x_0 \ge x_{(n-g+1)}\)</span> and so this is the plateau.</li>
 </ol>
 </div>
 </section>
@@ -857,7 +857,7 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/spring-2026");
+        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/fall-2026");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

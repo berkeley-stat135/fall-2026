@@ -710,7 +710,7 @@ E\!\left(\frac{\partial^2}{\partial\theta^2}\log f(X|\theta_0)\right) &amp;= -I(
 <p><span class="math display">\[\begin{align*}
 \sqrt{n}\,(\hat{\theta}_n - \theta_0) &amp;\approx -\frac{L'(\theta_0)/\sqrt{n}}{L''(\theta_0)/n} \\            &amp;\approx \frac{L'(\theta_0)/\sqrt{n}}{I(\theta_0)}\\
 \Rightarrow \sqrt{nI(\theta_0)}\,(\hat{\theta}_n - \theta_0) &amp;\approx \frac{L'(\theta_0)}{\sqrt{nI(\theta_0)}} \overset{D}\longrightarrow \mathcal{N}(0,1) \\
-\end{align*}\]</span> <span class="math inline">\(\blacksquare\)</span></p>
+\end{align*}\]</span></p>
 </div>
 </section>
 </section>
@@ -813,7 +813,7 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/spring-2026");
+        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/fall-2026");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

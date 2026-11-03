@@ -58,7 +58,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -359,17 +378,18 @@ window.Quarto = {
   <li><a href="#likelihood-ratio-for-continuous-distributions" id="toc-likelihood-ratio-for-continuous-distributions" class="nav-link" data-scroll-target="#likelihood-ratio-for-continuous-distributions">Likelihood Ratio for Continuous Distributions</a></li>
   <li><a href="#optimality-of-the-likelihood-ratio" id="toc-optimality-of-the-likelihood-ratio" class="nav-link" data-scroll-target="#optimality-of-the-likelihood-ratio">Optimality of the likelihood ratio</a></li>
   </ul></li>
-  <li><a href="#likelihood-ratio-test-lrt" id="toc-likelihood-ratio-test-lrt" class="nav-link" data-scroll-target="#likelihood-ratio-test-lrt">Likelihood Ratio Test (LRT)</a>
+  <li><a href="#the-generalized-likelihood-ratio-statistic" id="toc-the-generalized-likelihood-ratio-statistic" class="nav-link" data-scroll-target="#the-generalized-likelihood-ratio-statistic">The (Generalized) Likelihood Ratio Statistic</a>
   <ul class="collapse">
   <li><a href="#relationship-to-mle" id="toc-relationship-to-mle" class="nav-link" data-scroll-target="#relationship-to-mle">Relationship to MLE</a></li>
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   <li><a href="#connection-to-np-lemma" id="toc-connection-to-np-lemma" class="nav-link" data-scroll-target="#connection-to-np-lemma">Connection to NP Lemma</a></li>
   </ul></li>
-  <li><a href="#lrt-determining-the-critical-value" id="toc-lrt-determining-the-critical-value" class="nav-link" data-scroll-target="#lrt-determining-the-critical-value">LRT &amp; Determining the critical value</a>
+  <li><a href="#the-generalized-likelihood-ratio-test-and-finding-the-null-distribution" id="toc-the-generalized-likelihood-ratio-test-and-finding-the-null-distribution" class="nav-link" data-scroll-target="#the-generalized-likelihood-ratio-test-and-finding-the-null-distribution">The (Generalized) Likelihood Ratio Test and Finding the Null Distribution</a>
   <ul class="collapse">
-  <li><a href="#example-of-exact-sampling-distribution-of-lambda" id="toc-example-of-exact-sampling-distribution-of-lambda" class="nav-link" data-scroll-target="#example-of-exact-sampling-distribution-of-lambda">Example of exact sampling distribution of <span class="math inline">\(\Lambda\)</span></a></li>
+  <li><a href="#examples-of-exact-sampling-distribution-of-lambda" id="toc-examples-of-exact-sampling-distribution-of-lambda" class="nav-link" data-scroll-target="#examples-of-exact-sampling-distribution-of-lambda">Examples of exact sampling distribution of <span class="math inline">\(\Lambda\)</span></a></li>
   <li><a href="#asymptotic-lrt-and-chi2_k-distribution" id="toc-asymptotic-lrt-and-chi2_k-distribution" class="nav-link" data-scroll-target="#asymptotic-lrt-and-chi2_k-distribution">Asymptotic LRT and <span class="math inline">\(\chi^2_k\)</span> Distribution</a></li>
   <li><a href="#examples-1" id="toc-examples-1" class="nav-link" data-scroll-target="#examples-1">Examples</a></li>
+  <li><a href="#relationship-to-wald-and-score-tests" id="toc-relationship-to-wald-and-score-tests" class="nav-link" data-scroll-target="#relationship-to-wald-and-score-tests">Relationship to Wald and Score Tests</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -396,6 +416,15 @@ window.Quarto = {
 </header>
 
 
+<div class="READING">
+<div class="block-title">
+<p><strong>Corresponding reading</strong></p>
+</div>
+<ul>
+<li>Chapter 5.7 in <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span></li>
+<li>Chapter 9.4 in <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span></li>
+</ul>
+</div>
 <p>We have gone through many examples of <em>how</em> to construct a hypothesis test from a given test statistic <span class="math inline">\(T\)</span>. We’re now going to discuss how to choose <span class="math inline">\(T\)</span>. What makes for a good test statistic?</p>
 <section id="simple-alternative-hypothesis" class="level2">
 <h2 class="anchored" data-anchor-id="simple-alternative-hypothesis">Simple alternative hypothesis</h2>
@@ -665,8 +694,8 @@ D^*(x)[f_a(x)-cf_0(x)]\leq D(x)[f_a(x)-cf_0(x)]
 </div>
 </section>
 </section>
-<section id="likelihood-ratio-test-lrt" class="level2">
-<h2 class="anchored" data-anchor-id="likelihood-ratio-test-lrt">Likelihood Ratio Test (LRT)</h2>
+<section id="the-generalized-likelihood-ratio-statistic" class="level2">
+<h2 class="anchored" data-anchor-id="the-generalized-likelihood-ratio-statistic">The (Generalized) Likelihood Ratio Statistic</h2>
 <div class="PARAGRAPH">
 <p>Setup: composite nulls</p>
 </div>
@@ -707,11 +736,11 @@ D^*(x)[f_a(x)-cf_0(x)]\leq D(x)[f_a(x)-cf_0(x)]
 <div class="PARAGRAPH">
 <p>Normal with known <span class="math inline">\(\sigma^2\)</span></p>
 </div>
-<p>Suppose we assume <span class="math inline">\(X_1,\ldots,X_n \stackrel{iid}{\sim} N(\theta, 1)\)</span>, i.e.&nbsp;we know the variance <span class="math inline">\(\sigma^2=1\)</span>. Consider testing <span class="math inline">\(H_0: \theta = \theta_0\)</span> versus <span class="math inline">\(H_a: \theta \neq \theta_0\)</span>. The likelihood is <span class="math display">\[\ell(\theta)=c_n \exp\{\sum_i -\frac{1}{2}(X_i-\theta)^2\}\]</span> Then we know that the MLE is <span class="math inline">\(\hat\theta=\bar{X}\)</span>, and the MLE restricted to <span class="math inline">\(\omega_0=\{\theta_0\}\)</span> is just <span class="math inline">\(\hat\theta_{0}=\theta_0\)</span> because there’s only one possible value in the null hypothesis space.</p>
+<p>Suppose we assume <span class="math inline">\(X_1,\ldots,X_n \stackrel{iid}{\sim} N(\theta, \sigma^2)\)</span>, where we know the value of the variance <span class="math inline">\(\sigma^2\)</span>. Consider testing <span class="math inline">\(H_0: \theta = \theta_0\)</span> versus <span class="math inline">\(H_a: \theta \neq \theta_0\)</span>. The likelihood is <span class="math display">\[\ell(\theta)=(2\pi\sigma^2)^{-n/2} \exp\left\{-\frac{1}{2\sigma^2}\sum_i (X_i-\theta)^2\right\}\]</span> Then we know that the MLE is <span class="math inline">\(\hat\theta=\bar{X}\)</span>, and the MLE restricted to <span class="math inline">\(\omega_0=\{\theta_0\}\)</span> is just <span class="math inline">\(\hat\theta_{0}=\theta_0\)</span> because there’s only one possible value in the null hypothesis space.</p>
 <p>Then <span class="math display">\[
 \begin{aligned}
-\Lambda(X)&amp;=2\log\frac{\exp\{\sum_i -\frac{1}{2}(X_i-\bar{X})^2\}}{\exp\{\sum_i -\frac{1}{2}(X_i-\theta_0)^2\}}\\&amp;=\sum_i \left[(X_i-\theta_0)^2-(X_i-\bar{X})^2\right]\\
-&amp;=n (\bar{X}-\theta_0)^2
+\Lambda(X)&amp;=2\log\frac{\exp\{-\frac{1}{2\sigma^2}\sum_i (X_i-\bar{X})^2\}}{\exp\{-\frac{1}{2\sigma^2}\sum_i (X_i-\theta_0)^2\}}\\&amp;=\frac{1}{\sigma^2}\sum_i \left[(X_i-\theta_0)^2-(X_i-\bar{X})^2\right]\\
+&amp;=\frac{n (\bar{X}-\theta_0)^2}{\sigma^2}
 \end{aligned}\]</span></p>
 <div class="PARAGRAPH">
 <p>Normal with unknown <span class="math inline">\(\sigma^2\)</span></p>
@@ -746,29 +775,56 @@ D^*(x)[f_a(x)-cf_0(x)]\leq D(x)[f_a(x)-cf_0(x)]
 <p>Finally, notice that unlike <span class="math inline">\(T(X)\)</span>, we only have to do one constrained likelihood (for <span class="math inline">\(\theta\in\omega_0\)</span>); constrained optimization is harder than unconstrained optimization in general. And furthermore, if <span class="math inline">\(\omega_0=\{\theta_0\}\)</span> is a simple hypothesis, we have no optimization in the denominator, and only need to find the standard MLE, which we will probably have done anyway.</p>
 </section>
 </section>
-<section id="lrt-determining-the-critical-value" class="level2">
-<h2 class="anchored" data-anchor-id="lrt-determining-the-critical-value">LRT &amp; Determining the critical value</h2>
+<section id="the-generalized-likelihood-ratio-test-and-finding-the-null-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="the-generalized-likelihood-ratio-test-and-finding-the-null-distribution">The (Generalized) Likelihood Ratio Test and Finding the Null Distribution</h2>
 <div id="def-LRTtest" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (Likelihood Ratio Test (LRT))</strong></span> A <strong>likelihood ratio test</strong> is a test for which <span class="math display">\[ R = \{x: \Lambda(x) &gt; c\}\]</span> where <span class="math inline">\(c\)</span> is found so that the level of the test is <span class="math inline">\(\alpha\)</span></p>
+<p><span class="theorem-title"><strong>Definition 2 (The Generalized Likelihood Ratio Test (LRT))</strong></span> A <strong>likelihood ratio test</strong> is a test which rejects when <span class="math display">\[ \Lambda(x) &gt; c\]</span> where <span class="math inline">\(c\)</span> is found so that the level of the test is <span class="math inline">\(\alpha\)</span></p>
 </div>
-<p>To define a test based on <span class="math inline">\(\Lambda(X)\)</span> requires finding the critical value <span class="math inline">\(c\)</span> for our cutoff.</p>
-<p>Sometimes we can calculate the power function for the LRT exactly to find <span class="math inline">\(c\)</span>; or equivalently, we can find a simplified expression for the form of the rejection region, i.e.&nbsp;another formulation of <span class="math inline">\(\Lambda(X)\)</span> that is more tractable.</p>
-<section id="example-of-exact-sampling-distribution-of-lambda" class="level3">
-<h3 class="anchored" data-anchor-id="example-of-exact-sampling-distribution-of-lambda">Example of exact sampling distribution of <span class="math inline">\(\Lambda\)</span></h3>
-<p>Let’s return to our example where we assumed our data is <span class="math inline">\(X_i\stackrel{iid}{\sim} N(\theta,1)\)</span>. We found <span class="math inline">\(\Lambda(X)= n(\bar{X}-\theta_0)^2\)</span>. We can determine the exact value of <span class="math inline">\(c\)</span> for a particular <span class="math inline">\(\alpha\)</span> based on knowing the distribution of <span class="math inline">\(\bar{X}\)</span>: <span class="math display">\[\begin{gathered}
-    n(\bar{X}-\theta_0)^2 &gt; c\\
+<p>To define a test based on <span class="math inline">\(\Lambda(X)\)</span> requires finding the critical value <span class="math inline">\(c\)</span> for our cutoff, or alternatively, find a p-value for <span class="math inline">\(\Lambda(X)\)</span>. So the main question is to determine the null distribution of <span class="math inline">\(\Lambda(X)\)</span>.</p>
+<section id="examples-of-exact-sampling-distribution-of-lambda" class="level3">
+<h3 class="anchored" data-anchor-id="examples-of-exact-sampling-distribution-of-lambda">Examples of exact sampling distribution of <span class="math inline">\(\Lambda\)</span></h3>
+<p>Sometimes we can calculate the power function for the LRT exactly to find <span class="math inline">\(c\)</span>; generally we can do this because we find <span class="math inline">\(\Lambda(X)\)</span> is related to a statistic we do know the distribution of.</p>
+<div class="PARAGRAPH">
+<p>Normal data, variance known</p>
+</div>
+<p>Let’s return to our example where we assumed our data is <span class="math inline">\(X_i\stackrel{iid}{\sim} N(\theta,\sigma^2)\)</span> with <span class="math inline">\(\sigma^2\)</span> known. We found <span class="math display">\[\begin{aligned}
+\Lambda(X)&amp;= \frac{n(\bar{X}-\theta_0)^2}{\sigma^2}\\
+&amp; = \left(\frac{\bar{X}-\theta_0}{\sigma/\sqrt{n}}\right)^2
+\end{aligned}\]</span> So under the null <span class="math display">\[\Lambda(X)\sim Z^2, \quad \text{where }Z\sim N(0,1)\]</span></p>
+<p>We can determine the exact value of <span class="math inline">\(c\)</span> for a particular <span class="math inline">\(\alpha\)</span> based on knowing the distribution of <span class="math inline">\(\bar{X}\)</span>: <span class="math display">\[\begin{gathered}
+    \frac{n(\bar{X}-\theta_0)^2}{\sigma^2} &gt; c\\
     \Leftrightarrow\\
-    |\bar{X}-\theta_0| &gt;  \underbrace{\sqrt{\frac{c}{n}}}_{d}
+    |\bar{X}-\theta_0| &gt;  \underbrace{\sigma\sqrt{\frac{c}{n}}}_{d}
 \end{gathered}\]</span> So an equivalent test is to reject for <span class="math inline">\(|\bar{X}-\theta_0|&gt; d=d(c)\)</span>. We’ve done this type of calculation already!</p>
 <p>To find the cutoff we find <span class="math inline">\(d\)</span> so that, under the null, the probability of rejecting is <span class="math inline">\(\alpha\)</span>, <span class="math display">\[
 \begin{aligned}
   \alpha=P_{\theta_0}(\text{Reject }H_0)&amp;=P_{\theta_0}(|\bar{X} -\theta_0|&gt; d)\\
   &amp;=1-P_{\theta_0}(- d\leq\bar{X} -\theta_0 \leq  d)\\
-  &amp;=1-P_{\theta_0}\left(- \frac{d}{1/\sqrt{n}}\leq\frac{\bar{X} -\theta_0}{1/\sqrt{n}} \leq  \frac{d}{1/\sqrt{n}}\right)
+  &amp;=1-P_{\theta_0}\left(- \frac{d}{\sigma/\sqrt{n}}\leq\frac{\bar{X} -\theta_0}{\sigma/\sqrt{n}} \leq  \frac{d}{\sigma/\sqrt{n}}\right)
 \end{aligned}
-\]</span> Under the null, <span class="math inline">\(\frac{\bar{X} -\theta_0}{1/\sqrt{n}}\sim N(0,1)\)</span>, so <span class="math inline">\(\sqrt{n}d\)</span> must be the <span class="math inline">\(1-\alpha/2\)</span> quantile of the <span class="math inline">\(N(0,1)\)</span>.</p>
-<p>This gives a cutoff for <span class="math inline">\(|\bar{X}-\theta_0|\)</span> of <span class="math inline">\(d=z_{\alpha/2}/\sqrt{n}\)</span>.</p>
-<p>Or in terms of <span class="math inline">\(\Lambda(X)\)</span>, we reject when <span class="math inline">\(\Lambda(X)=n(\bar{X}-\theta_0)^2&gt; nd^2=z_{\alpha/2}^2\)</span>.</p>
+\]</span></p>
+<p>Under the null, <span class="math inline">\(\frac{\bar{X} -\theta_0}{\sigma/\sqrt{n}}\sim N(0,1)\)</span>, so <span class="math inline">\(\sqrt{n}d/\sigma\)</span> must be the <span class="math inline">\(1-\alpha/2\)</span> quantile of the <span class="math inline">\(N(0,1)\)</span>.</p>
+<p>This gives a cutoff for <span class="math inline">\(|\bar{X}-\theta_0|\)</span> of <span class="math inline">\(d=z_{\alpha/2}\sigma/\sqrt{n}\)</span>.</p>
+<p>Or in terms of <span class="math inline">\(\Lambda(X)\)</span>, we reject when <span class="math inline">\(\Lambda(X)=\frac{n(\bar{X}-\theta_0)^2}{\sigma^2}&gt; \frac{nd^2}{\sigma^2}=z_{\alpha/2}^2\)</span>.</p>
+<p>We can similarly calculate a p-value. Let <span class="math inline">\(\lambda_{obs}=n(\bar{x}-\theta_0)^2/\sigma^2\)</span> be the observed value of the statistic. The p-value is the probability, under the null, of a value of <span class="math inline">\(\Lambda(X)\)</span> at least as large as <span class="math inline">\(\lambda_{obs}\)</span>: <span class="math display">\[\begin{aligned}
+\text{p-value}&amp;=P_{\theta_0}\left(\Lambda(X)\geq \lambda_{obs}\right)\\
+&amp;=P_{\theta_0}\left(\frac{n(\bar{X}-\theta_0)^2}{\sigma^2}\geq \lambda_{obs}\right)\\
+&amp;=P_{\theta_0}\left(\left|\frac{\bar{X}-\theta_0}{\sigma/\sqrt{n}}\right|\geq \sqrt{\lambda_{obs}}\right)\\
+&amp;=P\left(|Z|\geq \sqrt{\lambda_{obs}}\right), \quad Z\sim N(0,1)\\
+&amp;=2\left[1-\Phi\left(\sqrt{\lambda_{obs}}\right)\right]=2\left[1-\Phi\left(\frac{\sqrt{n}\,|\bar{x}-\theta_0|}{\sigma}\right)\right]
+\end{aligned}\]</span> where <span class="math inline">\(\Phi\)</span> is the cdf of the <span class="math inline">\(N(0,1)\)</span> distribution.</p>
+<div class="PARAGRAPH">
+<p>Normal Data, variance unknown</p>
+</div>
+<p>The exact distribution is also available when the variance is unknown. We found above that, <span class="math display">\[\Lambda(X)=n\log\left(\frac{\hat\sigma_{0}^2}{\hat\sigma^2}\right)=n(\log(\sum_i (X_i-\mu_0)^2 )-\log(\sum_i (X_i-\bar{X})^2))\]</span> where <span class="math display">\[\hat\sigma_0^2=\frac{1}{n}\sum_i (X_i-\mu_0)^2\quad\text{and}\quad\hat\sigma^2=\frac{1}{n}\sum_i (X_i-\bar{X})^2\]</span></p>
+<p>Since <span class="math inline">\(\hat\sigma_0^2=\hat\sigma^2+(\bar{X}-\mu_0)^2\)</span>, the statistic we found above can be written as <span class="math display">\[
+\begin{aligned}
+\Lambda(X)&amp;=n\log\left(1+\frac{(\bar{X}-\mu_0)^2}{\hat\sigma^2}\right)\\
+&amp;=n\log\left(1+\frac{T^2}{n-1}\right),\quad\text{where } T=\frac{\bar{X}-\mu_0}{S/\sqrt{n}}
+\end{aligned}
+\]</span> and <span class="math inline">\(S^2=\frac{1}{n-1}\sum_i(X_i-\bar{X})^2\)</span>.</p>
+<p>Under the null (assuming the data is normal), <span class="math inline">\(T\sim t_{n-1}\)</span>, and <span class="math inline">\(\Lambda(X)\)</span> is an increasing function of <span class="math inline">\(|T|\)</span>. So rejecting when <span class="math inline">\(\Lambda(X)&gt;c\)</span> is the same as rejecting when <span class="math inline">\(|T|&gt;t_{n-1,\alpha/2}\)</span>: the likelihood ratio test is equivalent to the usual <span class="math inline">\(t\)</span>-test, and its p-value is that of the t-test.</p>
+<p>Notice that we have that <span class="math display">\[n\log(1+x/(n-1))\to x,\qquad n\to \infty\]</span> and <span class="math display">\[T\overset{D}{\rightarrow}Z, \qquad n\to \infty\]</span> so we have that asymptotically <span class="math display">\[\Lambda(X)\overset{D}{\rightarrow} Z^2\]</span> just like the case when the variance is known. So as we would expect, asymptotically, we get the same test when we estimate <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(S^2\)</span>, but they vary for finite samples, just like in the comparison of the t-test with its asymptotic Wald test.</p>
 </section>
 <section id="asymptotic-lrt-and-chi2_k-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="asymptotic-lrt-and-chi2_k-distribution">Asymptotic LRT and <span class="math inline">\(\chi^2_k\)</span> Distribution</h3>
@@ -808,6 +864,29 @@ Note
 <h3 class="anchored" data-anchor-id="examples-1">Examples</h3>
 <p>Let’s go back to our previous examples and consider the limiting distribution of <span class="math inline">\(\Lambda\)</span></p>
 <div class="PARAGRAPH">
+<p>Example: Normal, variance unknown</p>
+</div>
+<p>We found above that <span class="math display">\[\begin{aligned}
+  \Lambda(X)&amp;=n\left(\log\left(\sum_i (X_i-\mu_0)^2 \right)-\log\left(\sum_i (X_i-\bar{X})^2\right)\right)
+  \end{aligned}.\]</span></p>
+<p>Here <span class="math inline">\(\theta=(\theta_1,\theta_2)=(\mu,\sigma^2)\in \mathbb{R}\times(0,\infty)=\Omega\)</span>, so we have <span class="math inline">\(dim(\Omega)=2\)</span>.</p>
+<p>Then for our null hypothesis space <span class="math inline">\(\mu\)</span> can’t vary – it’s only <span class="math inline">\(\mu_0\)</span>; only <span class="math inline">\(\sigma^2\)</span> so <span class="math inline">\(\omega_0\)</span> is a subspace of <span class="math inline">\(\mathbb{R}^2\)</span> that is a line, so <span class="math inline">\(dim(\omega_0)=1\)</span>. So <span class="math inline">\(r=1\)</span> again, and <span class="math inline">\(\Lambda(X)\)</span> is approximately <span class="math inline">\(\chi^2_1\)</span> under the null and has the same critical values and p-value calculations as the Poisson (but obviously a different <span class="math inline">\(\Lambda(X)\)</span> equation).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the case where the variance is known, we actually had the exact distribution where <span class="math inline">\(\Lambda(X)=Z^2\)</span> with <span class="math inline">\(Z\sim N(0,1)\)</span> under the null. So in this case, <span class="math inline">\(\Lambda(X)\sim\chi^2_1\)</span> exactly, which matches the asymptotics.</p>
+<p>In this case, where the variance is unknown and the data are assumed normal, <span class="math display">\[\Lambda=n\log(1+T^2/(n-1)),\]</span> so we also have its exact distribution (via knowing the <span class="math inline">\(t_{n-1}\)</span> distribution), which is not <span class="math inline">\(\chi^2_1\)</span> exactly.</p>
+<p>We have that <span class="math display">\[n\log(1+x/(n-1))\to x,\qquad n\to \infty\]</span> and <span class="math display">\[T\overset{D}{\rightarrow}Z, \qquad n\to \infty\]</span> so we see that even without our general theorem, for the normal case we would have that <span class="math display">\[\Lambda(X)\overset{D}{\rightarrow}\chi^2_1\]</span></p>
+</div>
+</div>
+<div class="PARAGRAPH">
 <p>Example (Poisson):</p>
 </div>
 <p>We had that</p>
@@ -822,45 +901,42 @@ Note
 <pre><code>[1] 3.841459</code></pre>
 </div>
 </div>
-<p>Alternatively, we could calculate a p-value based on the <span class="math inline">\(\chi^2_1\)</span> distribution, <span class="math display">\[\text{p-value}\approx P(\chi^2_1 \geq \Lambda_{obs})=\mathtt{1-pchisq(lobs,df=1)}\]</span></p>
-<div class="PARAGRAPH">
-<p>Example: Normal, variance unknown</p>
-</div>
-<p>We found above that <span class="math display">\[\begin{aligned}
-  \Lambda(X)&amp;=n\left(\log\left(\sum_i (X_i-\mu_0)^2 \right)-\log\left(\sum_i (X_i-\bar{X})^2\right)\right)
-  \end{aligned}.\]</span></p>
-<p>Here <span class="math inline">\(\theta=(\theta_1,\theta_2)=(\mu,\sigma^2)\in \mathbb{R}\times(0,\infty)=\Omega\)</span>, so we have <span class="math inline">\(dim(\Omega)=2\)</span>.</p>
-<p>Then for our null hypothesis space <span class="math inline">\(\mu\)</span> can’t vary – it’s only <span class="math inline">\(\mu_0\)</span>; only <span class="math inline">\(\sigma^2\)</span> so <span class="math inline">\(\omega_0\)</span> is a subspace of <span class="math inline">\(\mathbb{R}^2\)</span> that is a line, so <span class="math inline">\(dim(\omega_0)=1\)</span>. So <span class="math inline">\(r=1\)</span> again, and <span class="math inline">\(\Lambda(X)\)</span> is approximately <span class="math inline">\(\chi^2_1\)</span> under the null and has the same critical values and p-value calculations as the Poisson (but obviously a different <span class="math inline">\(\Lambda(X)\)</span> equation).</p>
-<div class="QUESTION">
-<div class="block-title">
-<p><strong>Exercise/Question</strong></p>
-</div>
-<p>Suppose that a fast food company has developed a new, more expensive hamburger recipe. They recruit <span class="math inline">\(n\)</span> people to test the new and old hamburgers. For each person <span class="math inline">\(i\)</span>, let <span class="math inline">\(X_i = 1\)</span> if he/she prefers the new hamburger and 0 otherwise. Let <span class="math inline">\(p\)</span> denote the proportion of people in the target population (hamburger eaters) who prefer the new recipe.</p>
+<p>Alternatively, we could calculate a p-value based on the <span class="math inline">\(\chi^2_1\)</span> distribution, <span class="math display">\[\text{p-value}\approx P(\chi^2_1 \geq \lambda_{obs})=\mathtt{1-pchisq(lambdaobs,df=1)}\]</span></p>
+<p>Note that the square of the Wald statistic here would be <span class="math display">\[W^2=\left(\frac{\hat\theta-\theta_0}{\sqrt{\hat\theta/n}}\right)^2=\frac{n(\hat\theta-\theta_0)^2}{\hat\theta}\]</span> So we do not get the same test statistic for the likelihood ratio test as we do for the Wald test (that is a property specific to data with a normal distribution); the same is true of the score test. They will give three separate test statistics in the case of the Poisson.</p>
+</section>
+<section id="relationship-to-wald-and-score-tests" class="level3">
+<h3 class="anchored" data-anchor-id="relationship-to-wald-and-score-tests">Relationship to Wald and Score Tests</h3>
+<p>As we’ve seen, in general the likelihood ratio test will be different from the Wald and the Score Tests. Their test statistics are not monotone transformations of each other, and we can get different decision results / p-values from the same input data, depending on which we test we use.</p>
+<p>However, they are all asymptotically equivalent tests, meaning that asymptotically they will be making the same decisions.</p>
+<p>The book has a nice discussion of the relationship between these tests. I would note that in general, the LRT is found to perform better on finite samples than the Wald Test. However, the Wald Test is simple to calculate and is frequently the default provided, for example in logisitic regression output.</p>
+<div id="exr-ch19-1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1</strong></span> Suppose that a fast food company has developed a new, more expensive hamburger recipe. They recruit <span class="math inline">\(n\)</span> people to test the new and old hamburgers. For each person <span class="math inline">\(i\)</span>, let <span class="math inline">\(X_i = 1\)</span> if he/she prefers the new hamburger and 0 otherwise. Let <span class="math inline">\(p\)</span> denote the proportion of people in the target population (hamburger eaters) who prefer the new recipe.</p>
 <ul>
 <li>Find the form of the LRT for <span class="math inline">\(H_0: p=1/2\)</span>.</li>
 <li>Use the limiting <span class="math inline">\(\chi^2\)</span> distribution of <span class="math inline">\(\Lambda\)</span> to find the size 0.05 LRT.</li>
 <li>Suppose <span class="math inline">\(n = 30\)</span> and <span class="math inline">\(\sum_i X_i = 22\)</span>. What do you conclude?</li>
 </ul>
 </div>
-<div class="QUESTION">
-<div class="block-title">
-<p><strong>Exercise/Question</strong></p>
-</div>
-<p>Show that the LRT given above for testing <span class="math inline">\(H_0: \mu=\mu_0\)</span> from <span class="math inline">\(X_i\)</span> i.i.d. <span class="math inline">\(N(\mu,\sigma^2)\)</span>, with <span class="math inline">\(\sigma^2\)</span> unknown is equivalent to using the test statistic <span class="math display">\[T(X)=\frac{|\bar{X}-\mu_0|}{s/\sqrt{n}}\]</span> where <span class="math inline">\(s\)</span> is the sample standard deviation, with <span class="math display">\[s^2=\frac{1}{n-1}\sum_i (X_i-\bar{X})^2\]</span></p>
-<p>Hint: First show that <span class="math inline">\(\sum_i (X_i-\mu_0)^2=\sum_i (X_i-\bar{X})^2+n(\bar{X}-\mu_0)^2\)</span></p>
-</div>
+
 
 
 </section>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-agresti2021" class="csl-entry" role="listitem">
+Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-rice2006" class="csl-entry" role="listitem">
+Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. Duxbury Press.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>However, getting an exactly <span class="math inline">\(\alpha\)</span> level test will not be possible for all values of <span class="math inline">\(\alpha\)</span> for a discrete random variable.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Be careful: sometimes the likelihood ratio statistic will be defined with the reciprocal of this ratio, and with a <span class="math inline">\(-2\)</span> instead. Which means they are in fact exactly equivalent equations, but it can be confusing.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>The <span class="math inline">\(\chi^2_k\)</span> distribution is a special case of the Gamma distribution, <span class="math inline">\(Gamma(\frac{k}{2},2)\)</span>, using the shape-scale definition of the Gamma (as in Wasserman) with density <span class="math inline">\(\frac{x^{k/2-1} e^{-x/2}}{2^{k/2}\Gamma(k/2)}\)</span> for <span class="math inline">\(x&gt;0\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The <span class="math inline">\(\chi^2_k\)</span> distribution is a special case of the Gamma distribution, <span class="math inline">\(Gamma(\frac{k}{2},2)\)</span>, using the shape-scale definition of the Gamma with density <span class="math inline">\(\frac{x^{k/2-1} e^{-x/2}}{2^{k/2}\Gamma(k/2)}\)</span> for <span class="math inline">\(x&gt;0\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -936,7 +1012,7 @@ Note
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/spring-2026");
+        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/fall-2026");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
