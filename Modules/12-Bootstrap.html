@@ -355,8 +355,17 @@ window.Quarto = {
   </div>
 </li>
           <li class="sidebar-item">
- <span class="menu-text">Modules/20-PermutationTests.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/20-PermutationTests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Permutation Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/21-PowerCalculations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Power Calculations</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -647,7 +656,8 @@ $ year        &lt;fct&gt; 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 
 </div>
 </div>
 </div>
-<p>These might by eye look vaguely similar in shape, but notice the discreteness of the distribution of <span class="math inline">\(\hat\theta^*\)</span>. Consider how many times we get the observed max, for example,</p>
+<p>These might by eye look vaguely similar in shape, but notice the discreteness of the distribution of <span class="math inline">\(\hat\theta^*\)</span>. Discreteness is not itself a problem – the bootstrap distribution is always discrete – but there’s a specific problem here: the discreteness will never “go away” even with infinite sample sizes. Meaning, it will never become close to being a continuous distribution.</p>
+<p>In particular, consider how many times we get the max observed in the original data as one of our <span class="math inline">\(\hat\theta^*\)</span> values, for example,</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of times bootstrap estimate is observed estimate:</code></pre>
@@ -656,14 +666,14 @@ $ year        &lt;fct&gt; 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 
 <pre><code>[1] 0.638</code></pre>
 </div>
 </div>
-<p>This is because any sample that contains the observed max, <span class="math inline">\(\hat\theta^*\)</span> will equal the observed max of the original sample. We can actually calculate the probability of our sample containing the max value: <span class="math display">\[1-(1-1/n)^n \to 1-e^{-1} \approx 0.632\]</span> For our data, this probability is calculates to</p>
+<p>This is because for any sample that contains the observed max, the max of the bootstrap sample will equal the observed max of the original sample, <span class="math inline">\(\hat\theta^*=\hat\theta.\)</span> We can actually calculate the probability of our sample containing the max value: <span class="math display">\[1-(1-1/n)^n \to 1-e^{-1} \approx 0.632\]</span> For our data, this probability is calculates to</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6358303</code></pre>
 </div>
 </div>
 <p>which is very similar to the limit already for <span class="math inline">\(n=50\)</span>.</p>
-<p>So even for very large <span class="math inline">\(n\)</span>, the bootstrap distribution will have a point mass at <span class="math inline">\(\hat\theta\)</span>. This is independent of what the true distribution of <span class="math inline">\(\hat\theta\)</span> is. For example, the true distribution of <span class="math inline">\(\hat\theta-\theta\)</span> might be continuous, but <span class="math inline">\(\hat\theta^*-\hat\theta\)</span> will always have a non-zero point mass at <span class="math inline">\(0\)</span>, <em>no matter how large your sample size</em>.</p>
+<p>So even if we had very large <span class="math inline">\(n\)</span>, the bootstrap distribution will have a point mass at <span class="math inline">\(\hat\theta\)</span>. This is independent of what the true distribution of <span class="math inline">\(\hat\theta\)</span> is. For example, the true distribution of <span class="math inline">\(\hat\theta-\theta\)</span> might be continuous, but <span class="math inline">\(\hat\theta^*-\hat\theta\)</span> will always have a non-zero point mass at <span class="math inline">\(0\)</span>, <em>no matter how large your sample size</em>.</p>
 <p>And in fact we can use the fact that if the data are actually uniform, we know the sampling distribution of <span class="math inline">\(X_{(n)}\)</span> from your homework: <span class="math inline">\(\hat\theta/\theta\)</span> is distributed Beta(<span class="math inline">\(n\)</span>,1). So in this setting, we know that the distribution of <span class="math inline">\(\hat\theta\)</span> should be continuous, yet the bootstrap distribution <em>never</em> will be.</p>
 <p>Knowing the exact sampling distribution of <span class="math inline">\(\hat\theta\)</span> also allows us to construct an exact confidence intervals using the quantiles of the <span class="math inline">\(Beta(n,1)\)</span> distribution,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span class="math display">\[\begin{gathered}
 P\left((\alpha/2)^{1/n} \le \hat\theta/\theta \le (1-\alpha/2)^{1/n}\right) = 1-\alpha\\\Rightarrow\text{Confidence Interval: } \left(\hat\theta/(1-\alpha/2)^{1/n},\ \hat\theta/(\alpha/2)^{1/n}\right).

@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Permutation Tests</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-44952193eeadea267d9e4506e1456eea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="”https://siteimproveanalytics.com/js/siteanalyze_6294756.js”"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/20-PermutationTests.html">Permutation Tests</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/stat_bear.png" alt="UC Berkeley Statistics logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../assets/stat_bear.png" alt="UC Berkeley Statistics logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Stat 135</a> 
+        <div class="sidebar-tools-main">
+    <a href="{{< var site-url >}}" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home / Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../staff.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Staff</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../calendar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calendar</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modules</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/00-OverviewIntro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/01-ThinkProb.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Thinking probabilistically about data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/02-EstimationBasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/03-CaseStudyRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Case Study: Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/04-CreatingEstimators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating Estimators with MLE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/05-LossMEstimators.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estimating with Loss Functions and M-Estimators</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/06-SamplingDist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling distribution of the Mean</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/07-CIMean.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Confidence Intervals for the Population Mean</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/08-CaseStudy2Groups.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Case Study: Comparing Two Groups</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/09-CIregression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Confidence intervals for linear regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/10-MLEAsyNormal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Large Sample Theory for the Maximum Likelihood Estimator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/11-DeltaMethod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functions of Estimators and the Delta Method</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/12-Bootstrap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bootstrap</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/13-FiniteProperties.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Efficiency and Mean Squared Error</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/14-Consistency.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consistency</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/15-Robustness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Robustness properties</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/16-NullAndPvalues.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis Testing: Null hypotheses and P-values</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/17-DecisionRule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hypothesis Testing: Decision Perspective</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/18-WaldAndOtherTests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wald/T-tests and Relationship to Confidence Intervals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/19-LikelihoodNPLemma.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Likelihood Ratio Test and Neyman-Pearson Lemma</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/20-PermutationTests.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Permutation Tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Modules/21-PowerCalculations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Power Calculations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../license.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">License</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#permutation-distribution" id="toc-permutation-distribution" class="nav-link active" data-scroll-target="#permutation-distribution">Permutation Distribution</a>
+  <ul class="collapse">
+  <li><a href="#more-formally" id="toc-more-formally" class="nav-link" data-scroll-target="#more-formally">More formally</a></li>
+  <li><a href="#computationally-estimating-the-permutation-null-distribution" id="toc-computationally-estimating-the-permutation-null-distribution" class="nav-link" data-scroll-target="#computationally-estimating-the-permutation-null-distribution">Computationally Estimating the Permutation Null Distribution</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  <li><a href="#other-settings" id="toc-other-settings" class="nav-link" data-scroll-target="#other-settings">Other settings</a>
+  <ul class="collapse">
+  <li><a href="#paired-data" id="toc-paired-data" class="nav-link" data-scroll-target="#paired-data">Paired Data</a></li>
+  <li><a href="#simple-regression" id="toc-simple-regression" class="nav-link" data-scroll-target="#simple-regression">Simple Regression</a></li>
+  </ul></li>
+  <li><a href="#what-is-the-null-hypothesis-for-permutation-tests" id="toc-what-is-the-null-hypothesis-for-permutation-tests" class="nav-link" data-scroll-target="#what-is-the-null-hypothesis-for-permutation-tests">What is the null hypothesis for permutation tests?</a></li>
+  <li><a href="#assumptions-of-permutation-test" id="toc-assumptions-of-permutation-test" class="nav-link" data-scroll-target="#assumptions-of-permutation-test">Assumptions of Permutation Test</a></li>
+  <li><a href="#rank-tests" id="toc-rank-tests" class="nav-link" data-scroll-target="#rank-tests">Rank Tests</a>
+  <ul class="collapse">
+  <li><a href="#two-group-comparisons-wilcoxon-rank-sum-testmann-whitney-test" id="toc-two-group-comparisons-wilcoxon-rank-sum-testmann-whitney-test" class="nav-link" data-scroll-target="#two-group-comparisons-wilcoxon-rank-sum-testmann-whitney-test">Two Group Comparisons: Wilcoxon Rank-Sum Test/Mann-Whitney Test</a></li>
+  <li><a href="#paired-groups-wilcoxon-signed-rank-test" id="toc-paired-groups-wilcoxon-signed-rank-test" class="nav-link" data-scroll-target="#paired-groups-wilcoxon-signed-rank-test">Paired Groups: Wilcoxon Signed-Rank Test</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Modules/00-OverviewIntro.html">Modules</a></li><li class="breadcrumb-item"><a href="../Modules/20-PermutationTests.html">Permutation Tests</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Permutation Tests</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="READING">
+<div class="block-title">
+<p><strong>Corresponding reading</strong></p>
+</div>
+<ul>
+<li>Chapter 5.8.1-5.8.3 in <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span></li>
+</ul>
+<p>In <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span> only rank-based permutation tests are discussed, but they are discussed in much greater detail than in <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span>:</p>
+<ul>
+<li>Chapter 11.2.3 Mann-Whitney Test</li>
+<li>Chapter 11.3.2 Signed Rank Test</li>
+</ul>
+</div>
+<p>A primary step in constructing a hypothesis test is to determine the null distribution of our test statistic <span class="math inline">\(T\)</span>. We have discussed how to find the null distribution based on theoretically determining the sampling distribution of our test statistic when we either</p>
+<ol type="1">
+<li>assume something about the distribution of our data</li>
+<li>know the asymptotic behavior of our test statistic.</li>
+</ol>
+<p>What about a strategy for when we do not want to make assumptions about the distribution of our data?</p>
+<p><strong>Permutation tests</strong> are a different flavor of test and are non-parametric. They are appropriate when you can develop a null hypothesis that implies a symmetry of the data under permutations of the data.</p>
+<p>We will focus on one example, the case of comparing two groups, i.e.&nbsp;where we have data <span class="math inline">\(X_1,\ldots, X_{n_X}\)</span> and <span class="math inline">\(Y_1,\ldots,Y_{n_Y}\)</span> from two populations. Previously, we used normality assumptions (or asymptotic normality assumptions) to test whether the means are the same in the two groups. However, suppose I have a small sample size and my data is skewed? These options are not possible. Moreover, if the data is skewed, it’s not clear that comparing the means is the best option (especially since we have seen that the means are not robust to outlying points that we might have in skewed data).</p>
+<p>We assume we have a test statistic that measures a difference of importance between the two groups. For example, <span class="math display">\[|\text{median}\{X_i\}-\text{median}\{Y_i\}|.\]</span></p>
+<p>More generally, we can just write <span class="math display">\[T=g(X_1,\ldots,X_{n_X},Y_1,\ldots,Y_{n_Y}),\]</span> to encompass other possible statistics we are interested in – the permutation tests can be applied to any statistic.</p>
+<p>What characterizes a permutation test is how we determine the null distribution of <span class="math inline">\(T\)</span> under <span class="math inline">\(H_0\)</span>. We haven’t described the null hypothesis. The null hypothesis is that the observations we measure were put in group <span class="math inline">\(X\)</span> versus group <span class="math inline">\(Y\)</span> by random chance. We call this the <strong>permutation null</strong> and it says that <em>any permutation</em> of the data into <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> groups would be just as likely as the one we saw.</p>
+<section id="permutation-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="permutation-distribution">Permutation Distribution</h2>
+<p>This leads to the permutation distribution – we consider all possible <span class="math inline">\(T_j\)</span> we could have gotten under all permutations of the data. If <span class="math inline">\(n_X+n_Y=N\)</span>, then that is all <span class="math inline">\(N!\)</span> orderings of the data (for this problem, you could equivalently say all <span class="math inline">\(N \choose n_X\)</span> ways of choosing <span class="math inline">\(n_X\)</span> values to put into the <span class="math inline">\(X\)</span> group).</p>
+<p>The distribution of all such <span class="math inline">\(T_j\)</span> is taken as the null distribution, and our observed <span class="math inline">\(t_{obs}\)</span> is compared to this distribution.</p>
+<div class="PARAGRAPH">
+<p>Example</p>
+</div>
+<p>Consider a random sample of flights out of SF, and I want to know whether one airline (United=UA) has more delays than another airline (American=AA).</p>
+<p>Then our permutation null imagines that the airline assignment was completely random and separate from the flight delays – a bunch of blank airplanes on the runway that we at the last minute assign to an airline, with crew and passengers (not realistic, but a thought experiment!). If our data actually was from such a scenario, we could actually rerun the random assignment process. How? By randomly reassigning the labels. Since (under the null) we assume that the data we measured had nothing to do with those labels, we could have instead observed another assignment of those airline labels and we would have seen the same data with just different <em>permutations</em> of the labels on the planes.</p>
+<p>Below are the results of three different possible permutations, created by assigning planes (rows/observations) to an airline randomly – only the first six observations are shown, but all of the original observations get an assignment. Notice the number of planes assigned to UA vs AA stays the same, just which plane gets assigned to which airline changes. The column <code>Observed</code> shows the assignment we actually saw (as opposed to the assignments I made up by permuting the assignments).</p>
+<p>Here’s the first 6 observations of the data (out of 3,970 observations), and my permuted labels:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  FlightDelay Observed Permutation1 Permutation2 Permutation3
+1           5       UA           AA           UA           AA
+2          -6       UA           UA           UA           UA
+3         -10       AA           UA           UA           UA
+4          -3       UA           UA           AA           UA
+5          -3       UA           UA           AA           UA
+6           0       UA           UA           UA           UA</code></pre>
+</div>
+</div>
+<p>For each of these three permutations, I can calculate proportion of flights delayed, among those assigned to UA vs those assigned to AA, and calculate the difference between them</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Proportion delayed per Carrier, each permutation:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Observed Permutation1 Permutation2 Permutation3
+AA 0.1554878    0.2063008    0.1951220    0.1910569
+UA 0.2046216    0.1878768    0.1915606    0.1929002</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Differences in Proportion Delayed per Carrier, each permutation:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Observed Permutation1 Permutation2 Permutation3 
+ 0.049133762 -0.018424055 -0.003561335  0.001843290 </code></pre>
+</div>
+</div>
+<p>I’ve done this for three permutations, but we could enumerate (i.e.&nbsp;list) all possible such assignments of planes to airlines. If we did this, we would have the complete set of potential flight delay datasets possible under the null hypothesis, and for each one we could calculate the difference in the proportion of delayed flights between the airlines.</p>
+<section id="more-formally" class="level3">
+<h3 class="anchored" data-anchor-id="more-formally">More formally</h3>
+<p>Specifically, let <span class="math inline">\(T_j\)</span> be our test statistic evaluated after permuting all of our <em>combined</em> data. Then the null distribution of <span class="math inline">\(T\)</span> is a discrete distribution, giving probability <span class="math inline">\(1/N!\)</span> to each <span class="math inline">\(T_j\)</span>, with cdf <span class="math display">\[G(t)=P_{H_0}(T\leq t)=\frac{1}{N!}\sum_{j=1}^{N!}I(T_j\leq t),\]</span> (note the similarity to our empirical cdf and bootstrap distribution)</p>
+<p>If we assume that our statistic <span class="math inline">\(T\)</span> is such that large values are unexpected under the null, then we reject when <span class="math inline">\(T&gt;c_{\alpha}\)</span>, where <span class="math inline">\(c_\alpha\)</span> should be the <span class="math inline">\(1-\alpha\)</span> quantile of the null distribution <span class="math inline">\(G\)</span>, <span class="math display">\[c_\alpha: 1-G(c_\alpha)=P(T_j&gt;c_\alpha)= \frac{1}{N!}\sum_{j=1}^{N!}I(T_j&gt;c_\alpha)\]</span> The p-value of our observed statistic <span class="math inline">\(t_{obs}\)</span> is the probability, under this null distribution, of a value at least as large as <span class="math inline">\(t_{obs}\)</span>, <span class="math display">\[\text{p-value}=P_{H_0}(T_j\geq t_{obs})=\frac{1}{N!}\sum_{j=1}^{N!}I(T_j\geq t_{obs}).\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that because of discreteness issues, the p-value is <em>not</em> <span class="math inline">\(1-G(t_{obs})=P(T_j&gt;t_{obs})\)</span> because for a p-value, we need to <em>include</em> <span class="math inline">\(t_{obs}\)</span>. For large <span class="math inline">\(n\)</span> this will not make much of a difference, but since permutation tests can be used for small sample sizes, this distinction can be important.</p>
+</div>
+</div>
+</section>
+<section id="computationally-estimating-the-permutation-null-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="computationally-estimating-the-permutation-null-distribution">Computationally Estimating the Permutation Null Distribution</h3>
+<p>This is the principle of the permutation test, but I’m not about to do that in practice, because it’s not computationally feasible!</p>
+<p>Consider if we had only, say, 14 observations with two groups of 7 each, how many permutations do we have? This is 14 “choose” 7, which gives 3,432 permutations.</p>
+<p>So for even such a small dataset of 14 observations, we’d have to enumerate almost 3500 permutations. In the airline data, we have 984, and 2986 observations respectively for each airline. We can’t even calculate exactly how many permutations that is, much less actually enumerate them all.</p>
+<p>So what can we do? Instead, we consider that there exists such a null distribution and while we can’t calculate it perfectly, we are going to just approximate that null distribution.</p>
+<p>How? Well, this is a problem we’ve actually seen. If we want to estimate a true distribution of values, we don’t usually have a census at our disposal – i.e.&nbsp;all values. Instead we draw an i.i.d. sample from the population, and with that sample we can estimate that distribution.</p>
+<p>What does this look like here? We know how to create a single random permutation – it’s what I did above using the function <code>sample</code>. If we repeat this over and over and create a lot of random permutations, we are creating an i.i.d. sample from our population. Specifically, each possible permutation is an element of our sample space, and we are randomly drawing a permutation. We’ll do this many times (i.e.&nbsp;many calls to the function <code>sample</code>), and this will create an i.i.d. sample of permutations. Once we have an i.i.d. sample of permutations, we can calculate the test statistic for each permutation, and get an estimate of the true null distribution. Unlike i.i.d. samples of actual population data, we can make the size of our sample as large as our computer can handle to improve our estimate (like the bootstrap).</p>
+<p>Specifically, you create <span class="math inline">\(B\)</span> <em>random</em> permutations of your data; this means <span class="math inline">\(B\)</span> assignments of your data into groups <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Each one of these will create a different <span class="math inline">\(T_j\)</span>, so you will have a <em>random sample</em> of <span class="math inline">\(T_1,\ldots,T_B\)</span> values from all possible <span class="math inline">\(T_j\)</span>.</p>
+<p>Then we’ll approximate <span class="math inline">\(G(t)\)</span>, <span class="math display">\[G(t) \approx \frac{1}{B}\sum_{b=1}^{B}I(T_b\leq t)\]</span> and likewise approximate the p-value, <span class="math display">\[\text{p-value}\approx\frac{1}{B}\sum_{b=1}^{B}I(T_b\geq t_{obs}).\]</span> Like the bootstrap, <span class="math inline">\(B\)</span> is a quantity you control, so if <span class="math inline">\(B\)</span> is very large, this approximation will be better and better (unlike a statistical estimator of an unknown quantity where the accuracy of the estimator depends on <span class="math inline">\(n\)</span> which you do not generally get to make arbitrarily large).</p>
+<div class="PARAGRAPH">
+<p>In Summary</p>
+</div>
+<ol type="1">
+<li>Pick a test statistic <span class="math inline">\(T\)</span> (for example, the difference of means/medians; or the t-statistic) and compute its value on the <em>original</em> sample: call this <span class="math inline">\(t_{obs}\)</span>.</li>
+<li>Combine the samples, so we have a combined sample of size <span class="math inline">\(n_X+n_Y\)</span></li>
+<li>Draw a sample of size <span class="math inline">\(n_X\)</span> from this combined sample <em>without replacement</em> – this creates a random permutation of your data.</li>
+<li>Compute the value of the test statistic that you chose on these new samples that you obtained by <em>resampling</em> the original sample. Call this <span class="math inline">\(T^*_1\)</span>.</li>
+<li>Repeat steps 3, 4 <em>many</em> times, say <span class="math inline">\(B\)</span> times, where <span class="math inline">\(B\)</span> might be 5,000, thus building a <em>null</em> distribution of the test statistic <span class="math inline">\(T^*\)</span>, <strong>under <span class="math inline">\(H_0\)</span></strong>, that is, assuming the null hypothesis that there is no difference between the underlying distributions of the two samples.</li>
+<li>Compute the <span class="math inline">\(p\)</span>-value as the proportion of times <span class="math inline">\(T^*\)</span> is more extreme than <em>or equal</em> to <span class="math inline">\(t_{obs}\)</span>.</li>
+<li>For decision testing: reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(t_{obs}\)</span> is too extreme relative to this null distribution, that is, if the <span class="math inline">\(p\)</span>-value is less than your significance level <span class="math inline">\(\alpha\)</span>.</li>
+</ol>
+<p>The great thing about the permutation test is that we can build a null distribution for any statistic of our choice. So we usually will try to use a statistic that has a higher power.</p>
+</section>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p>We will demonstrate this procedure on the flight data, using the difference in the proportions later than 15 minutes as our statistic.</p>
+<p>The summary statistics on our actual data:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>       AA        UA 
+0.1554878 0.2046216 </code></pre>
+</div>
+</div>
+<p>I am going to choose as my statistic the <em>absolute</em> difference between the proportion later than 15 minutes. This will mean that large values are always considered extreme for my p-value computations.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04913376</code></pre>
+</div>
+</div>
+<p>Here is the histogram of the values of the statistics under all of my permutations.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20-PermutationTests_files/figure-html/permutationHist-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If my data came from the null, then this is the (estimate) of the actual distribution of what the test-statistic would be.</p>
+<p>To get a p-value, I will calculate the proportion of these <span class="math inline">\(T_j\)</span> that are greater than <em>or equal</em> to my observed value.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>pvalue= 0.0011</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that I defined my test statistic to include the absolute value of my differences. So I only have to worry about large values of <span class="math inline">\(T\)</span> and not the two tails separately.</p>
+</div>
+</div>
+<div id="exr-ch20-1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1</strong></span> &nbsp;</p>
+<ol type="1">
+<li>So what conclusions would you draw from this permutation test?</li>
+<li>What impact does this test have? What conclusions would you be likely to make going forward?</li>
+<li>Why do I take the absolute difference? What difference does it make if you change the code to be only the difference?</li>
+</ol>
+</div>
+<div class="PARAGRAPH">
+<p>Median difference</p>
+</div>
+<p>What about if I look at the difference in median flight delay between the two airlines? Let’s first look at what is the median flight delay for each airline:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>AA UA 
+-2 -1 </code></pre>
+</div>
+</div>
+<p>The first thing we might note is that there is a very small difference between the two airlines (1 minute). So even if we find something significant, who really cares? That is not going to change any opinions about which airline I fly. Statistical significance is not everything.</p>
+<p>However, I can still run a permutation test (you can always run tests, even if it’s not sensible!). I can reuse my previous function, but just quickly change the statistic I consider – now use the absolute difference in the median instead of proportion more than 15min late.</p>
+<p>Here is the histogram I get after doing this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20-PermutationTests_files/figure-html/permutationTestMedian-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This gives us a p-value:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>pvalue (median difference)= 0.1287</code></pre>
+</div>
+</div>
+<div id="exr-ch20-2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2</strong></span> &nbsp;</p>
+<ol type="1">
+<li>What is going on with our histogram? Why does it look so different from our usual histograms?</li>
+<li>What would have happened if we had defined our p-value as the probability of being <em>greater</em> rather than <em>greater than or equal to</em>? Where in the code of <code>permutation.test</code> was this done, and what happens if you change the code for this example?</li>
+</ol>
+</div>
+</section>
+</section>
+<section id="other-settings" class="level2">
+<h2 class="anchored" data-anchor-id="other-settings">Other settings</h2>
+<p>The use of permutation null is a very powerful idea as it relies on very few assumptions and is valid even for small sample sizes. However, you do have to figure out where and how a permutation null would make sense – it has to match the setup of the data.</p>
+<section id="paired-data" class="level3">
+<h3 class="anchored" data-anchor-id="paired-data">Paired Data</h3>
+<p>Consider our two group setting, but with paired data instead. We cannot have a null that assumes we can arbitrarily mix up all of the group labels. That would ignore the dependency between the paired observations.</p>
+<p>But we can consider our null to be that <em>within each pair,</em> the group labels are independent of the outcome. For example, that the outcome before and after would have been the same regardless; or that the response between the older and younger generation would have been the same even if they had been in the opposite generation.</p>
+<p>Then this implies <em>within each pair</em> we can arbitrarily permute the <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> labels to get our null distribution of our test statistic.</p>
+<p>The rank-based version of the permutation test is called the <em>signed-rank</em> test.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This randomization of the data can be viewed as a constrained permutation – of all possible permutations of the <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> labels, we constrain ourselves to permutations of the data that satisfy this requirement.</p>
+</div>
+</div>
+</section>
+<section id="simple-regression" class="level3">
+<h3 class="anchored" data-anchor-id="simple-regression">Simple Regression</h3>
+<p>Our simple regression setting says that the expected value of <span class="math inline">\(Y\)</span> depends on its <span class="math inline">\(X\)</span>. We could have a null hypothesis that it does not – i.e.&nbsp;we would have seen the same <span class="math inline">\(Y\)</span> values if they had been paired with different <span class="math inline">\(X\)</span> values. So a permutation null hypothesis for this data might be that any <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> could have been paired together and I would have seen the same <span class="math inline">\(Y\)</span> outcome.</p>
+<p>This leads to a permutation test where I permute the pairing of <span class="math inline">\(Y\)</span> with <span class="math inline">\(X\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice how this is the <em>opposite</em> of the logic of the paired data. There I wanted to <em>keep</em> the dependency between pairs, while here I am <em>breaking</em> the dependency between the pairs. This is because I am interested in testing different things. In regression, I am testing whether there is a dependency; by breaking it I can see how strong the dependency in my observed data is compared to data without that dependency. In my paired group comparison, however, I want to test whether the observed values depend on which group (<span class="math inline">\(X\)</span> or <span class="math inline">\(Y\)</span>) they are assigned to. My permutation in paired data <em>is</em> breaking a dependency, but not the dependency between pairs, but rather the dependency on the group assignment. (The use of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in both problems is a red herring).</p>
+</div>
+</div>
+<p>While there are a few other examples where you can use permutation ideas, it has to be appropriate for the setting, so the situations where we can use permutations tests is more limited. Regardless, it remains a powerful tool for some very common settings. Furthermore, the conceptual framework of the permutation null hypothesis is a fundamental idea for areas like causal inference.</p>
+</section>
+</section>
+<section id="what-is-the-null-hypothesis-for-permutation-tests" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-null-hypothesis-for-permutation-tests">What is the null hypothesis for permutation tests?</h2>
+<p>I wrote the null hypothesis as “the observations we measure were put in group <span class="math inline">\(X\)</span> versus group <span class="math inline">\(Y\)</span> by random chance.” This is a mechanistic description of how the data was generated, rather than testing something specific.</p>
+<p>You can often see this null hypothesis described as the distribution of group <span class="math inline">\(X\)</span> is equal to group <span class="math inline">\(Y\)</span>,</p>
+<p><span class="math display">\[
+H_0: F_X = F_Y \qquad \text{vs} \qquad H_a: F_X \neq F_Y
+\]</span> <strong>Setup:</strong> <span class="math inline">\(X_1, \ldots, X_{n_X} \overset{\text{IID}}{\sim} F_X\)</span> and <span class="math inline">\(Y_1, \ldots, Y_{n_Y} \overset{\text{IID}}{\sim} F_Y\)</span>, where <span class="math inline">\(F_X\)</span> and <span class="math inline">\(F_Y\)</span> are unknown.</p>
+<ul>
+<li>Under <span class="math inline">\(H_0\)</span>, <span class="math inline">\(F_X = F_Y\)</span>, so the combined sample <span class="math inline">\(X_1, \ldots, X_{n_X}, Y_1, \ldots, Y_{n_Y}\)</span> is also iid from <span class="math inline">\(F_X\)</span>.</li>
+<li>Any shuffle of the combined sample (e.g.&nbsp;<span class="math inline">\(X_5, X_3, Y_2, Y_{12}, \ldots\)</span>) is <em>also</em> iid from <span class="math inline">\(F_X\)</span> under <span class="math inline">\(H_0\)</span>.</li>
+<li>Under <span class="math inline">\(H_0\)</span>: the actual sample is <strong>indistinguishable</strong> from a permuted sample, but under <span class="math inline">\(H_a\)</span>: permuted samples will have a <strong>different distribution</strong>.</li>
+</ul>
+<blockquote class="blockquote">
+<p>The null hypothesis implies that the group labels of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>arbitrary</strong>.</p>
+</blockquote>
+<p>This is what the mechanistic description of the permutation null hypothesis assumes – there’s nothing systematically different between the two groups.</p>
+<p>However, I find just writing down this description of the null hypothesis can be confusing on its own, because this leaves the implication that the test we run will be explicitly testing whether the distributions are the same in all ways.</p>
+<p>But in fact, what differences in the distribution we are likely to detect will be highly influenced by the test statistic we choose. If I choose <span class="math display">\[T=|\text{median}\{X_i\}-\text{median}\{Y_i\}|\]</span> versus choosing <span class="math display">\[T=\left|\log\frac{S_X^2}{S_Y^2}\right|\]</span> then I will be more likely to detect certain types of deviations in their distribution than others. The choice of test statistic will concentrate the attention of the test in certain ways.</p>
+<p>When we think about it like this, we see that this is really a <em>power</em> discussion. Which alternatives I have high power against will depend on my test statistic. When you have null hypotheses which have broad sets of alternatives (here the alternative space is “all possible ways to have two different distributions”!), then there can often be many possible reasonable test statistics depending on a researcher’s priority.</p>
+<p>I personally find it easiest to think of the mechanistic null – that each permutation of the data between these groups was an equally likely outcome – and what it implies about the variable measured and its relationship to the grouping variable.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sometimes you will see written that if the test statistic is <span class="math display">\[T=|\text{median}\{X_i\}-\text{median}\{Y_i\}|\]</span> then you are testing <span class="math inline">\(H_0: \text{median}(F_X)=\text{median}(F_Y)\)</span>, i.e.&nbsp;the difference in the medians of the true distributions. This is problematic in its own way, because even if the medians of the distributions <em>are</em> the same, but the distributions differ in other ways, the permutation test might reject the null at rates higher than your level <span class="math inline">\(\alpha\)</span>. You can, of course, <em>assume</em> that’s the only difference, so that a rejection is only a rejection due to difference in medians, but the beauty of the permutation test is its lack of assumptions.</p>
+<p>In general, it can be tricky to make a conclusion about a parameter in a parameterized model via permutation tests. You run the risk that the parameterized null hypothesis that you write down doesn’t actually match the permutation null hypothesis.</p>
+</div>
+</div>
+</section>
+<section id="assumptions-of-permutation-test" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-of-permutation-test">Assumptions of Permutation Test</h2>
+<p>Unlike pretty much every other procedure, this procedure does <em>not</em> rely on either distributional assumptions or large sample sizes. It is (practically) assumption free. The one main assumption of permutation tests is that our data are independently sampled (and thus i.i.d. under the null).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>What we do need to be careful about is that the method considers the specific data values as <em>fixed</em> and the randomness comes from the <em>assignment</em> process. In other words, the null distribution assumes that these particular observations have an inherent value, and the randomness comes from assigning the observations into groups <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
+<p>This is quite a different conceptual framework from what we’ve assumed before (as you can see in our struggles about defining the null hypothesis). This also means that it’s really a test conditional on the specific units we are measuring – our abstract idea of probability is “what would these units have yielded if we had changed their treatment?”; the null hypothesis assumes the answer is “exactly the same”.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>However, this means that there is still an important issue of generalizing this result to a larger population – if these observations were not drawn from a larger population in a representative way, the generalizability of these results cannot be guaranteed.</p>
+<p>Does it mean that your data has to be generated by random assignment into groups for this test to be valid? No, it does not. A randomized assignment <em>guarantees</em> that this test is valid, by design.</p>
+</section>
+<section id="rank-tests" class="level2">
+<h2 class="anchored" data-anchor-id="rank-tests">Rank Tests</h2>
+<p>Permutation tests have been around longer than there have been personal computers. How is this possible? Historically, permutation tests were limited to test statistics <span class="math inline">\(T\)</span> that only used the <em>ranks</em> of the data. In other words, rather than using the <em>values</em> of the data, we would only use their combined ranks, <span class="math display">\[X_1,\ldots,X_{n_X},Y_1,\ldots,Y_{n_Y} \rightarrow R_1,\ldots,R_{n_X+n_Y}\]</span> where <span class="math inline">\(R_i \in \{1,\ldots,n_X+n_Y\}\)</span> is the rank of <span class="math inline">\(X_i\)</span> or <span class="math inline">\(Y_i\)</span> in the <em>combined</em> set of data.</p>
+<p>This creates a simplification, in that the transformed data <span class="math inline">\(R_i\)</span> must always lie in <span class="math inline">\(\{1,\ldots,n_X+n_Y\}\)</span> for all datasets, so that analytical approximations to <span class="math inline">\(G\)</span> can be determined (without seeing the data) and used universally. Such rank tests are often <em>equated</em> with permutation tests, but this is really a hold-over from when rank statistics were the only possible such statistics because you could analytically derive the permutation null distribution. These rank tests are really just <em>an example</em> of a permutation test.</p>
+<p>However, rank-based permutation tests are still highly relevant because using ranks can make the test less sensitive to outliers. This ties in with <em>robustness.</em></p>
+<p>We will go through two well-known examples.</p>
+<section id="two-group-comparisons-wilcoxon-rank-sum-testmann-whitney-test" class="level3">
+<h3 class="anchored" data-anchor-id="two-group-comparisons-wilcoxon-rank-sum-testmann-whitney-test">Two Group Comparisons: Wilcoxon Rank-Sum Test/Mann-Whitney Test</h3>
+<p>The <strong>Wilcoxon test</strong> or <strong>Mann-Whitney Test</strong> is the name of the rank-based permutation test applied to comparing two groups. It uses a specific test statistic <span class="math inline">\(T\)</span> (based on the sum of the ranks in each group) and the permutation null distribution.</p>
+<p>Because of its choice of test statistic (i.e.&nbsp;based on the rank), the test can be described as: <em>are the distributions the same, or does one population tend to yield larger values?</em><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> The basic idea is that if <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_j\)</span> have the <em>same</em> distribution, then <span class="math display">\[
+P(X_i &lt; Y_j) = \frac{1}{2}
+\]</span> for any <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_j\)</span>. This means that if the null is true, then the <span class="math inline">\(X_i\)</span>’s should be scattered randomly among the <span class="math inline">\(Y_j\)</span>’s, and the sum of their ranks should not be too small or too large.</p>
+<p><strong>Basic idea of the Procedure:</strong></p>
+<ol type="1">
+<li>Combine both samples and rank them in order of increasing size.</li>
+<li>Compute the sum of ranks belonging to each group, <span class="math inline">\(W_X\)</span> and <span class="math inline">\(W_Y\)</span></li>
+<li>We pick the smaller of these. If this rank sum is too small, it suggests the populations differ.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that our test statistic – the smaller of <span class="math inline">\(W_X\)</span> and <span class="math inline">\(W_Y\)</span> – means that really <em>small</em> values are unlikely under the null. This is another example of where the standard test-statistic doesn’t follow the convention that larger = less likely under the null.</p>
+<p>By picking the minimum, I am making my alternative “two-sided”, i.e.&nbsp;I do not assume that differences only go in one direction or the other.</p>
+</div>
+</div>
+<div id="exm-hodges-lehmann" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (Survival times (years) after a coronary attack)</strong></span> A physician believes that a certain treatment can prolong the life of people who have suffered a coronary attack. He does an experiment on 10 patients, randomly assigning 5 to the treatment group and 5 to the control (no treatment), and makes sure to control for other factors such as age and general health. 5 years later, 4 out of 5 patients from the treatment group are still alive, and only 2 of the control group. Below are the survival times in years of all the ten patients:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Group</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treatment</td>
+<td>4.2</td>
+<td>6.5</td>
+<td>7.9</td>
+<td>13.2</td>
+<td>17.8</td>
+</tr>
+<tr class="even">
+<td>Control</td>
+<td>0.4</td>
+<td>1.2</td>
+<td>2.9</td>
+<td>5.6</td>
+<td>6.7</td>
+</tr>
+</tbody>
+</table>
+<p>Combined and ordered:</p>
+<p><span class="math display">\[
+\underbrace{0.4}_{1},\ \underbrace{1.2}_{2},\ \underbrace{2.9}_{3},\ \underbrace{4.2}_{4},\ \underbrace{5.6}_{5},\ \underbrace{6.5}_{6},\ \underbrace{6.7}_{7},\ \underbrace{7.9}_{8},\ \underbrace{13.2}_{9},\ \underbrace{17.8}_{10}
+\]</span></p>
+<p><span class="math display">\[
+\underbrace{C \quad C \quad C \quad T \quad C \quad T \quad C \quad T \quad T \quad T}_{\text{group labels}}
+\]</span></p>
+<p><span class="math display">\[
+W_T = \text{rank sum of treatment} = 4 + 6 + 8 + 9 + 10 = 37
+\]</span></p>
+<p><span class="math display">\[
+W_C = \text{rank sum of control} = 1 + 2 + 3 + 5 + 7 = 18
+\]</span></p>
+<p>Note: <span class="math inline">\(W_T + W_C = \frac{10 \cdot 11}{2} = 55\)</span> ✓</p>
+</div>
+<section id="computing-a-p-value" class="level4">
+<h4 class="anchored" data-anchor-id="computing-a-p-value">Computing a p-value</h4>
+<p>We can use the same permutation test strategy as above – generate all permutations (or a random sample of <span class="math inline">\(B\)</span> of them), and count how many <span class="math inline">\(W_j\)</span> are <em>less than or equal to</em> our observed value. But unlike general permutation tests, because we are working on ranks, we can figure this out directly.</p>
+<p>Consider our example, where our smallest is <span class="math inline">\(W_C=18\)</span>. We want to calculate a p-value. There are <span class="math inline">\(\binom{10}{5} = 252\)</span> equally likely rank assignments. But unlike general permutations, we know <em>without seeing the data</em> that we will see ranks <span class="math inline">\(1-10\)</span>, and thus which possible permutations will create subsets where the first 5 have a sum <span class="math inline">\(\leq 18\)</span>:</p>
+<p><span class="math display">\[
+1+2+3+4+5 = 15
+\]</span></p>
+<p><span class="math display">\[
+1+2+3+4+6 = 16
+\]</span></p>
+<p><span class="math display">\[
+1+2+3+4+7 = 17
+\]</span></p>
+<p><span class="math display">\[
+1+2+3+5+6 = 17
+\]</span></p>
+<p><span class="math display">\[
+1+2+3+4+8 = 18
+\]</span></p>
+<p><span class="math display">\[
+1+2+3+5+7 = 18
+\]</span></p>
+<p><span class="math display">\[
+1+2+4+5+6 = 18
+\]</span></p>
+<p>We also need to consider that we are taking the minimum of the two groups, so we also need to count all the ways that the smallest ranks could be in the <em>last</em> five (i.e.&nbsp;in the treatment group). Since the groups are the same size, this will be just the same number of permutations. This gives us</p>
+<p><span class="math display">\[
+P(\min(W_C,W_T) \leq 18) = 2\times \frac{7}{252} \approx 0.056
+\]</span></p>
+<p><strong>Conclusion:</strong> Our p-value is <span class="math inline">\(0.056\)</span>. Usual measure of significance are for <span class="math inline">\(\alpha=0.01\)</span> or <span class="math inline">\(\alpha=0.05\)</span>, so while not very likely, it is only a marginal result. There is not strong evidence that the treatment appears to have an effect on survival.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that if we hadn’t taken the minimum, the p-value would have been 0.028 and would be more significant. If we had chosen a one-sided alternative hypothesis, then only small values of <span class="math inline">\(W_C\)</span> would count as evidence against the null, not large values of <span class="math inline">\(W_C\)</span>.</p>
+<p>The statement said that “a physician believes that a certain treatment can prolong the life of people who have suffered a coronary attack” so some people might think this justifies a one-sided test. However, this is a slippery slope. Everyone goes into their study believing that their intervention will make things better; that doesn’t mean it’s not possible that it will make things worse! If you set yourself up to only detect if it’s a positive effect, then you will miss a possible negative effect – which could be quite problematic.</p>
+<p>Moreover, practically, one-sided tests make it easier to get significance, as we’ve seen above. This makes them “attractive” for researchers who want to find significant p-values. But that doesn’t make it the right choice, and it certainly is not the conservative choice.</p>
+<p>While both books seem to love to present one-sided hypothesis tests (their properties are mathematically simpler to analyze), I steer clear of them in practice.</p>
+</div>
+</div>
+</section>
+<section id="formal-setup" class="level4">
+<h4 class="anchored" data-anchor-id="formal-setup">Formal Setup</h4>
+<p>Given independent samples <span class="math inline">\(X_1, \ldots, X_{n_X} \sim F_X\)</span> and <span class="math inline">\(Y_1, \ldots, Y_{n_Y} \sim F_Y\)</span>, let <span class="math inline">\(Z = (X, Y)\)</span> be the combined sample.</p>
+<p><span class="math display">\[
+R_i(Z) = \text{rank of } X_i \text{ in } Z, \quad 1 \leq i \leq n_X
+\]</span></p>
+<p><span class="math display">\[
+R_{n_X+j}(Z) = \text{rank of } Y_j \text{ in } Z, \quad 1 \leq j \leq n_Y
+\]</span></p>
+<p><span class="math display">\[
+R(X) + R(Y) = \frac{(n_X+n_Y)(n_X+n_Y+1)}{2}
+\]</span></p>
+<p>Under <span class="math inline">\(H_0\)</span>:</p>
+<p><span class="math display">\[
+P(X &lt; Y) = \frac{1}{2}
+\]</span></p>
+<ul>
+<li>Every assignment of <span class="math inline">\(n_X + n_Y\)</span> ranks is equally likely (there are <span class="math inline">\((n_X+n_Y)!\)</span> assignments).</li>
+<li>There are <span class="math inline">\(\binom{n_X+n_Y}{n_X}\)</span> distinct rank assignments to <span class="math inline">\(X\)</span>.</li>
+<li>Multiple different (equivalent) choices of test statistics can be used (that’s why there are two names for this test.) Generally, for two-sided tests, the easiest is to define the test statistic as the minimum of not the <span class="math inline">\(W_X\)</span> and <span class="math inline">\(W_Y\)</span> but of <span class="math display">\[\begin{gathered}
+U_X=W_X-\frac{n_X(n_X+1)}{2}\\
+U_Y=W_Y-\frac{n_Y(n_Y+1)}{2}
+\end{gathered}\]</span> where <span class="math inline">\(n_X(n_X+1)/2\)</span> is the smallest value for <span class="math inline">\(W_X\)</span>, i.e.&nbsp;if all the first <span class="math inline">\(n_X\)</span> ranks were in the <span class="math inline">\(X\)</span> group (and equivalently for <span class="math inline">\(Y\)</span>). This makes the calculations we did before work even when there are different sized groups.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></li>
+</ul>
+<p>The null distribution of the test statistic is (in principle) found by enumerating all <span class="math inline">\(\binom{n_X+n_Y}{n_X}\)</span> permutations. For larger sample sizes, we can get a normal approximation to the distribution of the test statistics. For this reason, rank tests could be used before there were computers to computationally resample from all possible permutations. Now that we have computers, we can determine the distribution using resampling, as we would in any permutation test.</p>
+</section>
+</section>
+<section id="paired-groups-wilcoxon-signed-rank-test" class="level3">
+<h3 class="anchored" data-anchor-id="paired-groups-wilcoxon-signed-rank-test">Paired Groups: Wilcoxon Signed-Rank Test</h3>
+<div class="PARAGRAPH">
+<p>Sunburn Example</p>
+</div>
+<p>Seven volunteers test suntan lotions with and without a new ingredient. Each volunteer applies the old lotion to one side of their spine and the new lotion to the other (side chosen randomly), then exposes their back to the sun.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Volunteer</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(X_i\)</span>: Degree of sunburn (old lotion)</td>
+<td>42</td>
+<td>51</td>
+<td>31</td>
+<td>61</td>
+<td>44</td>
+<td>55</td>
+<td>48</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(Y_i\)</span>: Degree of sunburn (new lotion)</td>
+<td>38</td>
+<td>53</td>
+<td>36</td>
+<td>52</td>
+<td>33</td>
+<td>49</td>
+<td>36</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(D_i = X_i - Y_i\)</span></td>
+<td>4</td>
+<td><strong>−2</strong></td>
+<td><strong>−5</strong></td>
+<td>9</td>
+<td>11</td>
+<td>6</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>Rank of <span class="math inline">\(|D_i|\)</span></td>
+<td>2</td>
+<td><strong>1</strong></td>
+<td><strong>3</strong></td>
+<td>5</td>
+<td>6</td>
+<td>4</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+<p>Under <span class="math inline">\(H_0\)</span> (the new ingredient has no effect), <span class="math inline">\(D_i\)</span> and <span class="math inline">\(-D_i\)</span> have the same distribution, so the <span class="math inline">\(k\)</span>-th largest difference is equally likely to be positive or negative. Hence <strong>all sign assignments to the <span class="math inline">\(n\)</span> ranks are equally likely</strong>.</p>
+<div class="PARAGRAPH">
+<p>Hypotheses</p>
+</div>
+<p>The permutation null hypothesis simplifies to:</p>
+<p><span class="math display">\[
+H_0: \text{All sign assignments to ranks are equally likely}
+\quad\text{(}D_i\text{'s symmetric about 0)}
+\]</span></p>
+<p><span class="math display">\[
+H_a: \text{The treatment has an effect}
+\quad\text{(}D_i\text{'s not equally likely to be positive or negative)}
+\]</span></p>
+<section id="mechanics" class="level4">
+<h4 class="anchored" data-anchor-id="mechanics">Mechanics</h4>
+<ol type="1">
+<li>Compute <span class="math inline">\(D_i = X_i - Y_i\)</span>.</li>
+<li>Rank the absolute differences <span class="math inline">\(|D_i|\)</span>; let <span class="math inline">\(R_i = \text{rank}(|D_i|)\)</span>.</li>
+<li>Compute</li>
+</ol>
+<p><span class="math display">\[
+W_+ = \sum_{i:\, D_i &gt; 0} R_i, \qquad
+W_- = \sum_{i:\, D_i &lt; 0} R_i.
+\]</span></p>
+<ol start="4" type="1">
+<li>Use whichever of <span class="math inline">\(W_+\)</span> or <span class="math inline">\(W_-\)</span> is <strong>smaller</strong> as the test statistic.</li>
+</ol>
+<div class="PARAGRAPH">
+<p>Sunburn example</p>
+</div>
+<p><span class="math display">\[
+W_- = \text{rank-sum of negative differences} = 1 + 3 = 4
+\]</span> <span class="math display">\[
+W_+ = \text{rank-sum of positive differences} = 28 - 4 = 24
+\]</span> Notice, ranks 1 through <span class="math inline">\(n\)</span> always sum to <span class="math inline">\(\frac{n(n+1)}{2}\)</span>:</p>
+<p><span class="math display">\[
+W_- + W_+ = \frac{7(7+1)}{2} = \frac{56}{2} = 28. \checkmark
+\]</span></p>
+<p>We use <span class="math inline">\(W_- = 4\)</span> (the smaller of the two) as our test statistic.</p>
+</section>
+<section id="null-distribution-of-w_--or-w_" class="level4">
+<h4 class="anchored" data-anchor-id="null-distribution-of-w_--or-w_">Null Distribution of <span class="math inline">\(W_-\)</span> (or <span class="math inline">\(W_+\)</span>)</h4>
+<p>Under the permutation null hypothesis, there are <span class="math inline">\(2^n\)</span> equally likely sign assignments, giving <span class="math inline">\(2^n\)</span> equally likely values of <span class="math inline">\(W_-\)</span>.</p>
+<p><span class="math display">\[
+P(W_- \leq w) = \frac{\#\{W_- \leq w\}}{2^n}
+\]</span></p>
+<div class="PARAGRAPH">
+<p>Sunburn Example (continued)</p>
+</div>
+<p>With <span class="math inline">\(n = 7\)</span>, there are <span class="math inline">\(2^7 = 128\)</span> equally likely sign assignments. Again, since we are working with ranks, and not the value of the data, we can say what are the possible permutations that would have a <span class="math inline">\(W_-\)</span> less than or equal to what we observed, to get <span class="math inline">\(P(W_- \leq 4)\)</span>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Value of <span class="math inline">\(W_-\)</span></th>
+<th>Rank assignments (negative <span class="math inline">\(D_i\)</span>’s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td><span class="math inline">\(\emptyset\)</span> — no negative <span class="math inline">\(D_i\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td><span class="math inline">\(\{1\}\)</span> — smallest <span class="math inline">\(D_i &lt; 0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td><span class="math inline">\(\{2\}\)</span> — second smallest <span class="math inline">\(D_i &lt; 0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td><span class="math inline">\(\{1,2\},\ \{3\}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">4</td>
+<td><span class="math inline">\(\{1,3\},\ \{4\}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Total assignments with <span class="math inline">\(W_- \leq 4\)</span>: <span class="math inline">\(\;1+1+1+2+2 = 7\)</span>.</p>
+<p><span class="math display">\[
+P(W_- \leq 4) = \frac{7}{128} \approx 0.0547
+\]</span></p>
+<p>We need, however, the probability of either <span class="math inline">\(W_-\)</span> or <span class="math inline">\(W_+\)</span> being this small or less, so again, we would double this to get our p-value: <span class="math inline">\(2 \times 0.0547 \approx 0.109\)</span>, so we fail to reject <span class="math inline">\(H_0\)</span> at the 5% level.</p>
+
+
+
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-agresti2021" class="csl-entry" role="listitem">
+Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-rice2006" class="csl-entry" role="listitem">
+Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. Duxbury Press.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The actual requirement is that our data are exchangeable under the null.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is related to the idea of potential outcomes in causal inference.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This is how the test was originally described – as to whether one distribution was likely to create larger values than the other.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>There are also issues about whether you use ascending ranks or descending ranks – many different descriptions of these test statistics exist. They all are equivalent tests, in the sense they will make the same decisions.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/stat135\.berkeley\.edu\/fall-2026");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
