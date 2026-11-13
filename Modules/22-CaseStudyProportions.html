@@ -328,7 +328,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Modules/21-PowerCalculations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Power Calculations</span></a>
+ <span class="menu-text">Power Calculations*</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -399,7 +399,6 @@ window.Quarto = {
 </div>
 <ul>
 <li>Chapter 5.4 in <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span></li>
-<li>Chapter 13 in <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span></li>
 </ul>
 </div>
 <p>We’ve seen several ways to create tests. We’re going to look at a particular setting in which we measure two categorical variables and go through what some of these tests would look like there and how they relate.</p>
@@ -648,7 +647,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The main book <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span> uses <span class="math inline">\(y_{ij}\)</span>, <span class="math inline">\(y_{+j}\)</span>, <span class="math inline">\(y_{i+}\)</span>, and <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span> uses <span class="math inline">\(N_{ij}\)</span>, <span class="math inline">\(n_{\cdot j}\)</span>, and <span class="math inline">\(n_{i\cdot}\)</span>. Variants of these are all equivalent and common. We have gone with <span class="math inline">\(Z\)</span> to avoid confusion with the actual binary variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, and to avoid getting mixed up with <span class="math inline">\(n\)</span> and <span class="math inline">\(N\)</span>, which are often used for sample size (while <span class="math inline">\(n_{\cdot j}\)</span> and <span class="math inline">\(n_{i\cdot}\)</span> are clearly related to sample size, what is considered your “sample size” can be complicated depending on the design of your data, as we will discuss below).</p>
+<p>The main book <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span> uses <span class="math inline">\(y_{ij}\)</span>, <span class="math inline">\(y_{+j}\)</span>, <span class="math inline">\(y_{i+}\)</span>, and <span class="citation" data-cites="rice2006">Rice (<a href="#ref-rice2006" role="doc-biblioref">2006</a>)</span> uses <span class="math inline">\(N_{ij}\)</span>, <span class="math inline">\(n_{\cdot j}\)</span>, and <span class="math inline">\(n_{i\cdot}\)</span>. Variants of these are all equivalent and common. We have gone with <span class="math inline">\(Z\)</span> to avoid confusion with the actual binary variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, and to avoid getting mixed up with <span class="math inline">\(n\)</span> and <span class="math inline">\(N\)</span>, which are often used for sample size (while <span class="math inline">\(n_{\cdot j}\)</span> and <span class="math inline">\(n_{i\cdot}\)</span> are clearly related to sample size, what is considered your “sample size” can be complicated depending on the design of your data).</p>
 </div>
 </div>
 </section>
@@ -668,7 +667,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>Notice again that the score statistic simplifies to using the estimate of the <em>shared</em> <span class="math inline">\(\pi\)</span> under the null for the standard error. In other words, using the <em>pooled</em> estimate where we combine the data into a single group and estimate their shared <span class="math inline">\(\pi\)</span>. This would be our estimate of <span class="math inline">\(\pi_1\)</span> and <span class="math inline">\(\pi_2\)</span> if the null were true. So it shares similarities in logic to the likelihood.</p>
-<p>Recall, however, that the score statistic is actually based on the gradient of the likelihood and <em>simplifies</em> to the forms we have shown. We haven’t discussed the Fisher information matrix for multiple parameters, which is the extension of the Fisher information to a matrix. We would formally have to use a matrix multiplication involving the Fisher information matrix to define the score statistic, and we are only giving the simplified equation above.</p>
+<p>Recall, however, that the score statistic is actually based on the gradient of the likelihood, and the score test statistic <em>simplifies</em> to the forms we have shown. For a single parameter <span class="math inline">\(\theta\)</span>, the score statistic is <span class="math display">\[T_0=\frac{\left|\left.\frac{\partial L(\theta)}{\partial \theta}\right|_{\theta=\theta_0}\right|}{\sqrt{I_n(\theta_0)}}.\]</span> In our two-population example, <span class="math inline">\(\theta\in R^2\)</span>, and to define the score statistic, we would have to use a matrix multiplication involving the gradient of <span class="math inline">\(L\)</span> and the Fisher information matrix – the extension of the Fisher information to a matrix which we haven’t discussed.</p>
 </div>
 </div>
 <div id="exm-waldscore" class="theorem example">
@@ -755,14 +754,33 @@ P(Y_i=1\mid X=x_i)&amp;= \dfrac{e^{\beta_0+\beta_1x_i}}{1+e^{\beta_0+\beta_1x_i}
 \Rightarrow \log\frac{\pi_1}{1-\pi_1}-\log\frac{\pi_2}{1-\pi_2}&amp;=\beta_1
 \end{aligned}
 \]</span></p>
-<p>So <span class="math inline">\(\beta_1\)</span> is the difference in the log-odds, which we called <span class="math inline">\(\Delta_{odds}\)</span> from before. Moreover, our MLEs for logistic regression are the same,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span class="math display">\[\hat{\beta}_1=\hat{\Delta}_{odds},\quad \hat\beta_0=\log\frac{\hat\pi_2}{1-\hat\pi_2}.\]</span></p>
-<p>So in fact, any tests about <span class="math inline">\(\beta_1\)</span> are equivalent to tests about the difference in the log-odds. Our standard test in regression is <span class="math display">\[H_0:\beta_1=0\]</span> and it implies that <span class="math inline">\(X\)</span> doesn’t predict the probability that <span class="math inline">\(Y_i=1\)</span>. In this setting, where <span class="math inline">\(X\)</span> is binary, it means which group you are in doesn’t affect the probability that <span class="math inline">\(Y_i=1\)</span>, i.e.&nbsp;<span class="math inline">\(\pi_1=\pi_2\)</span> or equivalently the log-odds <span class="math inline">\(\Delta_{odds}=0\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
-<p><strong>Tests of <span class="math inline">\(\beta_1\)</span>.</strong> Because the models and the hypothesis are the same, the possible tests of <span class="math inline">\(\beta_1=0\)</span> are the <em>same</em> as above:</p>
-<ul>
-<li><strong>Wald:</strong> the Wald statistic for testing <span class="math inline">\(\beta_1\)</span> is the same as the Wald test for the log-odds we gave above.</li>
-<li><strong>Score:</strong> Recall that the score test was the same whether we based it on estimating log-odds or the difference in proportions. The score statistic based on the likelihood written in terms of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> will not change it either, so we will still get the same Score statistic.</li>
-<li><strong>Likelihood ratio:</strong> the LRT involves the maximum <em>values</em> of the likelihood under the full model versus <span class="math inline">\(H_0\)</span>. The value of the likelihood of the data will be the same, whether we write the likelihood in terms of <span class="math inline">\(\theta=(\pi_1,\pi_2)\)</span> or <span class="math inline">\(\theta'=(\beta_0,\beta_1)=(\text{logit}(\pi_2),\Delta_{odds})\)</span>. So we get the same value of the test statistic <span class="math inline">\(\Lambda\)</span>.</li>
-</ul>
+<p>So <span class="math inline">\(\beta_1\)</span> is the difference in the log-odds, which we called <span class="math inline">\(\Delta_{odds}\)</span> from before.</p>
+<p>So in fact, any tests about <span class="math inline">\(\beta_1\)</span> are equivalent to tests about the difference in the log-odds. Our standard test in regression is <span class="math display">\[H_0:\beta_1=0\]</span> and it implies that <span class="math inline">\(X\)</span> doesn’t predict the probability that <span class="math inline">\(Y_i=1\)</span>. In this setting, where <span class="math inline">\(X\)</span> is binary, it means which group you are in doesn’t affect the probability that <span class="math inline">\(Y_i=1\)</span>, i.e.&nbsp;<span class="math inline">\(\pi_1=\pi_2\)</span> or equivalently the log-odds <span class="math inline">\(\Delta_{odds}=0\)</span>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>Moreover, unlike the usual situation for the logistic, we can actually work out the MLEs for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> by hand. And they turn out to be the exact same estimates as if we plug in <span class="math inline">\(\hat\pi_1\)</span> and <span class="math inline">\(\hat\pi_2\)</span> into the log-odds.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <span class="math display">\[\hat{\beta}_1=\hat{\Delta}_{odds},\quad \hat\beta_0=\log\frac{\hat\pi_2}{1-\hat\pi_2}.\]</span></p>
+<div class="PARAGRAPH">
+<p>Wald tests of <span class="math inline">\(\beta_1\)</span></p>
+</div>
+<p><span class="math inline">\(\hat\beta_1\)</span> is a MLE, and we can use our asymptotic results regarding MLEs to get a test statistic for testing <span class="math inline">\(H_0: \beta_1=0\)</span>, <span class="math display">\[T_0=\frac{\hat\beta_1}{\hat{SE}(\hat\beta_1)}\]</span> where<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> <span class="math display">\[\hat{SE}(\hat\beta_1)=\sqrt{I_n^{-1}(\hat\beta_1)}. \]</span> In this setting the calculations simplify to <span class="math display">\[var(\hat\beta_1)\approx\frac{1}{n_1\pi_1(1-\pi_1)}+\frac{1}{n_2\pi_2(1-\pi_2)}\]</span> so that <span class="math display">\[\hat{SE}(\hat\beta_1)=\sqrt{\frac{1}{n_1\hat\pi_1(1-\hat\pi_1)}+\frac{1}{n_2\hat\pi_2(1-\hat\pi_2)}},\]</span> which is the same standard error we found for <span class="math inline">\(\hat\Delta_{odds}\)</span>.</p>
+<p>Thus a Wald test based on the asymptotic normal distribution of the MLE <span class="math inline">\(\hat\beta_1\)</span> found via our theorem regarding the asymptotics of MLEs is the same as the Wald test based on the asymptotic normal distribution of <span class="math inline">\(\hat\Delta_{odds}\)</span> found via the Delta Method.</p>
+<div class="PARAGRAPH">
+<p>Likelihood Ratio tests of <span class="math inline">\(\beta_1\)</span></p>
+</div>
+<p>We can also write down the likelihood of the data with respect to <span class="math inline">\(\beta_0, \beta_1\)</span>, and find the likelihood ratio test statistic for <span class="math inline">\(H_0:\beta_1=0\)</span>. <span class="math display">\[\Lambda=2[L(\hat\beta_1,\hat\beta_0)-L(0,\hat\beta_0^{(0)})]\]</span> where <span class="math inline">\(\hat\beta_0^{(0)}\)</span> is the value maximizing the likelihood in the constrained null space. When <span class="math inline">\(\beta_1=0\)</span>, both groups have the same probability <span class="math inline">\(P(Y_i=1)=\frac{e^{\beta_0}}{1+e^{\beta_0}}\)</span>, so by the invariance of the MLE, <span class="math inline">\(\hat\beta_0^{(0)}\)</span> is the log-odds of the pooled estimate <span class="math inline">\(\hat\pi_0\)</span>, <span class="math display">\[\hat\beta_0^{(0)}=\log\frac{\hat\pi_0}{1-\hat\pi_0}=\log\frac{n_1\hat\pi_1+n_2\hat\pi_2}{n_1(1-\hat\pi_1)+n_2(1-\hat\pi_2)}=\log\frac{Z_{+1}}{Z_{+2}}.\]</span></p>
+<p>We could plug in these values and calculate <span class="math inline">\(\Lambda\)</span> and see that we get the same <span class="math inline">\(\Lambda\)</span> as previously. But actually, we don’t need to. The LRT statistic requires the maximum <em>values</em> of the likelihood under the full model versus <span class="math inline">\(H_0\)</span>. The value of the likelihood of the data will be the same, whether we write the likelihood in terms of <span class="math inline">\(\theta=(\pi_1,\pi_2)\)</span> or <span class="math inline">\(\theta'=(\beta_0,\beta_1)=(\text{logit}(\pi_2),\Delta_{odds})\)</span>. So we get the same value of the test statistic <span class="math inline">\(\Lambda\)</span>.</p>
+<p>In general, the value of the likelihood is invariant to 1-1 transformations of our parameters. So the likelihood ratio test statistic will be the <em>same</em> regardless (not just equivalent tests, but the same actual value of the test statistic.)</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The score statistic has the same property, if we were to calculate it. The Score statistic based on the likelihood written in terms of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> will be the same as the Score statistic written in terms of <span class="math inline">\(\pi_1\)</span> and <span class="math inline">\(\pi_2\)</span>, so we will still get the same Score statistic.</p>
+</div>
+</div>
 </section>
 <section id="permutation-tests-and-fishers-exact-test" class="level2">
 <h2 class="anchored" data-anchor-id="permutation-tests-and-fishers-exact-test">Permutation tests and Fisher’s Exact Test</h2>
@@ -807,7 +825,7 @@ P(Y_i=1\mid X=x_i)&amp;= \dfrac{e^{\beta_0+\beta_1x_i}}{1+e^{\beta_0+\beta_1x_i}
 </tr>
 </tbody>
 </table>
-<p>We will randomly permute the values of the treatment, so the assignment of patient to treatment gets permuted.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p></li>
+<p>We will randomly permute the values of the treatment, so the assignment of patient to treatment gets permuted.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p></li>
 <li><p>For each shuffled data set, recompute the statistic.</p></li>
 <li><p>The p-value is the proportion of permutations that give a statistic at least as large as <span class="math inline">\(t_{obs}\)</span>.</p></li>
 </ol>
@@ -951,7 +969,7 @@ P(Z_{11} = z_{11}) = \frac{\binom{Z_{+1}}{z_{11}}\binom{Z_{+2}}{z_{12}}}{\binom{
 </tr>
 <tr class="even">
 <td style="text-align: left;">Permutation</td>
-<td style="text-align: left;"><span class="math inline">\(\lvert\hat\Delta_{odds}\rvert\)</span><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></td>
+<td style="text-align: left;"><span class="math inline">\(\lvert\hat\Delta_{odds}\rvert\)</span><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></td>
 <td style="text-align: left;"><span class="math inline">\(0.166\)</span></td>
 </tr>
 <tr class="odd">
@@ -1064,10 +1082,11 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
 <ol>
 <li id="fn1"><p>The square of the score statistic is the same as the Pearson’s Chi-squared statistic for a 2x2 table.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>If we rewrite the likelihood in terms of the log-odds instead of <span class="math inline">\(\pi\)</span>, the chain rule introduces the same derivative factors into both the score and the Fisher information, and these cancel in the score statistic.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>We can work this out by hand, but we can also see this because of the invariance of the MLE.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p> The equivalence is special to a single categorical <span class="math inline">\(X\)</span> predictor. With more predictors or a continuous <span class="math inline">\(X\)</span>, there is no closed form for <span class="math inline">\(\hat\beta\)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>We could equivalently permute the outcomes.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>For the permuted tables with <span class="math inline">\(Z_{11}=0\)</span> or <span class="math inline">\(Z_{11}=8\)</span>, one of the cells is 0, so <span class="math inline">\(\hat\Delta_{odds}\)</span> is infinite (<code>Inf</code> in R). These tables are still counted as at least as extreme as the observed table, so they are included in the p-value.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p> The equivalence is special to a single categorical <span class="math inline">\(X\)</span> predictor. With more predictors or a continuous <span class="math inline">\(X\)</span>, there is no closed form for <span class="math inline">\(\hat\beta\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>We can work this out by hand, but we can also see this because of the invariance of the MLE.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>I am glossing over details here in my notation, because we haven’t talked about the Information Matrix for multiple variables. <span class="math inline">\(I_n^{-1}(\hat\beta_1)\)</span> isn’t a reciprocal but actually means take the inverse of the <span class="math inline">\(2\times 2\)</span> Fisher Information matrix and grab the diagonal entry in that corresponds to <span class="math inline">\(\beta_1\)</span>. Then plug in <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span> into the resulting equation.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>We could equivalently permute the outcomes.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>For the permuted tables with <span class="math inline">\(Z_{11}=0\)</span> or <span class="math inline">\(Z_{11}=8\)</span>, one of the cells is 0, so <span class="math inline">\(\hat\Delta_{odds}\)</span> is infinite (<code>Inf</code> in R). These tables are still counted as at least as extreme as the observed table, so they are included in the p-value.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
