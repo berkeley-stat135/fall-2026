@@ -61,7 +61,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-44952193eeadea267d9e4506e1456eea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-4d6bee11933e2af86abb5606b681b4f2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -481,7 +481,7 @@ window.Quarto = {
 </table>
 <p>This looks like our regression setup, where we have pairs <span class="math inline">\((X_i,Y_i)\)</span>, with <em>both</em> <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> categorical.</p>
 <p>We’ve discussed logistic regression for binary <span class="math inline">\(Y\)</span> and we’ve discussed simple regression for binary predictors <span class="math inline">\(X\)</span>. So clearly one option for analyzing this data is to just combine these two: do logistic regression with a categorical <span class="math inline">\(X\)</span>. We would be asking how the probability of recovery depends on whether the patient had treatment <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>.</p>
-<p>A natural hypothesis test would be test whether <span class="math inline">\(\beta_1=0\)</span> in our logistic regression model.</p>
+<p>A natural hypothesis test would be to test whether <span class="math inline">\(\beta_1=0\)</span> in our logistic regression model.</p>
 <div class="PARAGRAPH">
 <p>Compare proportions</p>
 </div>
@@ -602,8 +602,8 @@ Note
 </tbody>
 </table>
 <p>This might be called a 3x4 contingency table to indicate its dimensions. It is still <em>two</em> categorical variables, but each variable can take on different numbers of categories.</p>
-<div class="exr-cont2df">
-<p>How would the above contingency table look like as raw data, i.e.&nbsp;as a data.frame?</p>
+<div id="exr-cont2df" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1</strong></span> How would the above contingency table look like as raw data, i.e.&nbsp;as a data.frame?</p>
 </div>
 <p>We will often label the elements of the contingency table,</p>
 <table class="caption-top table">
@@ -655,8 +655,8 @@ Note
 <section id="wald-and-score-tests" class="level2">
 <h2 class="anchored" data-anchor-id="wald-and-score-tests">Wald and Score Tests</h2>
 <p>Suppose we have two groups, and we want to compare their means. If the variable we are measuring is binary, then we are comparing their proportions, and we can state the null as <span class="math display">\[H_0:\pi_1=\pi_2\]</span></p>
-<p>We already have seen that we can use either the Wald test for this purpose based on <span class="math inline">\(|\hat\pi_1-\hat\pi_2|\)</span> and its standard error estimate, <span class="math display">\[T_{Wald}=\frac{|\hat\pi_1-\hat\pi_2|}{\sqrt{\dfrac{\hat\pi_1(1-\hat\pi_1)}{n_1}+\dfrac{\hat\pi_2(1-\hat\pi_2)}{n_2}}}.\]</span> We can also use a score statistic that simplifies to <span class="math display">\[T_{Score}=\frac{|\hat\pi_1-\hat\pi_2|}{\sqrt{\hat\pi_{0}(1-\hat\pi_{0})\left(\dfrac{1}{n_1}+\dfrac{1}{n_2}\right)}},\]</span> where <span class="math inline">\(\hat\pi_{0}\)</span> is the <em>pooled</em> estimate of the proportion, assuming the two groups share the same proportion, <span class="math display">\[\hat\pi_{0}=\frac{n_1\hat\pi_1+n_2\hat\pi_2}{n_1+n_2}.\]</span> Then our denominator is our estimate of the standard error of our difference if we pooled the data together.</p>
-<p>For large samples, both are approximately <span class="math inline">\(N(0,1)\)</span> under <span class="math inline">\(H_0\)</span>, so the two-sided p-value is <span class="math inline">\(P(|Z|\geq t_{obs})=2\left[1-\Phi(t_{obs})\right]\)</span> for <span class="math inline">\(Z\sim N(0,1)\)</span>.</p>
+<p>We already have seen that we can use the Wald test for this purpose based on <span class="math inline">\(|\hat\pi_1-\hat\pi_2|\)</span> and its standard error estimate, <span class="math display">\[T_{Wald}=\frac{|\hat\pi_1-\hat\pi_2|}{\sqrt{\dfrac{\hat\pi_1(1-\hat\pi_1)}{n_1}+\dfrac{\hat\pi_2(1-\hat\pi_2)}{n_2}}}.\]</span> We can also use a score statistic that simplifies to <span class="math display">\[T_{Score}=\frac{|\hat\pi_1-\hat\pi_2|}{\sqrt{\hat\pi_{0}(1-\hat\pi_{0})\left(\dfrac{1}{n_1}+\dfrac{1}{n_2}\right)}},\]</span> where <span class="math inline">\(\hat\pi_{0}\)</span> is the <em>pooled</em> estimate of the proportion, assuming the two groups share the same proportion, <span class="math display">\[\hat\pi_{0}=\frac{n_1\hat\pi_1+n_2\hat\pi_2}{n_1+n_2}.\]</span> Then our denominator is our estimate of the standard error of our difference if we pooled the data together.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>For large samples, both are approximately distributed as the absolute value of <span class="math inline">\(N(0,1)\)</span> under <span class="math inline">\(H_0\)</span>, so the two-sided p-value is <span class="math inline">\(P(|Z|\geq t_{obs})=2\left[1-\Phi(t_{obs})\right]\)</span> for <span class="math inline">\(Z\sim N(0,1)\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -678,11 +678,27 @@ Note
 \qquad t_{obs}=\frac{0.3}{0.1020}=2.94,\]</span> giving a p-value of <span class="math inline">\(2\left[1-\Phi(2.94)\right]=0.0033\)</span>.</p>
 <p>The two tests use the same numerator, but the Wald test has a smaller standard error here, because <span class="math inline">\(\hat\pi_1(1-\hat\pi_1)\)</span> and <span class="math inline">\(\hat\pi_2(1-\hat\pi_2)\)</span> are smaller than the pooled <span class="math inline">\(\hat\pi_0(1-\hat\pi_0)\)</span>, so its statistic is larger and its p-value is smaller.</p>
 </div>
+<div id="exr-convertZ" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2</strong></span> Write the above equations in terms of the components of the 2x2 contingency table</p>
+</div>
 <section id="wald-and-score-tests-for-the-log-odds" class="level3">
 <h3 class="anchored" data-anchor-id="wald-and-score-tests-for-the-log-odds">Wald and Score tests for the Log-odds</h3>
 <p>We’ve briefly discussed during our development of the delta method that instead of considering the proportion <span class="math inline">\(\pi\)</span> as our parameter of interest, we can consider the <em>odds</em> <span class="math inline">\(\pi/(1-\pi)\)</span> or, more commonly, the <em>log-odds</em>, <span class="math display">\[\log\frac{\pi}{1-\pi}.\]</span> We can ask what if we consider the difference in the <em>log-odds</em> instead of the difference in the proportions as the base of our test statistic, <span class="math display">\[\hat{\Delta}_{odds}=\log\frac{\hat\pi_1}{1-\hat\pi_1}-\log\frac{\hat\pi_2}{1-\hat\pi_2}
 =\log\left(\frac{\hat\pi_1}{1-\hat\pi_1}\frac{1-\hat\pi_2}{\hat\pi_2}\right).\]</span></p>
-<p>Our null hypothesis of equal proportions will imply that the difference in the log-odds is 0: <span class="math display">\[\pi_1=\pi_2 \Rightarrow H_0: \Delta_{odds}=0.\]</span> We can use the delta method to get the asymptotic standard error of this <span class="math inline">\(\hat{\Delta}_{odds}\)</span>, and create a Wald test: <span class="math display">\[T_{Wald}= \frac{|\hat{\Delta}_{odds}-0|}{\hat{SE}(\hat{\Delta}_{odds})}.\]</span> The score statistic, unlike the Wald statistic, is invariant to transformations of our parameters<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, so we still get <span class="math display">\[T_{Score}=\frac{|\hat\pi_1-\hat\pi_2|}{\sqrt{\hat\pi_0(1-\hat\pi_0)\left(\dfrac{1}{n_1}+\dfrac{1}{n_2}\right)}}.\]</span></p>
+<p>The quantity <span class="math inline">\(\Delta_{odds}\)</span> is the log of the ratio of the two odds, and is commonly called the <em>log odds ratio</em>.</p>
+<p>The proportions are equal exactly when the difference in the log-odds is 0, so our null hypothesis of equal proportions is the same as <span class="math display">\[\pi_1=\pi_2 \Leftrightarrow H_0: \Delta_{odds}=0.\]</span> We can use the delta method to get the asymptotic standard error of this <span class="math inline">\(\hat{\Delta}_{odds}\)</span>, and create a Wald test: <span class="math display">\[T_{Wald}= \frac{|\hat{\Delta}_{odds}-0|}{\widehat{SE}(\hat{\Delta}_{odds})}.\]</span> Recall when we did the delta method, we found the log-odds to be approximately distributed as: <span class="math display">\[\text{log odds}(\hat\pi)=\log\left[\frac{\hat\pi}{1-\hat\pi}\right] \approx \mathcal{N}\left(\log\frac{\pi}{1-\pi},\frac{1}{n\pi(1-\pi)}\right),\]</span> which gives us <span class="math display">\[\widehat{\text{var}}(\text{log odds}(\hat\pi_1))=\frac{1}{n_1\hat\pi_1(1-\hat\pi_1)}\]</span> and similarly for <span class="math inline">\(\hat\pi_2\)</span>, using <span class="math inline">\(n_2\)</span>. Since we are assuming independence between our two groups, we have <span class="math display">\[\begin{aligned}
+\widehat{SE}(\hat{\Delta}_{odds})&amp;=\sqrt{\widehat{\text{var}}(\text{log odds}(\hat\pi_1))+\widehat{\text{var}}(\text{log odds}(\hat\pi_2))}\\
+&amp;=\sqrt{\frac{1}{n_1\hat\pi_1(1-\hat\pi_1)}+\frac{1}{n_2\hat\pi_2(1-\hat\pi_2)}}.
+\end{aligned}\]</span> Since <span class="math inline">\(n_1\hat\pi_1=Z_{11}\)</span>, <span class="math inline">\(n_1(1-\hat\pi_1)=Z_{12}\)</span>, and similarly for group 2, this can also be written quite simply in terms of the counts in our table as <span class="math display">\[\widehat{SE}(\hat{\Delta}_{odds})=\sqrt{\frac{1}{Z_{11}}+\frac{1}{Z_{12}}+\frac{1}{Z_{21}}+\frac{1}{Z_{22}}}.\]</span></p>
+<div class="PARAGRAPH">
+<p>Score Statistic</p>
+</div>
+<p>The score statistic, unlike the Wald statistic, is invariant to one-to-one transformations of our parameters,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> so we still get <span class="math display">\[T_{Score}=\frac{|\hat\pi_1-\hat\pi_2|}{\sqrt{\hat\pi_0(1-\hat\pi_0)\left(\dfrac{1}{n_1}+\dfrac{1}{n_2}\right)}}.\]</span></p>
+<div id="exm-waldlogodds" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2</strong></span> Continuing our example with <span class="math inline">\(n_1=60\)</span>, <span class="math inline">\(n_2=40\)</span>, <span class="math inline">\(\hat\pi_1=0.6\)</span> and <span class="math inline">\(\hat\pi_2=0.3\)</span>, the difference in the log-odds is <span class="math display">\[\hat\Delta_{odds}=\log\frac{0.6}{0.4}-\log\frac{0.3}{0.7}=0.405-(-0.847)=1.253.\]</span> The counts in our table are <span class="math inline">\(Z_{11}=36\)</span>, <span class="math inline">\(Z_{12}=24\)</span>, <span class="math inline">\(Z_{21}=12\)</span>, and <span class="math inline">\(Z_{22}=28\)</span>, so <span class="math display">\[\widehat{SE}(\hat\Delta_{odds})=\sqrt{\frac{1}{36}+\frac{1}{24}+\frac{1}{12}+\frac{1}{28}}=\sqrt{0.1885}=0.434,
+\qquad t_{obs}=\frac{1.253}{0.434}=2.89,\]</span> giving a p-value of <span class="math inline">\(2\left[1-\Phi(2.89)\right]=0.0039\)</span>.</p>
+<p>This is different from both the Wald test on the difference in proportions (<span class="math inline">\(t_{obs}=3.12\)</span>) and the Score test (<span class="math inline">\(t_{obs}=2.94\)</span>). Even though the null hypothesis is the same, the Wald statistic depends on which parametrization we use.</p>
+</div>
 </section>
 </section>
 <section id="likelihood-ratio-test" class="level2">
@@ -715,7 +731,7 @@ L(\pi,\pi)&amp;=\sum_i Y_{1,i}\log\pi+(n_1-\sum_i Y_{1,i})\log(1-\pi)+\sum_i Y_{
 <p><strong>Null distribution.</strong> <span class="math inline">\(\dim(\Omega)=2\)</span> and <span class="math inline">\(\dim(\omega_0)=1\)</span>, so we have that under <span class="math inline">\(H_0\)</span> <span class="math display">\[\Lambda\overset{D}{\rightarrow}\chi^2_1\]</span></p>
 <p>So we will reject when <span class="math inline">\(\Lambda &gt; \mathtt{qchisq(1-alpha,df=1)}\)</span> and the p-value will be <span class="math display">\[\text{p-value}= P_{H_0}(\Lambda \geq \lambda_{obs})=\mathtt{1-pchisq(\lambda_{obs},df=1)}.\]</span></p>
 <div id="exm-lrt" class="theorem example">
-<p><span class="theorem-title"><strong>Example 2</strong></span> For our data, <span class="math inline">\(n_1=60\)</span>, <span class="math inline">\(n_2=40\)</span>, <span class="math inline">\(\hat\pi_1=0.6\)</span>, <span class="math inline">\(\hat\pi_2=0.3\)</span> and <span class="math inline">\(\hat\pi_0=0.48\)</span>, so <span class="math display">\[\Lambda=2\left[36\log\frac{0.6}{0.48}+24\log\frac{0.4}{0.52}+12\log\frac{0.3}{0.48}+28\log\frac{0.7}{0.52}\right]=8.84,\]</span> and the p-value is <span class="math inline">\(P(\chi^2_1\geq 8.84)=0.0029\)</span>.</p>
+<p><span class="theorem-title"><strong>Example 3</strong></span> For our data, <span class="math inline">\(n_1=60\)</span>, <span class="math inline">\(n_2=40\)</span>, <span class="math inline">\(\hat\pi_1=0.6\)</span>, <span class="math inline">\(\hat\pi_2=0.3\)</span> and <span class="math inline">\(\hat\pi_0=0.48\)</span>, so <span class="math display">\[\Lambda=2\left[36\log\frac{0.6}{0.48}+24\log\frac{0.4}{0.52}+12\log\frac{0.3}{0.48}+28\log\frac{0.7}{0.52}\right]=8.84,\]</span> and the p-value is <span class="math inline">\(P(\chi^2_1\geq 8.84)=0.0029\)</span>.</p>
 </div>
 </section>
 <section id="logistic-regression" class="level2">
@@ -739,8 +755,8 @@ P(Y_i=1\mid X=x_i)&amp;= \dfrac{e^{\beta_0+\beta_1x_i}}{1+e^{\beta_0+\beta_1x_i}
 \Rightarrow \log\frac{\pi_1}{1-\pi_1}-\log\frac{\pi_2}{1-\pi_2}&amp;=\beta_1
 \end{aligned}
 \]</span></p>
-<p>So <span class="math inline">\(\beta_1\)</span> is the difference in the log-odds, which we called <span class="math inline">\(\Delta_{odds}\)</span> from before. Moreover, our MLEs for logistic regression are the same,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math display">\[\hat{\beta}_1=\hat{\Delta}_{odds},\quad \hat\beta_0=\log\frac{\hat\pi_2}{1-\hat\pi_2}.\]</span></p>
-<p>So in fact, any tests about <span class="math inline">\(\beta_1\)</span> are equivalent to tests about the difference in the log-odds. Our standard test in regression is <span class="math display">\[H_0:\beta_1=0\]</span> and it implies that <span class="math inline">\(X\)</span> doesn’t predict the probability that <span class="math inline">\(Y_i=1\)</span>. In this setting, where <span class="math inline">\(X\)</span> is binary, it means which group you are in doesn’t affect the probability that <span class="math inline">\(Y_i=1\)</span>, i.e.&nbsp;<span class="math inline">\(\pi_1=\pi_2\)</span> or equivalently the log-odds <span class="math inline">\(\Delta_{odds}=0\)</span>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>So <span class="math inline">\(\beta_1\)</span> is the difference in the log-odds, which we called <span class="math inline">\(\Delta_{odds}\)</span> from before. Moreover, our MLEs for logistic regression are the same,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span class="math display">\[\hat{\beta}_1=\hat{\Delta}_{odds},\quad \hat\beta_0=\log\frac{\hat\pi_2}{1-\hat\pi_2}.\]</span></p>
+<p>So in fact, any tests about <span class="math inline">\(\beta_1\)</span> are equivalent to tests about the difference in the log-odds. Our standard test in regression is <span class="math display">\[H_0:\beta_1=0\]</span> and it implies that <span class="math inline">\(X\)</span> doesn’t predict the probability that <span class="math inline">\(Y_i=1\)</span>. In this setting, where <span class="math inline">\(X\)</span> is binary, it means which group you are in doesn’t affect the probability that <span class="math inline">\(Y_i=1\)</span>, i.e.&nbsp;<span class="math inline">\(\pi_1=\pi_2\)</span> or equivalently the log-odds <span class="math inline">\(\Delta_{odds}=0\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p><strong>Tests of <span class="math inline">\(\beta_1\)</span>.</strong> Because the models and the hypothesis are the same, the possible tests of <span class="math inline">\(\beta_1=0\)</span> are the <em>same</em> as above:</p>
 <ul>
 <li><strong>Wald:</strong> the Wald statistic for testing <span class="math inline">\(\beta_1\)</span> is the same as the Wald test for the log-odds we gave above.</li>
@@ -753,9 +769,8 @@ P(Y_i=1\mid X=x_i)&amp;= \dfrac{e^{\beta_0+\beta_1x_i}}{1+e^{\beta_0+\beta_1x_i}
 <p>All of the previous tests are <em>asymptotic</em> tests. What if we do not have a large sample?</p>
 <p>Suppose I wanted to run a permutation test. Our data are really 100 patients, each with a group label (group 1 or group 2) and a binary outcome (recovery or relapse). Under <span class="math inline">\(H_0:\pi_1=\pi_2\)</span>, the outcome doesn’t depend on the group label. So just like the permutation tests we saw before, if <span class="math inline">\(H_0\)</span> is true then any shuffling of the labels among the patients is equally likely. A permutation test would be:</p>
 <ol type="1">
-<li>Compute the observed statistic, for example <span class="math display">\[t_{obs}=|\hat\pi_1-\hat\pi_2|=|0.6-0.3|=0.3.\]</span> We could also use the difference in the log-odds, if we prefer.</li>
-<li>Keep each patient’s outcome fixed, and randomly permute the group labels among the 100 patients. In other words, if our data looks like this:</li>
-</ol>
+<li><p>Compute the observed statistic, for example <span class="math display">\[t_{obs}=|\hat\pi_1-\hat\pi_2|=|0.6-0.3|=0.3.\]</span> We could also use the difference in the log-odds, if we prefer.</p></li>
+<li><p>Keep each patient’s outcome fixed, and randomly permute the group labels among the 100 patients. In other words, if our data looks like this:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -792,7 +807,10 @@ P(Y_i=1\mid X=x_i)&amp;= \dfrac{e^{\beta_0+\beta_1x_i}}{1+e^{\beta_0+\beta_1x_i}
 </tr>
 </tbody>
 </table>
-<p>We will randomly permute the values of the treatment, so the assignment of patient to treatment gets permuted.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> 3. For each shuffled data set, recompute the statistic. 4. The p-value is the proportion of permutations that give a statistic at least as large as <span class="math inline">\(t_{obs}\)</span>.</p>
+<p>We will randomly permute the values of the treatment, so the assignment of patient to treatment gets permuted.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p></li>
+<li><p>For each shuffled data set, recompute the statistic.</p></li>
+<li><p>The p-value is the proportion of permutations that give a statistic at least as large as <span class="math inline">\(t_{obs}\)</span>.</p></li>
+</ol>
 <p>Here is the histogram of the permutation null distribution with the observed value marked in red:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -848,8 +866,8 @@ P(Y_i=1\mid X=x_i)&amp;= \dfrac{e^{\beta_0+\beta_1x_i}}{1+e^{\beta_0+\beta_1x_i}
 <div class="PARAGRAPH">
 <p>Explanation of hypergeometric distribution</p>
 </div>
-<p>We can write this as a probability problem of white and black balls in an urn (probability always involves urns!), and we take a fixed sample <span class="math inline">\(N\)</span> of them, and consider how many balls will turn up white. In this case, we have an urn with <span class="math inline">\(Z_{++}\)</span> balls/patients, with <span class="math inline">\(Z_{+1}\)</span> of them white/recovery and <span class="math inline">\(Z_{+2}\)</span> of them black/relapse. I.e., we assume that under the null the total number of recoveries and relapses among these patients would be the same.</p>
-<p>We are going to sample <span class="math inline">\(N=Z_{1+}\)</span> from this urn corresponding to the size of our Treatment A group and count the number of recoveries <span class="math inline">\(Z_{11}\)</span> (white balls) we get. This corresponds to our random assignment of A to our patients in our permutation test.</p>
+<p>We can write this as a probability problem of white and black balls in an urn (probability always involves urns!), and we take a fixed sample of <span class="math inline">\(n\)</span> of them, and consider how many balls will turn up white. In this case, we have an urn with <span class="math inline">\(Z_{++}\)</span> balls/patients, with <span class="math inline">\(Z_{+1}\)</span> of them white/recovery and <span class="math inline">\(Z_{+2}\)</span> of them black/relapse. I.e., we assume that under the null the total number of recoveries and relapses among these patients would be the same.</p>
+<p>We are going to sample <span class="math inline">\(n=Z_{1+}\)</span> from this urn corresponding to the size of our Treatment A group and count the number of recoveries <span class="math inline">\(Z_{11}\)</span> (white balls) we get. This corresponds to our random assignment of A to our patients in our permutation test.</p>
 <p>Then the distribution of <span class="math inline">\(Z_{11}\)</span> under this setup is the hypergeometric distribution, <span class="math display">\[Z_{11} \sim \mathrm{HG}(w=Z_{+1},\ b=Z_{+2},\ n=Z_{1+})\]</span> and <span class="math display">\[
 P(Z_{11} = k) = \frac{\binom{Z_{+1}}{k}\binom{Z_{+2}}{Z_{1+}-k}}{\binom{Z_{++}}{Z_{1+}}}
 \]</span></p>
@@ -858,7 +876,7 @@ P(Z_{11} = z_{11}) = \frac{\binom{Z_{+1}}{z_{11}}\binom{Z_{+2}}{z_{12}}}{\binom{
 \]</span></p>
 <p>Since we know our statistic is a function of <span class="math inline">\(Z_{11}\)</span>, this will also give us our probabilities for any value of our statistic (just like in our coin flip example).</p>
 <div id="exm-fisherperm" class="theorem example">
-<p><span class="theorem-title"><strong>Example 3</strong></span> Since <span class="math inline">\(|\hat\pi_1-\hat\pi_2|\)</span> is proportional to <span class="math inline">\(|Z_{11}-28.8|\)</span>, a statistic at least as extreme as ours means <span class="math inline">\(|Z_{11}-28.8|\geq 7.2\)</span>, i.e.&nbsp;<span class="math inline">\(Z_{11}\geq 36\)</span> or <span class="math inline">\(Z_{11}\leq 21\)</span>, so <span class="math display">\[\begin{aligned}
+<p><span class="theorem-title"><strong>Example 4</strong></span> Since <span class="math inline">\(|\hat\pi_1-\hat\pi_2|\)</span> is proportional to <span class="math inline">\(|Z_{11}-28.8|\)</span>, a statistic at least as extreme as ours means <span class="math inline">\(|Z_{11}-28.8|\geq 7.2\)</span>, i.e.&nbsp;<span class="math inline">\(Z_{11}\geq 36\)</span> or <span class="math inline">\(Z_{11}\leq 21\)</span>, so <span class="math display">\[\begin{aligned}
 \text{p-value}&amp;=P_{H_0}(Z_{11}\geq 36)+P_{H_0}(Z_{11}\leq 21)\\
 &amp;=0.0029+0.0013=0.0042.
 \end{aligned}
@@ -878,9 +896,9 @@ P(Z_{11} = z_{11}) = \frac{\binom{Z_{+1}}{z_{11}}\binom{Z_{+2}}{z_{12}}}{\binom{
 <h3 class="anchored" data-anchor-id="fishers-exact-test">Fisher’s Exact Test</h3>
 <p>The most well-known exact test for comparing proportions is known as <strong>Fisher’s Exact Test</strong>. It is in fact just a permutation test that uses the statistic <span class="math display">\[T=-P_{H_0}(Z_{11}=z_{11}),\]</span> where <span class="math inline">\(z_{11}\)</span> is the observed value of the top-left count of the table and can be calculated using the hypergeometric distribution.</p>
 <p>This is similar to the likelihood ratio, where we calculate the probability of our observed data under the null and use it as our test statistic. A contingency table with a small probability is evidence against the null, so by taking the negative we have that large values of <span class="math inline">\(T\)</span> are evidence against <span class="math inline">\(H_0\)</span>. The p-value is the sum of the probabilities of all tables that are no more likely than the one we observed, <span class="math display">\[\text{p-value}=\sum_{k:\ P_{H_0}(Z_{11}=k)\ \leq\ P_{H_0}(Z_{11}=z_{11})}P_{H_0}(Z_{11}=k).\]</span> If all of the expected counts in the table grow, the hypergeometric distribution of <span class="math inline">\(Z_{11}\)</span> is approximately normal, so there are also large-sample approximations for Fisher’s Exact Test.</p>
-<p>In our data example, the two p-values are exactly the same as using the difference in the proportions. However, the two statistics don’t always agree since they measure the size of the effect differently. In general, it is best to use Fisher’s Exact Test since it widely known and understood, unless you are particularly interested in the value of another test statistic.</p>
+<p>In our data example, the p-values from Fisher’s Exact Test and from the permutation tests using the difference in proportions or the difference in log-odds are all exactly the same (0.0042). However, these statistics don’t always agree since they measure the size of the effect differently. In general, it is best to use Fisher’s Exact Test since it is widely known and understood, unless you are particularly interested in the value of another test statistic.</p>
 <div id="exm-permdiffer" class="theorem example">
-<p><span class="theorem-title"><strong>Example 4</strong></span> Here is a smaller data set where the permutation p-values do differ. Suppose that now Treatment A is given to only 10 patients and Treatment B to 30, with the following results:</p>
+<p><span class="theorem-title"><strong>Example 5</strong></span> Here is a smaller data set where the permutation p-values do differ. Suppose that now Treatment A is given to only 10 patients and Treatment B to 30, with the following results:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -933,7 +951,7 @@ P(Z_{11} = z_{11}) = \frac{\binom{Z_{+1}}{z_{11}}\binom{Z_{+2}}{z_{12}}}{\binom{
 </tr>
 <tr class="even">
 <td style="text-align: left;">Permutation</td>
-<td style="text-align: left;"><span class="math inline">\(\lvert\hat\Delta_{odds}\rvert\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\lvert\hat\Delta_{odds}\rvert\)</span><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></td>
 <td style="text-align: left;"><span class="math inline">\(0.166\)</span></td>
 </tr>
 <tr class="odd">
@@ -1044,10 +1062,12 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. 3rd ed. 
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>The score statistic is based on our derivative of our likelihood, once we rewrite our likelihood in terms of the log-odds, instead of in terms of <span class="math inline">\(\pi\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>We can work this out by hand, but we can also see this because of the invariance of the MLE.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p> The equivalence is special to a single categorical <span class="math inline">\(X\)</span> predictor. With more predictors or a continuous <span class="math inline">\(X\)</span>, there is no closed form for <span class="math inline">\(\hat\beta\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>We could equivalently permute the outcomes.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>The square of the score statistic is the same as the Pearson’s Chi-squared statistic for a 2x2 table.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>If we rewrite the likelihood in terms of the log-odds instead of <span class="math inline">\(\pi\)</span>, the chain rule introduces the same derivative factors into both the score and the Fisher information, and these cancel in the score statistic.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>We can work this out by hand, but we can also see this because of the invariance of the MLE.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p> The equivalence is special to a single categorical <span class="math inline">\(X\)</span> predictor. With more predictors or a continuous <span class="math inline">\(X\)</span>, there is no closed form for <span class="math inline">\(\hat\beta\)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>We could equivalently permute the outcomes.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>For the permuted tables with <span class="math inline">\(Z_{11}=0\)</span> or <span class="math inline">\(Z_{11}=8\)</span>, one of the cells is 0, so <span class="math inline">\(\hat\Delta_{odds}\)</span> is infinite (<code>Inf</code> in R). These tables are still counted as at least as extreme as the observed table, so they are included in the p-value.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
