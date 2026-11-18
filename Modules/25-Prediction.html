@@ -23,7 +23,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -356,12 +375,11 @@ window.Quarto = {
   <li><a href="#strategies-for-estimating-error" id="toc-strategies-for-estimating-error" class="nav-link" data-scroll-target="#strategies-for-estimating-error">Strategies for Estimating Error</a>
   <ul class="collapse">
   <li><a href="#testtraining-paradigm" id="toc-testtraining-paradigm" class="nav-link" data-scroll-target="#testtraining-paradigm">Test/Training Paradigm</a></li>
-  </ul></li>
-  <li><a href="#repeated-testtrain" id="toc-repeated-testtrain" class="nav-link" data-scroll-target="#repeated-testtrain">Repeated test/train</a>
-  <ul class="collapse">
+  <li><a href="#repeated-testtrain" id="toc-repeated-testtrain" class="nav-link" data-scroll-target="#repeated-testtrain">Repeated Test/Train</a></li>
   <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation">Cross-Validation</a></li>
   </ul></li>
-  <li><a href="#problems-with-measuring-prediction-error" id="toc-problems-with-measuring-prediction-error" class="nav-link" data-scroll-target="#problems-with-measuring-prediction-error">Problems with measuring prediction error</a>
+  <li><a href="#what-error-are-we-estimating" id="toc-what-error-are-we-estimating" class="nav-link" data-scroll-target="#what-error-are-we-estimating">What Error Are We Estimating?</a></li>
+  <li><a href="#problems-with-measuring-prediction-error" id="toc-problems-with-measuring-prediction-error" class="nav-link" data-scroll-target="#problems-with-measuring-prediction-error">Problems with Measuring Prediction Error</a>
   <ul class="collapse">
   <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
   <li><a href="#subpopulations" id="toc-subpopulations" class="nav-link" data-scroll-target="#subpopulations">Subpopulations</a></li>
@@ -391,10 +409,18 @@ window.Quarto = {
 </header>
 
 
+<div class="READING">
+<div class="block-title">
+<p><strong>Corresponding reading</strong></p>
+</div>
+<p>This material is not directly covered in either of the books (in <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span>, it is sprinkled in different places).</p>
+<p>I would recommend reading Chapters 7.1-7.3 in <span class="citation" data-cites="hastie2009">(<a href="#ref-hastie2009" role="doc-biblioref"><strong>hastie2009?</strong></a>)</span> (and optionally Chapters 7.4-7.5); a free PDF can be found <a href="https://hastie.su.domains/ElemStatLearn/printings/ESLII_print12_toc.pdf.download.html">here</a></p>
+</div>
+<p>In prediction, we are primarily focused on <span class="math inline">\(\hat{f}(x)\)</span> as a method of giving us predictions of <span class="math inline">\(Y\)</span> if we know a vector of its predictors <span class="math inline">\(x\)</span>, <span class="math display">\[\hat{Y}=\hat{f}(x).\]</span> From this prediction framework, linear regression estimates a prediction function <span class="math display">\[\hat{f}(x)=\hat\beta_0+\hat\beta_1x_1+\ldots+\hat{\beta}_p x_p.\]</span> In prediction, instead of saying we estimate the function, you will often hear this described as <strong>fitting</strong> or <strong>training</strong> a function. This is because we will usually choose the <span class="math inline">\(\hat{f}\)</span> that best fits the data, which is measured in terms of minimizing our chosen <strong>loss function,</strong> like those introduced earlier during our estimation section: <span class="math display">\[\sum_{i=1}^n l(Y_i, \hat{Y}_i).\]</span></p>
 <section id="measuring-performance-via-loss-functions" class="level2">
 <h2 class="anchored" data-anchor-id="measuring-performance-via-loss-functions">Measuring Performance via Loss Functions</h2>
-<p>In prediction, we are primarily focused on <span class="math inline">\(\hat{f}(x)\)</span> as a method of giving us predictions of <span class="math inline">\(Y\)</span> if we know a vector of its predictors <span class="math inline">\(x\)</span>, <span class="math display">\[\hat{Y}=\hat{f}(x).\]</span> From this prediction framework, linear regression estimates a prediction function <span class="math display">\[\hat{f}(x)=\hat\beta_0+\hat\beta_1x_1+\ldots+\hat{\beta}_p x_p.\]</span> In prediction, instead of saying we estimate the function, you will often hear this described as <strong>fitting</strong> or <strong>training</strong> a function. This is because we will usually choose the <span class="math inline">\(\hat{f}\)</span> that best fits the data, which is measured in terms of minimizing our chosen <strong>loss functions,</strong> like those introduced earlier during our estimation section: <span class="math display">\[\sum_{i=1}^n l(Y_i, \hat{Y}_i).\]</span> How do we evaluate whether <span class="math inline">\(\hat{f}\)</span> is a good prediction model? For example, what if I used 10 variables instead of 4? Those are two different prediction models, call them <span class="math inline">\(\hat{f}_{10}(x)\)</span> and <span class="math inline">\(\hat{f}_{4}(x)\)</span>. Which will give a better prediction? We could ask a similar question if we wanted to compare a linear model to alternative functions <span class="math inline">\(f\)</span>. It all comes down to evaluating the predictions they make, regardless of the specific details of the form of <span class="math inline">\(f\)</span>.</p>
-<p>Suppose we have a random point <span class="math inline">\((Y,X)\)</span>, and we want to measure how well <span class="math inline">\(\hat{f}(X)\)</span> predicts the corresponding <span class="math inline">\(Y\)</span>. We generally measure our performance using the same idea of loss functions. For example, squared error loss gives us <span class="math display">\[l(Y, \hat{f})=(Y - \hat{f}(X))^{2}\]</span> This measures how well we will predict any particular realization of the pair <span class="math inline">\((X,Y)\)</span>. We would like to measure this quantity, for example over the whole population, i.e.&nbsp;all <span class="math inline">\((X,Y)\)</span> values in the population <span class="math display">\[Err=E[l(Y, \hat{f})]\]</span> We call this the <strong>generalization error,</strong> which is the average error we expect for a new observation drawn from the population. For squared error loss, this would be <span class="math display">\[Err=E[(Y - \hat{f}(X))^{2}]\]</span> We obviously cannot evaluate this expectation without some serious assumptions about the true distribution of <span class="math inline">\(Y\)</span> relative to <span class="math inline">\(X\)</span> – including assuming what is the right model <span class="math inline">\(f\)</span>! That would obviously defeat the purpose.</p>
+<p>How do we evaluate whether <span class="math inline">\(\hat{f}\)</span> is a good prediction model? For example, what if in my regression model I used 10 variables instead of 4? Those are two different prediction models; call them <span class="math inline">\(\hat{f}_{10}(x)\)</span> and <span class="math inline">\(\hat{f}_{4}(x)\)</span>. Which will give a better prediction? We could ask a similar question if we wanted to compare a linear model to alternative functions <span class="math inline">\(f\)</span>. It all comes down to evaluating the predictions they make, regardless of the specific details of the form of <span class="math inline">\(f\)</span>.</p>
+<p>Suppose we have a random point <span class="math inline">\((Y,X)\)</span>, and we want to measure how well <span class="math inline">\(\hat{f}(X)\)</span> predicts the corresponding <span class="math inline">\(Y\)</span>. We generally measure our performance using loss functions. For example, squared error loss gives us <span class="math display">\[l(Y, \hat{f}(X))=(Y - \hat{f}(X))^{2}\]</span> This measures how well we will predict any particular realization of the pair <span class="math inline">\((X,Y)\)</span>. We would like to measure the average of this quantity over the whole population, i.e., over all <span class="math inline">\((X,Y)\)</span> values in the population <span class="math display">\[Err=E[l(Y, \hat{f}(X))]\]</span> We call this the <strong>generalization error,</strong> which is the average error we expect for a new observation drawn from the population. For squared error loss, this would be <span class="math display">\[Err=E[(Y - \hat{f}(X))^{2}]\]</span> We obviously cannot evaluate this expectation without some serious assumptions about the true distribution of <span class="math inline">\(Y\)</span> relative to <span class="math inline">\(X\)</span> – including assuming what the right model <span class="math inline">\(f\)</span> is! That would defeat the purpose. But we can consider ways to <em>estimate</em> this quantity.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -405,15 +431,15 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Note again this loss is measured over what <em>naturally</em> occurs in the population – that’s what expectation tells us. Being able to predict <span class="math inline">\(Y\)</span> from <span class="math inline">\(X\)</span> doesn’t tell us that it <em>caused</em> the outcome <span class="math inline">\(Y\)</span>.</p>
+<p>Note again this loss is measured over what <em>naturally</em> occurs in the population – that’s what expectation tells us. Being able to predict <span class="math inline">\(Y\)</span> from <span class="math inline">\(X\)</span> doesn’t tell us that <span class="math inline">\(X\)</span> <em>caused</em> the outcome <span class="math inline">\(Y\)</span>.</p>
 </div>
 </div>
 </section>
 <section id="observed-error" class="level2">
 <h2 class="anchored" data-anchor-id="observed-error">Observed Error</h2>
-<p>So what if we try to estimate the generalization error? A natural estimator would be to replace the expectation with averages over our data, <span class="math display">\[\bar{err}=\frac{1}{n}\sum_i l(Y_i, \hat{f}(X_i))=\frac{1}{n}\sum_i (Y_i - \hat{f}(X_i))^{2}.\]</span> This can be called the <strong>training error</strong> or the <strong>observed error.</strong></p>
+<p>So what if we try to estimate the generalization error? A natural estimator would be to replace the expectation with an average over our data, <span class="math display">\[\bar{err}=\frac{1}{n}\sum_i l(Y_i, \hat{f}(X_i))=\frac{1}{n}\sum_i (Y_i - \hat{f}(X_i))^{2}.\]</span> This can be called the <strong>training error</strong> or the <strong>observed error.</strong></p>
 <p>Indeed, this is the same quantity we minimized to get our estimates <span class="math inline">\(\hat\beta_j\)</span> that form <span class="math inline">\(\hat{f}\)</span>.</p>
-<p>However, consider our earlier question – what if I used 10 variables instead of 4?</p>
+<p>However, this will be a poor estimate of generalization error. We can see this if we consider our earlier question – what if I used 10 variables instead of 4 in my linear regression prediction?</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -424,8 +450,7 @@ Note
 </div>
 </div>
 </div>
-<p>It seems like we have reduced our error by adding more variables, which naively seems like a good thing. However, we can keep adding more variables, and we will continue to decrease the observed loss. This is a general phenomenon: <em>mathematically, adding more variables to the linear model will always decrease your observed loss, even if there is no relationship</em>.</p>
-<p>In fact, even if I add <em>random</em> variables that are completely independent of our <span class="math inline">\(Y\)</span>, we will still decrease the loss, and with enough predictors, will make the loss go to zero!</p>
+<p>It seems like we have reduced our error by adding more variables, which naively seems like a good thing. However, even if I add <em>random</em> variables that are completely independent of our <span class="math inline">\(Y\)</span>, we will still decrease the loss, and with enough predictors, will make the loss go to zero!</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -436,9 +461,19 @@ Note
 </div>
 </div>
 </div>
-<p>Intuitively, adding predictors that have nothing to do with our data should not improve our prediction, so what is the problem here?</p>
-<p>The problem is we are both choosing <span class="math inline">\(\hat{f}\)</span> <em>and</em> estimating the performance of <span class="math inline">\(\hat{f}\)</span> <em>on the same data.</em></p>
-<p>Consider a simple univariate (single predictor) model where we just try to predict our price based on the (log) of square footage. We can see that we can fit a curve <span class="math inline">\(\hat{f}\)</span> that goes through every point, so its loss is exactly zero:</p>
+<p>This is a general phenomenon: <em>mathematically, adding more variables to the linear model will always either decrease or keep the same your observed loss, even if there is no relationship</em>. This is easy to prove for linear regression.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div id="thm-reduceLoss" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1</strong></span> If <span class="math inline">\(k&lt;p\)</span>, then the observed loss for a fitted linear model trained on <span class="math inline">\(p\)</span> variables will always be less than or equal to that based on any subset of <span class="math inline">\(k\)</span> variables, <span class="math display">\[\frac{1}{n}\sum_i (Y_i - \hat{f}_p(X_i))^{2}\leq \frac{1}{n}\sum_i (Y_i - \hat{f}_k(X_i))^{2}\]</span> where <span class="math inline">\(\hat{f}_p\)</span> is a linear model trained on <span class="math inline">\(p\)</span> predictors, and <span class="math inline">\(\hat{f}_k\)</span> is a model trained on a set of <span class="math inline">\(k\)</span> predictors which are a subset of the <span class="math inline">\(p\)</span> predictors of <span class="math inline">\(\hat{f}_p\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By definition, the estimates <span class="math inline">\(\hat\beta_0,\ldots,\hat\beta_p\)</span> that make up <span class="math inline">\(\hat{f}_p(X_i)\)</span> are those that minimize the squared-error loss, <span class="math display">\[\min_{\beta_0,\ldots,\beta_p} \frac{1}{n}\sum_i (Y_i -\beta_0-\beta_1x_{1i}-\ldots-\beta_px_{pi})^2\]</span> Without loss of generality, let’s assume that the <span class="math inline">\(k\)</span> predictors used in <span class="math inline">\(\hat{f}_k\)</span> are <span class="math inline">\(X_1,\ldots,X_k\)</span>. Then the coefficients of <span class="math inline">\(\hat{f}_k\)</span> minimize <span class="math display">\[\frac{1}{n}\sum_i (Y_i -\beta_0-\beta_1x_{1i}-\ldots-\beta_kx_{ki})^2\]</span> But this quantity is equivalent to the loss using all <span class="math inline">\(p\)</span> predictors where we’ve forced <span class="math inline">\(\beta_{k+1},\ldots,\beta_p\)</span> to equal exactly zero. Which means any set of values for the coefficients considered for <span class="math inline">\(\hat{f}_k\)</span> was <em>also</em> a possible set of coefficients considered for <span class="math inline">\(\hat{f}_p\)</span>. Thus either <span class="math inline">\(\hat{f}_p\)</span> chooses coefficients that have the same loss as <span class="math inline">\(\hat{f}_k\)</span> (for example, by choosing the same coefficients as <span class="math inline">\(\hat{f}_k\)</span> and setting the remaining to zero) <em>or</em> it was able to reduce the loss by a different set of coefficients that have some non-zero coefficients for <span class="math inline">\(\beta_{k+1},\ldots,\beta_p\)</span>. Either way, the achieved observed loss of <span class="math inline">\(\hat{f}_p\)</span> is less than or equal to that of <span class="math inline">\(\hat{f}_k\)</span>.</p>
+</div>
+<div class="PARAGRAPH">
+<p>Bias of the estimate</p>
+</div>
+<p>Clearly, adding predictors that have nothing to do with our data should not improve our prediction. But is there a problem in our logic? Is it a wrong estimate? Replacing an expectation with a sample average is logic we’ve used many times before to estimate an expectation.</p>
+<p>The problem is that we are both choosing <span class="math inline">\(\hat{f}\)</span> <em>and</em> estimating the expected loss of <span class="math inline">\(\hat{f}\)</span> <em>on the same data.</em> This makes the estimate of error on our data no longer unbiased.</p>
+<p>Consider a simple univariate (single predictor) model where we just try to predict our price based on the log of square footage. And suppose that we do not limit ourselves to a line. We could fit a curve <span class="math inline">\(\hat{f}\)</span> that goes through every point, so its loss is exactly zero:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -449,34 +484,34 @@ Note
 </div>
 </div>
 </div>
-<p>But it turns out I held back some of this data and didn’t use it in the above choice of <span class="math inline">\(\hat{f}\)</span>. When I plot the new data that <em>was not</em> used in choosing <span class="math inline">\(\hat{f}\)</span>, it doesn’t exactly fit the new data:</p>
+<p>But it turns out I held back some of this data and didn’t use it in the above choice of <span class="math inline">\(\hat{f}\)</span>. When I plot the new data that <em>was not</em> used in choosing <span class="math inline">\(\hat{f}\)</span>, the curves don’t exactly fit it:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="25-Prediction_files/figure-html/univariateHeldOut-1.png" class="img-fluid figure-img" width="576"></p>
-<figcaption>The same three prediction functions, now compared to held-out houses (red) that were not used to fit them</figcaption>
+<figcaption>The same three prediction functions, now compared to held-out houses that were not used to fit them</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>This points out the fundamental problem in using the same data to both fit the model and evaluate.</p>
+<p>Clearly the curve that I forced to go through every point does not have zero error on this unseen set of points. And indeed, this will be true for every set of new data, so clearly the estimate of zero error is biased and underestimates the actual generalization error. This points out the fundamental problem in using the same data to both fit the model and evaluate.</p>
 <section id="complexity-of-a-model" class="level3">
 <h3 class="anchored" data-anchor-id="complexity-of-a-model">Complexity of a Model</h3>
 <p>When we compared different choices of <span class="math inline">\(\hat{f}\)</span> in our univariate example, we looked at three possible estimated functions. We can rank them intuitively by how simple they are, with the linear model being the simplest and the model fitting every point being the most complex or adaptable to the observed data.</p>
-<p>We often call this the <strong>complexity</strong> of a fitted model. Complexity can be measured in different ways, depending on what is the possible set of models you are considering. For example, if I limit myself to only linear regression models, the number of variables I include in my models will make my model more complex, i.e.&nbsp;being able to get closer fits to my data. The number of parameters <span class="math inline">\(p\)</span> dictates how complex my model is.</p>
+<p>We often call this the <strong>complexity</strong> of a fitted model. Complexity can be measured in different ways, depending on what set of models you are considering. For example, if I limit myself to only linear regression models, including more variables makes my model more complex, i.e., able to fit my data more closely. The number of parameters <span class="math inline">\(p\)</span> dictates how complex my model is.</p>
 <p>In my example above, I restricted myself to one explanatory variable, but I considered a wider class of models. The complexity of my <span class="math inline">\(\hat{f}\)</span> could be measured in different ways, for example, by the curvature of the function.</p>
 </section>
 </section>
 <section id="strategies-for-estimating-error" class="level2">
 <h2 class="anchored" data-anchor-id="strategies-for-estimating-error">Strategies for Estimating Error</h2>
-<p>There are different strategies for estimating the generalization error. There are a number specifically for regression. For example, the Adjusted <span class="math inline">\(R^2\)</span>, the F-test, and Mallows’ <span class="math inline">\(C_p\)</span> are all based on evaluating the reduction in loss you observe relative to the reduction in loss you would get if you added random noise (like I did above).</p>
-<p>What we will consider in what follows are general-purpose measures that are based on sampling and holding out your data.</p>
+<p>There are different strategies for estimating the generalization error. There are a number specifically for regression. For example, the Adjusted <span class="math inline">\(R^2\)</span>, the F-test, and Mallows’ <span class="math inline">\(C_p\)</span> are all based on evaluating the reduction in loss you observe relative to the reduction in loss you would get if you added random noise (like I did above). There are other methods that are more general and based on evaluating the likelihood of your data, like AIC and BIC.</p>
+<p>What we will focus on, however, are general-purpose measures that are based on sampling and holding out your data.</p>
 <section id="testtraining-paradigm" class="level3">
 <h3 class="anchored" data-anchor-id="testtraining-paradigm">Test/Training Paradigm</h3>
-<p>My above exercise demonstrates a possible solution to our problem – use some of the data to fit the model, and hold some data back to evaluate the model. This is often called a <em>training-test</em> paradigm. You <em>randomly</em> divide your data into two unequal parts: the larger chunk (e.g.&nbsp;70-80% of your data) called the <strong>training set or training data</strong> and the smaller chunk the <strong>test set or test data</strong>.</p>
-<p>As the name suggests, you use the training data to train or estimate your <span class="math inline">\(\hat{f}\)</span>, i.e.&nbsp;to minimizing the <em>training error</em>, <span class="math display">\[\bar{err}_{train}=\frac{1}{n_{train}}\sum_{i\in train}l(Y_i,\hat{f}(X_i))\]</span> Then you evaluate the performance of <span class="math inline">\(\hat{f}\)</span> on the held-out data in the test data. This gives us the <em>test error</em>, <span class="math display">\[\bar{err}_{test}=\frac{1}{n_{test}}\sum_{i\in test}l(Y_i,\hat{f}(X_i))\]</span> Since the <span class="math inline">\((Y_i,X_i)\)</span> in the test data weren’t used in creating the estimate <span class="math inline">\(\hat{f}\)</span>, the test data is independent of <span class="math inline">\(\hat{f}\)</span>, and <span class="math inline">\(\bar{err}_{test}\)</span> will give us an unbiased estimate of the error in the population, assuming that your data is i.i.d. from the population.</p>
-<p>For example, in my Ames data, if I use a random 80% to fit my models, and then 20% to evaluate them, I get the following results:</p>
+<p>The exercise above demonstrates a possible solution to our problem – use some of the data to fit the model, and hold some data back to evaluate the model. This is often called a <em>training-test</em> paradigm. You <em>randomly</em> divide your data into two unequal parts: the larger chunk (e.g.&nbsp;70-80% of your data) called the <strong>training set or training data</strong> and the smaller chunk the <strong>test set or test data</strong>.</p>
+<p>As the name suggests, you use the training data to train or estimate your <span class="math inline">\(\hat{f}\)</span>, i.e.&nbsp;to minimizing the <em>training error</em>, <span class="math display">\[\bar{err}_{train}=\frac{1}{n_{train}}\sum_{i\in train}l(Y_i,\hat{f}(X_i))\]</span> Then you evaluate the performance of <span class="math inline">\(\hat{f}\)</span> on the held-out test data. This gives us the <em>test error</em>, <span class="math display">\[\bar{err}_{test}=\frac{1}{n_{test}}\sum_{i\in test}l(Y_i,\hat{f}(X_i))\]</span> Since the <span class="math inline">\((Y_i,X_i)\)</span> in the test data weren’t used in creating the estimate <span class="math inline">\(\hat{f}\)</span>, the test data is independent of <span class="math inline">\(\hat{f}\)</span>, and <span class="math inline">\(\bar{err}_{test}\)</span> will give us an unbiased estimate of the error in the population, assuming that your data is i.i.d. from the population.</p>
+<p>For example, in my Ames data, if I use a random 80% to fit my models, and the other 20% to evaluate them, I get the following results:</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -503,67 +538,91 @@ Note
 <td style="text-align: right;">0.032</td>
 <td style="text-align: right;">0.108</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;">Regression, 34 variables</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: right;">0.030</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
+<p>We see in all cases that our training error is less than the test error.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Moreover, we see that <span class="math inline">\(\hat{f}_3\)</span>, which tried to fit every point perfectly,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> has both the largest difference between the training error and the cross-validation or test-training error – as well as the worst performance on the test data.</p>
 </section>
-</section>
-<section id="repeated-testtrain" class="level2">
-<h2 class="anchored" data-anchor-id="repeated-testtrain">Repeated test/train</h2>
-<p>A common issue with the test-train paradigm is what percentage of the data do we put in our test set versus our training set? The more data we have to train with, then the better our model is likely to be. However, if I don’t have enough in my test set, then I won’t get a very good prediction of the error. We are taking a mean to measure our loss, and we know that the variability in that will be much larger with a smaller sample.</p>
-<p>Here’s an illustration if we just had 100 observations in our house data, and we chose different percentages to be held out of the training data for our two possible models <span class="math inline">\(\hat{f}_1\)</span> (the line) and <span class="math inline">\(\hat{f}_2\)</span> (the more flexible model):</p>
+<section id="repeated-testtrain" class="level3">
+<h3 class="anchored" data-anchor-id="repeated-testtrain">Repeated Test/Train</h3>
+<p>A common issue with the test-train paradigm is what percentage of the data we should put in our test set versus our training set? The more data we have to train with, the better our model is likely to be. However, if I don’t have enough in my test set, then I won’t get a very good estimate of the error. We are taking a mean to measure our loss, and we know that the variability in that will be much larger with a smaller sample.</p>
+<p>Here’s an illustration if we just had 100 observations in our house data, and we chose different percentages to be held out of the training data for our two possible models <span class="math inline">\(\hat{f}_1\)</span> (the line) and <span class="math inline">\(\hat{f}_2\)</span> (the more flexible model, called a “spline”):</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="25-Prediction_files/figure-html/testErrorByPercent-1.png" class="img-fluid figure-img" width="1152"></p>
-<figcaption>Test error of the line (<span class="math inline">\(\hat{f}_1\)</span>) and the spline (<span class="math inline">\(\hat{f}_2\)</span>) over 200 random training/test splits, for different percentages of the data held out as the test set. Top row: a random subset of 100 houses (some test errors of the spline, mostly when 60-70% of the data is held out, are larger than 0.3 and are not shown). Bottom row: all of the houses.</figcaption>
+<figcaption>Test error of the line (<span class="math inline">\(\hat{f}_1\)</span>) and the spline (<span class="math inline">\(\hat{f}_2\)</span>) over 200 random training/test splits, for different percentages of the data held out as the test set, using a random subset of 100 houses (some test errors of the spline, mostly when 60-70% of the data is held out, are larger than 0.3 and are not shown).</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>We see that if we have a small percent in our test data, then we have very high variability. Of course, we only plan on doing it once, meaning we could be quite off by chance. However, if we don’t have enough data to train on, we see that the more flexible model, <span class="math inline">\(\hat{f}_2\)</span>, starts having poor performance because it didn’t have enough data to get a good prediction. This is a general tension that we see in prediction in the size of our test set versus our training set. We generally want to get the best model we can, so we generally will err in putting more data in our training set – but we will pay a price in having a poorer estimate of the error.</p>
-<p>We also see that if we have more data to begin with (like all of the almost 3,000 observations), we pay less of a penalty for having a larger test set because we have more absolute numbers of observations in our training set:</p>
+<p>We see that if we have a small percent in our test data, then we have very high variability. While I’m doing it repeatedly, the usual idea of test/training is to do it only once. But these simulations point out the problem with only doing it once: the estimate we get could be quite off by chance, especially with few observations in my test set. However, we also see that if we don’t have enough data to train on, then the more flexible model, <span class="math inline">\(\hat{f}_2\)</span>, starts having poor performance because it didn’t have enough data to get a good prediction. This is a general tension that we see in prediction in the size of our test set versus our training set. We generally want to get the best model we can, so we will generally err on the side of putting more data in our training set – but we will pay a price in having a poorer estimate of the error.</p>
+<p>We also see that if we have more data to begin with (like all of the almost 3,000 observations), we pay less of a penalty for having a larger test set because we have a larger absolute number of observations in our training set:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="25-Prediction_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="25-Prediction_files/figure-html/testErrorByPercentAll-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Test error of the line (<span class="math inline">\(\hat{f}_1\)</span>) and the spline (<span class="math inline">\(\hat{f}_2\)</span>) over 200 random training/test splits, for different percentages of the data held out as the test set, using all of the houses.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>We can see that when we use multiple regression with all 33 variables to predict sales price, that even with all of our data, we see similar problems as our more complex <span class="math inline">\(\hat{f}_2\)</span> in having not enough data if we make our test set too large of a proportion of our data.</p>
+<p>We can see that when we use multiple regression with all 34 variables to predict sales price, even with all of our data, we see similar problems to those of our more complex <span class="math inline">\(\hat{f}_2\)</span>: there is not enough training data if we make our test set too large a proportion of our data.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="25-Prediction_files/figure-html/testErrorByPercentMulti-1.png" class="img-fluid figure-img" width="576"></p>
-<figcaption>Test error of the linear regression using all 33 Ames variables, using all of the houses, over 200 random training/test splits, for different percentages of the data held out as the test set</figcaption>
+<figcaption>Test error of the linear regression using all 34 Ames variables, using all of the houses, over 200 random training/test splits, for different percentages of the data held out as the test set</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>All of this points to the dangers of doing a <em>single</em> random division of our data into test/training sets. Indeed, the above example suggests we will do better to repeat this many times, so that we will have a better idea of the actual error and not be subject to the luck of the draw of the particular test set we have.</p>
+</section>
 <section id="cross-validation" class="level3">
 <h3 class="anchored" data-anchor-id="cross-validation">Cross-Validation</h3>
-<p>We saw above that if we do many random splits, we will have a better idea of the actual error and not be subject to the luck of the draw of the particular test set we have.</p>
-<p>However, random draws can be expensive. We have to refit the model <em>every time</em>; regression is very fast, but with more complex models, each fit can be expensive, particularly if there are many variables and a large number of observations. But if we do not get enough random draws, then we are subject to more random variation in our estimate of the error.</p>
-<p><strong>Cross-validation</strong> is a clever way to use the data to have estimates of error which do not require as many fits.</p>
+<p>However, many iterations of the test/train procedure can be expensive. We have to refit the model <em>every time</em>; regression is very fast, but with more complex models, each fit can be expensive, particularly if there are many variables and a large number of observations. But to avoid the problems we saw above, we will likely need many random draws to get a reliable answer.</p>
+<p><strong>Cross-validation</strong> is a clever way to use the data to get estimates of error which do not require as many fits.</p>
 <p>The idea of cross-validation is to divide our data into <span class="math inline">\(K\)</span> partitions or <strong>folds</strong>, so each fold holds a <span class="math inline">\(1/K\)</span> fraction of our data. Typically <span class="math inline">\(K=10\)</span>. Then, each fold takes a turn being the test set, and the model is fit on the data from the other <span class="math inline">\(K-1\)</span> folds. This means each observation is used exactly once in the estimate of the error – we get complete coverage of the data. And we fit the model to the data exactly <span class="math inline">\(K\)</span> times.</p>
+<p>In contrast, if we did random test/training splits of our data into test sets containing a fraction <span class="math inline">\(1/K\)</span> of the data and only did <span class="math inline">\(K\)</span> random splits of our data, the probability we see any particular observation in at least 1 of the test sets is <span class="math display">\[1 - \left(1 - \frac{1}{K}\right)^K\approx 0.65 \quad\text{(for $K=10$)}\]</span> (this is just 1 minus the probability you don’t see the observation in any of the <span class="math inline">\(K\)</span> test sets). So for random test/training sets, we have to do many more random splits into test/training than just <span class="math inline">\(K\)</span> to have a high probability of testing the fit against all of our observations.</p>
+<p>So cross-validation provides an efficient way to get good coverage of all of our data.</p>
+<div id="fig-cv" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../StaticFigures/cv-diagram.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Illustration of <span class="math inline">\(K=10\)</span>-fold cross-validation. Each row fits the model on the training folds (blue) and computes the test error on the held-out fold (orange); the cross-validated estimate of error is the average of these <span class="math inline">\(K\)</span> test errors.
+</figcaption>
+</figure>
+</div>
+<p>When we do this on our models above, we get the following estimates:</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 41%">
-<col style="width: 18%">
 <col style="width: 21%">
-<col style="width: 18%">
+<col style="width: 9%">
+<col style="width: 19%">
+<col style="width: 28%">
+<col style="width: 11%">
+<col style="width: 9%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Prediction</th>
 <th style="text-align: right;">Training error</th>
+<th style="text-align: right;">Single 80/20 split test error</th>
+<th style="text-align: right;">Median test error, 200 random 90/10 splits</th>
 <th style="text-align: right;">10-fold CV error</th>
 <th style="text-align: right;">SE of CV error</th>
 </tr>
@@ -572,23 +631,31 @@ Note
 <tr class="odd">
 <td style="text-align: left;"><span class="math inline">\(\hat{f}_1\)</span> (line)</td>
 <td style="text-align: right;">0.0792</td>
+<td style="text-align: right;">0.0823</td>
+<td style="text-align: right;">0.0781</td>
 <td style="text-align: right;">0.0794</td>
 <td style="text-align: right;">0.0044</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><span class="math inline">\(\hat{f}_2\)</span> (spline)</td>
 <td style="text-align: right;">0.0772</td>
+<td style="text-align: right;">0.0839</td>
+<td style="text-align: right;">0.0775</td>
 <td style="text-align: right;">0.0786</td>
 <td style="text-align: right;">0.0046</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><span class="math inline">\(\hat{f}_3\)</span> (connect the points)</td>
 <td style="text-align: right;">0.0365</td>
+<td style="text-align: right;">0.1084</td>
+<td style="text-align: right;">0.1115</td>
 <td style="text-align: right;">0.1134</td>
 <td style="text-align: right;">0.0041</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Regression, 33 variables</td>
+<td style="text-align: left;">Regression, 34 variables</td>
+<td style="text-align: right;">0.0270</td>
+<td style="text-align: right;">0.0302</td>
 <td style="text-align: right;">0.0270</td>
 <td style="text-align: right;">0.0297</td>
 <td style="text-align: right;">0.0028</td>
@@ -597,8 +664,6 @@ Note
 </table>
 </div>
 </div>
-<p>In contrast, if we did random test/training splits of our data into test sets of size <span class="math inline">\(1/K\)</span> and only did <span class="math inline">\(K\)</span> random splits of our data, the probability we see any particular observation in at least 1 of the test sets is <span class="math display">\[1 - \left(1 - \frac{1}{K}\right)^K\approx 0.65\]</span> (this is just 1 minus the probability you don’t see the observation in any of the <span class="math inline">\(K\)</span> test sets). So for random test/training sets, we have to do many more random splits into test/training than just <span class="math inline">\(K\)</span> to have a high probability of testing the fit against all of our observations.</p>
-<p>So cross-validation provides an efficient way to get good coverage of all of our data.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -614,24 +679,78 @@ Note
 </div>
 </section>
 </section>
+<section id="what-error-are-we-estimating" class="level2">
+<h2 class="anchored" data-anchor-id="what-error-are-we-estimating">What Error Are We Estimating?</h2>
+<p>We’ve actually been mixing up different possible goals in estimating the prediction error, which are important to keep in mind, and the above methods are not all equivalent.</p>
+<ol type="1">
+<li><strong>Model Selection:</strong> We’ve been implicitly comparing different models and asking – which is the better model to use?</li>
+<li><strong>Model Assessment:</strong> We could be further along in our prediction model and have decided on a final model we want to deploy, say <span class="math inline">\(\hat{f}^*\)</span>. So we want to estimate the error of <span class="math inline">\(\hat{f}^*\)</span> will be on future observations.</li>
+</ol>
+<p>Notice how our estimates of error differ for these purposes. Cross-validation (and generally multiple train/test splits) is fitting a new model <span class="math inline">\(\hat{f}\)</span> for each training set. So it’s really answering the question: on average, how does this modeling <em>procedure</em> perform? And we’ve seen that a single train-test run doesn’t do a good job of answering that question.</p>
+<p>However, a final <span class="math inline">\(\hat{f}^*\)</span> is based on one single model, and thus on the one single training set on which it was trained. So knowing the average performance doesn’t tell us specifically the performance of <span class="math inline">\(\hat{f}^*\)</span> on future data. To do this, the train-test paradigm can be more appropriate.</p>
+<p>In practice, we often are going to want to do both: explore to figure out the best model <em>and</em> evaluate our final choice. For this reason (if there is enough data!) we will combine cross-validation and a training-test set approach. Then we use the test set <em>only</em> to evaluate our final model on it (and nothing else!). With the remaining dataset, we will select the best type of model (e.g.&nbsp;the number or set of variables to use) using cross-validation.</p>
+<p>This looks like:</p>
+<ol type="1">
+<li>On the remaining dataset (i.e.&nbsp;without the test data), use <span class="math inline">\(K\)</span>-fold cross-validation to select the best model.</li>
+<li>Fit the best model on all of the remaining data to create <span class="math inline">\(\hat{f}^*\)</span>.</li>
+<li>Evaluate <span class="math inline">\(\hat{f}^*\)</span> on the test dataset to get a measure of its prediction error.</li>
+</ol>
+<p>This strategy requires a fair amount of data to get both a good prediction model <span class="math inline">\(\hat{f}^*\)</span> and good estimates of its error. So if that is not possible, we will often use CV and use its measure of standard error to give us a gauge of the possible range of errors we might get on our final model <span class="math inline">\(\hat{f}^*\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>One thing to note is that the <span class="math inline">\(K\)</span> measurements of error that we get from cross-validation are <em>correlated</em> with each other, since their training sets overlap. This correlation means the standard estimates of standard error <span class="math inline">\(S/\sqrt{K}\)</span> (which are what is usually reported) are biased and usually underestimate the standard error. But they are still more useful than just ignoring the variability in your estimate of error!</p>
+</div>
+</div>
+</section>
 <section id="problems-with-measuring-prediction-error" class="level2">
-<h2 class="anchored" data-anchor-id="problems-with-measuring-prediction-error">Problems with measuring prediction error</h2>
+<h2 class="anchored" data-anchor-id="problems-with-measuring-prediction-error">Problems with Measuring Prediction Error</h2>
 <section id="assumptions" class="level3">
 <h3 class="anchored" data-anchor-id="assumptions">Assumptions</h3>
-<p>We just said that it will be unbiased for the error in the population <em>if your data is i.i.d. from the population</em>. This is because the data of test set is randomly selected from the data, and the data itself is i.i.d. from the population, so we know that the summation will be an unbiased estimate of the true mean, which is the generalization error, and from the WLLN that it will approach the true value for large sizes of your test set.</p>
+<p>We said earlier that the test error will be unbiased for the error in the population <em>if your data is i.i.d. from the population</em>. This is because the data in the test set is randomly selected from the data, and the data itself is i.i.d. from the population, so we know that the average will be an unbiased estimate of the true mean, which is the generalization error, and from the WLLN that it will approach the true value for large sizes of your test set.</p>
 <p>What if your data is not representative of your population? For example, you have a sample of convenience, like our early examples of web scraping. We don’t know how we collected the data, so we don’t know that the errors observed on the test set will have any relationship to a different population of data. Indeed, trying to apply a prediction model to a different population than the training/test data can be quite problematic. Many prediction models that are used throughout our tech world are trained based on convenience samples – data collected across a scraping of the internet. There have been well-documented examples of how these models can fail, particularly in ways that expose biases in who we collected data from.</p>
 </section>
 <section id="subpopulations" class="level3">
 <h3 class="anchored" data-anchor-id="subpopulations">Subpopulations</h3>
-<p>The basic principle above assumes our data is i.i.d., namely that the same function <span class="math inline">\(f\)</span> describes the data in the population. However, particularly when working with human subjects, the population is heterogeneous. Even if we have a representative sample that reflects this heterogeneity that we train our data on, our predictor <span class="math inline">\(\hat{f}\)</span> might perform better on some subsets of the data than others. Since our goal in training the data is to minimize the average loss, if one subpopulation is a small portion of our data, then performing badly on that subpopulation will not necessarily create high average error if it does better on the larger group: <span class="math display">\[\bar{err}_{train}=\frac{1}{n_{train}}\sum_{i\in train}l(Y_i,\hat{f}(X_i))=\frac{1}{n_{train}}\left[\sum_{i\in group\ 1}l(Y_i,\hat{f}(X_i))+ \sum_{i\in group\ 2}l(Y_i,\hat{f}(X_i))\right]\]</span> Since the subpopulation will also be small in the test set, the test error can show this same problem.</p>
-<p>If we are aware of these subpopulations ahead of time, we can choose to adjust our measure of error to equalize their importance, but that’s only if you know in advance. Thus there is always the danger that prediction algorithms will not perform well on smaller groups or unusual observations.</p>
-<p>Larger training data obviously helps here, if it is representative of the population, but only if it is tied with models that are complex or flexible enough to provide different predictions for different groups. This might mean providing more variables so that these differences can be detected, for example.</p>
+<p>The above analysis assumes that minimizing the expected error over our entire population is our only goal. However, particularly when working with human subjects, the population is heterogeneous. We might minimize the expected error on the whole population, and still not do equally well on different portions of the population.</p>
+<p>Thus, even if we have a representative sample on which we train our model and it accurately reflects this heterogeneity, our predictor <span class="math inline">\(\hat{f}\)</span> might perform better on some subsets of the data than others. Since our goal in training the model is to minimize the average loss, if one subpopulation is a small portion of our data, then performing badly on that subpopulation will not necessarily create high average error so long as it does better on the larger group: <span class="math display">\[\bar{err}_{train}=\frac{1}{n_{train}}\sum_{i\in train}l(Y_i,\hat{f}(X_i))=\frac{1}{n_{train}}\left[\sum_{i\in \text{group 1}}l(Y_i,\hat{f}(X_i))+ \sum_{i\in \text{group 2}}l(Y_i,\hat{f}(X_i))\right]\]</span> Since the subpopulation will also be small in the test set, the test error can show this same problem.</p>
+<p>If we are aware of these subpopulations ahead of time, we can choose to adjust our measure of error to equalize their importance, but only if we know about them in advance. Thus there is always the danger that prediction algorithms will not perform well on smaller groups or unusual observations.</p>
+<p>A larger training set obviously helps here, if it is representative of the population, but only if it is paired with models that are complex or flexible enough to provide different predictions for different groups. This might mean providing more variables so that these differences can be detected, for example.</p>
+<div class="PARAGRAPH">
+<p>Inequity in prediction algorithms</p>
+</div>
+<p>These two issues (heterogenous populations and biases in our available data) can <em>both</em> lead to our prediction algorithms to create predictions that have negative societal impacts!</p>
+<div id="exm-images" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1</strong></span> Image classification is a common area where systematic bias in prediction algorithms have historically been reported. Some are fairly benign, e.g.&nbsp;cows on a beach being misclassified as other types of animals <span class="citation" data-cites="beery2018">(<a href="#ref-beery2018" role="doc-biblioref"><strong>beery2018?</strong></a>)</span>. Beaches are clearly an atypical example of where cows are found so there are unlikely to be many photos of them on a beach; they are usually on farms or grassy fields. So this points out that prediction algorithms can be using features (i.e.&nbsp;predictors) like the background of the photo to make their predictions, that are not actually causally related to being a cow.</p>
+<p>Other documented examples are not benign, particularly when they involve mistakes regarding humans. In these situations, errors can also have high-stakes outcomes, such as automatic face identification algorithms by law-enforcement agencies.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Similarly, historically studies of health outcomes or drug impacts used primarily male participants (often justified to avoid complications due to possible pregnancy). But it turns out women are not just small men and such studies missed the health implications in women.</p>
+</div>
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-agresti2021" class="csl-entry" role="listitem">
+Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>This same problem can be observed in other types of models, not just linear regression, where as you increase the complexity of the fit you can drive the error to zero.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This doesn’t <em>have</em> to be the case, but it will often be the case.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>It was not able to fit it exactly, because for this random training set, multiple observations had exactly the same square footage, but different sales prices, so it was not possible to fit all of them perfectly.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Though it should be recognized that it is well-documented for decades that humans are also very bad at identification of people of an ethnicity that is not their own.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
