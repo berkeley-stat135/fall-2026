@@ -414,7 +414,7 @@ window.Quarto = {
 <p><strong>Corresponding reading</strong></p>
 </div>
 <p>This material is not directly covered in either of the books (in <span class="citation" data-cites="agresti2021">Agresti and Kateri (<a href="#ref-agresti2021" role="doc-biblioref">2021</a>)</span>, it is sprinkled in different places).</p>
-<p>I would recommend reading Chapters 7.1-7.3 in <span class="citation" data-cites="hastie2009">(<a href="#ref-hastie2009" role="doc-biblioref"><strong>hastie2009?</strong></a>)</span> (and optionally Chapters 7.4-7.5); a free PDF can be found <a href="https://hastie.su.domains/ElemStatLearn/printings/ESLII_print12_toc.pdf.download.html">here</a></p>
+<p>I would recommend reading Chapters 7.1-7.3 in <span class="citation" data-cites="hastie2009">Hastie et al. (<a href="#ref-hastie2009" role="doc-biblioref">2009</a>)</span> (and optionally Chapters 7.4-7.5); a free PDF can be found <a href="https://hastie.su.domains/ElemStatLearn/printings/ESLII_print12_toc.pdf.download.html">here</a></p>
 </div>
 <p>In prediction, we are primarily focused on <span class="math inline">\(\hat{f}(x)\)</span> as a method of giving us predictions of <span class="math inline">\(Y\)</span> if we know a vector of its predictors <span class="math inline">\(x\)</span>, <span class="math display">\[\hat{Y}=\hat{f}(x).\]</span> From this prediction framework, linear regression estimates a prediction function <span class="math display">\[\hat{f}(x)=\hat\beta_0+\hat\beta_1x_1+\ldots+\hat{\beta}_p x_p.\]</span> In prediction, instead of saying we estimate the function, you will often hear this described as <strong>fitting</strong> or <strong>training</strong> a function. This is because we will usually choose the <span class="math inline">\(\hat{f}\)</span> that best fits the data, which is measured in terms of minimizing our chosen <strong>loss function,</strong> like those introduced earlier during our estimation section: <span class="math display">\[\sum_{i=1}^n l(Y_i, \hat{Y}_i).\]</span></p>
 <section id="measuring-performance-via-loss-functions" class="level2">
@@ -728,7 +728,7 @@ Note
 </div>
 <p>These two issues (heterogenous populations and biases in our available data) can <em>both</em> lead to our prediction algorithms to create predictions that have negative societal impacts!</p>
 <div id="exm-images" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1</strong></span> Image classification is a common area where systematic bias in prediction algorithms have historically been reported. Some are fairly benign, e.g.&nbsp;cows on a beach being misclassified as other types of animals <span class="citation" data-cites="beery2018">(<a href="#ref-beery2018" role="doc-biblioref"><strong>beery2018?</strong></a>)</span>. Beaches are clearly an atypical example of where cows are found so there are unlikely to be many photos of them on a beach; they are usually on farms or grassy fields. So this points out that prediction algorithms can be using features (i.e.&nbsp;predictors) like the background of the photo to make their predictions, that are not actually causally related to being a cow.</p>
+<p><span class="theorem-title"><strong>Example 1</strong></span> Image classification is a common area where systematic bias in prediction algorithms have historically been reported. Some are fairly benign, e.g.&nbsp;cows on a beach being misclassified as other types of animals <span class="citation" data-cites="beery2018">(<a href="#ref-beery2018" role="doc-biblioref">Beery et al. 2018</a>)</span>. Beaches are clearly an atypical example of where cows are found so there are unlikely to be many photos of them on a beach; they are usually on farms or grassy fields. So this points out that prediction algorithms can be using features (i.e.&nbsp;predictors) like the background of the photo to make their predictions, that are not actually causally related to being a cow.</p>
 <p>Other documented examples are not benign, particularly when they involve mistakes regarding humans. In these situations, errors can also have high-stakes outcomes, such as automatic face identification algorithms by law-enforcement agencies.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Similarly, historically studies of health outcomes or drug impacts used primarily male participants (often justified to avoid complications due to possible pregnancy). But it turns out women are not just small men and such studies missed the health implications in women.</p>
 </div>
 
@@ -741,6 +741,12 @@ Note
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-agresti2021" class="csl-entry" role="listitem">
 Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Scientists</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-beery2018" class="csl-entry" role="listitem">
+Beery, Sara, Grant Van Horn, and Pietro Perona. 2018. <span>“Recognition in Terra Incognita.”</span> In <em>Computer Vision – <span>ECCV</span> 2018</em>, edited by Vittorio Ferrari, Martial Hebert, Cristian Sminchisescu, and Yair Weiss. Lecture Notes in Computer Science. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-030-01270-0_28">https://doi.org/10.1007/978-3-030-01270-0_28</a>.
+</div>
+<div id="ref-hastie2009" class="csl-entry" role="listitem">
+Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2009. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. 2nd ed. Springer Series in Statistics. Springer-Verlag.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
