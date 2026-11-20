@@ -61,7 +61,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4d6bee11933e2af86abb5606b681b4f2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-1a0d5b5803ec2a5ccb1e3a9e2119c285.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -548,6 +548,38 @@ Note
 </div>
 </div>
 <p>We see in all cases that our training error is less than the test error.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Moreover, we see that <span class="math inline">\(\hat{f}_3\)</span>, which tried to fit every point perfectly,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> has both the largest difference between the training error and the cross-validation or test-training error – as well as the worst performance on the test data.</p>
+<p>We can redo our analysis of the different multiple regression fits, and compare our training and test error for different numbers of variables:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="25-Prediction_files/figure-html/lossTrainTest-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Training and test error for predicting log price, as variables are added to the model in the same order as before, with the models fit on the 80% training set. The bars are 95% confidence intervals for the test error, and the arrows mark where the test error is significantly lower than that with one fewer variable (paired t-test, level 0.05, not corrected for multiple testing). Left: all of the houses. Right: removing five unusual houses from both the training and test sets (the two houses that sold for under $15,000, and the three houses over 4,000 square feet that were sold before construction was finished), and refitting the models.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A few things to note:</p>
+<ul>
+<li>We can provide 95% confidence intervals for our estimate of error. We can see that the intervals are quite large, indicating that there is a lot of uncertainty.</li>
+<li>However, much of this is due to a few strange observations (they were even marked as strange in the dataset); in the right-hand plot we remove these and we see tighter confidence intervals.</li>
+<li>The test error does not <em>have</em> to be less than the training error. In the left plot (all of the data) there are many places where the test error dips, while on the right plot, the test error is consistently below the training error.<br>
+</li>
+<li>However, we see that pattern of how the loss changes between models still shows the training error is not a reliable indicator of the error you expect on new data. Sometimes the test error backs it up – i.e.&nbsp;shows real improvement by adding a variable, just like the training error. Other times, the test error goes up or doesn’t change even though the training error went down.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Even though individual confidence intervals are wide, we have to remember that these are all fit on the same data for each model, so they are in fact <em>paired</em> measurements of loss. So while there’s a lot of variability in the loss from observation to observation, if we compare the <em>difference</em> in the loss for models applied to the same data, we can have significant reduction in loss when we run a paired test, <em>even though their separate confidence intervals overlap</em> (this is what the red arrows show). This is the power of paired data.</p>
+</div>
+</div>
 </section>
 <section id="repeated-testtrain" class="level3">
 <h3 class="anchored" data-anchor-id="repeated-testtrain">Repeated Test/Train</h3>
