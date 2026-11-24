@@ -383,7 +383,14 @@ window.Quarto = {
   <li><a href="#cross-entropy-loss" id="toc-cross-entropy-loss" class="nav-link" data-scroll-target="#cross-entropy-loss">Cross-entropy loss</a></li>
   <li><a href="#classifications-and-evaluation" id="toc-classifications-and-evaluation" class="nav-link" data-scroll-target="#classifications-and-evaluation">Classifications and evaluation</a></li>
   <li><a href="#comparing-possible-cutoffs-with-roc-curves" id="toc-comparing-possible-cutoffs-with-roc-curves" class="nav-link" data-scroll-target="#comparing-possible-cutoffs-with-roc-curves">Comparing possible cutoffs with ROC Curves</a></li>
+  <li><a href="#the-auc-as-a-probability" id="toc-the-auc-as-a-probability" class="nav-link" data-scroll-target="#the-auc-as-a-probability">The AUC as a Probability</a></li>
   <li><a href="#the-auc-and-the-wilcoxon-rank-sum-test" id="toc-the-auc-and-the-wilcoxon-rank-sum-test" class="nav-link" data-scroll-target="#the-auc-and-the-wilcoxon-rank-sum-test">The AUC and the Wilcoxon Rank-Sum Test*</a></li>
+  </ul></li>
+  <li><a href="#other-measures-of-error-rates" id="toc-other-measures-of-error-rates" class="nav-link" data-scroll-target="#other-measures-of-error-rates">Other measures of error rates</a>
+  <ul class="collapse">
+  <li><a href="#precision" id="toc-precision" class="nav-link" data-scroll-target="#precision">Precision</a></li>
+  <li><a href="#precision-recall-curves" id="toc-precision-recall-curves" class="nav-link" data-scroll-target="#precision-recall-curves">Precision-Recall Curves</a></li>
+  <li><a href="#which-measures-to-use" id="toc-which-measures-to-use" class="nav-link" data-scroll-target="#which-measures-to-use">Which measures to use?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -456,7 +463,8 @@ Figure&nbsp;1: Simulated data with two variables X1, X2, colored by their observ
 </div>
 </div>
 </div>
-<p>The idea of kNN is to simply look at the classifications of nearby training data observations to determine the best classification for our new point. Specifically, we choose the <span class="math inline">\(k\)</span> training observations that are closest to our observation. We can do this for every possible <span class="math inline">\(X\)</span> and see that this gives a prediction algorithm <span class="math inline">\(\hat{f}\)</span></p>
+<p>The idea of kNN is to simply look at the classifications of nearby training data observations to determine the best classification for our new point. Specifically, we choose the <span class="math inline">\(k\)</span> training observations that are closest to our observation. We can do this for every possible <span class="math inline">\(X\)</span> and see that this gives a prediction algorithm <span class="math inline">\(\hat{f},\)</span></p>
+<p><span class="math display">\[\hat{f}(x)=\begin{cases}1 &amp; \frac{1}{k}\sum_{i\in N_k(x)} Y_i&gt;0.5\\ 0 &amp; \frac{1}{k}\sum_{i\in N_k(x)} Y_i\leq 0.5\end{cases}\]</span> where <span class="math inline">\(N_k(x)\)</span> is the set of the <span class="math inline">\(k\)</span> training observations whose <span class="math inline">\(X_i\)</span> are closest to <span class="math inline">\(x\)</span>. Since <span class="math inline">\(\frac{1}{k}\sum_{i\in N_k(x)} Y_i\)</span> is the proportion of the <span class="math inline">\(k\)</span> neighbors in group 1, this is just a majority vote of the <span class="math inline">\(k\)</span> nearest neighbors.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-knn5" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -553,10 +561,10 @@ Table&nbsp;1: Confusion matrix for a single <span class="math inline">\(Y\)</spa
 </div>
 <p>We can consider the probability of a these events with our prediction model <span class="math inline">\(\hat{f}\)</span>.</p>
 <ul>
-<li><p><strong>True Positive Rate (TPR)</strong>: the probability that we predict an observation to be 1, given that it truly is 1, <span class="math display">\[TPR=P(\hat{Y}=1|Y=1)=P(\hat{f}(X)=1|Y=1)\]</span> (also called the <em>sensitivity</em> or <em>recall</em>). The probability of a False Negative is <span class="math display">\[P(\hat{Y}=0|Y=1)=1-TPR.\]</span></p>
-<p>This is similar to power, and we want it to be large.</p></li>
-<li><p><strong>False Positive Rate (FPR)</strong>: the probability that we (incorrectly) predict an observation to be 1, given that it truly is 0, <span class="math display">\[FPR=P(\hat{Y}=1|Y=0)=P(\hat{f}(X)=1|Y=0)\]</span> (equal to 1 minus the <em>specificity</em>, <span class="math inline">\(P(\hat{Y}=0|Y=0)\)</span>).</p>
-<p>This is similar to signifiance level of a test, and we want it to be small.</p></li>
+<li><p><strong>True Positive Rate (TPR)</strong>: the probability that we predict an observation to be 1, given that it truly is 1, <span class="math display">\[TPR=P(\hat{Y}=1|Y=1)=P(\hat{f}(X)=1|Y=1)\]</span> The TPR is also called the <strong>sensitivity</strong> or <strong>recall</strong> of the procedure. The probability of a False Negative is <span class="math display">\[P(\hat{Y}=0|Y=1)=1-TPR.\]</span></p>
+<p>TPR is similar to power, and we want it to be large.</p></li>
+<li><p><strong>False Positive Rate (FPR)</strong>: the probability that we (incorrectly) predict an observation to be 1, given that it truly is 0, <span class="math display">\[FPR=P(\hat{Y}=1|Y=0)=P(\hat{f}(X)=1|Y=0)\]</span> We also can talk about the <strong>specificity</strong> or the true negative rate (<span class="math inline">\(TNR\)</span>), which is equal to<span class="math inline">\(1-FPR\)</span>, i.e.&nbsp;<span class="math display">\[\text{specificity}=P(\hat{Y}=0|Y=0).\]</span></p>
+<p>FPR is similar to significance level of a test, and we want it to be small. For various historical reasons, we usually either discuss the <span class="math inline">\(FPR\)</span> (which should be small) or the specificity (which should be large), but the <span class="math inline">\(TNR\)</span> is less commonly used, even though its equivalent to specificity.</p></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -607,20 +615,20 @@ Truth   0   1
     1  93 261</code></pre>
 </div>
 </div>
-<p>This gives us the following estimates of TPR and FPR:</p>
+<p>This gives us the following estimates of the TPR and <span class="math inline">\(1-FPR\)</span>:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>       TPR        FPR 
-0.73728814 0.05123675 </code></pre>
+<pre><code>      TPR     1-FPR 
+0.7372881 0.9487633 </code></pre>
 </div>
 </div>
-<p>The number of neighbors <span class="math inline">\(k\)</span> also changes the TPR and FPR. Here we plot the estimated TPR and FPR on the test data for different values of <span class="math inline">\(k\)</span>:</p>
+<p>The number of neighbors <span class="math inline">\(k\)</span> also changes the TPR and FPR. Here we plot the estimated TPR and <span class="math inline">\(1-FPR\)</span> on the test data for different values of <span class="math inline">\(k\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="26-Classification_files/figure-html/spamKNNRatesByK-1.png" class="img-fluid figure-img" width="1152"></p>
-<figcaption>Estimated TPR (left) and FPR (right) of kNN on the spam test data for different numbers of neighbors k (log scale).</figcaption>
+<figcaption>Estimated TPR (left) and Sensitivity=1 - FPR (right) of kNN on the spam test data for different numbers of neighbors k (log scale).</figcaption>
 </figure>
 </div>
 </div>
@@ -709,7 +717,7 @@ L(\theta)
 </section>
 <section id="classifications-and-evaluation" class="level3">
 <h3 class="anchored" data-anchor-id="classifications-and-evaluation">Classifications and evaluation</h3>
-<p>To make a prediction, we need to choose how to convert our <span class="math inline">\(p_k(x)\)</span> into classifications. Above we said we could just pick the group that has the largest value of <span class="math inline">\(\hat{p}_k(x)\)</span>, <span class="math display">\[\hat{f}(x)=argmax_k \hat{p}_k(x).\]</span> Equivalently, we can choose a particular cutoff <span class="math inline">\(c\)</span>, <span class="math display">\[\hat{Y}=\hat{f}(x)=\begin{cases}1 &amp; \hat{p}_1(x)&gt;c\\ 0 &amp; \hat{p}_1(x)\leq c\end{cases},\]</span> and the choice <span class="math inline">\(c=0.5\)</span> corresponds to choosing the group with the largest predicted probability.</p>
+<p>To make a prediction, we need to choose how to convert our <span class="math inline">\(p_k(x)\)</span> into classifications. Above we said we could just pick the group that has the largest value of <span class="math inline">\(\hat{p}_k(x)\)</span>, <span class="math display">\[\hat{f}(x)=argmax_k \hat{p}_k(x).\]</span> Equivalently, we can choose a particular cutoff <span class="math inline">\(c\)</span>, <span class="math display">\[\hat{Y}=\hat{f}(x)=\begin{cases}1 &amp; \hat{p}_1(x)&gt;c\\ 0 &amp; \hat{p}_1(x)\leq c\end{cases}\hspace{2ex},\]</span> and the choice <span class="math inline">\(c=0.5\)</span> corresponds to choosing the group with the largest predicted probability.</p>
 <div class="PARAGRAPH">
 <p>Evaluating Classification</p>
 </div>
@@ -809,9 +817,9 @@ L(\theta)
 <div class="PARAGRAPH">
 <p>Comparing Models</p>
 </div>
-<p>We can also use ROC curves to compare models. A perfect classifier would reach the top left corner, <span class="math inline">\((0,1)\)</span>, while a classifier that just guesses at random will fall along the diagonal line.</p>
-<p>In our above ROC curve, we also plotted the ROC of a model that used only one variable, the length of the longest string of capital letters (also fit on the same training data). The model with all six variables has a curve that is closer to the top left corner than the model with just one variable, meaning for any given FPR it has a higher TPR. This means the model using all six variables has uniformally better performance.</p>
-<p>When we are comparing many models, the ROC curve can often be summarized by the area under the curve (AUC). This allows for a numerical comparison of these plots. A higher AUC does not mean that it gives uniformly better results across all values of FPR, however; you have to inspect the curves to know that.</p>
+<p>We can also use ROC curves to compare models. A perfect classifier would reach the top left corner, <span class="math inline">\((0,1)\)</span>, while a classifier that just guesses at random will fall along the diagonal line, <span class="math inline">\(y=x\)</span>.</p>
+<p>In our above ROC curve, we also plotted the ROC of a model that used only one variable, the length of the longest string of capital letters (also fit on the same training data). The model with all six variables has a curve that is closer to the top left corner than the model with just one variable, meaning for any given FPR it has a higher TPR. This means the model using all six variables has uniformly better performance.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>When we are comparing many models, the ROC curve can often be summarized by the <strong>area under the curve (AUC)</strong>. This allows for a numerical comparison of these plots. A higher AUC does not mean that it gives uniformly better results across all values of FPR, however; you have to inspect the curves to know that. Our baseline for comparison of AUC is <span class="math inline">\(AUC=1/2\)</span> since this is the value of the AUC for random guessing (ROC curve <span class="math inline">\(y=x\)</span>).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -835,24 +843,52 @@ L(\theta)
 </table>
 </div>
 </div>
+<div class="PARAGRAPH">
+<p>Population Versions of AUC/ROC</p>
+</div>
+<p>The previous definition of AUC and ROC are actually the versions calculated on our data. We didn’t write them as <span class="math inline">\(\hat{AUC}\)</span> and <span class="math inline">\(\hat{ROC}\)</span> for simplicity, but in fact they are estimating the true, unknown relationships between the true (unknown) TPR and FPR – the conditional probabilities <span class="math display">\[
+\begin{gathered}
+TPR(c)= P(\hat{p}_1(X)&gt;c | Y=1)\\
+FPR(c)=P(\hat{p}_1(X)&gt;c | Y=0).
+\end{gathered}\]</span></p>
+<p>In the same vein, the true unknown AUC is an integral. If we write <span class="math inline">\(T(f)\)</span> as the function that takes a given FPR of <span class="math inline">\(f\)</span> and provides the TPR, then <span class="math display">\[AUC=\int_0^1 T(f)\; df.\]</span></p>
+</section>
+<section id="the-auc-as-a-probability" class="level3">
+<h3 class="anchored" data-anchor-id="the-auc-as-a-probability">The AUC as a Probability</h3>
+<p>The AUC can also be shown to be the probability that a randomly chosen observation with <span class="math inline">\(Y=1\)</span>, call it <span class="math inline">\((X_1,Y_1)\)</span>, gets a higher value of <span class="math inline">\(\hat{p}_1\)</span> from our classifier than another independent and randomly chosen observation that has <span class="math inline">\(Y=0\)</span>, call it <span class="math inline">\((X_0,Y_0)\)</span>. <span class="math display">\[AUC=P(\hat{p}_1(X_1)&gt;\hat{p}_1(X_0)).\]</span> Thus, if the <span class="math inline">\(AUC=1/2\)</span>, a randomly chosen observation with <span class="math inline">\(Y=1\)</span> is equally likely to get a higher or a lower score than a randomly chosen observation with <span class="math inline">\(Y=0\)</span>.</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math display">\[\begin{aligned}
+S_1=\hat{p}_1(X_1) | Y_1=1\\
+S_0=\hat{p}_1(X_0) | Y_0=0
+\end{aligned}\]</span> be the predicted probabilities of the two random observations considered above, random observations with <span class="math inline">\((X_1,Y=1)\)</span> and <span class="math inline">\((X_0,Y=0)\)</span>. Then <span class="math display">\[\begin{aligned}
+TPR(c)=P(S_1&gt;c)=P(\hat{p}_1(X_1)&gt;c | Y_1=1)\\
+FPR(c)=P(S_0&gt;c)=P(\hat{p}_1(X_0)&gt;c | Y_0=0)
+\end{aligned}\]</span> This means that <span class="math display">\[TPR(c)=1-F_1(c),\]</span> where <span class="math inline">\(F_1\)</span> is the cdf of <span class="math inline">\(S_1\)</span>, and similarly, <span class="math display">\[FPR(c)=1-F_0(c),\]</span> where <span class="math inline">\(F_0\)</span> is the cdf of <span class="math inline">\(S_0\)</span>. We’ll assume that <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_0\)</span> are continuous with densities <span class="math inline">\(f_1\)</span> and <span class="math inline">\(f_0\)</span>, and that <span class="math inline">\(F_0\)</span> is strictly increasing (so that it can be inverted).</p>
+<p>We want to show that<br>
+<span class="math display">\[\int_0^1 T(f)\; df =P(S_1&gt;S_0).\]</span> To do this, we want to convert our integral into quantities that involve our random variables <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_0\)</span>. We do this by noting that if we know our <span class="math inline">\(FPR(c)=f\)</span>, then we can determine the <span class="math inline">\(c\)</span> that created this FPR, by inverting the following equation <span class="math display">\[FPR(c)=1-F_0(c)\]</span> which gives us that <span class="math inline">\(c=F_0^{-1}(1-f)\)</span> for any given FPR value <span class="math inline">\(f\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+\int_0^1 T(f)\; df &amp;= \int_0^1 P(S_1&gt;F_0^{-1}(1-f))\; df\\
+&amp; \text{change of variable: }c=F_0^{-1}(1-f); -f_0(c) dc=df\\
+&amp;=-\int_{+\infty}^{-\infty}P(S_1&gt;c)f_0(c) dc \\
+&amp;\text{because as } c\rightarrow \infty, FPR\rightarrow 0\\
+&amp;=\int_{-\infty}^{+\infty}P(S_1&gt;c)f_0(c) dc \\
+\end{aligned}\]</span></p>
+<p>Looking at the other side of our equation, by the law of total probability we can condition the probability <span class="math inline">\(P(S_1&gt;S_0)\)</span> on the value of <span class="math inline">\(S_0\)</span>, as follows: <span class="math display">\[\begin{aligned}
+P(S_1&gt;S_0)&amp;=\int_{-\infty}^{\infty} P(S_1&gt;c\,|\,S_0=c)\,f_0(c)\,dc\\
+&amp;=\int_{-\infty}^{\infty} P(S_1&gt;c)\,f_0(c)\,dc\\
+&amp;=AUC
+\end{aligned}\]</span> where we can drop the conditioning on <span class="math inline">\(S_0\)</span> because <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_0\)</span> are independent.</p>
+</div>
 </section>
 <section id="the-auc-and-the-wilcoxon-rank-sum-test" class="level3">
 <h3 class="anchored" data-anchor-id="the-auc-and-the-wilcoxon-rank-sum-test">The AUC and the Wilcoxon Rank-Sum Test*</h3>
-<p>A common property of ROC curves is that the AUC is the same as the statistic of the Wilcoxon rank-sum test (or Mann-Whitney test) that we saw in the chapter on permutation tests. Specifically, calculating the AUC is the same as running a rank-sum test comparing the predicted probabilities <span class="math inline">\(\hat{p}_1(X)\)</span> of the observations with <span class="math inline">\(Y=1\)</span> to those of the observations with <span class="math inline">\(Y=0\)</span>. We will show why this is true.</p>
-<div class="PARAGRAPH">
-<p>The AUC as a probability</p>
+<p>The AUC actually is closely related to doing a Wilcoxon rank-sum test (or Mann-Whitney) hypothesis test. Specifically, the AUC is a rescaled version of the test statistic of a rank-sum test comparing the predicted probabilities <span class="math inline">\(\hat{p}_1(X)\)</span> of the observations with <span class="math inline">\(Y=1\)</span> to those of the observations with <span class="math inline">\(Y=0\)</span>.</p>
+<p>In otherwords, if we take the values of our predicted probabilities on our observed data, <span class="math display">\[\hat{p}_i=\hat{p}_1(X_i)\]</span> and put our observations into groups based on whether <span class="math inline">\(Y_i=0\)</span> or <span class="math inline">\(Y_i=1\)</span>, then the Mann-Whitney form of the test statistic for the Wilcoxon rank-sum test using <span class="math inline">\(\hat{p}_i\)</span> as our data will be <span class="math inline">\(U=n_0n_1\cdot AUC\)</span>.</p>
+<p>This points out that in fact, the ROC curve doesn’t actually depend on the <em>value</em> of the <span class="math inline">\(\hat{p}_i\)</span> but only the <em>rank</em> of these predicted probabilities. Any transformation of the <span class="math inline">\(\hat{p}_i\)</span> that preserves the rank will result in the same ROC curve. This is because we are going through all possible cutoffs <span class="math inline">\(c\)</span> to make the <span class="math inline">\(\hat{TPR}\)</span> and <span class="math inline">\(\hat{FPR}\)</span> calculations, so we will eventually get the points in the ROC curve.</p>
+<p>Moreover, the rank-sum test can be summarized as asking whether the distributions of two populations are the same (the null hypothesis), or whether one population tends to yield larger values. We’ve just seen that the AUC measures the probability that one group yields bigger predicted probabilities than the other. So it makes sense that the <span class="math inline">\(AUC\)</span> would be closely related to the statistic that we use to test the rank-sum null hypothesis.</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>In practice we estimate the ROC curve from our test data, where we have <span class="math inline">\(n_1\)</span> observations with <span class="math inline">\(Y=1\)</span> and <span class="math inline">\(n_0\)</span> observations with <span class="math inline">\(Y=0\)</span>, with scores <span class="math inline">\(\hat{p}_i=\hat{p}_1(X_i)\)</span>. Our estimated ROC curve uses <span class="math inline">\(\widehat{TPR}(c)\)</span> and <span class="math inline">\(\widehat{FPR}(c)\)</span>, which is the same as replacing <span class="math inline">\(F_1\)</span> and <span class="math inline">\(F_0\)</span> above with the empirical cdfs of the scores in each group. Doing the same calculation with the empirical distributions turns the integral into an average over the observations with <span class="math inline">\(Y=0\)</span>, and <span class="math inline">\(P(S_1&gt;S_0)\)</span> into the proportion of all <span class="math inline">\(n_1n_0\)</span> pairs of observations (one with <span class="math inline">\(Y=1\)</span>, one with <span class="math inline">\(Y=0\)</span>) where the observation with <span class="math inline">\(Y=1\)</span> has the higher score: <span class="math display">\[\widehat{AUC}=\frac{1}{n_0}\sum_{j:Y_j=0}\widehat{TPR}(\hat{p}_j)=\frac{1}{n_1n_0}\sum_{i:Y_i=1}\sum_{j:Y_j=0}I(\hat{p}_i&gt;\hat{p}_j)\]</span> (this assumes there are no ties; if there are ties, <span class="math inline">\(\hat{p}_i=\hat{p}_j\)</span>, the area under the estimated ROC curve counts each tied pair as <span class="math inline">\(\frac{1}{2}\)</span>, as in <span class="math inline">\(U\)</span> below). The double sum <span class="math display">\[U=\sum_{i:Y_i=1}\sum_{j:Y_j=0}\left[I(\hat{p}_i&gt;\hat{p}_j)+\frac{1}{2}I(\hat{p}_i=\hat{p}_j)\right]\]</span> is the Mann-Whitney statistic for comparing the scores of the two groups, and it is equivalent to the Wilcoxon rank-sum statistic. If we rank all <span class="math inline">\(n_1+n_0\)</span> scores together, the rank of an observation with <span class="math inline">\(Y=1\)</span> is 1 plus the number of observations with a smaller score. Adding these up over the <span class="math inline">\(n_1\)</span> observations with <span class="math inline">\(Y=1\)</span> to get their rank sum <span class="math inline">\(W_1\)</span>, the observations with <span class="math inline">\(Y=0\)</span> that have smaller scores contribute <span class="math inline">\(U\)</span> in total, and the other observations with <span class="math inline">\(Y=1\)</span> that have smaller scores contribute <span class="math inline">\(0+1+\ldots+(n_1-1)\)</span>, so <span class="math display">\[W_1=n_1+U+\frac{n_1(n_1-1)}{2}=U+\frac{n_1(n_1+1)}{2}.\]</span> Putting these together, <span class="math display">\[\widehat{AUC}=\frac{U}{n_1n_0}=\frac{W_1-\frac{n_1(n_1+1)}{2}}{n_1n_0}.\]</span> So the estimated AUC is just the rank-sum statistic of the scores of the <span class="math inline">\(Y=1\)</span> group, shifted and scaled to be between 0 and 1.</p>
 </div>
-<p>For a fixed prediction function, let <span class="math inline">\(S=\hat{p}_1(X)\)</span> be the “score” that our classifier gives to an observation, and consider two random observations: <span class="math inline">\(S_1\)</span>, the score of an observation with <span class="math inline">\(Y=1\)</span>, and <span class="math inline">\(S_0\)</span>, the score of an observation with <span class="math inline">\(Y=0\)</span>. Let <span class="math inline">\(F_1\)</span> and <span class="math inline">\(F_0\)</span> be the cdfs of <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_0\)</span>, and assume they are continuous with densities <span class="math inline">\(f_1\)</span> and <span class="math inline">\(f_0\)</span>. Then for a cutoff <span class="math inline">\(c\)</span>, <span class="math display">\[TPR(c)=P(S_1&gt;c)=1-F_1(c),\qquad FPR(c)=P(S_0&gt;c)=1-F_0(c).\]</span> The ROC curve is the set of points <span class="math inline">\((FPR(c),TPR(c))\)</span> as <span class="math inline">\(c\)</span> goes from <span class="math inline">\(\infty\)</span> (where both are 0) down to <span class="math inline">\(-\infty\)</span> (where both are 1). The area under this curve is <span class="math display">\[AUC=\int_0^1 TPR\; d(FPR).\]</span> To evaluate this integral, we change variables from <span class="math inline">\(FPR\)</span> to <span class="math inline">\(c\)</span>. Since <span class="math inline">\(FPR(c)=1-F_0(c)\)</span>, we have <span class="math inline">\(d(FPR)=-f_0(c)\,dc\)</span>, and <span class="math inline">\(FPR\)</span> going from 0 to 1 corresponds to <span class="math inline">\(c\)</span> going from <span class="math inline">\(\infty\)</span> to <span class="math inline">\(-\infty\)</span>, so <span class="math display">\[\begin{aligned}
-AUC&amp;=\int_{\infty}^{-\infty} TPR(c)\,\left(-f_0(c)\right)dc=\int_{-\infty}^{\infty} P(S_1&gt;c)\,f_0(c)\,dc.
-\end{aligned}\]</span> But this last integral is just the law of total probability, conditioning on the value of <span class="math inline">\(S_0\)</span>: if <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_0\)</span> are independent, then <span class="math display">\[P(S_1&gt;S_0)=\int_{-\infty}^{\infty} P(S_1&gt;c\,|\,S_0=c)\,f_0(c)\,dc=\int_{-\infty}^{\infty} P(S_1&gt;c)\,f_0(c)\,dc.\]</span> So <span class="math display">\[AUC=P(S_1&gt;S_0),\]</span> i.e.&nbsp;the AUC is the probability that a randomly chosen observation with <span class="math inline">\(Y=1\)</span> gets a higher score (predicted probability) from our classifier than a randomly chosen observation with <span class="math inline">\(Y=0\)</span>.</p>
-<div class="PARAGRAPH">
-<p>The estimated AUC and the rank-sum statistic</p>
-</div>
-<p>In practice we estimate the ROC curve from our test data, where we have <span class="math inline">\(n_1\)</span> observations with <span class="math inline">\(Y=1\)</span> and <span class="math inline">\(n_0\)</span> observations with <span class="math inline">\(Y=0\)</span>, with scores <span class="math inline">\(\hat{p}_i=\hat{p}_1(X_i)\)</span>. Our estimated ROC curve uses <span class="math inline">\(\widehat{TPR}(c)\)</span> and <span class="math inline">\(\widehat{FPR}(c)\)</span>, which is the same as replacing <span class="math inline">\(F_1\)</span> and <span class="math inline">\(F_0\)</span> above with the empirical cdfs of the scores in each group. Doing the same calculation with the empirical distributions turns the integral into an average over the observations with <span class="math inline">\(Y=0\)</span>, and <span class="math inline">\(P(S_1&gt;S_0)\)</span> into the proportion of all <span class="math inline">\(n_1n_0\)</span> pairs of observations (one with <span class="math inline">\(Y=1\)</span>, one with <span class="math inline">\(Y=0\)</span>) where the observation with <span class="math inline">\(Y=1\)</span> has the higher score: <span class="math display">\[\widehat{AUC}=\frac{1}{n_0}\sum_{j:Y_j=0}\widehat{TPR}(\hat{p}_j)=\frac{1}{n_1n_0}\sum_{i:Y_i=1}\sum_{j:Y_j=0}I(\hat{p}_i&gt;\hat{p}_j)\]</span> (ties, <span class="math inline">\(\hat{p}_i=\hat{p}_j\)</span>, count as <span class="math inline">\(\frac{1}{2}\)</span>). The double sum <span class="math display">\[U=\sum_{i:Y_i=1}\sum_{j:Y_j=0}I(\hat{p}_i&gt;\hat{p}_j)\]</span> is the Mann-Whitney statistic for comparing the scores of the two groups, and it is equivalent to the Wilcoxon rank-sum statistic. If we rank all <span class="math inline">\(n_1+n_0\)</span> scores together, the rank of an observation with <span class="math inline">\(Y=1\)</span> is 1 plus the number of observations with a smaller score. Adding these up over the <span class="math inline">\(n_1\)</span> observations with <span class="math inline">\(Y=1\)</span> to get their rank sum <span class="math inline">\(W_1\)</span>, the observations with <span class="math inline">\(Y=0\)</span> that have smaller scores contribute <span class="math inline">\(U\)</span> in total, and the other observations with <span class="math inline">\(Y=1\)</span> that have smaller scores contribute <span class="math inline">\(0+1+\ldots+(n_1-1)\)</span>, so <span class="math display">\[W_1=n_1+U+\frac{n_1(n_1-1)}{2}=U+\frac{n_1(n_1+1)}{2}.\]</span> Putting these together, <span class="math display">\[\widehat{AUC}=\frac{U}{n_1n_0}=\frac{W_1-\frac{n_1(n_1+1)}{2}}{n_1n_0}.\]</span> So the estimated AUC is just the rank-sum statistic of the scores of the <span class="math inline">\(Y=1\)</span> group, shifted and scaled to be between 0 and 1.</p>
-<div class="PARAGRAPH">
-<p>Why this makes sense</p>
-</div>
-<p>The ROC curve only depends on whether one observation’s score is above or below the cutoff, so it only depends on the <em>ordering</em> of the scores <span class="math inline">\(\hat{p}_i\)</span>, i.e.&nbsp;their ranks – any transformation of <span class="math inline">\(\hat{p}\)</span> that keeps the same ordering gives the same ROC curve. So it is natural that a summary of the ROC curve is a function of the ranks. Moreover, the AUC and the rank-sum test ask the same question. In the chapter on permutation tests, we described the rank-sum test as testing whether the two distributions are the same, in which case <span class="math inline">\(P(S_1&gt;S_0)=\frac{1}{2}\)</span>, versus whether one population tends to yield larger values. For our classifier, <span class="math inline">\(P(S_1&gt;S_0)=\frac{1}{2}\)</span> means <span class="math inline">\(AUC=\frac{1}{2}\)</span>, which is the AUC of the diagonal line of a classifier that just guesses at random. So the Wilcoxon rank-sum test comparing the scores of the two groups is a test of <span class="math inline">\(H_0: AUC=\frac{1}{2}\)</span>, i.e.&nbsp;whether our classifier does any better than random guessing.</p>
 <div id="exm-spamAUC" class="theorem example">
 <p><span class="theorem-title"><strong>Example 3 (AUC of the spam classifiers)</strong></span> We can calculate the AUC of our two logistic regression models on the spam test data using the rank sum, and compare it to the area under the ROC curves we plotted above (calculated with the trapezoid rule) and the Mann-Whitney statistic <span class="math inline">\(U\)</span> that is reported by R’s <code>wilcox.test</code> function (which R calls <code>W</code>).</p>
 <div class="cell">
@@ -900,6 +936,156 @@ AUC&amp;=\int_{\infty}^{-\infty} TPR(c)\,\left(-f_0(c)\right)dc=\int_{-\infty}^{
 </div>
 <p>The AUC from the rank sum and <span class="math inline">\(U/(n_1n_0)\)</span> agree exactly, and the area under the plotted ROC curve agrees up to the small error from only evaluating the curve at a grid of cutoffs. The model with all six variables has an AUC of 0.897: for 90% of the pairs of a spam and a non-spam email in the test data, the spam email has the higher predicted probability of being spam. The Wilcoxon p-values show that both models are clearly better than random guessing (<span class="math inline">\(AUC=\frac{1}{2}\)</span>).</p>
 </div>
+</section>
+</section>
+<section id="other-measures-of-error-rates" class="level2">
+<h2 class="anchored" data-anchor-id="other-measures-of-error-rates">Other measures of error rates</h2>
+<p>There are other measures and measurement curves that are based on different quantities than TPR and FPR (or work in combination with them).</p>
+<section id="precision" class="level3">
+<h3 class="anchored" data-anchor-id="precision">Precision</h3>
+<p>One of the most relevant measurements is the <strong>precision</strong> or <strong>positive predictive value (PPV)</strong> of our classifier.</p>
+<p>TPR and FPR condition on the <em>true</em> value of <span class="math inline">\(Y\)</span>. We can instead condition on our <em>prediction</em>, and ask: of the observations that we predicted to be 1, what proportion truly are 1? This is the <strong>precision</strong> of our classifier, <span class="math display">\[\text{precision}=P(Y=1|\hat{Y}=1)=P(Y=1|\hat{f}(X)=1).\]</span> We estimate it from a <em>column</em> of the confusion matrix, rather than a row, <span class="math display">\[\widehat{\text{precision}}=\frac{TP}{TP+FP}.\]</span></p>
+<div class="PARAGRAPH">
+<p>Relationship to Prevalence in Population</p>
+</div>
+<p>An important difference between precision and the TPR/FPR is that precision depends on how common <span class="math inline">\(Y=1\)</span> is in our population. The TPR and FPR are properties of the classifier alone: they condition on <span class="math inline">\(Y\)</span>, so they don’t depend on how many observations have <span class="math inline">\(Y=1\)</span> versus <span class="math inline">\(Y=0\)</span>.</p>
+<p>Let <span class="math inline">\(\pi=P(Y=1)\)</span> be the proportion of the population with <span class="math inline">\(Y=1\)</span> (often called the <em>prevalence</em>). Then by Bayes’ rule, <span class="math display">\[\begin{aligned}
+\text{precision}&amp;=\frac{P(\hat{Y}=1|Y=1)P(Y=1)}{P(\hat{Y}=1|Y=1)P(Y=1)+P(\hat{Y}=1|Y=0)P(Y=0)}\\
+&amp;=\frac{TPR\cdot\pi}{TPR\cdot\pi+FPR\cdot(1-\pi)}.
+\end{aligned}\]</span> Precision combines TPR and FPR with <span class="math inline">\(\pi\)</span>, so the same classifier, with the same TPR and FPR, can have very different precision depending on how rare <span class="math inline">\(Y=1\)</span> is. If <span class="math inline">\(Y=1\)</span> is rare (<span class="math inline">\(\pi\)</span> small), even a small FPR can mean that most of the observations we predict to be 1 are false positives, simply because there are so many more observations with <span class="math inline">\(Y=0\)</span>. Think of a diagnostic test for a rare disease: even a very accurate test can produce mostly false positives, simply because there are not that many times that a positive will be tested to begin with.</p>
+<p>This also means that our estimate of precision from test data is only a good estimate of the precision we would see in practice if the proportion of <span class="math inline">\(Y=1\)</span> in our test data is similar to the proportion in the population where we will use the classifier. Alternatively, if we <em>know</em> the prevelance in our population (e.g.&nbsp;we know the prevalence of a disease in our population), we could use this known value to estimate the precision/PPV based on our estimates, <span class="math inline">\(\widehat{TPR}\)</span> and <span class="math inline">\(\widehat{FPR}\)</span>.</p>
+<!-- :::{.callout-note} -->
+<!-- Continuing our analogy to hypothesis testing, where predicting $\hat{Y}=1$ is like rejecting the null: the FPR is like the significance level, $P(\text{reject}|H_0 \text{ true})$, while $1-\text{precision}=P(Y=0|\hat{Y}=1)$ is like $P(H_0 \text{ true}|\text{reject})$, the proportion of our rejections that are wrong. The second is called the *false discovery rate*, and it is a common way to measure errors when we do many hypothesis tests at once. A small significance level does not guarantee a small false discovery rate, for the same reason that a small FPR does not guarantee a high precision. -->
+<!-- ::: -->
+<div id="exm-knnprecision" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4</strong></span> For the kNN with <span class="math inline">\(k=10\)</span> in <a href="#exm-knnconfusion" class="quarto-xref">Example&nbsp;2</a>, 290 of the test emails were predicted to be spam, and 261 of those truly were spam, so <span class="math display">\[\widehat{\text{precision}}=\frac{261}{290}=0.9.\]</span> We get the same number (up to rounding) by plugging <span class="math inline">\(\widehat{TPR}=0.737\)</span>, <span class="math inline">\(\widehat{FPR}=0.051\)</span>, and the proportion of spam in the test data, <span class="math inline">\(\hat{\pi}=0.385\)</span>, into the Bayes’ rule formula above.</p>
+</div>
+</section>
+<section id="precision-recall-curves" class="level3">
+<h3 class="anchored" data-anchor-id="precision-recall-curves">Precision-Recall Curves</h3>
+<p>Precision is usually paired with the TPR, which in this context is usually called the <strong>recall</strong>: recall is the proportion of the true 1’s that we find, and precision is the proportion of the observations we call 1 that are correct.</p>
+<p>Just as with the TPR and FPR, the precision and recall of a classifier depend on the cutoff <span class="math inline">\(c\)</span> we use to turn <span class="math inline">\(\hat{p}_1(x)\)</span> into a classification. A <strong>precision-recall curve</strong> (PR curve) plots the precision against the recall (TPR) for all possible cutoffs <span class="math inline">\(c\)</span>. As <span class="math inline">\(c\)</span> decreases we predict more observations to be 1, so the recall goes up, and the precision will generally go down. Unlike the ROC curve, however, the PR curve does <em>not</em> have to be monotone: lowering the cutoff can add a group of observations that are mostly true 1’s, which increases the precision.</p>
+<p>The baselines are also different. A perfect classifier reaches the top right corner, <span class="math inline">\((1,1)\)</span>, i.e.&nbsp;it finds all of the 1’s without any false positives. A classifier that guesses at random has a precision equal to <span class="math inline">\(\pi\)</span> for every cutoff, so the random-guessing baseline is a horizontal line at the prevalence <span class="math inline">\(\pi\)</span>, rather than the diagonal line of the ROC curve. Just as for the ROC curve, the PR curve is sometimes summarized by the area under it, though unlike the AUC, this area doesn’t have a simple probability interpretation, and it depends on <span class="math inline">\(\pi\)</span>.</p>
+<p>PR curves are most useful when <span class="math inline">\(Y=1\)</span> is rare and what we care about is how trustworthy our predictions of <span class="math inline">\(\hat{Y}=1\)</span> are, e.g.&nbsp;screening for a rare disease or flagging fraudulent transactions. In that case the ROC curve can look very good, because the FPR divides the number of false positives by the (large) number of observations with <span class="math inline">\(Y=0\)</span>, even when the false positives far outnumber the true positives.</p>
+<div id="exm-spamPR" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5 (Precision and recall with rare spam)</strong></span> In our spam test data, 38% of the emails are spam, so spam is not very rare. To see what happens when spam is rare, we create a new test set by keeping all of the non-spam emails in our test data, and randomly sampling only enough of the spam emails so that spam makes up 5% of this new test set. We do not refit the model: we use the same logistic regression with all six variables, fit on the same training data, and only change which test emails we evaluate it on.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>nonSpam    spam 
+    566      30 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="26-Classification_files/figure-html/spamPRcurves-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>ROC curves (left) and precision-recall curves (right) for the logistic regression with all six variables, on the full spam test data (blue) and on the subsample of the test data where only 5% of emails are spam (orange). The dashed lines in the right plot show the precision of random guessing, which is the proportion of spam in each test set. Points mark the cutoff c = 0.5.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The two ROC curves are estimates of the same ROC curve, since sampling the test emails based on whether they are spam doesn’t change the TPR or FPR. They differ only because the subsample has just 30 spam emails, so its TPR is estimated less precisely and its ROC curve is more jagged. The PR curves, on the other hand, are very different: for the same recall, the precision is much lower when spam is rare.</p>
+<p>We can see this in the precision at the cutoff <span class="math inline">\(c=0.5\)</span>:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Performance of the logistic regression with all six variables, using cutoff <span class="math inline">\(c=0.5\)</span>, on the full spam test data and on the subsample where 5% of emails are spam. The last column uses <span class="math inline">\(\widehat{TPR}\)</span> and <span class="math inline">\(\widehat{FPR}\)</span> of the full test data and the proportion of spam in each test set.</caption>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 9%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Test data</th>
+<th style="text-align: right;">Proportion spam</th>
+<th style="text-align: right;"><span class="math inline">\(\widehat{TPR}\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(\widehat{FPR}\)</span></th>
+<th style="text-align: right;">Precision</th>
+<th style="text-align: right;">Precision from Bayes’ rule</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Full test data</td>
+<td style="text-align: right;">0.385</td>
+<td style="text-align: right;">0.653</td>
+<td style="text-align: right;">0.064</td>
+<td style="text-align: right;">0.865</td>
+<td style="text-align: right;">0.865</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Test data with 5% spam</td>
+<td style="text-align: right;">0.050</td>
+<td style="text-align: right;">0.667</td>
+<td style="text-align: right;">0.064</td>
+<td style="text-align: right;">0.357</td>
+<td style="text-align: right;">0.352</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span class="math inline">\(\widehat{TPR}\)</span> and <span class="math inline">\(\widehat{FPR}\)</span> are about the same in the two test sets, but the precision drops from 0.87 to 0.36. With 5% spam, most of the emails that we send to the spam folder are actually real emails, even though we only send 6% of the real emails there. This is what Bayes’ rule predicts from <span class="math inline">\(\widehat{TPR}\)</span> and <span class="math inline">\(\widehat{FPR}\)</span> of the full test data (last column of the table); the small difference is because the TPR of the subsample is estimated from only 30 spam emails.</p>
+</div>
+</section>
+<section id="which-measures-to-use" class="level3">
+<h3 class="anchored" data-anchor-id="which-measures-to-use">Which measures to use?</h3>
+<p>It can seem a little strange that we pair together Precision (calculated conditional on <span class="math inline">\(\hat{Y}=1\)</span>) with Recall/TPR (calculated conditional on <span class="math inline">\(Y=1\)</span>). Especially since ROC curves pair together FPR/TPR (calculated condition on <span class="math inline">\(Y=0\)</span> and <span class="math inline">\(Y=1\)</span>).</p>
+<p>There is a measure that “matches” precision, called the negative predicitive value (NPV), <span class="math display">\[NPV=P(Y=0|\hat{Y}=0)=P(Y=0|\hat{f}(X)=0).\]</span> and we estimate it from the other <em>column</em> of the confusion matrix, not used by precision/PPV: <span class="math display">\[\widehat{\text{precision}}=\frac{TN}{TN+FN}.\]</span> It has similar properties of as precision/PPV, in the sense of being dependent on the prevalence of the population. <span class="math display">\[NPV=\frac{(1-FPR)(1-\pi)}{(1-FPR)(1-\pi)+(1-TPR)\,\pi}.\]</span> Precision/PPV and NPV are reported together in medical contexts, like in evaluating diagnostic procedures, and are similarly important in evaluating the effect of the classifier with unbalanced prevalance.</p>
+<div class="PARAGRAPH">
+<p>When use Precision-Recall versus ROC curves?</p>
+</div>
+<p>Which makes the most sense depends on the context and the prevalence of <span class="math inline">\(Y=1\)</span> outcomes in your application. Historically in machine learning contexts, a classifier was frequently trying to identify something quite rare from a large pool. Think of a search algorithm, where the user will be searching a collection of a million documents, and 20 of them are relevant.</p>
+<ul>
+<li>True Negatives (TN): The negatives are huge and uninteresting. The true negatives are the roughly one million irrelevant documents you correctly didn’t return. The measures that use TN are FPR/Specificity, NPV, and overall error/accuracy. With TN so large, these are close to 1 no matter what model you use, and thus can’t distinguish between classifiers.</li>
+<li>Precision and recall are the two natural measures that never use TN. Precision is <span class="math inline">\(TP/(TP+FP)\)</span>, and recall is <span class="math inline">\(TP/(TP+FN)\)</span>. Together they pin down TP, FP and FN up to scale, which is everything in the table except TN. They answer the user’s two questions: “how much of what I got is useful?” and “how much of what’s useful did I get?”</li>
+</ul>
+<p>For this reason, NPV is not frequently considered in machine learning contexts, and ROC curves are less common. But precision-recall curves will be less relevant in situations with less lopsided prevalence values.</p>
+<div id="tbl-measurepairs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-measurepairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Common pairs of measures for evaluating a classifier
+</figcaption>
+<div aria-describedby="tbl-measurepairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 34%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Pair of measures</th>
+<th style="text-align: left;">Conditions on</th>
+<th style="text-align: left;">Common in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">TPR (sensitivity) and FPR (or sensitivity, <span class="math inline">\(1-FPR\)</span>)</td>
+<td style="text-align: left;">the truth, <span class="math inline">\(Y\)</span> (rows of the confusion matrix)</td>
+<td style="text-align: left;">medicine, statistics</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Precision/PPV and NPV</td>
+<td style="text-align: left;">the prediction, <span class="math inline">\(\hat{Y}\)</span> (columns)</td>
+<td style="text-align: left;">medicine</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Precision and recall/TPR</td>
+<td style="text-align: left;">one column and one row, both about the positives</td>
+<td style="text-align: left;">information retrieval, machine learning</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
 
 
 
@@ -916,6 +1102,8 @@ Agresti, Alan, and Maria Kateri. 2021. <em>Foundations of Statistics for Data Sc
 <ol>
 <li id="fn1"><p>We have discussed varying the number of predictor variables in multiple regression, but that is distinct from the point here. With kNN, even with a fixed set of predictors, I don’t have a strategy for picking <span class="math inline">\(k\)</span>; if I also consider <em>which</em> variables to use for kNN that’s just yet another parameter.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>In practice, we make a large grid of <span class="math inline">\(c\)</span> values.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Technically, when the two curves start plateauing at around <span class="math inline">\(\widehat{FPR}&gt;0.8\)</span>, the curves do cross slightly.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Though you can get an <span class="math inline">\(AUC=1/2\)</span> for other curves as well; it’s not a unique property of <span class="math inline">\(y=x\)</span>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
